@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/* custom tailwind components */
+
+@layer components {
+  .section-title {
+    @apply relative mb-4 text-center text-2xl font-bold tracking-wider before:absolute before:bottom-1 before:left-1/2 before:-z-1 before:h-full before:w-full before:-translate-x-1/2 before:bg-(--global-border-color) before:[clip-path:polygon(0_85%,_100%_43%,_100%_100%,_0%_100%)];
+  }
+
+  .highlight-primary {
+    @apply mx-0.5 inline-block bg-(--global-primary-highlight-color) px-2 text-(--global-background-color);
+  }
+
+  .highlight-secondary {
+    @apply mx-0.5 inline-block bg-(--global-secondary-highlight-color) px-2 text-(--global-text-color);
+  }
+
+  .anchor {
+    @apply relative inline-block text-[var(--anchor-color,var(--global-anchor-color))] before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-[var(--anchor-decoration-color,_var(--global-anchor-decoration-color))] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[var(--anchor-decoration-color_hover,_var(--global-anchor-decoration-color_hover))] after:transition-all hover:after:w-full;
+  }
+}
+
+/* custom tailwind theme-variables */
+
+@theme {
+  --breakpoint-xs: 30rem;
+
+  --animate-textAnimation1: textAnim 2s infinite;
+
+  @keyframes textAnim {
+    to {
+      font-weight: bolder;
+      color: var(--accent-color-1);
+    }
+  }
+}
+
+/* custom tailwind utilities */
+
+@utility fancy-bg-1 {
+  @apply bg-[radial-gradient(var(--fancybg1-color)_1.5px,transparent_1.5px)] bg-[length:16px_16px];
+}
+
+@utility fancy-bg-2 {
+  @apply bg-[repeating-linear-gradient(45deg,var(--fancybg2-color)_0,var(--fancybg2-color)_1.5px,transparent_0,transparent_50%)] bg-[length:15px_15px];
+}
+
+@utility secondary-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--global-scrollbar-thumb-color);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--global-scrollbar-track-color);
+    border: 1px solid var(--global-scrollbar-thumb-color);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: color-mix(
+      in srgb,
+      var(--global-scrollbar-track-color),
+      black 10%
+    );
+  }
+}
+
+/* custom tailwind variants */
+
+@custom-variant any-pointer-fine ( @media (any-pointer: fine) );
+
+@custom-variant hover (&:hover); /* Enable hover effects on any device */

@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+:root {
+  --global-font-family: "Poppins", serif;
+
+  --global-anchor-color: var(--color-blue-500); /* Link */
+  --global-anchor-decoration-color: color-mix(
+    in srgb,
+    var(--global-anchor-color),
+    transparent 80%
+  ); /* Link decoration */
+  --global-anchor-decoration-color_hover: var(
+    --global-anchor-color
+  ); /* Link decoration - state: hover */
+
+  --global-scrollbar-track-color: var(--global-background-color);
+  --global-scrollbar-thumb-color: var(--global-text-color);
+
+  --fancybg1-color: color-mix(
+    in srgb,
+    var(--global-border-color),
+    transparent 20%
+  );
+  --fancybg2-color: color-mix(
+    in srgb,
+    var(--global-border-color),
+    transparent 80%
+  );
+
+  /* Component-specific variables */
+  --navbar-z-index: 1;
+  --navbar-dropdown-z-index: 1;
+
+  /* Boiler-plate for Theme-specific variables */
+  /* --global-background-color: ;
+  --global-text-color: ;
+  --global-secondary-text-color: ;
+  --global-border-color: ;
+  --global-menus-color: ;
+  --global-primary-highlight-color: ;
+  --global-secondary-highlight-color: ;
+  --input-color: ; */
+  /* --accent-color-1:;
+  --gradient-1: ;
+  --gradient-2: ; */
+}
