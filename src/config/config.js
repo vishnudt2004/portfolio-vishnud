@@ -13,32 +13,32 @@ const config = {
         category: "Clean & Minimal",
         themes: ["minimal-light", "minimal-dark"],
       },
-      // {
-      //   category: "Soft & Neutral",
-      //   themes: ["paper", "sepia", "minty", "lavender", "aqua-zen", "sunrise"],
-      // },
-      // {
-      //   category: "Pastel & Romantic",
-      //   themes: [
-      //     "pastel",
-      //     "cotton-candy",
-      //     "vintage-rose",
-      //     "red-harmony",
-      //     "red-rose",
-      //   ],
-      // },
-      // {
-      //   category: "Dev Favorites",
-      //   themes: ["one-dark-pro", "dracula", "postman"],
-      // },
-      // {
-      //   category: "Tech & Futuristic",
-      //   themes: ["dark-matter", "forest-essence", "cyber", "synthwave"],
-      // },
-      // {
-      //   category: "Aurora Glow",
-      //   themes: ["aurora-light", "aurora-dark"],
-      // },
+      {
+        category: "Soft & Neutral",
+        themes: ["paper", "sepia", "minty", "lavender", "aqua-zen", "sunrise"],
+      },
+      {
+        category: "Pastel & Romantic",
+        themes: [
+          "pastel",
+          "cotton-candy",
+          "vintage-rose",
+          "red-harmony",
+          "red-rose",
+        ],
+      },
+      {
+        category: "Dev Favorites",
+        themes: ["one-dark-pro", "dracula", "postman"],
+      },
+      {
+        category: "Tech & Futuristic",
+        themes: ["dark-matter", "forest-essence", "cyber", "synthwave"],
+      },
+      {
+        category: "Aurora Glow",
+        themes: ["aurora-light", "aurora-dark"],
+      },
     ], // Add or remove themes in src/styles/themes.css
   },
   VISIBLE_SECTIONS: [
