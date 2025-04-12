@@ -88,7 +88,9 @@ const ProficiencyCreator = ({
               </figure>
             ))}
           </div>
-          <div className="text-[1.2rem]">{techStack.techStackDescription}</div>
+          <div className="sm:text-[1.1rem]">
+            {techStack.techStackDescription}
+          </div>
         </div>
       ),
     }}
@@ -97,7 +99,7 @@ const ProficiencyCreator = ({
 
 const Highlighter = ({ type = "primary", children, ...attr }) => (
   <span
-    className={`highlight-${type} inline-flex! items-center justify-center gap-2 rounded-${type === "primary" ? "full" : "lg"} ${type === "primary" ? "px-3!" : ""} text-[1.1rem] ${attr?.className ? attr.className : ""}`}
+    className={`highlight-${type} mb-1 inline-flex! items-center justify-center gap-2 rounded-${type === "primary" ? "full" : "lg"} ${type === "primary" ? "px-3!" : ""} sm:text-[1rem] ${attr?.className ? attr.className : ""}`}
   >
     {children}
   </span>

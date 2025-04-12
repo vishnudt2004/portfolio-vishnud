@@ -17,6 +17,7 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
       linkedin: CustomLinkedinIcon,
       github: SiGithub,
       leetcode: SiLeetcode,
+      phone: PhoneIcon,
     },
   };
 
@@ -40,10 +41,14 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
                   target="_blank"
                   className="inline-block rounded-full border border-(--global-secondary-text-color) bg-(--global-background-color) p-2 text-(--global-secondary-text-color) transition-all duration-400 hover:bg-(--global-secondary-text-color) hover:text-(--global-background-color)"
                 >
-                  {createElement(footerProps.contactsIcon[type.toLowerCase()], {
-                    className: "w-7 h-7",
-                    color: "default",
-                  })}
+                  {footerProps.contactsIcon[type.toLowerCase()] &&
+                    createElement(
+                      footerProps.contactsIcon[type.toLowerCase()],
+                      {
+                        className: "w-7 h-7",
+                        color: "default",
+                      },
+                    )}
                 </a>
               </li>
             ))}
@@ -83,6 +88,7 @@ const Footer = () => {
     LinkedIn: "https://www.linkedin.com/in/vishnu-d-28b7a52b1/",
     LeetCode: "https://leetcode.com/vishnud2004/",
     Email: "mailto:vishnu.d.t.2004@gmail.com",
+    // Phone: "tel:+91936350XXXX",
   };
 
   const quickLinks = config.FOOTER_QUICK_LINKS;

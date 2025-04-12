@@ -6,7 +6,7 @@ import { SimpleLayout } from "@components/elements/SectionLayouts";
 const Activities = () => (
   <SimpleLayout
     id={config.SECTION_IDS.ACTIVITIES}
-    sectionTitle="_Activities_"
+    sectionTitle="Activities"
   />
 );
 

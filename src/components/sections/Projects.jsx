@@ -1,3 +1,5 @@
+// TODO: add project links - repo, live, demo
+
 import { CloudIcon, GlobeAltIcon } from "@heroicons/react/24/solid";
 
 import config from "@config/config";
@@ -12,10 +14,12 @@ const ProjectCard = ({ title, descr, thumb, techStack, category, links }) => {
   const linkProps = {
     color: {
       repo: "var(--color-blue-400)",
+      demo: "var(--color-yellow-400)",
       live: "var(--color-green-400)",
     },
     icon: {
       repo: <CloudIcon className="inline-block h-4 w-4" />,
+      demo: <GlobeAltIcon className="inline-block h-4 w-4" />,
       live: <GlobeAltIcon className="inline-block h-4 w-4" />,
     },
   };
@@ -41,7 +45,7 @@ const ProjectCard = ({ title, descr, thumb, techStack, category, links }) => {
           <span className="font-medium">Tech stack:</span>
           {techStack.map((tech, i) => (
             <span
-              key={i}
+              key={`tech-stack_${i}`}
               className="rounded-full bg-(--global-secondary-highlight-color) px-2 py-1 text-xs text-(--global-text-color)"
             >
               {tech}
@@ -99,7 +103,7 @@ const Projects = () => {
       category: "Personal Project",
       links: {
         repo: "",
-        live: "",
+        demo: "",
       },
     },
     {

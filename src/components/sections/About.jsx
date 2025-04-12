@@ -1,7 +1,9 @@
+// TODO: add profile photo, resume
+
 import config from "@config/config";
 import Anchor from "@components/elements/Anchor";
-import { Divider } from "@components/elements/Divider";
 import Img from "@components/elements/Img";
+import { Divider } from "@components/elements/Divider";
 import {
   SimpleLayout,
   TwoColumnsLayout,
@@ -25,12 +27,12 @@ const AboutCreator = ({
               src={image}
               alt="my-image"
               fallbackSrc="/assets/images/placeholders/person.webp"
-              className="aspect-square h-fit w-[350px] rounded-full object-cover shadow-lg max-[350px]:w-[100%]"
+              className="aspect-square h-fit w-[350px] rounded-full object-cover shadow-lg max-sm:w-[250px]"
               caption="Vishnu D"
             />
           ),
           col2: () => (
-            <div className="fancy-bg-1 p-4 text-[1.2rem]">{aboutMe}</div>
+            <div className="fancy-bg-1 p-4 sm:text-[1.1rem]">{aboutMe}</div>
           ),
         }}
       />
@@ -41,7 +43,7 @@ const AboutCreator = ({
         <SimpleLayout
           key={ind}
           sectionTitle={ind === 0 && moreAboutMeTitle}
-          main={<div>{aboutMe}</div>}
+          main={<div className="sm:text-[1.1rem]">{aboutMe}</div>}
         />
       ))}
     </>
@@ -50,7 +52,7 @@ const AboutCreator = ({
 
 const Highlighter = ({ type = "primary", children, ...attr }) => (
   <span
-    className={`highlight-${type} rounded-sm text-[1.1rem] text-nowrap ${attr?.className ? attr.className : ""}`}
+    className={`highlight-${type} rounded-sm text-nowrap max-sm:text-[0.9rem] sm:text-[1rem] ${attr?.className ? attr.className : ""}`}
   >
     {children}
   </span>
@@ -62,8 +64,8 @@ const Underliner = ({ children }) => (
   </span>
 );
 
-const MoreAboutTitle = ({ children }) => (
-  <h1 className="my-3 text-xl font-bold tracking-wider underline underline-offset-4">
+const MoreAboutSubTitle = ({ children }) => (
+  <h1 className="my-3 font-bold tracking-wider underline underline-offset-4">
     {children}
   </h1>
 );
@@ -93,8 +95,8 @@ const About = () => {
   );
 
   const moreAboutMe = [
-    <div className="flex flex-col gap-4 text-lg">
-      <MoreAboutTitle>How I Got Started?</MoreAboutTitle>
+    <div className="flex flex-col gap-4">
+      <MoreAboutSubTitle>How I Got Started?</MoreAboutSubTitle>
       <div>
         My interest in computer science began during my HSC days. As a college
         student, I started learning programming, which eventually led me to dive
@@ -109,7 +111,7 @@ const About = () => {
         <Underliner>expertise</Underliner>.
       </div>
 
-      <MoreAboutTitle>What I can do?</MoreAboutTitle>
+      <MoreAboutSubTitle>What I can do?</MoreAboutSubTitle>
       <ul className="grid list-disc grid-cols-1 gap-4 px-5 font-bold md:grid-cols-2">
         <li>
           Build Scalable & Mobile-Friendly Web Applications{" "}
@@ -127,7 +129,7 @@ const About = () => {
         <li>Deploy & Maintain Web Applications</li>
       </ul>
 
-      <MoreAboutTitle>What I Have Learned?</MoreAboutTitle>
+      <MoreAboutSubTitle>What I Have Learned?</MoreAboutSubTitle>
       <div>
         Beyond development, I have experience in writing{" "}
         <Underliner>automation scripts</Underliner> to streamline tasks and

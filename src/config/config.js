@@ -57,7 +57,7 @@ const config = {
   //     "Projects",
   //     "Contact", // Footer: contact links
   //   ],
-  FOOTER_QUICK_LINKS: ["about", "projects", "proficiency"],
+  FOOTER_QUICK_LINKS: ["about", "proficiency", "projects", "achievements"], // Footer: quick links to sections
   SECTION_IDS: {
     // layouts
     HEADER: "header",
