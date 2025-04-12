@@ -29,6 +29,7 @@ const Img = ({ caption, src, fallback, fallbackSrc, ...attr }) => {
         {...attr}
         onError={() => setError(true)}
       />
+      <br />
       {caption && (
         <figcaption className="mt-3 text-center">{caption}</figcaption>
       )}

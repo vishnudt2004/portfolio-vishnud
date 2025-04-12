@@ -66,6 +66,16 @@ const AchievementCard = ({
   </div>
 );
 
+const AchievementsCreator = ({ title = "Achievements", achievements }) => (
+  <SimpleLayout id={config.SECTION_IDS.ACHIEVEMENTS} sectionTitle={title}>
+    <div className="flex flex-wrap gap-5">
+      {achievements.map((achievement, ind) => (
+        <AchievementCard key={ind} {...achievement} />
+      ))}
+    </div>
+  </SimpleLayout>
+);
+
 const Achievements = () => {
   const achievements = [
     {
@@ -94,18 +104,7 @@ const Achievements = () => {
     },
   ];
 
-  return (
-    <SimpleLayout
-      id={config.SECTION_IDS.ACHIEVEMENTS}
-      sectionTitle="_Achievements_"
-    >
-      <div className="flex flex-wrap gap-5">
-        {achievements.map((achievement, ind) => (
-          <AchievementCard key={ind} {...achievement} />
-        ))}
-      </div>
-    </SimpleLayout>
-  );
+  return <AchievementsCreator achievements={achievements} />;
 };
 
 export default Achievements;

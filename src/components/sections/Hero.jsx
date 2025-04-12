@@ -20,16 +20,22 @@ const HeroCreator = ({ children }) => (
   </div>
 );
 
-const ScrollDownButton = () => (
-  <div
-    className="group absolute inset-x-0 bottom-5 m-auto flex h-18 w-9 cursor-pointer justify-center rounded-full border border-(--global-text-color) inset-ring-3 inset-ring-(--global-border-color) transition-transform duration-400 hover:rotate-45"
-    onClick={() => scrollDown()}
-  >
-    <div className="mt-0.5 grid h-7 w-7 place-items-center rounded-full bg-(--global-text-color) transition-all duration-400 ease-in group-hover:translate-y-9.5 group-hover:-rotate-225 group-hover:delay-200">
-      <ArrowLongDownIcon className="h-7/10 w-7/10 rotate-180 text-(--global-background-color)" />
+const ScrollDownButton = () => {
+  const handleClick = () => {
+    setTimeout(() => scrollDown(), 500);
+  };
+
+  return (
+    <div
+      className="group absolute inset-x-0 bottom-5 m-auto flex h-18 w-9 cursor-pointer justify-center rounded-full border border-(--global-text-color) inset-ring-3 inset-ring-(--global-border-color) transition-transform duration-400 hover:rotate-45"
+      onClick={handleClick}
+    >
+      <div className="mt-0.5 grid h-7 w-7 place-items-center rounded-full bg-(--global-text-color) transition-all duration-400 ease-in group-hover:translate-y-9.5 group-hover:-rotate-225 group-hover:delay-200">
+        <ArrowLongDownIcon className="h-7/10 w-7/10 rotate-180 text-(--global-background-color)" />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const HeroHighlighter = ({ children }) => (
   <span className="highlight-primary px-3! py-0.5">{children}</span>
