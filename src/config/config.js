@@ -9,10 +9,10 @@ const config = {
         category: "Base Modes",
         themes: ["light", "dark", "pitch-black"],
       },
-      {
-        category: "Clean & Minimal",
-        themes: ["minimal-light", "minimal-dark"],
-      },
+      // {
+      //   category: "Clean & Minimal",
+      //   themes: ["minimal-light", "minimal-dark"],
+      // },
       // {
       //   category: "Soft & Neutral",
       //   themes: ["paper", "sepia", "minty", "lavender", "aqua-zen", "sunrise"],

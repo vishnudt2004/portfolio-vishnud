@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2025-04-15
+
+### Changed
+
+- Improved UI responsiveness and structure across all sections
+  - Header: Dropdown box now adapts to current theme modes, and text size is adjusted for a better look (`Header`).
+  - Hero: Adjusted welcome text size, `ScrollDownButton` size, and background shape sizes for small screens. `HeroHighlighter` restructured to be customizable
+  - Proficiency: Tweaked skill box sizes and tech stack icon scaling for small screens
+  - Achievements: Unified secondary scrollbar style (same as `ProjectCard`) for all pointer types.
+  - Anchor: Added hover effect, title for the default icon
+  - Proficiency, About: Resized `Anchor` links for small screens
+  - config.js: Simplified themes. The _Clean & Minimal_ category is now disabled
+
 ## [1.0.1] - 2025-04-12
 
 ### Changed

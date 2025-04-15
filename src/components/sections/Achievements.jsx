@@ -49,7 +49,7 @@ const AchievementCard = ({
       style={{ opacity: 0.5 }}
     />
 
-    <p className="text-(--global-secondary-text-color) max-sm:max-h-50 max-sm:overflow-y-auto">
+    <p className="any-pointer-fine:secondary-scrollbar text-(--global-secondary-text-color) max-sm:max-h-50 max-sm:overflow-y-auto">
       {fullDescr}
     </p>
 

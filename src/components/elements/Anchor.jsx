@@ -3,7 +3,12 @@ import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 const Anchor = ({
   children,
   color = "var(--global-anchor-color)",
-  icon = <ArrowUpRightIcon className={`inline h-4 w-4`} />,
+  icon = (
+    <ArrowUpRightIcon
+      className={`inline h-4 w-4 hover:bg-(--anchor-decoration-color)`}
+      title="Link"
+    />
+  ),
   ...attr
 }) => {
   const style = {

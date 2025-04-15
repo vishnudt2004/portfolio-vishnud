@@ -55,7 +55,7 @@ const ProficiencyCreator = ({
                 {skills.map(({ name, icon = undefined }) => (
                   <li
                     key={name}
-                    className="highlight-secondary group relative flex! list-none items-center justify-center gap-1 rounded-xl"
+                    className="highlight-secondary group relative flex! list-none items-center justify-center gap-1 rounded-full max-sm:text-sm"
                   >
                     {name}{" "}
                     {icon && (
@@ -76,7 +76,7 @@ const ProficiencyCreator = ({
       col2: () => (
         <div className="flex flex-col items-center gap-10 p-1">
           <h1 className="text-xl font-bold tracking-wider">Tech Stack</h1>
-          <div className="flex flex-wrap items-center justify-center gap-5">
+          <div className="flex flex-wrap items-center justify-center gap-5 max-sm:scale-90">
             {techStack.techStackIcons.map(({ name, icon }) => (
               <figure key={name} className="text-center">
                 {createElement(icon, {
@@ -84,7 +84,7 @@ const ProficiencyCreator = ({
                     "mb-2 h-24 w-24 rounded-full border-2 border-(--global-border-color) bg-[#fafafa] p-4 shadow-lg",
                   color: "default",
                 })}
-                <figcaption>{name}</figcaption>
+                <figcaption className="max-sm:text-sm">{name}</figcaption>
               </figure>
             ))}
           </div>
@@ -192,7 +192,7 @@ const Proficiency = () => {
         </div>
         <Anchor
           href="https://www.mongodb.com/resources/languages/mern-stack"
-          className="self-start text-[1rem] before:-bottom-0.5! after:-bottom-0.5!"
+          className="self-start before:-bottom-0.5! after:-bottom-0.5! max-md:self-center max-sm:text-sm"
         >
           Read more about{" "}
           <Highlighter className="rounded-sm!">MERN</Highlighter> stack

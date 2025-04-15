@@ -87,7 +87,7 @@ const About = () => {
 
       <Anchor
         href=""
-        className="self-start text-[1rem] before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
+        className="self-start before:-bottom-0.5! after:-bottom-0.5! max-md:self-center max-sm:text-sm"
       >
         Check out my <Highlighter>Resume</Highlighter> here.
       </Anchor>

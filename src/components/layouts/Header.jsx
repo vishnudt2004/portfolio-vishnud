@@ -56,7 +56,7 @@ const ThemeButton = ({ toggleNavbar }) => {
       </button>
 
       <NavbarDropdownAnimatePresence dropDownVisible={visible}>
-        <div className="absolute top-13 right-0 z-(--navbar-dropdown-z-index) m-auto w-40">
+        <div className="absolute top-13 right-0 z-(--navbar-dropdown-z-index) m-auto w-35 text-sm">
           <ManualThemeSwitcher onChange={handleOnChange} />
         </div>
       </NavbarDropdownAnimatePresence>
