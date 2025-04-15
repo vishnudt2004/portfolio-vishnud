@@ -15,7 +15,7 @@
 A clean, responsive, and modern portfolio built to showcase who I am as a self-taught full-stack developer. It reflects my learning journey, coding style, and adaptability—while giving potential employers a quick overview of my skills, projects, and personality.
 
 **Source Code:** [GitHub Repository](https://github.com/vishnudt2004/portfolio-vishnud)
-**Live site:** _(Coming soon)_
+**Live site:** [Vishnu D - Portfolio](https://portfolio-vishnud.vercel.app/)
 
 ### 🔹 Highlights
 
@@ -53,7 +53,7 @@ A clean, responsive, and modern portfolio built to showcase who I am as a self-t
 ## 🛠️ Tech Stack
 
 - **Frontend:** HTML, CSS, JavaScript, React.js, Tailwind CSS, Motion (framer-motion)
-- **Deployment:** _(Coming soon)_
+- **Deployment:** GitHub + Vercel
 
 ## 🗂 Configuration Files
 
@@ -63,7 +63,7 @@ A clean, responsive, and modern portfolio built to showcase who I am as a self-t
 
 ## 🔗 Contacts
 
-- 🌐 Portfolio: _(Coming soon)_
+- 🌐 Portfolio: [portfolio-vishnud](https://portfolio-vishnud.vercel.app/)
 - 💻 GitHub: [vishnudt2004](https://github.com/vishnudt2004)
 - 🔗 LinkedIn: [vishnu-d](https://www.linkedin.com/in/vishnu-d-28b7a52b1/)
 - 🧠 LeetCode: [vishnud2004](https://leetcode.com/vishnud2004/)
