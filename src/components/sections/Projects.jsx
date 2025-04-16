@@ -1,5 +1,3 @@
-// TODO: add project links - repo, live, demo
-
 import { CloudIcon, GlobeAltIcon } from "@heroicons/react/24/solid";
 
 import config from "@config/config";
@@ -102,8 +100,8 @@ const Projects = () => {
       ],
       category: "Personal Project",
       links: {
-        repo: "",
-        demo: "",
+        repo: "https://github.com/vishnudt2004/globblog",
+        demo: "https://globblog.vercel.app/",
       },
     },
     {
@@ -121,8 +119,8 @@ const Projects = () => {
       ],
       category: "Personal Website",
       links: {
-        repo: "",
-        live: "",
+        repo: "https://github.com/vishnudt2004/portfolio-vishnud",
+        live: "https://portfolio-vishnud.vercel.app/",
       },
     },
   ];

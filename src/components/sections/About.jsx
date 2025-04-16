@@ -1,5 +1,3 @@
-// TODO: add profile photo, resume
-
 import config from "@config/config";
 import Anchor from "@components/elements/Anchor";
 import Img from "@components/elements/Img";
@@ -86,7 +84,7 @@ const About = () => {
       </span>
 
       <Anchor
-        href=""
+        href="https://vishnudt2004.github.io/vishnud-resume/Vishnu%20D%20-%20Resume.pdf"
         className="self-start before:-bottom-0.5! after:-bottom-0.5! max-md:self-center max-sm:text-sm"
       >
         Check out my <Highlighter>Resume</Highlighter> here.

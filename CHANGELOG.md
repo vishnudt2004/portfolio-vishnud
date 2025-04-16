@@ -2,11 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.2] - 2025-04-15
+## [1.0.2] - 2025-04-17
 
 ### Changed
 
-- Improved UI responsiveness and structure across all sections
+- (Apr 17) Updated links
+
+  - About: Resume link updated
+  - Projects: Project links updated (repo, demo, live)
+
+- (Apr 15) Improved UI responsiveness and structure across all sections
+
   - Header: Dropdown box now adapts to current theme modes, and text size is adjusted for a better look (`Header`).
   - Hero: Adjusted welcome text size, `ScrollDownButton` size, and background shape sizes for small screens. `HeroHighlighter` restructured to be customizable
   - Proficiency: Tweaked skill box sizes and tech stack icon scaling for small screens
