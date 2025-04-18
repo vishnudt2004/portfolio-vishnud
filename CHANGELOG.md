@@ -2,9 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.2] - 2025-04-17
+## [1.0.2] - 2025-04-18
 
 ### Changed
+
+- (Apr 18) Updated links
+
+  - About: Resume link updated
+  - Footer: LinkedIn link updated
 
 - (Apr 17) Updated links
 
