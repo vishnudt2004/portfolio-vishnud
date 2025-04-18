@@ -85,8 +85,8 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
 const Footer = () => {
   const contacts = {
     GitHub: "https://github.com/vishnudt2004",
-    LinkedIn: "https://www.linkedin.com/in/vishnu-d-28b7a52b1/",
-    LeetCode: "https://leetcode.com/vishnud2004/",
+    LinkedIn: "https://www.linkedin.com/in/vishnu-dt",
+    LeetCode: "https://leetcode.com/vishnud2004",
     Email: "mailto:vishnu.d.t.2004@gmail.com",
     // Phone: "tel:+91936350XXXX",
   };
