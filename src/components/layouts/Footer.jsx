@@ -4,7 +4,11 @@ import {
   EnvelopeIcon,
   PhoneIcon,
 } from "@heroicons/react/24/solid";
-import { SiGithub, SiLeetcode } from "@icons-pack/react-simple-icons";
+import {
+  SiGithub,
+  SiLeetcode,
+  SiHackerrank,
+} from "@icons-pack/react-simple-icons";
 
 import config from "@config/config";
 import { scrollIntoSection } from "@utils/jsUtils";
@@ -17,6 +21,7 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
       linkedin: CustomLinkedinIcon,
       github: SiGithub,
       leetcode: SiLeetcode,
+      hackerrank: SiHackerrank,
       phone: PhoneIcon,
     },
   };
@@ -87,6 +92,7 @@ const Footer = () => {
     GitHub: "https://github.com/vishnudt2004",
     LinkedIn: "https://www.linkedin.com/in/vishnu-dt",
     LeetCode: "https://leetcode.com/vishnud2004",
+    HackerRank: "https://www.hackerrank.com/profile/vishnu_d_t_2004",
     Email: "mailto:vishnu.d.t.2004@gmail.com",
     // Phone: "tel:+91936350XXXX",
   };

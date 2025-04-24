@@ -11,6 +11,9 @@ import { MedalStarBadgeIcon as CustomMedalStarBadgeIcon } from "@components/elem
 
 import achievementImage_1 from "@assets/images/achievements-certificate/achievement-1.webp";
 import achievementImage_2 from "@assets/images/achievements-certificate/achievement-2.webp";
+import achievementImage_3_react from "@assets/images/achievements-certificate/achievement-3/react_basic-certificate.webp";
+import achievementImage_3_js from "@assets/images/achievements-certificate/achievement-3/javascript_basic-certificate.webp";
+import achievementImage_3_css from "@assets/images/achievements-certificate/achievement-3/css-certificate.webp";
 
 const AchievementCard = ({
   title = (
@@ -21,7 +24,7 @@ const AchievementCard = ({
   ),
   descr,
   event,
-  location,
+  location_date,
   fullDescr,
   cert,
 }) => (
@@ -37,10 +40,12 @@ const AchievementCard = ({
 
     <h3 className="mb-1 text-lg font-bold">{descr}</h3>
 
-    <p className="mb-3 text-sm font-bold text-(--global-secondary-text-color)">
-      {event} {location && "@"}{" "}
-      {location && <span className="italic">{location}</span>}
-    </p>
+    {(event || location_date) && (
+      <p className="mb-3 text-sm font-bold text-(--global-secondary-text-color)">
+        {event} {location_date && "@"}{" "}
+        {location_date && <span className="italic">{location_date}</span>}
+      </p>
+    )}
 
     <Divider
       color="var(--color-yellow-400)"
@@ -54,15 +59,29 @@ const AchievementCard = ({
     </p>
 
     {/* Optional CTA / Certificate Link */}
-    {cert && (
-      <a
-        href={cert}
-        target="_blank"
-        className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-3 py-2 text-sm text-white"
-      >
-        <DocumentCheckIcon className="h-5 w-5" /> View Certificate
-      </a>
-    )}
+    {cert &&
+      (typeof cert === "object" ? (
+        <div className="mt-5 flex flex-wrap gap-2">
+          {cert.map(({ name, cert }) => (
+            <a
+              key={name}
+              href={cert}
+              target="_blank"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-3 py-2 text-sm text-white"
+            >
+              <DocumentCheckIcon className="h-5 w-5" /> {name}
+            </a>
+          ))}
+        </div>
+      ) : (
+        <a
+          href={cert}
+          target="_blank"
+          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-3 py-2 text-sm text-white"
+        >
+          <DocumentCheckIcon className="h-5 w-5" /> View Certificate
+        </a>
+      ))}
   </div>
 );
 
@@ -81,7 +100,7 @@ const Achievements = () => {
     {
       descr: "1st Place – Web Development Contest",
       event: "Mirror 2K24, Intercollegiate Event",
-      location: "Erode Arts and Science College, Erode – 2024",
+      location_date: "Erode Arts and Science College, Erode – 2024",
       fullDescr: (
         <>
           Developed a webpage in 45 minutes using only the provided images, no
@@ -96,11 +115,28 @@ const Achievements = () => {
     {
       descr: "1st Place – Logo Design Competition",
       event: "CS Department Function",
-      location:
+      location_date:
         "Govt. Arts & Science College – Komarapalayam, Namakkal (Dt.) – 2022",
       fullDescr:
         "Received the book 'Yevuganai Manithan: Abdul Kalam Vazhkai Varalarum, Kavithaigalum' as a prize during the 75th Independence Day Celebration, 2022",
       cert: achievementImage_2,
+    },
+    {
+      descr: "HackerRank Certifications",
+      event: "",
+      location_date: "Online – 2025",
+      fullDescr: (
+        <>
+          <span>⭐&nbsp;React (Basic)</span>
+          <span> ⭐&nbsp;JavaScript (Basic)</span>
+          <span> ⭐&nbsp;CSS (Basic)</span>
+        </>
+      ),
+      cert: [
+        { name: "React Certificate", cert: achievementImage_3_react },
+        { name: "JavaScript Certificate", cert: achievementImage_3_js },
+        { name: "CSS Certificate", cert: achievementImage_3_css },
+      ],
     },
   ];
 

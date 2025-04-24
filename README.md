@@ -67,4 +67,5 @@ A clean, responsive, and modern portfolio built to showcase who I am as a self-t
 - 💻 GitHub: [vishnudt2004](https://github.com/vishnudt2004)
 - 🔗 LinkedIn: [vishnu-dt](https://www.linkedin.com/in/vishnu-dt)
 - 🧠 LeetCode: [vishnud2004](https://leetcode.com/vishnud2004/)
+- 🧠 HackerRank: [vishnu_d_t_2004](https://www.hackerrank.com/profile/vishnu_d_t_2004)
 - 📧 Email: [vishnu.d.t.2004@gmail.com](mailto:vishnu.d.t.2004@gmail.com)
