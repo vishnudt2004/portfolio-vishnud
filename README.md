@@ -1,3 +1,5 @@
+# Vishnu D – Developer Portfolio
+
 ## 📑 Table of Contents
 
 - [🚀 Project Overview](#-project-overview)
@@ -9,8 +11,6 @@
 - [🔗 Contacts](#-contacts)
 
 ## 🚀 Project Overview
-
-# Vishnu D – Developer Portfolio
 
 A clean, responsive, and modern portfolio built to showcase who I am as a self-taught full-stack developer. It reflects my learning journey, coding style, and adaptability—while giving potential employers a quick overview of my skills, projects, and personality.
 
@@ -32,13 +32,22 @@ A clean, responsive, and modern portfolio built to showcase who I am as a self-t
 
 ## 📷 Screenshots
 
-### 🖥️ Desktop View
+> ⚠️ These screenshots represent initial versions of the application. The current state may have minor differences.
+> 🔗 **Recommended:** [View Live Site](https://portfolio-vishnud.vercel.app) for the most up-to-date experience.
 
-![Portfolio - Light](<./screenshots/Desktop%20View/Portfolio%20-%20Vishnu%20D%20(Full,%20Light%20mode).png>)
+<details>
+  <summary>🖥️ Desktop View</summary>
 
-### 🖥️ Mobile View
+  ![Portfolio - Light](./screenshots/Desktop%20View/Portfolio%20-%20Vishnu%20D%20(Full,%20Light%20mode).png)
 
-![Portfolio - Light](<./screenshots/Mobile%20View/Portfolio%20-%20Vishnu%20D%20(Full,%20Light%20mode).png>)
+</details>
+
+<details>
+  <summary>📱 Mobile View</summary>
+
+  ![Portfolio - Light](./screenshots/Mobile%20View/Portfolio%20-%20Vishnu%20D%20(Full,%20Light%20mode).png)
+
+</details>
 
 <!-- 🔎 Want to see more? → [View Full Screenshot Gallery](./screenshots/SCREENSHOTS.md) -->
 
