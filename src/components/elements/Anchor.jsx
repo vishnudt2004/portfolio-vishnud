@@ -5,7 +5,7 @@ const Anchor = ({
   color = "var(--global-anchor-color)",
   icon = (
     <ArrowUpRightIcon
-      className={`inline h-4 w-4 hover:bg-(--anchor-decoration-color)`}
+      className="inline size-4 hover:bg-(--anchor-decoration-color)"
       title="Link"
     />
   ),

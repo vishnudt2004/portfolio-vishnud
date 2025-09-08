@@ -4,7 +4,7 @@
 
 @layer components {
   .section-title {
-    @apply relative mb-4 text-center text-2xl font-bold tracking-wider before:absolute before:bottom-1 before:left-1/2 before:-z-1 before:h-full before:w-full before:-translate-x-1/2 before:bg-(--global-border-color) before:[clip-path:polygon(0_85%,_100%_43%,_100%_100%,_0%_100%)];
+    @apply relative mb-4 text-center text-2xl tracking-wider before:absolute before:-bottom-1 before:left-1/2 before:-z-1 before:h-[1px] before:w-3/4 before:-translate-x-1/2 before:bg-(--global-border-color);
   }
 
   .highlight-primary {
@@ -38,7 +38,7 @@
 /* custom tailwind utilities */
 
 @utility fancy-bg-1 {
-  @apply bg-[radial-gradient(var(--fancybg1-color)_1.5px,transparent_1.5px)] bg-[length:16px_16px];
+  @apply bg-[radial-gradient(var(--fancybg1-color)_1px,transparent_1px)] bg-[length:16px_16px];
 }
 
 @utility fancy-bg-2 {

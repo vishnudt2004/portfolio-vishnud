@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect } from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 import config, { derivedConfig } from "@config/config";
-import useLocalStorage from "@hooks/useLocalStorage";
 
 const ThemeModeContext = createContext({
   themeMode: "light",
@@ -13,7 +13,8 @@ function ThemeModeProvider({ children }) {
     DEFAULT_THEME_MODE: defaultThemeMode,
     THEME_MODE_CLASS_NAME_PREFIX: themeModeClassNamePrefix,
   } = config.UI;
-  const { THEME_MODES_ARRAY: themeModes } = derivedConfig;
+  const { ACTIVE_THEME_MODES_ARRAY: themeModes } = derivedConfig;
+  const allThemeModes = config.UI.THEME_MODES.flatMap((group) => group.themes);
 
   const [themeMode, setThemeMode] = useLocalStorage(
     "themeMode",
@@ -22,7 +23,7 @@ function ThemeModeProvider({ children }) {
 
   useEffect(() => {
     // Remove all possible theme classes first
-    themeModes.forEach((mode) =>
+    allThemeModes.forEach((mode) =>
       document.documentElement.classList.remove(
         `${themeModeClassNamePrefix}-${mode.replace(" ", "_")}`,
       ),
@@ -34,14 +35,14 @@ function ThemeModeProvider({ children }) {
         `${themeModeClassNamePrefix}-${themeMode.replace(" ", "_")}`,
       );
     }
-  }, [themeMode, themeModes, defaultThemeMode, themeModeClassNamePrefix]);
+  }, [themeMode, allThemeModes, defaultThemeMode, themeModeClassNamePrefix]);
 
   const nextThemeMode =
     themeModes[(themeModes.indexOf(themeMode) + 1) % themeModes.length];
 
   const cycleThemeMode = () =>
     setThemeMode(
-      themeModes[(themeModes.indexOf(themeMode) + 1) % themeModes.length],
+      (prev) => themeModes[(themeModes.indexOf(prev) + 1) % themeModes.length],
     );
 
   return (

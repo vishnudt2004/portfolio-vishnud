@@ -1,11 +1,13 @@
 import { useState, createElement, useEffect, useRef } from "react";
 import {
-  PhoneIcon,
-  FolderIcon,
-  AcademicCapIcon,
-  PaintBrushIcon,
+  CubeIcon,
+  ChatBubbleLeftIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
+import {
   XMarkIcon,
   Squares2X2Icon,
+  PaintBrushIcon,
 } from "@heroicons/react/24/solid";
 
 import config from "@config/config";
@@ -23,7 +25,7 @@ import {
 } from "@components/elements/Animations";
 import { ManualThemeSwitcher } from "@components/elements/ThemeSwitcher";
 
-const ThemeButton = ({ toggleNavbar }) => {
+const ThemeButton = ({ onChange }) => {
   const [visible, setVisible] = useState(false);
 
   const clickRef = useRef(null);
@@ -38,21 +40,17 @@ const ThemeButton = ({ toggleNavbar }) => {
 
   const handleOnChange = () => {
     setVisible(false);
-    toggleNavbar();
-    scrollIntoTop(); // Avoid sections disappearing during scroll-motion when changing themes
+    onChange();
+    scrollIntoTop(); // Prevent sections from disappearing due to scroll reset on theme change.
   };
 
   return (
     <div ref={clickRef} className="relative">
       <button
-        className="cursor-pointer place-items-center rounded-full bg-(--global-text-color) p-3 text-(--global-background-color) transition-transform hover:rotate-25"
+        className="scale-90 cursor-pointer place-items-center rounded-full bg-(--global-text-color) p-3 text-(--global-background-color) transition-transform *:size-4 hover:scale-100 active:scale-90"
         onClick={handleVisibility}
       >
-        {!visible ? (
-          <PaintBrushIcon className="h-4 w-4" />
-        ) : (
-          <XMarkIcon className="h-4 w-4" />
-        )}
+        {!visible ? <PaintBrushIcon /> : <XMarkIcon />}
       </button>
 
       <NavbarDropdownAnimatePresence dropDownVisible={visible}>
@@ -70,7 +68,7 @@ const Navbar = ({
 }) => {
   const scrollDir = useScrollDirection();
 
-  const navbarMutationBreakpoint = "640px"; // tailwind-variant: --breakpoint-sm: sm
+  const navbarMutationBreakpoint = "639px"; // tailwind-variant: --breakpoint-sm: sm - 1
 
   const [navbarVisible, setNavbarVisible] = useState(
     window.matchMedia(`(min-width: ${navbarMutationBreakpoint})`).matches,
@@ -135,9 +133,7 @@ const Navbar = ({
     >
       <nav
         ref={(el) => (clickRefs.current[0] = el)}
-        className={`pointer-events-auto flex w-full justify-between border-b border-(--global-border-color) bg-(--global-background-color) px-5 py-5 max-sm:h-full max-sm:w-[250px] max-sm:flex-col max-sm:items-center max-sm:justify-start max-sm:gap-10 max-sm:border-r max-sm:border-b-0 max-sm:py-10 ${
-          navbarVisible ? "shadow-sm" : ""
-        } `}
+        className="pointer-events-auto flex w-full items-center justify-between border-b border-(--global-border-color) bg-(--global-background-color) px-5 py-3 max-sm:h-full max-sm:w-[250px] max-sm:flex-col max-sm:items-center max-sm:justify-start max-sm:gap-10 max-sm:border-r max-sm:border-b-0 max-sm:py-10"
       >
         <NavbarBrandMotion
           screen={isSmallScreen ? "small" : "large"}
@@ -146,7 +142,7 @@ const Navbar = ({
           <div className="brand">{brand}</div>
         </NavbarBrandMotion>
 
-        <ul className="flex gap-10 max-md:gap-8 max-sm:flex-col">
+        <ul className="flex gap-5 max-sm:flex-col max-sm:gap-8">
           {menus.map(({ name, icon: { el, props }, id }, index) => (
             <NavbarMenusMotion
               key={id}
@@ -157,7 +153,7 @@ const Navbar = ({
               <li>
                 <a
                   href="#"
-                  className="group relative flex h-full cursor-pointer items-center gap-2 text-[14px] tracking-[2px] text-(--global-menus-color) before:absolute before:inset-x-0 before:-bottom-1 before:m-auto before:h-[4px] before:w-0 before:rounded-[0_10px_0_10px] before:bg-(--global-menus-color) before:transition-all before:duration-500 hover:before:w-full max-sm:w-fit max-sm:before:-bottom-2"
+                  className="group relative flex h-full cursor-pointer items-center gap-0.5 text-[14px] tracking-[2px] text-(--global-menus-color) before:absolute before:inset-x-0 before:bottom-1 before:m-auto before:h-[2px] before:w-0 before:rounded-[5px_5px_0_0] before:bg-(--global-menus-color) before:transition-all before:duration-500 hover:before:w-full max-sm:w-fit max-sm:before:-bottom-2"
                   onClick={(e) => {
                     scrollIntoSection(e, config.SECTION_IDS[id.toUpperCase()]);
                     toggleNavbar();
@@ -174,7 +170,7 @@ const Navbar = ({
           ))}
 
           <li>
-            <ThemeButton toggleNavbar={toggleNavbar} />
+            <ThemeButton onChange={toggleNavbar} />
           </li>
         </ul>
       </nav>
@@ -222,17 +218,20 @@ const Header = () => {
   const menus = [
     {
       name: "About",
-      icon: { el: AcademicCapIcon, props: { className: "w-4 h-4" } },
+      icon: { el: UserIcon, props: { className: "size-4.5" } },
       id: "ABOUT",
     },
     {
       name: "Projects",
-      icon: { el: FolderIcon, props: { className: "w-4 h-4 scale-90" } },
+      icon: { el: CubeIcon, props: { className: "size-4.5 scale-90" } },
       id: "PROJECTS",
     },
     {
       name: "Contact",
-      icon: { el: PhoneIcon, props: { className: "w-4 h-4 scale-90" } },
+      icon: {
+        el: ChatBubbleLeftIcon,
+        props: { className: "size-4.5 scale-90" },
+      },
       id: "FOOTER",
     },
   ];

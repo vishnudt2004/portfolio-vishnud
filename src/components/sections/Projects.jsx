@@ -1,4 +1,5 @@
 import { CloudIcon, GlobeAltIcon } from "@heroicons/react/24/solid";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 
 import config from "@config/config";
 import Anchor from "@components/elements/Anchor";
@@ -7,8 +8,9 @@ import { SimpleLayout } from "@components/elements/SectionLayouts";
 
 import projectImage_globblog from "@assets/images/projects-screenshot/globblog_(welcome-page).png";
 import projectImage_portfolio from "@assets/images/projects-screenshot/portfolio-vishnu-d_(hero-section).png";
+import projectImage_suic from "@assets/images/projects-screenshot/suic_(home-page).png";
 
-const ProjectCard = ({ title, descr, thumb, techStack, category, links }) => {
+const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
   const linkProps = {
     color: {
       repo: "var(--color-blue-400)",
@@ -23,11 +25,7 @@ const ProjectCard = ({ title, descr, thumb, techStack, category, links }) => {
   };
 
   return (
-    <div className="fancy-bg-2 group relative min-h-[470px] overflow-hidden rounded-md border border-(--global-border-color) bg-(--global-background-color) shadow-lg transition hover:-translate-y-1 hover:shadow-xl max-md:max-w-[400px] sm:h-auto md:w-[calc(50%-12px)] lg:w-[calc(33.33%-12px)]">
-      <span className="absolute top-0 left-0 rounded-br-md border-r border-b border-(--global-border-color) bg-(--global-background-color) px-3 py-1 text-xs text-(--global-secondary-text-color) transition-opacity group-hover:opacity-0">
-        {category}
-      </span>
-
+    <div className="fancy-bg-2 group min-h-[470px] w-full overflow-hidden border border-(--global-border-color)/50 bg-(--global-background-color) transition hover:-translate-y-1 hover:shadow-sm">
       <Img
         src={thumb}
         alt={`${title} image`}
@@ -40,11 +38,11 @@ const ProjectCard = ({ title, descr, thumb, techStack, category, links }) => {
           {descr}
         </p>
         <div className="mt-3 flex flex-wrap gap-2 text-sm">
-          <span className="font-medium">Tech stack:</span>
+          <span className="pt-1 leading-2 font-medium">Tech stack:</span>
           {techStack.map((tech, i) => (
             <span
               key={`tech-stack_${i}`}
-              className="rounded-full bg-(--global-secondary-highlight-color) px-2 py-1 text-xs text-(--global-text-color)"
+              className="bg-(--global-secondary-highlight-color) px-1.5 py-1 text-xs leading-2 text-(--global-text-color)"
             >
               {tech}
             </span>
@@ -71,13 +69,31 @@ const ProjectCard = ({ title, descr, thumb, techStack, category, links }) => {
   );
 };
 
-const ProjectsCreator = ({ title = "Projects", projects }) => (
+const ProjectsCreator = ({
+  title = "Projects",
+  projects,
+  githubProfileRepos,
+}) => (
   <SimpleLayout id={config.SECTION_IDS.PROJECTS} sectionTitle={title}>
-    <div className="flex flex-wrap gap-3 max-lg:justify-center">
+    <div className="grid justify-items-center gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((project) => (
         <ProjectCard key={project.title} {...project} />
       ))}
     </div>
+
+    <p className="mt-5 text-center">
+      Explore more projects on my GitHub:{" "}
+      <a
+        color="var(--global-text-color)"
+        href={githubProfileRepos}
+        target="_blank"
+        className="highlight-primary before: mt-2 ml-2 inline-flex! items-center rounded-full"
+      >
+        <span className="inline-flex items-center gap-2">
+          <SiGithub className="size-4.5" /> vishnudt2004
+        </span>
+      </a>
+    </p>
   </SimpleLayout>
 );
 
@@ -97,8 +113,10 @@ const Projects = () => {
         "QuillJs",
         "JWT",
         "Google OAuth2.0",
+        "Mongoose",
+        "React Router DOM",
+        "Styled Components",
       ],
-      category: "Personal Project",
       links: {
         repo: "https://github.com/vishnudt2004/globblog",
         demo: "https://globblog.vercel.app/",
@@ -117,15 +135,39 @@ const Projects = () => {
         "Tailwind CSS",
         "Motion (framer-motion)",
       ],
-      category: "Personal Website",
       links: {
         repo: "https://github.com/vishnudt2004/portfolio-vishnud",
         live: "https://portfolio-vishnud.vercel.app/",
       },
     },
+    {
+      title: "Simple UI Components",
+      descr:
+        "A personal, local-first collection of reusable UI and frontend utility components — installable via CLI.",
+      thumb: projectImage_suic,
+      techStack: [
+        "Next.js",
+        "TypeScript",
+        "MDX",
+        "Tailwind CSS",
+        "React",
+        "Motion (framer-motion)",
+        "Node.js",
+        "etc..",
+      ],
+      links: {
+        repo: "https://github.com/vishnudt2004/suic-core",
+        live: "https://suic-docs.vercel.app/",
+      },
+    },
   ];
 
-  return <ProjectsCreator projects={projects} />;
+  return (
+    <ProjectsCreator
+      projects={projects}
+      githubProfileRepos="https://github.com/vishnudt2004?tab=repositories"
+    />
+  );
 };
 
 export default Projects;

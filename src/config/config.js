@@ -9,37 +9,43 @@ const config = {
         category: "Base Modes",
         themes: ["light", "dark", "pitch-black"],
       },
-      // {
-      //   category: "Clean & Minimal",
-      //   themes: ["minimal-light", "minimal-dark"],
-      // },
-      // {
-      //   category: "Soft & Neutral",
-      //   themes: ["paper", "sepia", "minty", "lavender", "aqua-zen", "sunrise"],
-      // },
-      // {
-      //   category: "Pastel & Romantic",
-      //   themes: [
-      //     "pastel",
-      //     "cotton-candy",
-      //     "vintage-rose",
-      //     "red-harmony",
-      //     "red-rose",
-      //   ],
-      // },
-      // {
-      //   category: "Dev Favorites",
-      //   themes: ["one-dark-pro", "dracula", "postman"],
-      // },
-      // {
-      //   category: "Tech & Futuristic",
-      //   themes: ["dark-matter", "forest-essence", "cyber", "synthwave"],
-      // },
-      // {
-      //   category: "Aurora Glow",
-      //   themes: ["aurora-light", "aurora-dark"],
-      // },
+      {
+        category: "Clean & Minimal",
+        themes: ["minimal-light", "minimal-dark"],
+      },
+      {
+        category: "Soft & Neutral",
+        themes: ["paper", "sepia", "minty", "lavender", "aqua-zen", "sunrise"],
+      },
+      {
+        category: "Pastel & Romantic",
+        themes: [
+          "pastel",
+          "cotton-candy",
+          "vintage-rose",
+          "red-harmony",
+          "red-rose",
+        ],
+      },
+      {
+        category: "Dev Favorites",
+        themes: ["one-dark-pro", "dracula", "postman"],
+      },
+      {
+        category: "Tech & Futuristic",
+        themes: ["dark-matter", "forest-essence", "cyber", "synthwave"],
+      },
+      {
+        category: "Aurora Glow",
+        themes: ["aurora-light", "aurora-dark"],
+      },
     ], // Add or remove themes in src/styles/themes.css
+    ACTIVE_THEME_MODES: [
+      {
+        category: "Base Modes",
+        themes: ["light", "dark", "pitch-black"],
+      },
+    ],
   },
   VISIBLE_SECTIONS: [
     "Hero",
@@ -77,7 +83,9 @@ const config = {
 };
 
 const derivedConfig = {
-  THEME_MODES_ARRAY: config.UI.THEME_MODES.flatMap((group) => group.themes),
+  ACTIVE_THEME_MODES_ARRAY: config.UI.ACTIVE_THEME_MODES.flatMap(
+    (group) => group.themes,
+  ),
 };
 
 export default config;

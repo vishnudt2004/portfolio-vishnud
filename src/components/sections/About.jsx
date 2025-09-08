@@ -1,11 +1,12 @@
+import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
+
 import config from "@config/config";
 import Anchor from "@components/elements/Anchor";
 import Img from "@components/elements/Img";
 import { Divider } from "@components/elements/Divider";
-import {
-  SimpleLayout,
-  TwoColumnsLayout,
-} from "@components/elements/SectionLayouts";
+import HoverTooltip from "@components/elements/HoverTooltip";
+import { TwoColumnsLayout } from "@components/elements/SectionLayouts";
+import { LinkedinIcon } from "@components/elements/CustomIcons";
 
 const AboutCreator = ({
   title = "About Me",
@@ -25,23 +26,24 @@ const AboutCreator = ({
               src={image}
               alt="my-image"
               fallbackSrc="/assets/images/placeholders/person.webp"
-              className="aspect-square h-fit w-[350px] rounded-full object-cover shadow-lg max-sm:w-[250px]"
+              className="aspect-square h-fit w-[200px] rounded-full object-cover shadow-lg"
               caption="Vishnu D"
             />
           ),
-          col2: () => (
-            <div className="fancy-bg-1 p-4 sm:text-[1.1rem]">{aboutMe}</div>
-          ),
+          col2: () => <div className="fancy-bg-1 p-4">{aboutMe}</div>,
         }}
       />
 
       {moreAboutMe.length && <Divider />}
 
-      {moreAboutMe.map((aboutMe, ind) => (
-        <SimpleLayout
+      {moreAboutMe.map((section, ind) => (
+        <TwoColumnsLayout
           key={ind}
-          sectionTitle={ind === 0 && moreAboutMeTitle}
-          main={<div className="sm:text-[1.1rem]">{aboutMe}</div>}
+          sectionTitle={ind === 0 ? moreAboutMeTitle : ""}
+          cols={{
+            col1: () => <div className="p-4 max-sm:p-2">{section.col1}</div>,
+            col2: () => <div className="p-4 max-sm:p-2">{section.col2}</div>,
+          }}
         />
       ))}
     </>
@@ -50,7 +52,7 @@ const AboutCreator = ({
 
 const Highlighter = ({ type = "primary", children, ...attr }) => (
   <span
-    className={`highlight-${type} rounded-sm text-nowrap max-sm:text-[0.9rem] sm:text-[1rem] ${attr?.className ? attr.className : ""}`}
+    className={`highlight-${type} rounded-sm text-sm text-nowrap ${attr?.className ? attr.className : ""}`}
   >
     {children}
   </span>
@@ -63,7 +65,7 @@ const Underliner = ({ children }) => (
 );
 
 const MoreAboutSubTitle = ({ children }) => (
-  <h1 className="my-3 font-bold tracking-wider underline underline-offset-4">
+  <h1 className="mb-4 font-bold tracking-wider underline underline-offset-4">
     {children}
   </h1>
 );
@@ -73,73 +75,106 @@ const About = () => {
     <div className="flex flex-col gap-10">
       <span>
         I'm Vishnu, a self-taught{" "}
-        <Highlighter>MERN Stack developer</Highlighter> passionate about
-        building <Underliner>scalable applications</Underliner> and solving
-        problems efficiently. Skilled in writing{" "}
-        <Underliner>clean, modular code</Underliner>,{" "}
-        <Underliner>debugging</Underliner>, and quickly adapting to new
-        technologies. Focused on performance optimization, well-structured
-        codebases, and modern development practices to deliver maintainable
-        solutions.
+        <Highlighter>Full-Stack Developer</Highlighter> focused on{" "}
+        <Underliner>React, Next.js, and modern web tooling</Underliner>. I enjoy
+        building applications and tools that are{" "}
+        <Underliner>clean, modular, and maintainable</Underliner>, while also
+        making the developer experience smoother through good documentation and
+        reusable components.
       </span>
 
       <Anchor
         href="https://vishnudt2004.github.io/vishnud-resume/vishnud-resume.pdf"
-        className="self-start before:-bottom-0.5! after:-bottom-0.5! max-md:self-center max-sm:text-sm"
+        className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
       >
         Check out my <Highlighter>Resume</Highlighter> here.
       </Anchor>
+
+      <ul className="flex h-full flex-wrap gap-2 p-3 max-md:self-center">
+        {[
+          {
+            name: "GitHub",
+            link: "https://github.com/vishnudt2004",
+            icon: <SiGithub className="scale-110" />,
+          },
+          {
+            name: "LinkedIn",
+            link: "https://www.linkedin.com/in/vishnu-dt",
+            icon: <LinkedinIcon className="scale-120" />,
+          },
+          {
+            name: "Email",
+            link: "mailto:vishnu.d.t.2004@gmail.com",
+            icon: <SiGmail color="default" className="scale-95" />,
+          },
+        ].map(({ name, link, icon }) => (
+          <li key={name} title={name}>
+            <HoverTooltip label={name} className="-bottom-7">
+              <a
+                href={link}
+                title={name}
+                target="_blank"
+                className="inline-flex size-11 items-center justify-center rounded-full border-1 border-(--global-border-color) bg-(--global-background-color) p-2.5 text-(--global-text-color) transition-all duration-400 hover:bg-(--global-text-color) hover:text-(--global-background-color)"
+              >
+                {icon}
+              </a>
+            </HoverTooltip>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 
   const moreAboutMe = [
-    <div className="flex flex-col gap-4">
-      <MoreAboutSubTitle>How I Got Started?</MoreAboutSubTitle>
-      <div>
-        My interest in computer science began during my HSC days. As a college
-        student, I started learning programming, which eventually led me to dive
-        into <Underliner>web development</Underliner>. Over time, I’ve built
-        projects, explored modern web technologies, and continuously refined my
-        skills. I'm currently seeking <Underliner>opportunities</Underliner>
-        —whether an <Underliner>internship</Underliner> or a{" "}
-        <Underliner>remote job</Underliner>—to gain{" "}
-        <Underliner>industry experience</Underliner> and grow further. I'm also
-        eager to contribute to <Underliner>open-source projects</Underliner> and
-        learn from experienced <Underliner>developers</Underliner> to sharpen my{" "}
-        <Underliner>expertise</Underliner>.
-      </div>
+    {
+      col1: (
+        <div className="flex flex-col gap-10">
+          <div className="flex flex-col">
+            <MoreAboutSubTitle>How I Got Started?</MoreAboutSubTitle>
+            <div>
+              I began with MERN stack basics during college and slowly expanded
+              into the Next.js ecosystem. What started as curiosity turned into
+              a consistent practice of building and shipping projects — from
+              blogs and portfolios to my own{" "}
+              <Underliner>UI component system with a CLI</Underliner>.
+            </div>
+          </div>
 
-      <MoreAboutSubTitle>What I can do?</MoreAboutSubTitle>
-      <ul className="grid list-disc grid-cols-1 gap-4 px-5 font-bold md:grid-cols-2">
-        <li>
-          Build Scalable & Mobile-Friendly Web Applications{" "}
-          <span className="font-normal">(Static & Dynamic)</span>
-        </li>
-        <li>
-          Develop Mini Projects{" "}
-          <span className="font-normal">for students and personal use</span>
-        </li>
-        <li>Redesign & Modernize Older Websites</li>
-        <li>
-          Write Basic Automation Scripts{" "}
-          <span className="font-normal">to simplify repetitive tasks</span>
-        </li>
-        <li>Deploy & Maintain Web Applications</li>
-      </ul>
-
-      <MoreAboutSubTitle>What I Have Learned?</MoreAboutSubTitle>
-      <div>
-        Beyond development, I have experience in writing{" "}
-        <Underliner>automation scripts</Underliner> to streamline tasks and
-        improve efficiency. I also focus on crafting user and developer-friendly{" "}
-        <Underliner>documentation</Underliner> to enhance project
-        maintainability. Additionally, I continuously refine my{" "}
-        <Underliner>AI prompting skills</Underliner> and stay eager to explore
-        and implement <Underliner>emerging technologies</Underliner> to expand
-        my expertise. I constantly seek to enhance my problem-solving skills and
-        stay updated with industry trends.
-      </div>
-    </div>,
+          <div className="flex flex-col">
+            <MoreAboutSubTitle>What I’m Aiming For?</MoreAboutSubTitle>
+            <div>
+              Currently, I’m looking for opportunities where I can apply my
+              skills to real-world products, especially in roles that value{" "}
+              <Underliner>front-end engineering</Underliner>,{" "}
+              <Underliner>full-stack development</Underliner>, or{" "}
+              <Underliner>open-source contributions</Underliner>. I’m excited to
+              keep learning, collaborate with teams, and push my projects beyond
+              “personal experiments” into production-ready solutions.
+            </div>
+          </div>
+        </div>
+      ),
+      col2: (
+        <div className="flex flex-col">
+          <MoreAboutSubTitle>What I Focus On?</MoreAboutSubTitle>
+          <ul className="flex list-disc flex-col gap-4 px-5">
+            <li>
+              Building clean, maintainable full-stack apps (React, Next.js,
+              Node.js, etc.)
+            </li>
+            <li>
+              Focusing on reusability and clear documentation in UI development.
+            </li>
+            <li>
+              Enhancing developer experience with tools, automation, and
+              streamlined workflows
+            </li>
+            <li>Deploying & scaling apps with modern hosting solutions</li>
+            <li>Continuously learning and adapting to new technologies</li>
+          </ul>
+        </div>
+      ),
+    },
   ];
 
   return (

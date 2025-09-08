@@ -2,7 +2,7 @@
 
 html,
 html.theme_mode-light {
-  --global-background-color: #fafafa;
+  --global-background-color: #f5f5f5;
   --global-text-color: #1e1e1e;
   --global-secondary-text-color: var(--color-gray-700);
   --global-border-color: #ddd;
@@ -27,7 +27,7 @@ html.theme_mode-dark,
 html.theme_mode-pitch-black {
   --global-text-color: #fafafa;
   --global-secondary-text-color: var(--color-gray-300);
-  --global-border-color: #555;
+  --global-border-color: #333;
   --global-menus-color: #eee;
   --global-primary-highlight-color: #eee;
   --global-secondary-highlight-color: #555;
@@ -37,11 +37,11 @@ html.theme_mode-pitch-black {
 }
 
 html.theme_mode-dark {
-  --global-background-color: #1e1e1e;
+  --global-background-color: #0b1215;
 }
 
 html.theme_mode-pitch-black {
-  --global-background-color: #0e0e0e;
+  --global-background-color: #0c0c0c;
 }
 
 /* Clean & Minimal */
@@ -358,14 +358,14 @@ html.theme_mode-cyber {
   --global-secondary-text-color: #2dc7c7;
   --global-border-color: #222;
   --global-menus-color: #0ff;
-  --global-primary-highlight-color: #ff007a;
+  --global-primary-highlight-color: #b300ff;
   --global-secondary-highlight-color: #222;
   --input-color: #111;
 
   --accent-color-1: #ff007a;
   --gradient-1:
-    linear-gradient(160deg, #00ffff, #ff0077cc, #00000000 70%),
-    linear-gradient(32deg, #00ffcc, #ff00aacc, #00000000 70%);
+    linear-gradient(100deg, #00ff88, #ff0077cc 40%, #00000000 70%),
+    linear-gradient(-20deg, #c300ff, #550039, #00000000 70%);
   --gradient-2:
     linear-gradient(73deg, #00ffee, #ff0077cc, #00000000 70%),
     linear-gradient(330deg, #2dc7c7, #ff0044cc, #00000000 70%);

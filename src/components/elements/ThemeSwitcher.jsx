@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 import config from "@config/config";
@@ -25,21 +25,27 @@ const ThemeSwitcher = () => {
   );
 };
 
-const ManualThemeSwitcher = ({ onChange = () => "" }) => {
-  const themes = config.UI.THEME_MODES;
+const ManualThemeSwitcher = ({
+  initialThemes = config.UI.ACTIVE_THEME_MODES,
+  themes = config.UI.THEME_MODES,
+  onChange = () => "",
+}) => {
   const { themeMode: activeTheme, setThemeMode: setTheme } = useThemeMode();
+  const [showAll, setShowAll] = useState(false);
 
   const handleThemeChange = (theme) => {
-    setTheme(theme);
+    setTheme(() => theme);
     onChange();
   };
 
   const displayName = (str) =>
     str.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
+  const activeThemes = showAll ? themes : initialThemes;
+
   return (
     <DropdownBox>
-      {themes.map(({ category, themes }) => (
+      {activeThemes.map(({ category, themes }) => (
         <Fragment key={category}>
           <TextDivider>
             <span>{category}</span>
@@ -56,6 +62,12 @@ const ManualThemeSwitcher = ({ onChange = () => "" }) => {
           ))}
         </Fragment>
       ))}
+
+      {!showAll && (
+        <DropdownMenuItem onClick={() => setShowAll(true)}>
+          More…
+        </DropdownMenuItem>
+      )}
     </DropdownBox>
   );
 };

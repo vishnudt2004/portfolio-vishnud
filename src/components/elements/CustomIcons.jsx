@@ -82,6 +82,22 @@ const VSCodeIcon = (attr) => (
   </svg>
 );
 
+const MotionIcon = (attr) => (
+  <svg
+    stroke="currentColor"
+    fill="none"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    xmlns="http://www.w3.org/2000/svg"
+    {...attr}
+  >
+    <path d="M12 12l-8 -8v16l16 -16v16l-4 -4"></path>
+    <path d="M20 12l-8 8l-4 -4"></path>
+  </svg>
+);
+
 // Custom icons - UI icons
 
 const ImageSquareXMarkIcon = (attr) => (
@@ -127,4 +143,38 @@ const MedalStarBadgeIcon = (attr) => (
   </svg>
 );
 
-export { LinkedinIcon, VSCodeIcon, ImageSquareXMarkIcon, MedalStarBadgeIcon };
+const DownCircleIcon = (attr) => (
+  <svg viewBox="-0.5 0 25 25" xmlns="http://www.w3.org/2000/svg" {...attr}>
+    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+      <path
+        d="M12 22.4199C17.5228 22.4199 22 17.9428 22 12.4199C22 6.89707 17.5228 2.41992 12 2.41992C6.47715 2.41992 2 6.89707 2 12.4199C2 17.9428 6.47715 22.4199 12 22.4199Z"
+        // stroke="#000000"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+      <path
+        d="M16 10.99L13.13 14.05C12.9858 14.2058 12.811 14.3298 12.6166 14.4148C12.4221 14.4998 12.2122 14.5437 12 14.5437C11.7878 14.5437 11.5779 14.4998 11.3834 14.4148C11.189 14.3298 11.0142 14.2058 10.87 14.05L8 10.99"
+        // stroke="#000000"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+    </g>
+  </svg>
+);
+
+export {
+  LinkedinIcon,
+  VSCodeIcon,
+  MotionIcon,
+  ImageSquareXMarkIcon,
+  MedalStarBadgeIcon,
+  DownCircleIcon,
+};

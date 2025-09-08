@@ -7,6 +7,7 @@ import {
 import config from "@config/config";
 import { Divider } from "@components/elements/Divider";
 import { SimpleLayout } from "@components/elements/SectionLayouts";
+import ShowMoreData from "@components/elements/ShowMoreData";
 import { MedalStarBadgeIcon as CustomMedalStarBadgeIcon } from "@components/elements/CustomIcons";
 
 import achievementImage_1 from "@assets/images/achievements-certificate/achievement-1.webp";
@@ -28,12 +29,12 @@ const AchievementCard = ({
   fullDescr,
   cert,
 }) => (
-  <div className="relative z-0 mx-auto min-h-80 w-3xl rounded-2xl border border-yellow-400 p-6 shadow-md">
-    <AcademicCapIcon className="absolute top-0 left-0 -z-1 h-full opacity-10 max-sm:w-full" />
-    <CheckBadgeIcon className="absolute -top-3 -right-3 h-10 w-10 rounded-full border border-yellow-500 bg-(--global-background-color) text-yellow-500" />
+  <div className="relative z-0 mx-auto min-h-80 w-full rounded-lg border p-6 shadow-md min-[800px]:w-3xl">
+    <AcademicCapIcon className="absolute top-0 left-0 -z-1 h-full opacity-5 max-sm:w-full" />
+    <CheckBadgeIcon className="absolute -top-3 -right-3 h-10 w-10 rounded-full border bg-(--global-background-color)" />
 
     <div className="mb-4 flex items-center gap-3">
-      <h2 className="flex items-center justify-center gap-2 text-xl font-semibold text-yellow-500 sm:text-2xl">
+      <h2 className="flex items-center justify-center gap-2 text-xl font-semibold sm:text-2xl">
         {title}
       </h2>
     </div>
@@ -67,9 +68,9 @@ const AchievementCard = ({
               key={name}
               href={cert}
               target="_blank"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-3 py-2 text-sm text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-3 py-2 text-sm text-black"
             >
-              <DocumentCheckIcon className="h-5 w-5" /> {name}
+              <DocumentCheckIcon className="size-5" /> {name}
             </a>
           ))}
         </div>
@@ -77,21 +78,33 @@ const AchievementCard = ({
         <a
           href={cert}
           target="_blank"
-          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-3 py-2 text-sm text-white"
+          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-3 py-2 text-sm text-black"
         >
-          <DocumentCheckIcon className="h-5 w-5" /> View Certificate
+          <DocumentCheckIcon className="size-5" /> View Certificate
         </a>
       ))}
   </div>
 );
 
-const AchievementsCreator = ({ title = "Achievements", achievements }) => (
-  <SimpleLayout id={config.SECTION_IDS.ACHIEVEMENTS} sectionTitle={title}>
-    <div className="flex flex-wrap gap-5">
-      {achievements.map((achievement, ind) => (
-        <AchievementCard key={ind} {...achievement} />
-      ))}
-    </div>
+const AchievementsCreator = ({
+  achievements,
+  endMessage = <p>🎉 That’s all for now!</p>,
+}) => (
+  <SimpleLayout
+    id={config.SECTION_IDS.ACHIEVEMENTS}
+    sectionTitle="Achievements"
+  >
+    <ShowMoreData
+      items={achievements}
+      initialCount={2}
+      endMessageElement={endMessage}
+    >
+      {(visibleItems) =>
+        visibleItems.map((achievement, ind) => (
+          <AchievementCard key={ind} {...achievement} />
+        ))
+      }
+    </ShowMoreData>
   </SimpleLayout>
 );
 

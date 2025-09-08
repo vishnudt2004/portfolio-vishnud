@@ -31,7 +31,7 @@ const Img = ({ caption, src, fallback, fallbackSrc, ...attr }) => {
       />
       <br />
       {caption && (
-        <figcaption className="mt-3 text-center">{caption}</figcaption>
+        <figcaption className="mt-1 text-center leading-0">{caption}</figcaption>
       )}
     </figure>
   );

@@ -28,15 +28,15 @@ const SectionWrapper = ({ ref: motionRef, children, divide = true }) => {
 
 const Home = () => {
   const totalSections = {
-    Hero: Hero,
-    About: About,
-    Proficiency: Proficiency,
-    Projects: Projects,
-    Experience: Experience,
-    Achievements: Achievements,
-    Activities: Activities,
-    Testimonials: Testimonials,
-    ContactForm: ContactForm,
+    Hero,
+    About,
+    Proficiency,
+    Projects,
+    Experience,
+    Achievements,
+    Activities,
+    Testimonials,
+    ContactForm,
   };
 
   const sections = config.VISIBLE_SECTIONS.map((key) => ({
@@ -48,7 +48,6 @@ const Home = () => {
     <div>
       {sections.map(({ key, component }, index) => {
         const isHero = key === "Hero";
-        const isEven = (index + 1) % 2 === 0; // Offset index (+1) since 'Hero' is excluded from scroll animation
 
         const content = (
           <SectionWrapper divide={index !== sections.length - 1}>
@@ -65,11 +64,11 @@ const Home = () => {
             key={key}
             initial={{
               opacity: 0,
-              x: isEven ? -50 : 50,
+              y: 10,
             }}
             whileInView={{
               opacity: 1,
-              x: 0,
+              y: 0,
               transition: { duration: 0.6, ease: "easeOut" },
             }}
           >
