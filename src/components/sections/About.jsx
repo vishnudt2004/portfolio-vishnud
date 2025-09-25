@@ -8,6 +8,8 @@ import HoverTooltip from "@components/elements/HoverTooltip";
 import { TwoColumnsLayout } from "@components/elements/SectionLayouts";
 import { LinkedinIcon } from "@components/elements/CustomIcons";
 
+import profileImg from "@assets/images/profile-image/vishnud.jpg";
+
 const AboutCreator = ({
   title = "About Me",
   image,
@@ -24,9 +26,9 @@ const AboutCreator = ({
           col1: () => (
             <Img
               src={image}
-              alt="my-image"
+              alt="Vishnu D"
               fallbackSrc="/assets/images/placeholders/person.webp"
-              className="aspect-square h-fit w-[200px] rounded-full object-cover shadow-lg"
+              className="aspect-square size-[200px] rounded-full object-cover shadow-[0_0_0_5px_color-mix(in_srgb,var(--global-border-color),transparent_70%)] grayscale-50 transition-all duration-300 hover:grayscale-0"
               caption="Vishnu D"
             />
           ),
@@ -178,7 +180,11 @@ const About = () => {
   ];
 
   return (
-    <AboutCreator image={"image"} aboutMe={aboutMe} moreAboutMe={moreAboutMe} />
+    <AboutCreator
+      image={profileImg}
+      aboutMe={aboutMe}
+      moreAboutMe={moreAboutMe}
+    />
   );
 };
 

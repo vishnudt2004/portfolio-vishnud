@@ -54,7 +54,8 @@ const config = {
     // "Experience",
     "Projects",
     "Achievements",
-    // "Activities",
+    "Certifications",
+    "Activities",
     // "Testimonials",
     // "ContactForm",
   ], // sections to visible
@@ -76,6 +77,7 @@ const config = {
     EXPERIENCE: "experience",
     PROJECTS: "projects",
     ACHIEVEMENTS: "achievements",
+    CERTIFICATIONS: "certifications",
     ACTIVITIES: "activities",
     TESTIMONIALS: "testimonials",
     CONTACT_FORM: "contact-form",

@@ -25,12 +25,11 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
   };
 
   return (
-    <div className="fancy-bg-2 group min-h-[470px] w-full overflow-hidden border border-(--global-border-color)/50 bg-(--global-background-color) transition hover:-translate-y-1 hover:shadow-sm">
+    <div className="fancy-bg-2 group min-h-[470px] w-full overflow-hidden border border-(--global-border-color)/50 bg-(--global-background-color) transition-all hover:shadow-[0_0_0_1px_var(--accent-color-1)]">
       <Img
         src={thumb}
         alt={`${title} image`}
-        className="aspect-video w-full object-cover"
-        fallback="default"
+        className="aspect-video w-full object-cover grayscale-60 transition-all duration-300 group-hover:p-0.5 group-hover:grayscale-0"
       />
       <div className="p-4 sm:p-5">
         <h3 className="text-lg font-bold sm:text-xl">{title}</h3>

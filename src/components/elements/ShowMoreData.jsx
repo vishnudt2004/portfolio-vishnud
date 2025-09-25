@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 function ShowMoreData({
   children,
   items = [],
-  initialCount = 2,
+  initialCount = 3,
   noResultElement,
-  endMessageElement,
-  loadCount = 2,
+  endMessageElement = "All caught up!",
+  loadCount = 3,
   loadAll = false,
   ...props
 }) {
@@ -20,21 +21,39 @@ function ShowMoreData({
   };
 
   return (
-    <div
-      {...props}
-      className={"flex flex-col items-center gap-4 " + (props?.className ?? "")}
-    >
-      {items.length > 0 ? children(visibleItems) : noResultElement}
+    <div>
+      {items.length > 0 ? (
+        <div
+          className={twMerge(
+            "grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 lg:grid-cols-3",
+            props?.className ?? "",
+          )}
+          {...props}
+        >
+          {children(visibleItems)}
+        </div>
+      ) : (
+        noResultElement
+      )}
 
       {!loadAll && hasMore ? (
-        <button
-          onClick={handleShowMore}
-          className="mt-2 cursor-pointer rounded-sm bg-(--global-text-color) px-5 py-1 text-sm text-(--global-background-color) transition-opacity hover:opacity-90"
-        >
-          More...
-        </button>
+        <div className="mt-4 flex justify-center">
+          <button
+            onClick={handleShowMore}
+            className="cursor-pointer bg-(--global-text-color) px-5 py-1 text-sm text-(--global-background-color) transition-opacity hover:opacity-90"
+          >
+            More...
+          </button>
+        </div>
       ) : (
-        !loadAll && items.length > 0 && <span>{endMessageElement}</span>
+        !loadAll &&
+        items.length > 0 && (
+          <div className="mt-5 flex justify-center">
+            {!(items.length <= initialCount) && (
+              <span>{endMessageElement}</span>
+            )}
+          </div>
+        )
       )}
     </div>
   );

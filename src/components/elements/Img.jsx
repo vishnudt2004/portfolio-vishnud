@@ -1,26 +1,28 @@
 import { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { twMerge } from "tailwind-merge";
 
-import { ImageSquareXMarkIcon as CustomImageSquareXMarkIcon } from "./CustomIcons";
+import { ImageSquareXMarkIcon } from "./CustomIcons";
 
-const Img = ({ caption, src, fallback, fallbackSrc, ...attr }) => {
+const Img = ({ caption, src, fallback = "default", fallbackSrc, ...attr }) => {
   const [error, setError] = useState(false);
 
-  if (error && fallback === "default")
-    return (
-      <div
-        {...attr}
-        className={
-          "grid h-50 w-50 place-items-center content-center bg-(--global-background-color) stroke-(--global-text-color)! " +
-          attr?.className
-        }
-      >
-        <CustomImageSquareXMarkIcon />
-        No Image
-      </div>
-    );
-
-  if (error && fallback) return fallback;
+  if (error && !fallbackSrc) {
+    if (fallback === "default")
+      return (
+        <div
+          {...attr}
+          className={twMerge(
+            "grid size-50 place-items-center content-center bg-(--global-background-color) stroke-(--global-text-color)!",
+            attr?.className,
+          )}
+        >
+          <ImageSquareXMarkIcon />
+          No Image
+        </div>
+      );
+    else if (fallback) return fallback;
+  }
 
   return (
     <figure>
@@ -29,9 +31,13 @@ const Img = ({ caption, src, fallback, fallbackSrc, ...attr }) => {
         {...attr}
         onError={() => setError(true)}
       />
-      <br />
       {caption && (
-        <figcaption className="mt-1 text-center leading-0">{caption}</figcaption>
+        <>
+          <br />
+          <figcaption className="mt-1 text-center leading-0">
+            {caption}
+          </figcaption>
+        </>
       )}
     </figure>
   );

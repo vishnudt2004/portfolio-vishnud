@@ -1,107 +1,81 @@
 import {
-  CheckBadgeIcon,
-  AcademicCapIcon,
-  DocumentCheckIcon,
+  TrophyIcon as TrophySolidIcon,
+  InformationCircleIcon,
 } from "@heroicons/react/24/solid";
+import { TrophyIcon } from "@heroicons/react/24/outline";
 
 import config from "@config/config";
-import { Divider } from "@components/elements/Divider";
 import { SimpleLayout } from "@components/elements/SectionLayouts";
+import ShowcaseItem from "@components/elements/ShowcaseItem";
 import ShowMoreData from "@components/elements/ShowMoreData";
-import { MedalStarBadgeIcon as CustomMedalStarBadgeIcon } from "@components/elements/CustomIcons";
 
-import achievementImage_1 from "@assets/images/achievements-certificate/achievement-1.webp";
-import achievementImage_2 from "@assets/images/achievements-certificate/achievement-2.webp";
-import achievementImage_3_react from "@assets/images/achievements-certificate/achievement-3/react_basic-certificate.webp";
-import achievementImage_3_js from "@assets/images/achievements-certificate/achievement-3/javascript_basic-certificate.webp";
-import achievementImage_3_css from "@assets/images/achievements-certificate/achievement-3/css-certificate.webp";
+import achievement1 from "@assets/images/achievements-certificate/achievement-1.webp";
+import achievement2 from "@assets/images/achievements-certificate/achievement-2.webp";
 
-const AchievementCard = ({
-  title = (
-    <span className="flex items-center justify-center gap-2">
-      <CustomMedalStarBadgeIcon className="inline-block h-15 w-15 fill-yellow-500" />{" "}
-      Achievement Unlocked
-    </span>
-  ),
-  descr,
+const AchievementItem = ({
+  title,
   event,
-  location_date,
-  fullDescr,
-  cert,
+  location,
+  date,
+  description,
+  credentials,
+  logo,
 }) => (
-  <div className="relative z-0 mx-auto min-h-80 w-full rounded-lg border p-6 shadow-md min-[800px]:w-3xl">
-    <AcademicCapIcon className="absolute top-0 left-0 -z-1 h-full opacity-5 max-sm:w-full" />
-    <CheckBadgeIcon className="absolute -top-3 -right-3 h-10 w-10 rounded-full border bg-(--global-background-color)" />
-
-    <div className="mb-4 flex items-center gap-3">
-      <h2 className="flex items-center justify-center gap-2 text-xl font-semibold sm:text-2xl">
-        {title}
-      </h2>
-    </div>
-
-    <h3 className="mb-1 text-lg font-bold">{descr}</h3>
-
-    {(event || location_date) && (
-      <p className="mb-3 text-sm font-bold text-(--global-secondary-text-color)">
-        {event} {location_date && "@"}{" "}
-        {location_date && <span className="italic">{location_date}</span>}
-      </p>
-    )}
-
-    <Divider
-      color="var(--color-yellow-400)"
-      height="1px"
-      width="100%"
-      style={{ opacity: 0.5 }}
-    />
-
-    <p className="any-pointer-fine:secondary-scrollbar text-(--global-secondary-text-color) max-sm:max-h-50 max-sm:overflow-y-auto">
-      {fullDescr}
-    </p>
-
-    {/* Optional CTA / Certificate Link */}
-    {cert &&
-      (typeof cert === "object" ? (
-        <div className="mt-5 flex flex-wrap gap-2">
-          {cert.map(({ name, cert }) => (
+  <ShowcaseItem
+    title={title}
+    subtitle={
+      (event || location) && (
+        <p className="mb-2 inline text-sm font-semibold text-(--global-secondary-text-color)">
+          {event} {location && "@"}{" "}
+          {location && <span className="italic">{location}</span>}
+        </p>
+      )
+    }
+    date={date}
+    description={description}
+    credentials={
+      credentials &&
+      (Array.isArray(credentials) ? (
+        <div className="mt-auto flex flex-wrap gap-2">
+          {credentials.map(({ name, credential }) => (
             <a
               key={name}
-              href={cert}
+              href={credential}
               target="_blank"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-3 py-2 text-sm text-black"
+              className="inline-flex items-center justify-center gap-1 bg-yellow-500 px-2 py-1 text-sm text-black"
             >
-              <DocumentCheckIcon className="size-5" /> {name}
+              <InformationCircleIcon className="size-4" /> {name}
             </a>
           ))}
         </div>
       ) : (
         <a
-          href={cert}
+          href={credentials}
           target="_blank"
-          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-3 py-2 text-sm text-black"
+          className="mt-auto inline-flex w-fit items-center justify-center gap-1 bg-yellow-500 px-2 py-1 text-sm text-black"
         >
-          <DocumentCheckIcon className="size-5" /> View Certificate
+          <InformationCircleIcon className="size-4" /> See Details
         </a>
-      ))}
-  </div>
+      ))
+    }
+    logo={logo}
+    defaultLogo={TrophyIcon}
+    bgOverlay={<TrophySolidIcon className="w-[120px] opacity-5" />}
+    style={{
+      "--accent-color": "var(--color-yellow-500)",
+    }}
+  />
 );
 
-const AchievementsCreator = ({
-  achievements,
-  endMessage = <p>🎉 That’s all for now!</p>,
-}) => (
+const AchievementsCreator = ({ achievements }) => (
   <SimpleLayout
     id={config.SECTION_IDS.ACHIEVEMENTS}
     sectionTitle="Achievements"
   >
-    <ShowMoreData
-      items={achievements}
-      initialCount={2}
-      endMessageElement={endMessage}
-    >
+    <ShowMoreData items={achievements}>
       {(visibleItems) =>
         visibleItems.map((achievement, ind) => (
-          <AchievementCard key={ind} {...achievement} />
+          <AchievementItem key={ind} {...achievement} />
         ))
       }
     </ShowMoreData>
@@ -111,10 +85,19 @@ const AchievementsCreator = ({
 const Achievements = () => {
   const achievements = [
     {
-      descr: "1st Place – Web Development Contest",
+      title: "Open Source – Simple UI Components",
+      event: "Open Source, NPM",
+      date: "Sep 2025",
+      description:
+        "Built SUIC, an open-source, local-first collection of reusable UI and frontend utility components. published with an NPM CLI (npx suic-cli) for seamless installation as editable source code with documentation support.",
+      credentials: "https://npmjs.com/package/suic-cli/",
+    },
+    {
+      title: "1st Place – Web Development Contest",
       event: "Mirror 2K24, Intercollegiate Event",
-      location_date: "Erode Arts and Science College, Erode – 2024",
-      fullDescr: (
+      location: "Erode Arts and Science College, Erode",
+      date: "Oct 2024",
+      description: (
         <>
           Developed a webpage in 45 minutes using only the provided images, no
           internet access. Chose one of two given topics and built it with{" "}
@@ -123,32 +106,28 @@ const Achievements = () => {
           <span className="highlight-primary rounded-md">₹ 1000</span>.
         </>
       ),
-      cert: achievementImage_1,
+      credentials: achievement1,
     },
     {
-      descr: "1st Place – Logo Design Competition",
+      title: "1st Place – Logo Design Competition",
       event: "CS Department Function",
-      location_date:
-        "Govt. Arts & Science College – Komarapalayam, Namakkal (Dt.) – 2022",
-      fullDescr:
+      location: "Govt. Arts & Science College – Komarapalayam, Namakkal (Dt.)",
+      date: "May 2022",
+      description:
         "Received the book 'Yevuganai Manithan: Abdul Kalam Vazhkai Varalarum, Kavithaigalum' as a prize during the 75th Independence Day Celebration, 2022",
-      cert: achievementImage_2,
+      credentials: achievement2,
     },
     {
-      descr: "HackerRank Certifications",
-      event: "",
-      location_date: "Online – 2025",
-      fullDescr: (
-        <>
-          <span>⭐&nbsp;React (Basic)</span>
-          <span> ⭐&nbsp;JavaScript (Basic)</span>
-          <span> ⭐&nbsp;CSS (Basic)</span>
-        </>
-      ),
-      cert: [
-        { name: "React Certificate", cert: achievementImage_3_react },
-        { name: "JavaScript Certificate", cert: achievementImage_3_js },
-        { name: "CSS Certificate", cert: achievementImage_3_css },
+      title: "Portfolio Redesign",
+      event: "Portfolio Update",
+      date: "Sep 2025",
+      description:
+        "Completely revamped personal portfolio with a cleaner UI, new sections (Certifications, Activities), reusable ShowcaseItem component, polished hero design with dotted background, real photo integration, and support for 22 unique themes. Improved overall consistency and user experience.",
+      credentials: [
+        {
+          name: "Explore this site",
+          credential: "https://portfolio-vishnud.vercel.app",
+        },
       ],
     },
   ];

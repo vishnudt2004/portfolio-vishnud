@@ -3,8 +3,6 @@ import {
   CubeIcon,
   ChatBubbleLeftIcon,
   UserIcon,
-} from "@heroicons/react/24/outline";
-import {
   XMarkIcon,
   Squares2X2Icon,
   PaintBrushIcon,
@@ -142,7 +140,7 @@ const Navbar = ({
           <div className="brand">{brand}</div>
         </NavbarBrandMotion>
 
-        <ul className="flex gap-5 max-sm:flex-col max-sm:gap-8">
+        <ul className="group flex gap-8 max-sm:flex-col">
           {menus.map(({ name, icon: { el, props }, id }, index) => (
             <NavbarMenusMotion
               key={id}
@@ -153,16 +151,21 @@ const Navbar = ({
               <li>
                 <a
                   href="#"
-                  className="group relative flex h-full cursor-pointer items-center gap-0.5 text-[14px] tracking-[2px] text-(--global-menus-color) before:absolute before:inset-x-0 before:bottom-1 before:m-auto before:h-[2px] before:w-0 before:rounded-[5px_5px_0_0] before:bg-(--global-menus-color) before:transition-all before:duration-500 hover:before:w-full max-sm:w-fit max-sm:before:-bottom-2"
+                  className="relative flex h-full cursor-pointer items-center gap-1 text-[14px] tracking-[2px] text-(--global-menus-color) duration-300 group-hover:not-hover:opacity-60 before:absolute before:bottom-1 before:m-auto before:h-[2px] before:w-0 before:bg-(--global-border-color) before:transition-all before:duration-500 hover:before:w-full max-sm:w-fit max-sm:before:-bottom-2"
                   onClick={(e) => {
-                    scrollIntoSection(e, config.SECTION_IDS[id.toUpperCase()]);
-                    toggleNavbar();
+                    setTimeout(() => {
+                      scrollIntoSection(
+                        e,
+                        config.SECTION_IDS[id.toUpperCase()],
+                      );
+                      toggleNavbar();
+                    }, 200);
                   }}
                 >
                   {name}{" "}
                   {createElement(el, {
                     ...props,
-                    className: `${props?.className ? props?.className : ""} opacity-0 transition-all duration-500 group-hover:opacity-100`,
+                    className: `${props?.className ? props?.className : ""} transition-all duration-500`,
                   })}
                 </a>
               </li>
@@ -192,7 +195,7 @@ const Navbar = ({
 
 const NavBrand = ({ children, ...attr }) => (
   <div
-    className="group relative z-0 mx-2 cursor-pointer overflow-hidden text-center text-[1.2rem] tracking-[3px] text-(--global-menus-color)"
+    className="group relative z-0 mx-2 cursor-pointer overflow-hidden py-0.5 text-center text-[1.2rem] tracking-[2px] text-(--global-menus-color)"
     {...attr}
   >
     <div>
@@ -218,19 +221,19 @@ const Header = () => {
   const menus = [
     {
       name: "About",
-      icon: { el: UserIcon, props: { className: "size-4.5" } },
+      icon: { el: UserIcon, props: { className: "size-3.5" } },
       id: "ABOUT",
     },
     {
       name: "Projects",
-      icon: { el: CubeIcon, props: { className: "size-4.5 scale-90" } },
+      icon: { el: CubeIcon, props: { className: "size-3.5" } },
       id: "PROJECTS",
     },
     {
       name: "Contact",
       icon: {
         el: ChatBubbleLeftIcon,
-        props: { className: "size-4.5 scale-90" },
+        props: { className: "size-3.5" },
       },
       id: "FOOTER",
     },

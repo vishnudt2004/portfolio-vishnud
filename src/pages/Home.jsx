@@ -10,9 +10,10 @@ import { Divider } from "@components/elements/Divider";
 import Hero from "@components/sections/Hero";
 import About from "@components/sections/About";
 import Proficiency from "@components/sections/Proficiency";
-import Projects from "@components/sections/Projects";
 import Experience from "@components/sections/Experience";
+import Projects from "@components/sections/Projects";
 import Achievements from "@components/sections/Achievements";
+import Certifications from "@components/sections/Certifications";
 import Activities from "@components/sections/Activities";
 import Testimonials from "@components/sections/Testimonials";
 import ContactForm from "@components/sections/ContactForm";
@@ -27,13 +28,14 @@ const SectionWrapper = ({ ref: motionRef, children, divide = true }) => {
 };
 
 const Home = () => {
-  const totalSections = {
+  const allSections = {
     Hero,
     About,
     Proficiency,
     Projects,
     Experience,
     Achievements,
+    Certifications,
     Activities,
     Testimonials,
     ContactForm,
@@ -41,7 +43,7 @@ const Home = () => {
 
   const sections = config.VISIBLE_SECTIONS.map((key) => ({
     key,
-    component: totalSections[key],
+    component: allSections[key],
   }));
 
   return (

@@ -31,7 +31,6 @@ html::-webkit-scrollbar-track {
 html::-webkit-scrollbar-thumb {
   background: var(--global-scrollbar-thumb-color);
   border: 3px solid var(--global-scrollbar-track-color);
-  border-radius: 10px 0 0 10px;
 }
 
 * {

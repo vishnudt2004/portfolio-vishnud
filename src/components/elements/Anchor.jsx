@@ -20,6 +20,7 @@ const Anchor = ({
   return (
     <a
       target="_blank"
+      rel="noopener noreferrer"
       {...attr}
       className={`anchor ${attr?.className ? attr.className : ""}`}
       style={style}

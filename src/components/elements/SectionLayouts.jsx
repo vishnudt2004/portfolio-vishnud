@@ -1,4 +1,5 @@
 import { createElement } from "react";
+import { twMerge } from "tailwind-merge";
 
 // Layout component names reflect their design on larger screens (desktop, tablet), but they may appear differently on smaller screens.
 
@@ -7,10 +8,14 @@ const SimpleLayout = ({
   main,
   children = <div className="text-center">Main Content</div>,
   id, // Unique identifier for navigation
+  className,
 }) => (
   <div
     id={id}
-    className="m-auto flex max-w-6xl flex-col justify-center gap-5 px-5 py-10"
+    className={twMerge(
+      "m-auto flex max-w-6xl flex-col justify-center gap-5 px-5 py-10",
+      className,
+    )}
   >
     {sectionTitle && (
       <h1 className="section-title self-center">{sectionTitle}</h1>
