@@ -1,7 +1,7 @@
 {
   "name": "portfolio-vishnud",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,6 +12,8 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@icons-pack/react-simple-icons": "^12.3.0",
+    "@radix-ui/react-popover": "^1.1.15",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/vite": "^4.0.17",
     "@uidotdev/usehooks": "^2.4.1",
     "motion": "^12.6.3",

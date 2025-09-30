@@ -1,18 +1,19 @@
 import { useState, createElement, useEffect, useRef } from "react";
 import {
   CubeIcon,
-  ChatBubbleLeftIcon,
+  PhoneIcon,
   UserIcon,
   XMarkIcon,
   Squares2X2Icon,
   PaintBrushIcon,
+  SparklesIcon,
 } from "@heroicons/react/24/solid";
 
 import config from "@config/config";
 import {
-  scrollIntoTop,
   scrollIntoSection,
   setHTMLOverflowY,
+  addArtificialDelay,
 } from "@utils/jsUtils";
 import useScrollDirection from "@hooks/useScrollDirection";
 import useClickOutside from "@hooks/useClickOutside";
@@ -39,7 +40,6 @@ const ThemeButton = ({ onChange }) => {
   const handleOnChange = () => {
     setVisible(false);
     onChange();
-    scrollIntoTop(); // Prevent sections from disappearing due to scroll reset on theme change.
   };
 
   return (
@@ -153,13 +153,14 @@ const Navbar = ({
                   href="#"
                   className="relative flex h-full cursor-pointer items-center gap-1 text-[14px] tracking-[2px] text-(--global-menus-color) duration-300 group-hover:not-hover:opacity-60 before:absolute before:bottom-1 before:m-auto before:h-[2px] before:w-0 before:bg-(--global-border-color) before:transition-all before:duration-500 hover:before:w-full max-sm:w-fit max-sm:before:-bottom-2"
                   onClick={(e) => {
-                    setTimeout(() => {
+                    e.preventDefault();
+                    addArtificialDelay(() => {
                       scrollIntoSection(
                         e,
                         config.SECTION_IDS[id.toUpperCase()],
                       );
                       toggleNavbar();
-                    }, 200);
+                    });
                   }}
                 >
                   {name}{" "}
@@ -195,7 +196,7 @@ const Navbar = ({
 
 const NavBrand = ({ children, ...attr }) => (
   <div
-    className="group relative z-0 mx-2 cursor-pointer overflow-hidden py-0.5 text-center text-[1.2rem] tracking-[2px] text-(--global-menus-color)"
+    className="group relative z-0 mx-2 flex cursor-pointer overflow-hidden py-0.5 text-center text-[1.2rem] tracking-[2px] text-(--global-menus-color)"
     {...attr}
   >
     <div>
@@ -209,7 +210,8 @@ const NavBrand = ({ children, ...attr }) => (
         </span>
       ))}
     </div>
-    <div className="absolute top-0 right-0 bottom-0 left-0 -z-1 m-auto h-[30px] w-[30px] rounded-full bg-(image:--gradient-1) opacity-60 transition-all duration-400 group-hover:top-full! group-hover:bottom-[unset]" />
+    <SparklesIcon className="ml-1 inline size-6 opacity-15" />
+    <div className="absolute inset-0 right-6 -z-1 m-auto size-[30px] rounded-full bg-(image:--gradient-1) opacity-60 transition-all duration-300 group-hover:top-full! group-hover:bottom-[unset]" />
   </div>
 );
 
@@ -232,7 +234,7 @@ const Header = () => {
     {
       name: "Contact",
       icon: {
-        el: ChatBubbleLeftIcon,
+        el: PhoneIcon,
         props: { className: "size-3.5" },
       },
       id: "FOOTER",

@@ -170,6 +170,103 @@ const DownCircleIcon = (attr) => (
   </svg>
 );
 
+const DuotoneComputerIcon = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    style={{
+      "--color-1": "#1C1C1C",
+      "--color-2": "#DF1463",
+    }}
+    {...props}
+  >
+    <g strokeWidth={1.4}>
+      <path
+        stroke="var(--color-1)"
+        d="M2.844 13V7.507a3.662 3.662 0 0 1 3.663-3.663h10.986a3.662 3.662 0 0 1 3.663 3.663V13a3.662 3.662 0 0 1-3.662 3.662H6.507A3.662 3.662 0 0 1 2.844 13Z"
+      />
+      <path
+        stroke="var(--color-2)"
+        strokeLinecap="round"
+        d="M6.04 20.325h11.92"
+      />
+    </g>
+  </svg>
+);
+
+const DuotoneLightbulbIcon = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    style={{
+      "--color-1": "#1C1C1C",
+      "--color-2": "#DF1463",
+    }}
+    {...props}
+  >
+    <mask id="a" fill="#fff">
+      <path
+        fillRule="evenodd"
+        d="M16.143 16.352a8.762 8.762 0 1 0-8.762 0v1.902c0 1.21.98 2.19 2.19 2.19h4.381c1.21 0 2.19-.98 2.19-2.19v-1.902Z"
+        clipRule="evenodd"
+      />
+    </mask>
+    <path
+      fill="var(--color-1)"
+      d="m16.143 16.352-.701-1.212-.7.404v.808h1.4Zm-8.762 0h1.4v-.808l-.699-.404-.701 1.212Zm11.743-7.59a7.358 7.358 0 0 1-3.682 6.378l1.402 2.424a10.159 10.159 0 0 0 5.08-8.802h-2.8ZM11.762 1.4a7.362 7.362 0 0 1 7.362 7.362h2.8c0-5.612-4.55-10.162-10.162-10.162v2.8ZM4.4 8.762A7.362 7.362 0 0 1 11.762 1.4v-2.8C6.15-1.4 1.6 3.15 1.6 8.762h2.8Zm3.682 6.378A7.358 7.358 0 0 1 4.4 8.762H1.6c0 3.763 2.046 7.046 5.08 8.802l1.402-2.424Zm.699 3.114v-1.902h-2.8v1.902h2.8Zm.79.79a.79.79 0 0 1-.79-.79h-2.8a3.59 3.59 0 0 0 3.59 3.59v-2.8Zm4.381 0h-4.38v2.8h4.38v-2.8Zm.79-.79a.79.79 0 0 1-.79.79v2.8a3.59 3.59 0 0 0 3.59-3.59h-2.8Zm0-1.902v1.902h2.8v-1.902h-2.8Z"
+      mask="url(#a)"
+    />
+    <path
+      stroke="var(--color-2)"
+      strokeLinecap="round"
+      strokeWidth={1.4}
+      d="M8.476 23h6.571"
+    />
+    <path
+      stroke="var(--color-1)"
+      strokeLinecap="round"
+      strokeWidth={1.4}
+      d="M13 3c1.333.333 4 1.8 4 5"
+    />
+  </svg>
+);
+
+const DuotonePluginIcon = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    style={{
+      "--color-1": "#1C1C1C",
+      "--color-2": "#DF1463",
+    }}
+    {...props}
+  >
+    <g strokeLinecap="round" strokeWidth={1.4} clipPath="url(#a)">
+      <path
+        stroke="var(--color-1)"
+        d="m17.634 11.565-5.395 5.395 3.112 3.112a3.814 3.814 0 1 0 5.395-5.395l-3.112-3.112ZM6.81 11.204l5.394-5.395-3.112-3.112a3.814 3.814 0 1 0-5.395 5.394l3.112 3.113Z"
+      />
+      <path
+        stroke="var(--color-2)"
+        d="m13.19 15.421-1.95-1.951M16.095 12.517l-1.951-1.952"
+      />
+      <path
+        stroke="var(--color-1)"
+        d="m20.746 20.072 1.244 1.245M3.697 2.697 2.452 1.452M11.41 17.79l7.053-7.055M13.033 4.98 5.98 12.032"
+      />
+    </g>
+
+    <defs>
+      <clipPath id="a">
+        <path fill="#fff" d="M0 0h24v24H0z" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
 export {
   LinkedinIcon,
   VSCodeIcon,
@@ -177,4 +274,7 @@ export {
   ImageSquareXMarkIcon,
   MedalStarBadgeIcon,
   DownCircleIcon,
+  DuotoneComputerIcon,
+  DuotoneLightbulbIcon,
+  DuotonePluginIcon,
 };

@@ -13,14 +13,26 @@ html.theme_mode-light {
   /* Component-specific variables */
   --input-color: #ddd;
 
-  --accent-color-1: #7b00ff;
+  /* old */
+  /* --accent-color-1: #7b00ff;
   --gradient-1:
     linear-gradient(160deg, #34ffc2, #fb83f6cc, #00000000 70%),
     linear-gradient(32deg, #2a0355, #2b2a8fcc, #00000000 70%);
   --gradient-2:
     linear-gradient(73deg, #423987, #f60b6ecc, #00000000 70%),
     linear-gradient(330deg, #423987, #821adecc, #00000000 70%),
-    linear-gradient(168deg, #423987, #a44080cc, #00000000 70%);
+    linear-gradient(168deg, #423987, #a44080cc, #00000000 70%); */
+
+  --accent-color-1: #1e90ff;
+  --gradient-1:
+    linear-gradient(200deg, #1ad29d, #1ad29ea4, #00000000 55%),
+    linear-gradient(130deg, #1ad29dcc, #1e90ff, #00000000 70%),
+    linear-gradient(10deg, #1eead2, #8930f5cc, #00000000 70%);
+  --gradient-2:
+    linear-gradient(247deg, #ff4479, #1e90ffcc, #00000000 70%),
+    linear-gradient(192deg, #26f3cacc, #00000000 70%),
+    linear-gradient(125deg, #97a7eccc, #00000000 70%),
+    linear-gradient(167deg, #62810ecc, #00000000 110%);
 }
 
 html.theme_mode-dark,
@@ -408,11 +420,11 @@ html.theme_mode-aurora-light {
 }
 
 html.theme_mode-aurora-dark {
-  --global-background-color: #1b1f3a;
-  --global-text-color: #d4faff;
-  --global-secondary-text-color: #74e6e6;
-  --global-border-color: #3b5b99;
-  --global-menus-color: #72ffdc;
+  --global-background-color: #0d1321;
+  --global-text-color: #e6fcff;
+  --global-secondary-text-color: #81c7c7;
+  --global-border-color: #263459;
+  --global-menus-color: #4ad6ba;
   --global-primary-highlight-color: #8affff;
   --global-secondary-highlight-color: #1889ac;
   --input-color: #263459;

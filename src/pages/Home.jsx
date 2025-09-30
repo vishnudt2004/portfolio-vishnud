@@ -1,11 +1,7 @@
 import { createElement } from "react";
 
 import config from "@config/config";
-import {
-  MotionOnScroll,
-  ThemeModeAnimatePresence,
-  ZoomInMotion,
-} from "@components/elements/Animations";
+import { MotionOnScroll, ZoomInMotion } from "@components/elements/Animations";
 import { Divider } from "@components/elements/Divider";
 import Hero from "@components/sections/Hero";
 import About from "@components/sections/About";
@@ -58,20 +54,15 @@ const Home = () => {
         );
 
         return isHero ? (
-          <ThemeModeAnimatePresence key={key}>
-            <ZoomInMotion>{content}</ZoomInMotion>
-          </ThemeModeAnimatePresence>
+          <ZoomInMotion key={key}>{content}</ZoomInMotion>
         ) : (
           <MotionOnScroll
             key={key}
-            initial={{
-              opacity: 0,
-              y: 10,
-            }}
+            initial={{ opacity: 0, filter: "blur(1px)" }}
             whileInView={{
               opacity: 1,
-              y: 0,
-              transition: { duration: 0.6, ease: "easeOut" },
+              filter: "blur(0px)",
+              transition: { duration: 0.7, ease: "easeOut" },
             }}
           >
             {content}

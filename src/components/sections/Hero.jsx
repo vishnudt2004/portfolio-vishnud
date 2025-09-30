@@ -1,10 +1,13 @@
 import { createElement } from "react";
 import { SiNextdotjs, SiReact } from "@icons-pack/react-simple-icons";
-import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/solid";
+import {
+  ChatBubbleOvalLeftEllipsisIcon,
+  HandRaisedIcon,
+} from "@heroicons/react/24/solid";
 
 import config from "@config/config";
 import { scrollDown } from "@utils/jsUtils";
-import HoverTooltip from "@components/elements/HoverTooltip";
+import Tooltip from "@components/elements/Tooltip";
 import { DownCircleIcon } from "@components/elements/CustomIcons";
 
 const HeroCreator = ({ children, size = 16, techstackIcons }) => {
@@ -28,14 +31,14 @@ const HeroCreator = ({ children, size = 16, techstackIcons }) => {
 
       <div className="flex flex-wrap justify-center gap-2">
         {techstackIcons.map(({ name, icon }) => (
-          <HoverTooltip key={name} label={name}>
+          <Tooltip key={name} content={name}>
             {createElement(icon, {
               className:
                 "size-12 rounded-full bg-white p-2 border border-(--global-border-color)/50",
               color: "default",
               title: null,
             })}
-          </HoverTooltip>
+          </Tooltip>
         ))}
       </div>
     </div>
@@ -44,7 +47,7 @@ const HeroCreator = ({ children, size = 16, techstackIcons }) => {
 
 const ScrollDownButton = () => {
   const handleClick = () => {
-    setTimeout(() => scrollDown(), 500);
+    scrollDown();
   };
 
   return (
@@ -77,21 +80,30 @@ const Hero = () => (
         <h1 className="flex gap-3 text-2xl">
           <span className="inline-block transition-transform duration-400 hover:scale-105 hover:-rotate-2">
             <span className="font-semibold">Hello, I&apos;m</span>
-            <HeroHighlighter className="group">~ Vishnu D</HeroHighlighter>.
+            <HeroHighlighter className="ml-1">~ Vishnu D</HeroHighlighter>.
           </span>{" "}
-          <HoverTooltip label="Say Hello!" className="-top-8 -left-8">
+          <Tooltip
+            content={
+              <>
+                Say Hello!
+                <HandRaisedIcon className="ml-1.5 inline size-4 -translate-0.5 -rotate-20" />
+              </>
+            }
+            side="top"
+            sideOffset={8}
+          >
             <a
               href="mailto:vishnu.d.t.2004@gmail.com"
-              className="inline-grid place-items-center rounded-full border-2 p-1.5"
+              className="hover:*:animate-fadeIn inline-grid place-items-center rounded-full border-2 p-1.5"
             >
               <ChatBubbleOvalLeftEllipsisIcon className="size-4.5" />
             </a>
-          </HoverTooltip>
+          </Tooltip>
         </h1>
 
-        <p className="max-w-[700px] px-3 text-xl">
-          I build modern web applications with clean code and smooth user
-          experiences.
+        <p className="max-w-[700px] px-3 text-[18px]">
+          I build modern web applications with clean, maintainable code and
+          seamless user experiences.
         </p>
       </div>
     </HeroCreator>

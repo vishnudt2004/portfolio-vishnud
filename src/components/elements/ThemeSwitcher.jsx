@@ -5,7 +5,6 @@ import config from "@config/config";
 import { useThemeMode } from "@contexts/ThemeModeContext";
 
 import { DropdownBox, DropdownMenuItem } from "./Dropdown";
-import { TextDivider } from "./Divider";
 
 const ThemeSwitcher = () => {
   const { themeMode, nextThemeMode, cycleThemeMode } = useThemeMode();
@@ -47,9 +46,9 @@ const ManualThemeSwitcher = ({
     <DropdownBox>
       {activeThemes.map(({ category, themes }) => (
         <Fragment key={category}>
-          <TextDivider>
-            <span>{category}</span>
-          </TextDivider>
+          <span className="my-1 text-center text-xs italic opacity-50">
+            {category}
+          </span>
 
           {themes.map((theme) => (
             <DropdownMenuItem

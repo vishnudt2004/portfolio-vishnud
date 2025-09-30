@@ -11,7 +11,7 @@ import {
 
 import config from "@config/config";
 import { scrollIntoSection } from "@utils/jsUtils";
-import HoverTooltip from "@components/elements/HoverTooltip";
+import Tooltip from "@components/elements/Tooltip";
 import { LinkedinIcon } from "@components/elements/CustomIcons";
 
 const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
@@ -24,12 +24,12 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
         {/* Left Column */}
         <div className="flex flex-col gap-3 border-(--global-border-color) max-md:border-b md:border-r">
           <h2 className="flex items-center gap-2 text-xl font-bold">
-            Contacts <PhoneIcon className="h-5 w-5" />
+            Contacts <PhoneIcon className="size-4.5" />
           </h2>
           <ul className="flex h-full flex-wrap gap-2 p-5">
             {contacts.map(({ name, link, icon }) => (
               <li key={name}>
-                <HoverTooltip label={name} className="-bottom-7">
+                <Tooltip content={name}>
                   <a
                     href={link}
                     target="_blank"
@@ -37,7 +37,7 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
                   >
                     {icon}
                   </a>
-                </HoverTooltip>
+                </Tooltip>
               </li>
             ))}
           </ul>
@@ -46,9 +46,9 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
         {/* Right Column */}
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold">
-            Quick Links <ArrowRightEndOnRectangleIcon className="h-5 w-5" />
+            Quick Links <ArrowRightEndOnRectangleIcon className="size-5" />
           </h2>
-          <ul className="mt-2 space-y-2 pt-4 pl-3">
+          <ul className="mt-2 w-fit columns-2 space-y-2 pt-4 pl-3">
             {quickLinks.map((qLink) => (
               <li key={qLink}>
                 <a
@@ -63,7 +63,7 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
           </ul>
         </div>
       </div>
-      <p className="absolute inset-x-0 bottom-0 bg-(--global-border-color)/25 p-2 text-center text-sm text-(--global-text-color)">
+      <p className="absolute inset-x-0 bottom-0 bg-(--global-border-color)/25 p-2 text-center text-xs text-(--global-text-color)">
         {cpyText}
       </p>
     </footer>
@@ -75,27 +75,27 @@ const Footer = () => {
     {
       name: "GitHub",
       link: "https://github.com/vishnudt2004",
-      icon: <SiGithub className="scale-110" />,
+      icon: <SiGithub title={null} className="scale-110" />,
     },
     {
       name: "LinkedIn",
       link: "https://www.linkedin.com/in/vishnu-dt",
-      icon: <LinkedinIcon className="scale-115" />,
+      icon: <LinkedinIcon title={null} className="scale-115" />,
     },
     {
       name: "LeetCode",
       link: "https://leetcode.com/vishnud2004",
-      icon: <SiLeetcode color="default" className="scale-100" />,
+      icon: <SiLeetcode title={null} color="default" className="scale-100" />,
     },
     {
       name: "HackerRank",
       link: "https://www.hackerrank.com/profile/vishnu_d_t_2004",
-      icon: <SiHackerrank color="default" className="scale-95" />,
+      icon: <SiHackerrank title={null} color="default" className="scale-95" />,
     },
     {
       name: "Email",
       link: "mailto:vishnu.d.t.2004@gmail.com",
-      icon: <SiGmail color="default" className="scale-95" />,
+      icon: <SiGmail title={null} color="default" className="scale-95" />,
     },
     // Phone: "tel:+91936350XXXX",
   ];

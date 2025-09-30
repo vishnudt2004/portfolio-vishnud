@@ -1,12 +1,9 @@
 import { AnimatePresence, motion } from "motion/react";
 
-import { useThemeMode } from "@contexts/ThemeModeContext";
-
 // Categorization of animations:
 // Base motion wrapper – for global use
 // Predefined animations – for global use
 // Predefined animations – for component-specific use
-// AnimatePresence wrappers – for global use
 // AnimatePresence wrappers – for component-specific use
 
 // Base motion wrappers – for global use
@@ -122,25 +119,6 @@ const NavbarMenusMotion = ({
   );
 };
 
-// AnimatePresence wrappers – for global use
-
-const ThemeModeAnimatePresence = ({ children }) => {
-  const { themeMode } = useThemeMode();
-
-  return (
-    <AnimatePresence mode="wait">
-      <MotionWrapper
-        key={themeMode}
-        // initial={{ opacity: 0, scale: 0.98 }}
-        // animate={{ opacity: 1, scale: 1, transition: { duration: 0.8 } }}
-        // exit={{ opacity: 0, scale: 1.02 }}
-      >
-        {children}
-      </MotionWrapper>
-    </AnimatePresence>
-  );
-};
-
 // AnimatePresence wrappers – for component-specific use
 
 const NavbarDropdownAnimatePresence = ({ children, dropDownVisible }) => {
@@ -180,6 +158,5 @@ export {
   ZoomInMotion,
   NavbarBrandMotion,
   NavbarMenusMotion,
-  ThemeModeAnimatePresence,
   NavbarDropdownAnimatePresence,
 };

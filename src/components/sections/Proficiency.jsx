@@ -41,7 +41,7 @@ import {
 import config from "@config/config";
 import Anchor from "@components/elements/Anchor";
 import { TwoColumnsLayout } from "@components/elements/SectionLayouts";
-import HoverTooltip from "@components/elements/HoverTooltip";
+import Tooltip from "@components/elements/Tooltip";
 import { VSCodeIcon, MotionIcon } from "@components/elements/CustomIcons";
 
 const ProficiencyCreator = ({
@@ -59,9 +59,9 @@ const ProficiencyCreator = ({
         <div className="fancy-bg-1 flex flex-col items-center gap-10 p-4">
           <h1 className="flex items-center justify-center gap-2 text-center text-xl font-bold tracking-wider">
             Skill Sets
-            <HoverTooltip label="Hover on a skill to see its icon" className>
+            <Tooltip content="Hover on a skill to see its icon">
               <InformationCircleIcon className="size-5 cursor-help text-sm" />
-            </HoverTooltip>
+            </Tooltip>
           </h1>
 
           <ul className="flex flex-wrap gap-x-1 gap-y-2">
@@ -93,19 +93,20 @@ const ProficiencyCreator = ({
         <div className="flex flex-col items-center gap-5 p-1">
           <h1 className="mb-5 flex items-center justify-center gap-2 text-center text-xl font-bold tracking-wider">
             Tech Stack
-            <HoverTooltip label="Hover on icon to see name">
+            <Tooltip content="Hover on icon to see name">
               <InformationCircleIcon className="size-5 cursor-help text-sm" />
-            </HoverTooltip>
+            </Tooltip>
           </h1>
           <div className="flex flex-wrap items-center justify-center gap-2 max-sm:scale-90">
             {techStack.techStackIcons.map(({ name, icon }) => (
-              <HoverTooltip key={name} label={name} className="-bottom-5">
+              <Tooltip key={name} content={name} sideOffset={-6}>
                 {createElement(icon, {
                   className:
                     "mb-2 size-15 rounded-full border-1 border-(--global-border-color)/50 bg-[#fafafa] p-4",
                   color: "default",
+                  title: null,
                 })}
-              </HoverTooltip>
+              </Tooltip>
             ))}
           </div>
           <div>{techStack.techStackDescription}</div>
@@ -204,7 +205,7 @@ const Proficiency = () => {
           href="https://nextjs.org/"
           className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
         >
-          Read more about <b>Next.js</b> development.
+          Read more about <b className="mx-1">Next.js</b> development.
         </Anchor>
       </div>
     ),

@@ -3,16 +3,20 @@ import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 
 import config from "@config/config";
 import { SimpleLayout } from "@components/elements/SectionLayouts";
-import ShowcaseItem from "@components/elements/ShowcaseItem";
+import ShowcaseItem, {
+  ShowcaseItemBtn,
+} from "@components/elements/ShowcaseItem";
 import ShowMoreData from "@components/elements/ShowMoreData";
 
 import vercelIcon from "@assets/images/icons/vercel.svg";
 import hrIcon from "@assets/images/icons/hackerrank.svg";
+import fccIcon from "@assets/images/icons/fcc.svg";
 import certificate1 from "@assets/images/certifications-certificates/certificate-1.webp";
 import certificate2 from "@assets/images/certifications-certificates/certificate-2.webp";
 import certificate3_react from "@assets/images/certifications-certificates/certificate-3/react_basic-certificate.webp";
 import certificate3_js from "@assets/images/certifications-certificates/certificate-3/javascript_basic-certificate.webp";
 import certificate3_css from "@assets/images/certifications-certificates/certificate-3/css-certificate.webp";
+import certificate4 from "@assets/images/certifications-certificates/certificate-4.png";
 
 const CertificateItem = ({
   title,
@@ -32,24 +36,22 @@ const CertificateItem = ({
       (Array.isArray(credentials) ? (
         <div className="mt-auto flex flex-wrap gap-2">
           {credentials.map(({ name, credential }) => (
-            <a
+            <ShowcaseItemBtn
               key={name}
               href={credential}
-              target="_blank"
-              className="inline-flex items-center justify-center gap-1 bg-green-500 px-2 py-1 text-sm text-white"
+              icon={<DocumentCheckIcon className="size-4" />}
             >
-              <DocumentCheckIcon className="size-4" /> {name}
-            </a>
+              {name}
+            </ShowcaseItemBtn>
           ))}
         </div>
       ) : (
-        <a
+        <ShowcaseItemBtn
           href={credentials}
-          target="_blank"
-          className="mt-auto inline-flex w-fit items-center justify-center gap-1 bg-green-500 px-2 py-1 text-sm text-white"
+          icon={<DocumentCheckIcon className="size-4" />}
         >
-          <DocumentCheckIcon className="size-4" /> View Credential
-        </a>
+          View Credential
+        </ShowcaseItemBtn>
       ))
     }
     logo={logo}
@@ -76,6 +78,55 @@ const CertificationsCreator = ({ certificates }) => (
 
 const Certifications = () => {
   const certificates = [
+    {
+      title: "Responsive Web Design",
+      issuer: "freeCodeCamp",
+      date: "Sep 2025",
+      description: (
+        <>
+          Completed the <span className="underline">Responsive Web Design</span>{" "}
+          certification by building{" "}
+          <span className="underline">5 responsive projects</span>, each testing
+          my understanding of semantic HTML, CSS layout, Flexbox, and media
+          queries. Passing all project tests earned me the certification and
+          validated my grasp of the core principles of modern web design.
+        </>
+      ),
+      credentials: [
+        { name: "View Certificate", credential: certificate4 },
+        {
+          name: "Certificate Link",
+          credential:
+            "https://www.freecodecamp.org/certification/vishnu-d-t-2004/responsive-web-design",
+        },
+      ],
+      logo: fccIcon,
+    },
+    {
+      title: "Frontend Developer (React)",
+      issuer: "HackerRank",
+      date: "Sep 2025",
+      description: (
+        <>
+          Earned the{" "}
+          <span className="underline">Frontend Developer (React)</span>{" "}
+          certificate through a 60-minute test consisting of coding challenges
+          and multiple-choice questions. The assessment covered{" "}
+          <span className="underline">React, CSS, and JavaScript</span> —
+          including implementing features in React, answering CSS-based MCQs,
+          and writing required functionality in JavaScript. Cleared in a single
+          attempt.
+        </>
+      ),
+      credentials: [
+        { name: "View Certificate", credential: certificate2 },
+        {
+          name: "Certificate Link",
+          credential: "https://www.hackerrank.com/certificates/7a2fef995346",
+        },
+      ],
+      logo: hrIcon,
+    },
     {
       title: "Next.js App Router Fundamentals",
       issuer: "Vercel",
@@ -109,31 +160,6 @@ const Certifications = () => {
         },
       ],
       logo: vercelIcon,
-    },
-    {
-      title: "Frontend Developer (React)",
-      issuer: "HackerRank",
-      date: "Sep 2025",
-      description: (
-        <>
-          Earned the{" "}
-          <span className="underline">Frontend Developer (React)</span>{" "}
-          certificate through a 60-minute test consisting of coding challenges
-          and multiple-choice questions. The assessment covered{" "}
-          <span className="underline">React, CSS, and JavaScript</span> —
-          including implementing features in React, answering CSS-based MCQs,
-          and writing required functionality in JavaScript. Cleared in a single
-          attempt.
-        </>
-      ),
-      credentials: [
-        { name: "View Certificate", credential: certificate2 },
-        {
-          name: "Certificate Link",
-          credential: "https://www.hackerrank.com/certificates/7a2fef995346",
-        },
-      ],
-      logo: hrIcon,
     },
     {
       title: "HackerRank Basic Certificates",

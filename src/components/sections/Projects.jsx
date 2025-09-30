@@ -4,6 +4,7 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import config from "@config/config";
 import Anchor from "@components/elements/Anchor";
 import Img from "@components/elements/Img";
+import { ExploreMoreLink } from "@components/elements/ShowMoreData";
 import { SimpleLayout } from "@components/elements/SectionLayouts";
 
 import projectImage_globblog from "@assets/images/projects-screenshot/globblog_(welcome-page).png";
@@ -16,27 +17,29 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
       repo: "var(--color-blue-400)",
       demo: "var(--color-yellow-400)",
       live: "var(--color-green-400)",
+      docs: "var(--color-red-400)",
     },
     icon: {
-      repo: <CloudIcon className="inline-block h-4 w-4" />,
-      demo: <GlobeAltIcon className="inline-block h-4 w-4" />,
-      live: <GlobeAltIcon className="inline-block h-4 w-4" />,
+      repo: <CloudIcon className="inline-block size-4" />,
+      demo: <GlobeAltIcon className="inline-block size-4" />,
+      live: <GlobeAltIcon className="inline-block size-4" />,
+      docs: <GlobeAltIcon className="inline-block size-4" />,
     },
   };
 
   return (
-    <div className="fancy-bg-2 group min-h-[470px] w-full overflow-hidden border border-(--global-border-color)/50 bg-(--global-background-color) transition-all hover:shadow-[0_0_0_1px_var(--accent-color-1)]">
+    <div className="fancy-bg-2 group flex min-h-[470px] w-full flex-col overflow-hidden border border-(--global-border-color)/50 bg-(--global-background-color) transition-all hover:border-(--accent-color-1)">
       <Img
         src={thumb}
         alt={`${title} image`}
-        className="aspect-video w-full object-cover grayscale-60 transition-all duration-300 group-hover:p-0.5 group-hover:grayscale-0"
+        className="aspect-video object-cover grayscale-60 transition-all duration-300 group-hover:grayscale-0"
       />
-      <div className="p-4 sm:p-5">
+      <div className="flex grow flex-col gap-2 p-4 sm:p-5">
         <h3 className="text-lg font-bold sm:text-xl">{title}</h3>
-        <p className="any-pointer-fine:secondary-scrollbar mt-2 h-20 overflow-y-auto text-sm text-(--global-secondary-text-color)">
+        <p className="any-pointer-fine:secondary-scrollbar h-20 overflow-y-auto text-sm text-(--global-secondary-text-color)">
           {descr}
         </p>
-        <div className="mt-3 flex flex-wrap gap-2 text-sm">
+        <div className="mb-2 flex flex-wrap gap-2 text-sm">
           <span className="pt-1 leading-2 font-medium">Tech stack:</span>
           {techStack.map((tech, i) => (
             <span
@@ -47,15 +50,10 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
             </span>
           ))}
         </div>
-        <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
+        <div className="mt-auto flex flex-wrap items-center gap-3 text-sm">
           <span className="font-medium">Links:</span>
           {Object.entries(links).map(([type, link]) => (
-            <Anchor
-              key={type}
-              color={linkProps.color[type]}
-              href={link}
-              className="inline-flex! items-center"
-            >
+            <Anchor key={type} color={linkProps.color[type]} href={link}>
               <span className="inline-flex! items-center justify-center gap-2">
                 {linkProps.icon[type]}
                 {type.charAt(0).toUpperCase() + type.substring(1)}
@@ -68,11 +66,7 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
   );
 };
 
-const ProjectsCreator = ({
-  title = "Projects",
-  projects,
-  githubProfileRepos,
-}) => (
+const ProjectsCreator = ({ title = "Projects", projects, githubRepos }) => (
   <SimpleLayout id={config.SECTION_IDS.PROJECTS} sectionTitle={title}>
     <div className="grid justify-items-center gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((project) => (
@@ -80,19 +74,15 @@ const ProjectsCreator = ({
       ))}
     </div>
 
-    <p className="mt-5 text-center">
-      Explore more projects on my GitHub:{" "}
-      <a
-        color="var(--global-text-color)"
-        href={githubProfileRepos}
-        target="_blank"
-        className="highlight-primary before: mt-2 ml-2 inline-flex! items-center rounded-full"
-      >
-        <span className="inline-flex items-center gap-2">
+    <ExploreMoreLink
+      text="Explore more projects on my GitHub"
+      linkText={
+        <span className="inline-flex items-center gap-1">
           <SiGithub className="size-4.5" /> vishnudt2004
         </span>
-      </a>
-    </p>
+      }
+      href={githubRepos}
+    />
   </SimpleLayout>
 );
 
@@ -117,8 +107,8 @@ const Projects = () => {
         "Styled Components",
       ],
       links: {
-        repo: "https://github.com/vishnudt2004/globblog",
         demo: "https://globblog.vercel.app/",
+        repo: "https://github.com/vishnudt2004/globblog",
       },
     },
     {
@@ -135,8 +125,8 @@ const Projects = () => {
         "Motion (framer-motion)",
       ],
       links: {
-        repo: "https://github.com/vishnudt2004/portfolio-vishnud",
         live: "https://portfolio-vishnud.vercel.app/",
+        repo: "https://github.com/vishnudt2004/portfolio-vishnud",
       },
     },
     {
@@ -155,8 +145,8 @@ const Projects = () => {
         "etc..",
       ],
       links: {
+        docs: "https://suic-docs.vercel.app/",
         repo: "https://github.com/vishnudt2004/suic-core",
-        live: "https://suic-docs.vercel.app/",
       },
     },
   ];
@@ -164,7 +154,7 @@ const Projects = () => {
   return (
     <ProjectsCreator
       projects={projects}
-      githubProfileRepos="https://github.com/vishnudt2004?tab=repositories"
+      githubRepos="https://github.com/vishnudt2004?tab=repositories"
     />
   );
 };

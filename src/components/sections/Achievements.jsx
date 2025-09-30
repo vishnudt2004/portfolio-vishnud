@@ -6,7 +6,9 @@ import { TrophyIcon } from "@heroicons/react/24/outline";
 
 import config from "@config/config";
 import { SimpleLayout } from "@components/elements/SectionLayouts";
-import ShowcaseItem from "@components/elements/ShowcaseItem";
+import ShowcaseItem, {
+  ShowcaseItemBtn,
+} from "@components/elements/ShowcaseItem";
 import ShowMoreData from "@components/elements/ShowMoreData";
 
 import achievement1 from "@assets/images/achievements-certificate/achievement-1.webp";
@@ -20,15 +22,16 @@ const AchievementItem = ({
   description,
   credentials,
   logo,
+  className,
 }) => (
   <ShowcaseItem
     title={title}
     subtitle={
       (event || location) && (
-        <p className="mb-2 inline text-sm font-semibold text-(--global-secondary-text-color)">
+        <span className="mb-2 inline text-sm font-semibold text-(--global-secondary-text-color)">
           {event} {location && "@"}{" "}
           {location && <span className="italic">{location}</span>}
-        </p>
+        </span>
       )
     }
     date={date}
@@ -38,24 +41,18 @@ const AchievementItem = ({
       (Array.isArray(credentials) ? (
         <div className="mt-auto flex flex-wrap gap-2">
           {credentials.map(({ name, credential }) => (
-            <a
-              key={name}
-              href={credential}
-              target="_blank"
-              className="inline-flex items-center justify-center gap-1 bg-yellow-500 px-2 py-1 text-sm text-black"
-            >
+            <ShowcaseItemBtn key={name} href={credential}>
               <InformationCircleIcon className="size-4" /> {name}
-            </a>
+            </ShowcaseItemBtn>
           ))}
         </div>
       ) : (
-        <a
+        <ShowcaseItemBtn
           href={credentials}
-          target="_blank"
-          className="mt-auto inline-flex w-fit items-center justify-center gap-1 bg-yellow-500 px-2 py-1 text-sm text-black"
+          icon={<InformationCircleIcon className="size-4" />}
         >
-          <InformationCircleIcon className="size-4" /> See Details
-        </a>
+          See Details
+        </ShowcaseItemBtn>
       ))
     }
     logo={logo}
@@ -64,6 +61,7 @@ const AchievementItem = ({
     style={{
       "--accent-color": "var(--color-yellow-500)",
     }}
+    className={className}
   />
 );
 
@@ -84,6 +82,19 @@ const AchievementsCreator = ({ achievements }) => (
 
 const Achievements = () => {
   const achievements = [
+    {
+      title: "Portfolio Redesign",
+      event: "Portfolio Update",
+      date: "Sep 2025",
+      description:
+        "Completely revamped personal portfolio with a cleaner UI, new sections (Certifications, Activities), reusable ShowcaseItem component, polished hero design with dotted background, real photo integration, and support for 22 unique themes. Improved overall consistency and user experience.",
+      credentials: [
+        {
+          name: "Explore this site",
+          credential: "https://portfolio-vishnud.vercel.app",
+        },
+      ],
+    },
     {
       title: "Open Source – Simple UI Components",
       event: "Open Source, NPM",
@@ -116,19 +127,6 @@ const Achievements = () => {
       description:
         "Received the book 'Yevuganai Manithan: Abdul Kalam Vazhkai Varalarum, Kavithaigalum' as a prize during the 75th Independence Day Celebration, 2022",
       credentials: achievement2,
-    },
-    {
-      title: "Portfolio Redesign",
-      event: "Portfolio Update",
-      date: "Sep 2025",
-      description:
-        "Completely revamped personal portfolio with a cleaner UI, new sections (Certifications, Activities), reusable ShowcaseItem component, polished hero design with dotted background, real photo integration, and support for 22 unique themes. Improved overall consistency and user experience.",
-      credentials: [
-        {
-          name: "Explore this site",
-          credential: "https://portfolio-vishnud.vercel.app",
-        },
-      ],
     },
   ];
 
