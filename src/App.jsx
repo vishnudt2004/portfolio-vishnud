@@ -1,13 +1,13 @@
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 
-import ThemeModeProvider from "@contexts/ThemeModeContext";
-import Header from "@components/layouts/Header";
-import Footer from "@components/layouts/Footer";
-import Home from "@pages/Home";
+import ThemeProvider from "@/contexts/ThemeContext";
+import Header from "@/components/layouts/Header";
+import Footer from "@/components/layouts/Footer";
+import AppContent from "@//AppContent";
 
 const ContextProviders = ({ children }) => (
   <TooltipProvider delayDuration={0} disableHoverableContent>
-    <ThemeModeProvider>{children}</ThemeModeProvider>
+    <ThemeProvider>{children}</ThemeProvider>
   </TooltipProvider>
 );
 
@@ -22,7 +22,7 @@ const Layout = ({ outlet, children }) => (
 const App = () => (
   <ContextProviders>
     <Layout>
-      <Home />
+      <AppContent />
     </Layout>
   </ContextProviders>
 );

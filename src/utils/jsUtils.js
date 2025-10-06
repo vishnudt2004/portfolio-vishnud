@@ -5,18 +5,14 @@ const scrollIntoTop = (e) => {
   window.scrollTo(0, 0);
 };
 
-const scrollIntoSection = (
-  e,
-  id, // HTML id attribute
-) => {
-  e && e.preventDefault();
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-};
+const scrollIntoSection = (e, id, offset = -65) => {
+  e?.preventDefault();
 
-const scrollDown = (
-  top = window.innerHeight, // defalut: 100vh
-) => {
-  window.scrollBy({ top, behavior: "smooth" });
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const y = el.getBoundingClientRect().top + window.scrollY + offset;
+  window.scrollTo({ top: y, behavior: "smooth" });
 };
 
 const setHTMLOverflowY = (condition) => {
@@ -30,7 +26,6 @@ function addArtificialDelay(action = () => {}, delay = 200) {
 export {
   scrollIntoTop,
   scrollIntoSection,
-  scrollDown,
   setHTMLOverflowY,
   addArtificialDelay,
 };

@@ -2,7 +2,7 @@ import * as RTt from "@radix-ui/react-tooltip";
 import * as RPo from "@radix-ui/react-popover";
 import { twMerge } from "tailwind-merge";
 
-import { useIsMobile } from "@hooks/useIsMobile";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HybridTooltip = ({ content, children, className, ...props }) => {
   const isMobile = useIsMobile();

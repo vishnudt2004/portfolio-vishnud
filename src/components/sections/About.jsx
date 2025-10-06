@@ -1,22 +1,22 @@
 import { createElement } from "react";
 import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 
-import config from "@config/config";
-import Anchor from "@components/elements/Anchor";
-import Img from "@components/elements/Img";
-import { Divider } from "@components/elements/Divider";
-import Tooltip from "@components/elements/Tooltip";
-import { TwoColumnsLayout } from "@components/elements/SectionLayouts";
+import config from "@/config";
+import Anchor from "@/components/elements/Anchor";
+import Img from "@/components/elements/Img";
+import { Divider } from "@/components/elements/Divider";
+import Tooltip from "@/components/elements/Tooltip";
+import { TwoColumnsLayout } from "@/components/elements/SectionLayouts";
 import {
   LinkedinIcon,
   DuotoneComputerIcon,
   DuotoneLightbulbIcon,
   DuotonePluginIcon,
-} from "@components/elements/CustomIcons";
+} from "@/components/elements/CustomIcons";
 
-import profileImg from "@assets/images/profile-image/vishnud.jpg";
+import profileImg from "@/assets/images/profile-image/vishnud.jpg";
 
-const AboutCreator = ({
+const AboutSection = ({
   title = "About Me",
   image,
   aboutMe,
@@ -75,7 +75,7 @@ const MoreAboutSubTitle = ({ children }) => (
   </h1>
 );
 
-const About = () => {
+const AboutView = () => {
   const aboutMe = (
     <div className="flex flex-col gap-10 text-(--global-secondary-text-color)">
       <span className="text-(--global-secondary-text-color)">
@@ -272,7 +272,7 @@ const About = () => {
   ];
 
   return (
-    <AboutCreator
+    <AboutSection
       image={profileImg}
       aboutMe={aboutMe}
       moreAboutMe={moreAboutMe}
@@ -280,4 +280,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutView;

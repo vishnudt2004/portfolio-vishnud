@@ -1,15 +1,17 @@
 import { CloudIcon, GlobeAltIcon } from "@heroicons/react/24/solid";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 
-import config from "@config/config";
-import Anchor from "@components/elements/Anchor";
-import Img from "@components/elements/Img";
-import { ExploreMoreLink } from "@components/elements/ShowMoreData";
-import { SimpleLayout } from "@components/elements/SectionLayouts";
+import config from "@/config";
+import Anchor from "@/components/elements/Anchor";
+import Img from "@/components/elements/Img";
+import ShowMoreData, {
+  ExploreMoreLink,
+} from "@/components/elements/ShowMoreData";
+import { SimpleLayout } from "@/components/elements/SectionLayouts";
 
-import projectImage_globblog from "@assets/images/projects-screenshot/globblog_(welcome-page).png";
-import projectImage_portfolio from "@assets/images/projects-screenshot/portfolio-vishnu-d_(hero-section).png";
-import projectImage_suic from "@assets/images/projects-screenshot/suic_(home-page).png";
+import projectImage_globblog from "@/assets/images/projects-screenshot/globblog_(welcome-page).png";
+import projectImage_portfolio from "@/assets/images/projects-screenshot/portfolio-vishnu-d_(hero-section).png";
+import projectImage_suic from "@/assets/images/projects-screenshot/suic_(home-page).png";
 
 const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
   const linkProps = {
@@ -28,7 +30,10 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
   };
 
   return (
-    <div className="fancy-bg-2 group flex min-h-[470px] w-full flex-col overflow-hidden border border-(--global-border-color)/50 bg-(--global-background-color) transition-all hover:border-(--accent-color-1)">
+    <div
+      style={{ "--accent-color": "var(--color-purple-500)" }}
+      className="fancy-bg-2 group flex min-h-[470px] w-full max-w-lg flex-col overflow-hidden border border-(--global-border-color)/50 bg-(--global-background-color) transition-all hover:border-(--accent-color)"
+    >
       <Img
         src={thumb}
         alt={`${title} image`}
@@ -66,13 +71,15 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
   );
 };
 
-const ProjectsCreator = ({ title = "Projects", projects, githubRepos }) => (
-  <SimpleLayout id={config.SECTION_IDS.PROJECTS} sectionTitle={title}>
-    <div className="grid justify-items-center gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {projects.map((project) => (
-        <ProjectCard key={project.title} {...project} />
-      ))}
-    </div>
+const ProjectsSection = ({ projects, githubRepos }) => (
+  <SimpleLayout id={config.SECTION_IDS.PROJECTS} sectionTitle="Projects">
+    <ShowMoreData items={projects}>
+      {(visibleItems) =>
+        visibleItems.map((project, ind) => (
+          <ProjectCard key={ind} {...project} />
+        ))
+      }
+    </ShowMoreData>
 
     <ExploreMoreLink
       text="Explore more projects on my GitHub"
@@ -86,7 +93,7 @@ const ProjectsCreator = ({ title = "Projects", projects, githubRepos }) => (
   </SimpleLayout>
 );
 
-const Projects = () => {
+const ProjectsView = () => {
   const projects = [
     {
       title: "Globblog",
@@ -152,11 +159,11 @@ const Projects = () => {
   ];
 
   return (
-    <ProjectsCreator
+    <ProjectsSection
       projects={projects}
       githubRepos="https://github.com/vishnudt2004?tab=repositories"
     />
   );
 };
 
-export default Projects;
+export default ProjectsView;

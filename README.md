@@ -25,7 +25,7 @@ A clean, responsive, and modern portfolio built to showcase who I am as a self-t
 
 - **Frontend:**
   - [`/src/styles/config.css`](src/styles/config.css) – UI-related variables and theme settings.
-  - [`/src/config/config.js`](src/config/config.js) – App-level constants and UI config toggles.
+  - [`/src/config/index.js`](src/config/index.js) – App-level constants and UI config toggles.
 
 ## 🔗 Contacts
 

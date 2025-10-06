@@ -1,7 +1,7 @@
 // Module reserved for future use.
 
-import config from "@config/config";
-import { SimpleLayout } from "@components/elements/SectionLayouts";
+import config from "@/config";
+import { SimpleLayout } from "@/components/elements/SectionLayouts";
 
 const Experience = () => (
   <SimpleLayout

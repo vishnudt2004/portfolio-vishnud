@@ -38,13 +38,13 @@ import {
   SiPnpm,
 } from "@icons-pack/react-simple-icons";
 
-import config from "@config/config";
-import Anchor from "@components/elements/Anchor";
-import { TwoColumnsLayout } from "@components/elements/SectionLayouts";
-import Tooltip from "@components/elements/Tooltip";
-import { VSCodeIcon, MotionIcon } from "@components/elements/CustomIcons";
+import config from "@/config";
+import Anchor from "@/components/elements/Anchor";
+import { TwoColumnsLayout } from "@/components/elements/SectionLayouts";
+import Tooltip from "@/components/elements/Tooltip";
+import { VSCodeIcon, MotionIcon } from "@/components/elements/CustomIcons";
 
-const ProficiencyCreator = ({
+const ProficienciesSection = ({
   skills,
   techStack = {
     techStackIcons: [{ name: "", icon: "" }],
@@ -52,8 +52,8 @@ const ProficiencyCreator = ({
   },
 }) => (
   <TwoColumnsLayout
-    id={config.SECTION_IDS.PROFICIENCY}
-    sectionTitle="Proficiency"
+    id={config.SECTION_IDS.PROFICIENCIES}
+    sectionTitle="Proficiencies"
     cols={{
       col1: () => (
         <div className="fancy-bg-1 flex flex-col items-center gap-10 p-4">
@@ -116,7 +116,7 @@ const ProficiencyCreator = ({
   />
 );
 
-const Proficiency = () => {
+const ProficienciesView = () => {
   const skills = [
     {
       category: "Development",
@@ -211,7 +211,7 @@ const Proficiency = () => {
     ),
   };
 
-  return <ProficiencyCreator skills={skills} techStack={techStack} />;
+  return <ProficienciesSection skills={skills} techStack={techStack} />;
 };
 
-export default Proficiency;
+export default ProficienciesView;

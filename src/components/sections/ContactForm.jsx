@@ -9,8 +9,8 @@ import {
   UserIcon,
 } from "@heroicons/react/24/solid";
 
-import config from "@config/config";
-import { SimpleLayout } from "@components/elements/SectionLayouts";
+import config from "@/config";
+import { SimpleLayout } from "@/components/elements/SectionLayouts";
 
 const Input = ({ type, icon, ...attr }) => (
   <div className="group relative w-full">
@@ -40,7 +40,7 @@ const Input = ({ type, icon, ...attr }) => (
 const ContactForm = () => {
   return (
     <SimpleLayout
-      id={config.SECTION_IDS.CONTACT_FORM}
+      id={config.SECTION_IDS.CONTACTFORM}
       sectionTitle="Contact Me"
     >
       <form

@@ -6,7 +6,11 @@ import { twMerge } from "tailwind-merge";
 const SimpleLayout = ({
   sectionTitle = "Section Title",
   main,
-  children = <div className="text-center">Main Content</div>,
+  children = (
+    <span className="block text-center text-sm opacity-50">
+      Content will be added here.
+    </span>
+  ),
   id, // Unique identifier for navigation
   className,
 }) => (

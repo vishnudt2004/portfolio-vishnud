@@ -1,8 +1,8 @@
+import { useMemo } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 // Categorization of animations:
 // Base motion wrapper – for global use
-// Predefined animations – for global use
 // Predefined animations – for component-specific use
 // AnimatePresence wrappers – for component-specific use
 
@@ -12,6 +12,18 @@ const MotionWrapper = ({ as = "span", children, ...props }) => {
   if (!children || Array.isArray(children)) {
     throw new Error("MotionWrapper must have exactly one child element.");
   }
+
+  // Precompute custom motion
+  const CustomMotion = useMemo(() => {
+    if (
+      children &&
+      typeof children.type !== "string" &&
+      typeof children !== "string"
+    ) {
+      return motion.create(children.type, { forwardMotionProps: true });
+    }
+    return null;
+  }, [children]);
 
   // Text node
   if (typeof children === "string") {
@@ -25,12 +37,12 @@ const MotionWrapper = ({ as = "span", children, ...props }) => {
     return <MotionComponent {...children.props} {...props} />;
   }
 
-  // Custom React component (requires forwardRef; React 19 simplifies this)
-  const MotionComponent = motion.create(children.type, {
-    forwardMotionProps: true,
-  });
+  // Custom React component
+  if (CustomMotion) {
+    return <CustomMotion {...children.props} {...props} />;
+  }
 
-  return <MotionComponent {...children.props} {...props} />;
+  return null;
 };
 
 const MotionOnScroll = ({ children, ...rest }) => {
@@ -46,19 +58,42 @@ const MotionOnScroll = ({ children, ...rest }) => {
   );
 };
 
-// Predefined animations – for global use
+// Predefined animations – for component-specific use
 
-const ZoomInMotion = ({ children, delay = 0, rest }) => (
+const HeroBgOverlayMotion = ({ children }) => (
   <MotionWrapper
-    initial={{ scale: 0.8, opacity: 0 }}
-    animate={{ scale: 1, opacity: 1, transition: { duration: 0.5, delay } }}
-    {...rest}
+    initial={{ scale: 0.5, opacity: 0 }}
+    animate={{
+      scale: 1,
+      opacity: 0.7,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 10,
+        mass: 1.2,
+        delay: 0.6,
+      },
+    }}
   >
     {children}
   </MotionWrapper>
 );
 
-// Predefined animations – for component-specific use
+const HeroFgMotion = ({ children, delay = 0.85 }) => (
+  <MotionWrapper
+    initial={{ opacity: 0 }}
+    animate={{
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay,
+      },
+    }}
+  >
+    {children}
+  </MotionWrapper>
+);
 
 const NavbarBrandMotion = ({ children, screen = "small", navbarVisible }) => {
   const menuVariants = {
@@ -119,6 +154,22 @@ const NavbarMenusMotion = ({
   );
 };
 
+const SectionRevealMotion = ({ isHero, children }) =>
+  isHero ? (
+    children
+  ) : (
+    <MotionOnScroll
+      initial={{ opacity: 0, filter: "blur(5px)" }}
+      whileInView={{
+        opacity: 1,
+        filter: "blur(0px)",
+        transition: { duration: 0.7, ease: "easeOut" },
+      }}
+    >
+      {children}
+    </MotionOnScroll>
+  );
+
 // AnimatePresence wrappers – for component-specific use
 
 const NavbarDropdownAnimatePresence = ({ children, dropDownVisible }) => {
@@ -155,8 +206,10 @@ const NavbarDropdownAnimatePresence = ({ children, dropDownVisible }) => {
 export {
   MotionWrapper,
   MotionOnScroll,
-  ZoomInMotion,
+  HeroBgOverlayMotion,
+  HeroFgMotion,
   NavbarBrandMotion,
   NavbarMenusMotion,
   NavbarDropdownAnimatePresence,
+  SectionRevealMotion,
 };

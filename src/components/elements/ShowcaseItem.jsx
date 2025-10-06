@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { twMerge } from "tailwind-merge";
 
-import Img from "@components/elements/Img";
+import Img from "./Img";
 
 const ShowcaseItem = ({
   title,
@@ -18,7 +18,7 @@ const ShowcaseItem = ({
   return (
     <div
       className={twMerge(
-        "fancy-bg-1 relative flex w-full max-w-lg flex-col gap-1 border border-(--global-border-color)/50 p-5 transition-all hover:border-(--accent-color)",
+        "relative flex w-full max-w-lg flex-col gap-1 border border-(--global-border-color)/50 p-5 transition-all hover:border-(--accent-color)",
         className,
       )}
       style={{ "--accent-color": "var(--accent-color-1)", ...style }}

@@ -1,21 +1,21 @@
 import { Fragment, useState } from "react";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
-import config from "@config/config";
-import { useThemeMode } from "@contexts/ThemeModeContext";
+import config from "@/config";
+import { useTheme } from "@/contexts/ThemeContext";
 
 import { DropdownBox, DropdownMenuItem } from "./Dropdown";
 
 const ThemeSwitcher = () => {
-  const { themeMode, nextThemeMode, cycleThemeMode } = useThemeMode();
+  const { theme, nextTheme, cycleTheme } = useTheme();
 
   return (
     <button
-      title={nextThemeMode}
+      title={nextTheme}
       className="cursor-pointer place-items-center rounded-full bg-(--global-text-color) p-3 text-(--global-background-color) transition-transform hover:rotate-245"
-      onClick={cycleThemeMode}
+      onClick={cycleTheme}
     >
-      {themeMode !== "light" ? (
+      {theme !== "light" ? (
         <SunIcon className="h-3 w-3" />
       ) : (
         <MoonIcon className="h-3 w-3" />
@@ -24,12 +24,14 @@ const ThemeSwitcher = () => {
   );
 };
 
+const { INITIAL_THEMES, THEMES } = config.UI;
+
 const ManualThemeSwitcher = ({
-  initialThemes = config.UI.ACTIVE_THEME_MODES,
-  themes = config.UI.THEME_MODES,
+  initialThemes = INITIAL_THEMES,
+  allThemes = THEMES,
   onChange = () => "",
 }) => {
-  const { themeMode: activeTheme, setThemeMode: setTheme } = useThemeMode();
+  const { theme: activeTheme, setTheme: setTheme } = useTheme();
   const [showAll, setShowAll] = useState(false);
 
   const handleThemeChange = (theme) => {
@@ -40,17 +42,26 @@ const ManualThemeSwitcher = ({
   const displayName = (str) =>
     str.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
-  const activeThemes = showAll ? themes : initialThemes;
-
   return (
     <DropdownBox>
-      {activeThemes.map(({ category, themes }) => (
-        <Fragment key={category}>
-          <span className="my-1 text-center text-xs italic opacity-50">
-            {category}
-          </span>
-
-          {themes.map((theme) => (
+      {showAll
+        ? allThemes.map(({ category, themes }) => (
+            <Fragment key={category}>
+              <span className="my-1 text-center text-xs italic opacity-50">
+                {category}
+              </span>
+              {themes.map((theme) => (
+                <DropdownMenuItem
+                  key={theme}
+                  active={activeTheme === theme}
+                  onClick={() => handleThemeChange(theme)}
+                >
+                  {displayName(theme)}
+                </DropdownMenuItem>
+              ))}
+            </Fragment>
+          ))
+        : initialThemes.map((theme) => (
             <DropdownMenuItem
               key={theme}
               active={activeTheme === theme}
@@ -59,8 +70,6 @@ const ManualThemeSwitcher = ({
               {displayName(theme)}
             </DropdownMenuItem>
           ))}
-        </Fragment>
-      ))}
 
       {!showAll && (
         <DropdownMenuItem onClick={() => setShowAll(true)}>

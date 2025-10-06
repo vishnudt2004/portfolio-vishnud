@@ -4,15 +4,15 @@ import {
 } from "@heroicons/react/24/solid";
 import { TrophyIcon } from "@heroicons/react/24/outline";
 
-import config from "@config/config";
-import { SimpleLayout } from "@components/elements/SectionLayouts";
+import config from "@/config";
+import { SimpleLayout } from "@/components/elements/SectionLayouts";
 import ShowcaseItem, {
   ShowcaseItemBtn,
-} from "@components/elements/ShowcaseItem";
-import ShowMoreData from "@components/elements/ShowMoreData";
+} from "@/components/elements/ShowcaseItem";
+import ShowMoreData from "@/components/elements/ShowMoreData";
 
-import achievement1 from "@assets/images/achievements-certificate/achievement-1.webp";
-import achievement2 from "@assets/images/achievements-certificate/achievement-2.webp";
+import achievement1 from "@/assets/images/achievements-certificate/achievement-1.webp";
+import achievement2 from "@/assets/images/achievements-certificate/achievement-2.webp";
 
 const AchievementItem = ({
   title,
@@ -65,7 +65,7 @@ const AchievementItem = ({
   />
 );
 
-const AchievementsCreator = ({ achievements }) => (
+const AchievementsSection = ({ achievements }) => (
   <SimpleLayout
     id={config.SECTION_IDS.ACHIEVEMENTS}
     sectionTitle="Achievements"
@@ -80,14 +80,14 @@ const AchievementsCreator = ({ achievements }) => (
   </SimpleLayout>
 );
 
-const Achievements = () => {
+const AchievementsView = () => {
   const achievements = [
     {
       title: "Portfolio Redesign",
       event: "Portfolio Update",
       date: "Sep 2025",
       description:
-        "Completely revamped personal portfolio with a cleaner UI, new sections (Certifications, Activities), reusable ShowcaseItem component, polished hero design with dotted background, real photo integration, and support for 22 unique themes. Improved overall consistency and user experience.",
+        "Completely revamped personal portfolio with a cleaner, more consistent UI and improved UX, including smooth transitions throughout. Added new sections (Certifications, Activities) with a consistent showcase design across sections and updated content. Refactored code for better maintainability and enhanced overall user experience.",
       credentials: [
         {
           name: "Explore this site",
@@ -130,7 +130,7 @@ const Achievements = () => {
     },
   ];
 
-  return <AchievementsCreator achievements={achievements} />;
+  return <AchievementsSection achievements={achievements} />;
 };
 
-export default Achievements;
+export default AchievementsView;

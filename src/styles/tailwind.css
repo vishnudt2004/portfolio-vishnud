@@ -67,27 +67,19 @@
 
 @utility secondary-scrollbar {
   &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    @apply size-[7px];
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--global-scrollbar-thumb-color);
-    border-radius: 10px;
+    @apply bg-transparent;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--global-scrollbar-track-color);
-    border: 1px solid var(--global-scrollbar-thumb-color);
-    border-radius: 10px;
+    @apply rounded-lg border-1 border-(--global-background-color) bg-[color-mix(in_srgb,_var(--global-text-color)_30%,_transparent)];
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: color-mix(
-      in srgb,
-      var(--global-scrollbar-track-color),
-      black 10%
-    );
+    @apply bg-[color-mix(in_srgb,_var(--global-text-color)_55%,_transparent)];
   }
 }
 

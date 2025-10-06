@@ -37,17 +37,20 @@ html::-webkit-scrollbar-thumb {
   user-select: none;
 }
 
+/* Smooth transition for theme changes */
 body,
 #header nav,
 #footer,
 #hero,
 #about,
-#proficiency,
+#proficiencies,
 #projects,
 #contact-form,
 #achievements,
+#certifications,
+#activities,
 #experience {
   transition:
     background-color 0.4s ease,
-    color 0.4s ease; /* Smooth transition for theme changes */
+    color 0.4s ease;
 }

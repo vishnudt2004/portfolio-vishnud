@@ -5,7 +5,7 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/solid";
 
-import Anchor from "@components/elements/Anchor";
+import Anchor from "./Anchor";
 
 const ShowMoreData = ({
   children,

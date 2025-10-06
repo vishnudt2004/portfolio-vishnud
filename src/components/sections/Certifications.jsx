@@ -1,22 +1,22 @@
 import { DocumentCheckIcon } from "@heroicons/react/24/solid";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 
-import config from "@config/config";
-import { SimpleLayout } from "@components/elements/SectionLayouts";
+import config from "@/config";
+import { SimpleLayout } from "@/components/elements/SectionLayouts";
 import ShowcaseItem, {
   ShowcaseItemBtn,
-} from "@components/elements/ShowcaseItem";
-import ShowMoreData from "@components/elements/ShowMoreData";
+} from "@/components/elements/ShowcaseItem";
+import ShowMoreData from "@/components/elements/ShowMoreData";
 
-import vercelIcon from "@assets/images/icons/vercel.svg";
-import hrIcon from "@assets/images/icons/hackerrank.svg";
-import fccIcon from "@assets/images/icons/fcc.svg";
-import certificate1 from "@assets/images/certifications-certificates/certificate-1.webp";
-import certificate2 from "@assets/images/certifications-certificates/certificate-2.webp";
-import certificate3_react from "@assets/images/certifications-certificates/certificate-3/react_basic-certificate.webp";
-import certificate3_js from "@assets/images/certifications-certificates/certificate-3/javascript_basic-certificate.webp";
-import certificate3_css from "@assets/images/certifications-certificates/certificate-3/css-certificate.webp";
-import certificate4 from "@assets/images/certifications-certificates/certificate-4.png";
+import vercelIcon from "@/assets/images/icons/vercel.svg";
+import hrIcon from "@/assets/images/icons/hackerrank.svg";
+import fccIcon from "@/assets/images/icons/fcc.svg";
+import certificate1 from "@/assets/images/certifications-certificates/certificate-1.webp";
+import certificate2 from "@/assets/images/certifications-certificates/certificate-2.webp";
+import certificate3_react from "@/assets/images/certifications-certificates/certificate-3/react_basic-certificate.webp";
+import certificate3_js from "@/assets/images/certifications-certificates/certificate-3/javascript_basic-certificate.webp";
+import certificate3_css from "@/assets/images/certifications-certificates/certificate-3/css-certificate.webp";
+import certificate4 from "@/assets/images/certifications-certificates/certificate-4.png";
 
 const CertificateItem = ({
   title,
@@ -61,7 +61,7 @@ const CertificateItem = ({
   />
 );
 
-const CertificationsCreator = ({ certificates }) => (
+const CertificationsSection = ({ certificates }) => (
   <SimpleLayout
     id={config.SECTION_IDS.CERTIFICATIONS}
     sectionTitle="Certifications"
@@ -76,7 +76,7 @@ const CertificationsCreator = ({ certificates }) => (
   </SimpleLayout>
 );
 
-const Certifications = () => {
+const CertificationsView = () => {
   const certificates = [
     {
       title: "Responsive Web Design",
@@ -191,7 +191,7 @@ const Certifications = () => {
     },
   ];
 
-  return <CertificationsCreator certificates={certificates} />;
+  return <CertificationsSection certificates={certificates} />;
 };
 
-export default Certifications;
+export default CertificationsView;

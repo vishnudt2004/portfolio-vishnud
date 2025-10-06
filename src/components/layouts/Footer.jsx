@@ -9,15 +9,17 @@ import {
   SiGmail,
 } from "@icons-pack/react-simple-icons";
 
-import config from "@config/config";
-import { scrollIntoSection } from "@utils/jsUtils";
-import Tooltip from "@components/elements/Tooltip";
-import { LinkedinIcon } from "@components/elements/CustomIcons";
+import config from "@/config";
+import { scrollIntoSection } from "@/utils/jsUtils";
+import Tooltip from "@/components/elements/Tooltip";
+import { LinkedinIcon } from "@/components/elements/CustomIcons";
+
+const { LAYOUT_IDS, FOOTER_QUICK_LINKS } = config;
 
 const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
   return (
     <footer
-      id={config.SECTION_IDS.FOOTER}
+      id={LAYOUT_IDS.FOOTER}
       className="fancy-bg-2 relative min-h-[50vh] border-t border-(--global-border-color) p-6 text-(--global-text-color)"
     >
       <div className="mx-auto mb-[40px] grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
@@ -50,13 +52,13 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
           </h2>
           <ul className="mt-2 w-fit columns-2 space-y-2 pt-4 pl-3">
             {quickLinks.map((qLink) => (
-              <li key={qLink}>
+              <li key={qLink.id}>
                 <a
                   href="#"
                   className="hover:underline"
-                  onClick={(e) => scrollIntoSection(e, qLink)}
+                  onClick={(e) => scrollIntoSection(e, qLink.id)}
                 >
-                  {qLink.charAt(0).toUpperCase() + qLink.substring(1)}
+                  {qLink.name}
                 </a>
               </li>
             ))}
@@ -100,7 +102,7 @@ const Footer = () => {
     // Phone: "tel:+91936350XXXX",
   ];
 
-  const quickLinks = config.FOOTER_QUICK_LINKS;
+  const quickLinks = FOOTER_QUICK_LINKS;
 
   const cpyText = (
     <>&copy; {new Date().getFullYear()} Vishnu D. All Rights Reserved.</>

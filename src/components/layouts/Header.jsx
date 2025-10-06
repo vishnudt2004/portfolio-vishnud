@@ -9,20 +9,20 @@ import {
   SparklesIcon,
 } from "@heroicons/react/24/solid";
 
-import config from "@config/config";
+import config from "@/config";
 import {
   scrollIntoSection,
   setHTMLOverflowY,
   addArtificialDelay,
-} from "@utils/jsUtils";
-import useScrollDirection from "@hooks/useScrollDirection";
-import useClickOutside from "@hooks/useClickOutside";
+} from "@/utils/jsUtils";
+import useScrollDirection from "@/hooks/useScrollDirection";
+import useClickOutside from "@/hooks/useClickOutside";
 import {
   NavbarDropdownAnimatePresence,
   NavbarMenusMotion,
   NavbarBrandMotion,
-} from "@components/elements/Animations";
-import { ManualThemeSwitcher } from "@components/elements/ThemeSwitcher";
+} from "@/components/elements/Animations";
+import { ManualThemeSwitcher } from "@/components/elements/ThemeSwitcher";
 
 const ThemeButton = ({ onChange }) => {
   const [visible, setVisible] = useState(false);
@@ -52,7 +52,7 @@ const ThemeButton = ({ onChange }) => {
       </button>
 
       <NavbarDropdownAnimatePresence dropDownVisible={visible}>
-        <div className="absolute top-13 right-0 z-(--navbar-dropdown-z-index) m-auto w-35 text-sm">
+        <div className="absolute top-13 right-0 z-(--navbar-dropdown-z-index) m-auto w-40 text-sm">
           <ManualThemeSwitcher onChange={handleOnChange} />
         </div>
       </NavbarDropdownAnimatePresence>
@@ -155,10 +155,7 @@ const Navbar = ({
                   onClick={(e) => {
                     e.preventDefault();
                     addArtificialDelay(() => {
-                      scrollIntoSection(
-                        e,
-                        config.SECTION_IDS[id.toUpperCase()],
-                      );
+                      scrollIntoSection(e, id);
                       toggleNavbar();
                     });
                   }}
@@ -215,6 +212,8 @@ const NavBrand = ({ children, ...attr }) => (
   </div>
 );
 
+const { LAYOUT_IDS, SECTION_IDS } = config;
+
 const Header = () => {
   const brand = (
     <NavBrand onClick={(e) => scrollIntoSection(e, "hero")}>PORTFOLIO</NavBrand>
@@ -224,12 +223,12 @@ const Header = () => {
     {
       name: "About",
       icon: { el: UserIcon, props: { className: "size-3.5" } },
-      id: "ABOUT",
+      id: SECTION_IDS.ABOUT,
     },
     {
       name: "Projects",
       icon: { el: CubeIcon, props: { className: "size-3.5" } },
-      id: "PROJECTS",
+      id: SECTION_IDS.PROJECTS,
     },
     {
       name: "Contact",
@@ -237,12 +236,12 @@ const Header = () => {
         el: PhoneIcon,
         props: { className: "size-3.5" },
       },
-      id: "FOOTER",
+      id: LAYOUT_IDS.FOOTER,
     },
   ];
 
   return (
-    <header id={config.SECTION_IDS.HEADER}>
+    <header id={LAYOUT_IDS.HEADER}>
       <Navbar brand={brand} menus={menus} />
     </header>
   );

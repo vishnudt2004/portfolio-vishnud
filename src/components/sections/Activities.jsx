@@ -1,16 +1,16 @@
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
 
-import config from "@config/config";
-import Anchor from "@components/elements/Anchor";
-import { SimpleLayout } from "@components/elements/SectionLayouts";
-import ShowcaseItem from "@components/elements/ShowcaseItem";
+import config from "@/config";
+import Anchor from "@/components/elements/Anchor";
+import { SimpleLayout } from "@/components/elements/SectionLayouts";
+import ShowcaseItem from "@/components/elements/ShowcaseItem";
 import ShowMoreData, {
   ExploreMoreLink,
-} from "@components/elements/ShowMoreData";
-import { LinkedinIcon } from "@components/elements/CustomIcons";
+} from "@/components/elements/ShowMoreData";
+import { LinkedinIcon } from "@/components/elements/CustomIcons";
 
-import linkedInIcon from "@assets/images/icons/linkedin.svg";
+import linkedInIcon from "@/assets/images/icons/linkedin.svg";
 
 const ActivityItem = ({ title, platform, date, description, links, logo }) => (
   <ShowcaseItem
@@ -52,7 +52,7 @@ const ActivityItem = ({ title, platform, date, description, links, logo }) => (
   />
 );
 
-const ActivitiesCreator = ({ activities, linkedinActivities }) => (
+const ActivitiesSection = ({ activities, linkedinActivities }) => (
   <SimpleLayout id={config.SECTION_IDS.ACTIVITIES} sectionTitle="Activities">
     <ShowMoreData items={activities}>
       {(visibleItems) =>
@@ -74,7 +74,7 @@ const ActivitiesCreator = ({ activities, linkedinActivities }) => (
   </SimpleLayout>
 );
 
-const Activities = () => {
+const ActivitiesView = () => {
   const activities = [
     {
       title: "SDLC Explained Creatively",
@@ -157,11 +157,11 @@ const Activities = () => {
   ];
 
   return (
-    <ActivitiesCreator
+    <ActivitiesSection
       activities={activities}
       linkedinActivities="https://www.linkedin.com/in/vishnu-dt/recent-activity/all/"
     />
   );
 };
 
-export default Activities;
+export default ActivitiesView;

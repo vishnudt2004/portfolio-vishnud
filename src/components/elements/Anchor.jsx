@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 
-import { addArtificialDelay } from "@utils/jsUtils";
+import { addArtificialDelay } from "@/utils/jsUtils";
 
 const AnchorIcon = () => (
   <span className="relative inline-flex shrink-0 overflow-hidden">
