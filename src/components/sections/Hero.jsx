@@ -53,6 +53,15 @@ const BgOverlay = ({ size, ref: motionRef }) => (
   </div>
 );
 
+const HeroStatus = ({ status: { color, msg } }) => {
+  return msg ? (
+    <div className="flex items-center gap-2 rounded-full bg-(--global-background-color)/75 px-3 py-1 text-xs">
+      <span className={`size-2 rounded-full ${color}`} />
+      <span>{msg}</span>
+    </div>
+  ) : null;
+};
+
 const HeroSection = ({
   greeting,
   name,
@@ -60,6 +69,7 @@ const HeroSection = ({
   email,
   techIcons,
   bgOverlaySize = 16,
+  status,
 }) => {
   return (
     <div
@@ -74,11 +84,11 @@ const HeroSection = ({
         <div className="hero-main">
           <HeroFgMotion>
             <div className="flex flex-col flex-wrap items-center justify-center gap-7 text-center tracking-wider text-(--global-text-color)">
-              <h1 className="flex gap-3 text-2xl">
-                <span className="inline-block transition-transform duration-400 hover:scale-105 hover:-rotate-2">
+              <h1 className="flex gap-2 text-2xl">
+                <span className="inline-block transition-all duration-400 hover:tracking-wider">
                   <span className="font-semibold">{greeting}</span>
                   <HeroHighlighter className="ml-1">~ {name}</HeroHighlighter>.
-                </span>{" "}
+                </span>
                 <Tooltip
                   content={
                     <>
@@ -99,6 +109,8 @@ const HeroSection = ({
               </h1>
 
               <p className="max-w-[700px] px-3 text-[18px]">{tagline}</p>
+
+              <HeroStatus status={status} />
             </div>
           </HeroFgMotion>
         </div>
@@ -107,12 +119,13 @@ const HeroSection = ({
       <div className="flex flex-wrap justify-center gap-2">
         {techIcons.map(({ name, icon }) => (
           <Tooltip key={name} content={name}>
-            {createElement(icon, {
-              className:
-                "size-12 rounded-full bg-white p-2 border border-(--global-border-color)/50",
-              color: "default",
-              title: null,
-            })}
+            <span className="inline-block size-12 rounded-full border border-(--global-border-color)/50 bg-white/10 p-2">
+              {createElement(icon, {
+                className: "size-full",
+                color: "default",
+                title: null,
+              })}
+            </span>
           </Tooltip>
         ))}
       </div>
@@ -122,6 +135,13 @@ const HeroSection = ({
   );
 };
 
+const NextjsIcon = (props) => (
+  <span className="relative inline-block size-full">
+    <SiNextdotjs {...props} />
+    <span className="absolute inset-0 -z-1 m-auto size-[90%] rounded-full bg-white" />
+  </span>
+);
+
 const HeroView = () => (
   <HeroSection
     greeting="Hello, I'm"
@@ -130,8 +150,12 @@ const HeroView = () => (
     email="vishnu.d.t.2004@gmail.com"
     techIcons={[
       { name: "React.js", icon: SiReact },
-      { name: "Next.js", icon: SiNextdotjs },
+      {
+        name: "Next.js",
+        icon: NextjsIcon,
+      },
     ]}
+    status={{ color: "bg-green-500", msg: "Open to Collaborations" }}
   />
 );
 

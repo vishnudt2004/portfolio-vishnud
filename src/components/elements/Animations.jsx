@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
+import { useTheme } from "@/contexts/ThemeContext";
+
 // Categorization of animations:
 // Base motion wrapper – for global use
 // Predefined animations – for component-specific use
@@ -60,26 +62,33 @@ const MotionOnScroll = ({ children, ...rest }) => {
 
 // Predefined animations – for component-specific use
 
-const HeroBgOverlayMotion = ({ children }) => (
-  <MotionWrapper
-    initial={{ scale: 0.5, opacity: 0 }}
-    animate={{
-      scale: 1,
-      opacity: 0.7,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 10,
-        mass: 1.2,
-        delay: 0.6,
-      },
-    }}
-  >
-    {children}
-  </MotionWrapper>
-);
+const HeroBgOverlayMotion = ({ children }) => {
+  const { theme } = useTheme();
 
-const HeroFgMotion = ({ children, delay = 0.85 }) => (
+  return (
+    <AnimatePresence mode="wait">
+      <MotionWrapper
+        key={theme}
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{
+          scale: 1,
+          opacity: 0.7,
+          transition: {
+            type: "spring",
+            stiffness: 200,
+            damping: 10,
+            mass: 1.2,
+            delay: 0.6,
+          },
+        }}
+      >
+        {children}
+      </MotionWrapper>
+    </AnimatePresence>
+  );
+};
+
+const HeroFgMotion = ({ children, delay = 0.9 }) => (
   <MotionWrapper
     initial={{ opacity: 0 }}
     animate={{
