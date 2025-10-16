@@ -40,7 +40,7 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
         className="aspect-video object-cover grayscale-60 transition-all duration-300 group-hover:grayscale-0"
       />
       <div className="flex grow flex-col gap-2 p-4 sm:p-5">
-        <h3 className="text-lg font-bold sm:text-xl">{title}</h3>
+        <span className="text-lg font-semibold sm:text-xl">{title}</span>
         <p className="any-pointer-fine:secondary-scrollbar h-20 overflow-y-auto text-sm text-(--global-secondary-text-color)">
           {descr}
         </p>

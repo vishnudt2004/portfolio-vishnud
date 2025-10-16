@@ -31,7 +31,6 @@
 
   @keyframes textAnim {
     to {
-      font-weight: bolder;
       color: var(--accent-color-1);
     }
   }

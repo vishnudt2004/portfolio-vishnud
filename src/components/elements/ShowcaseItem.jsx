@@ -18,7 +18,7 @@ const ShowcaseItem = ({
   return (
     <div
       className={twMerge(
-        "relative flex w-full max-w-lg flex-col gap-1 border border-(--global-border-color)/50 p-5 transition-all hover:border-(--accent-color)",
+        "fancy-bg-1 relative flex w-full max-w-lg flex-col gap-1 border border-(--global-border-color)/50 p-5 transition-all hover:border-(--accent-color)",
         className,
       )}
       style={{ "--accent-color": "var(--accent-color-1)", ...style }}
@@ -44,7 +44,7 @@ const ShowcaseItem = ({
           })
         )}
         <div>
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <span className="text-lg font-semibold">{title}</span>
           <p className="text-sm font-semibold text-(--global-secondary-text-color)">
             <span className="mr-2">{subtitle}</span>
             <span className="mt-1 inline-block rounded-full bg-[color-mix(in_srgb,var(--accent-color),var(--global-background-color)_50%)] px-2 py-0.5 text-xs font-medium text-[color-mix(in_srgb,var(--accent-color),var(--global-text-color)_70%)]">

@@ -22,7 +22,10 @@ import {
   NavbarMenusMotion,
   NavbarBrandMotion,
 } from "@/components/elements/Animations";
-import { ManualThemeSwitcher } from "@/components/elements/ThemeSwitcher";
+import {
+  ManualThemeSwitcher,
+  ThemeSwitcher,
+} from "@/components/elements/ThemeSwitcher";
 
 const ThemeButton = ({ onChange }) => {
   const [visible, setVisible] = useState(false);
@@ -47,6 +50,7 @@ const ThemeButton = ({ onChange }) => {
       <button
         className="scale-90 cursor-pointer place-items-center rounded-full bg-(--global-text-color) p-3 text-(--global-background-color) transition-transform *:size-4 hover:scale-100 active:scale-90"
         onClick={handleVisibility}
+        aria-label="Toggle Themes Dropdown"
       >
         {!visible ? <PaintBrushIcon /> : <XMarkIcon />}
       </button>
@@ -149,8 +153,7 @@ const Navbar = ({
               delay={index * 0.2}
             >
               <li>
-                <a
-                  href="#"
+                <button
                   className="relative flex h-full cursor-pointer items-center gap-1 text-[14px] tracking-[2px] text-(--global-menus-color) duration-300 group-hover:not-hover:opacity-60 before:absolute before:bottom-1 before:m-auto before:h-[2px] before:w-0 before:bg-(--global-border-color) before:transition-all before:duration-500 hover:before:w-full max-sm:w-fit max-sm:before:-bottom-2"
                   onClick={(e) => {
                     e.preventDefault();
@@ -165,7 +168,7 @@ const Navbar = ({
                     ...props,
                     className: `${props?.className ? props?.className : ""} transition-all duration-500`,
                   })}
-                </a>
+                </button>
               </li>
             </NavbarMenusMotion>
           ))}
@@ -180,6 +183,7 @@ const Navbar = ({
         ref={(el) => (clickRefs.current[1] = el)}
         className="pointer-events-auto mt-7 ml-7 hidden h-fit w-fit cursor-pointer rounded-full border border-(--global-border-color) bg-(--global-background-color) p-2 shadow-md transition-all max-sm:inline-block"
         onClick={toggleNavbar}
+        aria-label="Toggle Navigation Menu"
       >
         {!navbarVisible ? (
           <Squares2X2Icon className="h-6 w-6" />
@@ -195,6 +199,7 @@ const NavBrand = ({ children, ...attr }) => (
   <div
     className="group relative z-0 mx-2 flex cursor-pointer overflow-hidden py-0.5 text-center text-[1.2rem] tracking-[2px] text-(--global-menus-color)"
     {...attr}
+    role="button"
   >
     <div>
       {children.split("").map((char, index) => (

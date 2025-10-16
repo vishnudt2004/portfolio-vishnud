@@ -41,7 +41,11 @@ const AchievementItem = ({
       (Array.isArray(credentials) ? (
         <div className="mt-auto flex flex-wrap gap-2">
           {credentials.map(({ name, credential }) => (
-            <ShowcaseItemBtn key={name} href={credential}>
+            <ShowcaseItemBtn
+              key={name}
+              href={credential}
+              aria-label="View Achievement Details"
+            >
               <InformationCircleIcon className="size-4" /> {name}
             </ShowcaseItemBtn>
           ))}
@@ -50,6 +54,7 @@ const AchievementItem = ({
         <ShowcaseItemBtn
           href={credentials}
           icon={<InformationCircleIcon className="size-4" />}
+          aria-label="View Achievement Details"
         >
           See Details
         </ShowcaseItemBtn>
@@ -83,11 +88,32 @@ const AchievementsSection = ({ achievements }) => (
 const AchievementsView = () => {
   const achievements = [
     {
+      title: "1st Place – Web Development Contest",
+      event: "Mirror 2K25, Intercollegiate Event",
+      location: "Erode Arts and Science College, Erode",
+      date: "Oct 2025",
+      description: (
+        <>
+          Developed a webpage in 1 hour using only{" "}
+          <span className="underline">HTML, CSS, and JavaScript</span>, with
+          internet access allowed only for images. Topic was chosen by drawing
+          lots, and I built it as part of a team of two. Competed among multiple
+          teams, secured 1st place, and won{" "}
+          <span className="highlight-primary rounded-md">₹ 1000</span> and a
+          medal.
+          <br />
+          <br />
+          <span className="italic">Topic was: Digital Literacy for all.</span>
+        </>
+      ),
+      credentials: [{ name: "Credential (Coming soon)" }],
+    },
+    {
       title: "Portfolio Redesign",
       event: "Portfolio Update",
       date: "Sep 2025",
       description:
-        "Completely revamped personal portfolio with a cleaner, more consistent UI and improved UX, including smooth transitions throughout. Added new sections (Certifications, Activities) with a consistent showcase design across sections and updated content. Refactored code for better maintainability and enhanced overall user experience.",
+        "Completely revamped personal portfolio with a cleaner, more consistent UI and improved UX, including smooth transitions multiple new themes, added sections (Certifications, Activities) with a consistent showcase design across sections and updated content. Refactored code for better maintainability and enhanced overall user experience.",
       credentials: [
         {
           name: "Explore this site",
@@ -111,10 +137,14 @@ const AchievementsView = () => {
       description: (
         <>
           Developed a webpage in 45 minutes using only the provided images, no
-          internet access. Chose one of two given topics and built it with{" "}
-          <span className="underline">HTML, CSS, and JavaScript</span> as a team
-          of two. Competed against ~25 teams, secured 1st place, and won{" "}
-          <span className="highlight-primary rounded-md">₹ 1000</span>.
+          internet access. Chose one of two given sets of images and built it
+          using <span className="underline">HTML, CSS, and JavaScript</span> as
+          a team of two. Competed among multiple teams, secured 1st place, and
+          won <span className="highlight-primary rounded-md">₹ 1000</span> and a
+          medal.
+          <br />
+          <br />
+          <span className="italic">Titled: Green Nature (Organization).</span>
         </>
       ),
       credentials: achievement1,

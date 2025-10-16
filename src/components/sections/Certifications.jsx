@@ -16,7 +16,7 @@ import certificate2 from "@/assets/images/certifications-certificates/certificat
 import certificate3_react from "@/assets/images/certifications-certificates/certificate-3/react_basic-certificate.webp";
 import certificate3_js from "@/assets/images/certifications-certificates/certificate-3/javascript_basic-certificate.webp";
 import certificate3_css from "@/assets/images/certifications-certificates/certificate-3/css-certificate.webp";
-import certificate4 from "@/assets/images/certifications-certificates/certificate-4.png";
+import certificate4 from "@/assets/images/certifications-certificates/certificate-4.webp";
 
 const CertificateItem = ({
   title,
@@ -40,6 +40,7 @@ const CertificateItem = ({
               key={name}
               href={credential}
               icon={<DocumentCheckIcon className="size-4" />}
+              aria-label="View Certification Credential"
             >
               {name}
             </ShowcaseItemBtn>
@@ -49,6 +50,7 @@ const CertificateItem = ({
         <ShowcaseItemBtn
           href={credentials}
           icon={<DocumentCheckIcon className="size-4" />}
+          aria-label="View Certification Credential"
         >
           View Credential
         </ShowcaseItemBtn>

@@ -1,3 +1,4 @@
+import { isValidElement } from "react";
 import * as RTt from "@radix-ui/react-tooltip";
 import * as RPo from "@radix-ui/react-popover";
 import { twMerge } from "tailwind-merge";
@@ -12,7 +13,11 @@ const HybridTooltip = ({ content, children, className, ...props }) => {
     return (
       <RPo.Root>
         <RPo.Trigger asChild>
-          <span>{children}</span>
+          {isValidElement(children) ? (
+            children
+          ) : (
+            <span role="button">{children}</span>
+          )}
         </RPo.Trigger>
         <RPo.Portal>
           <RPo.Content

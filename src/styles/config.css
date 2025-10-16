@@ -1,10 +1,5 @@
-@font-face {
-  font-family: "Poppins";
-  src: url("../assets/fonts/Poppins-Regular.ttf") format("truetype");
-}
-
 :root {
-  --global-font-family: "Poppins", serif;
+  --global-font-family: "Poppins", sans-serif;
 
   --global-anchor-color: var(--color-blue-500); /* Link */
   --global-anchor-decoration-color: color-mix(

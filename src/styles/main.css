@@ -1,3 +1,4 @@
+@import "./externals.css";
 @import "./tailwind.css";
 @import "./config.css";
 @import "./themes.css";
@@ -53,4 +54,8 @@ body,
   transition:
     background-color 0.4s ease,
     color 0.4s ease;
+}
+
+b {
+  font-weight: 600;
 }

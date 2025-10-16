@@ -35,7 +35,7 @@ const TwoColumnsLayout = ({
 }) => (
   <div
     id={id}
-    className="flex flex-col items-center justify-center gap-10 px-5 py-10"
+    className="m-auto flex max-w-6xl flex-col items-center justify-center gap-10 px-5 py-10"
   >
     {sectionTitle && <h1 className="section-title">{sectionTitle}</h1>}
 

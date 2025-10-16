@@ -84,7 +84,7 @@ const HeroSection = ({
         <div className="hero-main">
           <HeroFgMotion>
             <div className="flex flex-col flex-wrap items-center justify-center gap-7 text-center tracking-wider text-(--global-text-color)">
-              <h1 className="flex gap-2 text-2xl">
+              <h1 className="flex gap-2 text-xl sm:text-2xl">
                 <span className="inline-block transition-all duration-400 hover:tracking-wider">
                   <span className="font-semibold">{greeting}</span>
                   <HeroHighlighter className="ml-1">~ {name}</HeroHighlighter>.
@@ -102,13 +102,14 @@ const HeroSection = ({
                   <a
                     href={`mailto:${email}`}
                     className="hover:*:animate-fadeIn inline-grid place-items-center rounded-full border-2 p-1.5"
+                    aria-label="Mail me"
                   >
                     <ChatBubbleOvalLeftEllipsisIcon className="size-4.5" />
                   </a>
                 </Tooltip>
               </h1>
 
-              <p className="max-w-[700px] px-3 text-[18px]">{tagline}</p>
+              <p className="max-w-[700px] px-3">{tagline}</p>
 
               <HeroStatus status={status} />
             </div>
@@ -119,7 +120,7 @@ const HeroSection = ({
       <div className="flex flex-wrap justify-center gap-2">
         {techIcons.map(({ name, icon }) => (
           <Tooltip key={name} content={name}>
-            <span className="inline-block size-12 rounded-full border border-(--global-border-color)/50 bg-white/10 p-2">
+            <span className="inline-block size-12 rounded-full border border-(--global-border-color)/50 bg-white/10 p-2 backdrop-blur-xl">
               {createElement(icon, {
                 className: "size-full",
                 color: "default",

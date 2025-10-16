@@ -269,14 +269,14 @@ html.theme-one-dark-pro {
   --global-text-color: #c5cedd;
   --global-secondary-text-color: #72baf5;
   --global-border-color: #3e4451;
-  --global-menus-color: #eabdf5;
+  --global-menus-color: #e06c75;
   --global-primary-highlight-color: #d47af0;
-  --global-secondary-highlight-color: #d87093;
+  --global-secondary-highlight-color: #b87088;
   --input-color: #3e4451;
 
   --accent-color-1: #61afef;
-  --gradient-1: linear-gradient(160deg, #61afef, #c678dd, #e06c75);
-  --gradient-2: linear-gradient(73deg, #a38eff, #c678dd, #e06c75);
+  --gradient-1: linear-gradient(45deg, #61afef, #c678dd, #e06c75);
+  --gradient-2: linear-gradient(70deg, #eabdf5, #c678dd, #e06c75);
 }
 
 html.theme-dracula {

@@ -1,4 +1,4 @@
-import { Fragment, createElement } from "react";
+import { createElement } from "react";
 import {
   GlobeAltIcon,
   DeviceTabletIcon,
@@ -57,46 +57,49 @@ const ProficienciesSection = ({
     cols={{
       col1: () => (
         <div className="fancy-bg-1 flex flex-col items-center gap-10 p-4">
-          <h1 className="flex items-center justify-center gap-2 text-center text-xl font-bold tracking-wider">
+          <h2 className="flex items-center justify-center gap-2 text-center text-xl font-semibold tracking-wider">
             Skill Sets
             <Tooltip content="Hover on a skill to see its icon">
               <InformationCircleIcon className="size-5 cursor-help text-sm" />
             </Tooltip>
-          </h1>
+          </h2>
 
           <ul className="flex flex-wrap gap-x-1 gap-y-2">
             {skills.map(({ category, skills }) => (
-              <Fragment key={category}>
-                <h5 className="my-3 w-full font-bold">{category}</h5>
-                {skills.map(({ name, icon = undefined }) => (
-                  <li
-                    key={name}
-                    className="highlight-secondary group relative flex! list-none items-center justify-center rounded-full text-sm"
-                  >
-                    {name}{" "}
-                    {icon && (
-                      <span className="transition-center absolute inset-0 -top-10 m-auto size-0 rounded-full border border-(--global-border-color) bg-white p-2 text-black opacity-0 transition-all group-hover:size-10 group-hover:opacity-100">
-                        {createElement(icon, {
-                          className: "size-full",
-                          color: "default",
-                        })}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </Fragment>
+              <li key={category} className="flex flex-col gap-y-2">
+                <span className="my-3 font-semibold">{category}</span>
+
+                <ul className="flex flex-wrap gap-x-1 gap-y-2">
+                  {skills.map(({ name, icon = undefined }) => (
+                    <li
+                      key={name}
+                      className="highlight-secondary group relative flex! list-none items-center justify-center rounded-full text-sm"
+                    >
+                      {name}{" "}
+                      {icon && (
+                        <span className="transition-center absolute inset-0 -top-10 m-auto size-0 rounded-full border border-(--global-border-color) bg-white p-2 text-black opacity-0 transition-all group-hover:size-10 group-hover:opacity-100">
+                          {createElement(icon, {
+                            className: "size-full",
+                            color: "default",
+                          })}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </li>
             ))}
           </ul>
         </div>
       ),
       col2: () => (
         <div className="flex flex-col items-center gap-5 p-1">
-          <h1 className="mb-5 flex items-center justify-center gap-2 text-center text-xl font-bold tracking-wider">
+          <h2 className="mb-5 flex items-center justify-center gap-2 text-center text-xl font-semibold tracking-wider">
             Tech Stack
             <Tooltip content="Hover on icon to see name">
               <InformationCircleIcon className="size-5 cursor-help text-sm" />
             </Tooltip>
-          </h1>
+          </h2>
           <div className="flex flex-wrap items-center justify-center gap-2 max-sm:scale-90">
             {techStack.techStackIcons.map(({ name, icon }) => (
               <Tooltip key={name} content={name} sideOffset={-6}>
@@ -128,7 +131,9 @@ const ProficienciesView = () => {
         { name: "SASS", icon: SiSass },
         {
           name: "EJS",
-          icon: () => <span className="font-bold text-yellow-500">&lt;%</span>,
+          icon: () => (
+            <span className="font-semibold text-yellow-500">&lt;%</span>
+          ),
         },
         { name: "Tailwind CSS", icon: SiTailwindcss },
         { name: "Bootstrap", icon: SiBootstrap },

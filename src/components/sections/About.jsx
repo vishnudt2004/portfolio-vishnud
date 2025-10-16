@@ -14,7 +14,7 @@ import {
   DuotonePluginIcon,
 } from "@/components/elements/CustomIcons";
 
-import profileImg from "@/assets/images/profile-image/vishnud.jpg";
+import profileImg from "@/assets/images/profile-image/vishnud.webp";
 
 const AboutSection = ({
   title = "About Me",
@@ -66,13 +66,13 @@ const Highlighter = ({ type = "primary", children, ...attr }) => (
 );
 
 const Underline = ({ children }) => (
-  <span className="underline decoration-2 underline-offset-4">{children}</span>
+  <span className="underline underline-offset-4">{children}</span>
 );
 
 const MoreAboutSubTitle = ({ children }) => (
-  <h1 className="mb-4 font-bold tracking-wider text-(--global-text-color) underline underline-offset-4">
+  <h2 className="mb-4 font-semibold tracking-wider text-(--global-text-color)">
     {children}
-  </h1>
+  </h2>
 );
 
 const AboutView = () => {
@@ -101,24 +101,28 @@ const AboutView = () => {
             name: "GitHub",
             link: "https://github.com/vishnudt2004",
             icon: <SiGithub title={null} className="scale-110" />,
+            ariaLabel: "GitHub Profile",
           },
           {
             name: "LinkedIn",
             link: "https://www.linkedin.com/in/vishnu-dt",
             icon: <LinkedinIcon title={null} className="scale-120" />,
+            ariaLabel: "LinkedIn Profile",
           },
           {
             name: "Email",
             link: "mailto:vishnu.d.t.2004@gmail.com",
             icon: <SiGmail title={null} color="default" className="scale-95" />,
+            ariaLabel: "Mail Me",
           },
-        ].map(({ name, link, icon }) => (
+        ].map(({ name, link, icon, ariaLabel }) => (
           <li key={name}>
             <Tooltip content={name}>
               <a
                 href={link}
                 target="_blank"
                 className="inline-flex size-11 items-center justify-center rounded-full border-1 border-(--global-border-color) bg-(--global-background-color) p-2.5 text-(--global-text-color) transition-all duration-400 hover:bg-(--global-text-color) hover:text-(--global-background-color)"
+                aria-label={ariaLabel}
               >
                 {icon}
               </a>
@@ -259,10 +263,12 @@ const AboutView = () => {
               },
             ].map(({ tip, icon }, i) => (
               <Tooltip key={i} content={tip}>
-                {createElement(icon, {
-                  className:
-                    "size-22 p-6 [--color-1:var(--global-text-color)]! [--color-2:var(--accent-color-1)]! max-sm:size-20 hover:animate-fadeIn transition hover:-translate-y-1",
-                })}
+                <span>
+                  {createElement(icon, {
+                    className:
+                      "size-22 p-6 [--color-1:var(--global-text-color)]! [--color-2:var(--accent-color-1)]! max-sm:size-20 hover:animate-fadeIn transition hover:-translate-y-1",
+                  })}
+                </span>
               </Tooltip>
             ))}
           </div>

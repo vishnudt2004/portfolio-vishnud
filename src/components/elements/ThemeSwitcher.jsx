@@ -14,6 +14,7 @@ const ThemeSwitcher = () => {
       title={nextTheme}
       className="cursor-pointer place-items-center rounded-full bg-(--global-text-color) p-3 text-(--global-background-color) transition-transform hover:rotate-245"
       onClick={cycleTheme}
+      aria-label="Toggle Dark Mode"
     >
       {theme !== "light" ? (
         <SunIcon className="h-3 w-3" />
