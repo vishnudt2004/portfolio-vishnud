@@ -14,7 +14,7 @@ import {
   DuotonePluginIcon,
 } from "@/components/elements/CustomIcons";
 
-import profileImg from "@/assets/images/profile-image/vishnud.webp";
+import personFallbackImg from "@/assets/images/placeholders/person.webp";
 
 const AboutSection = ({
   title = "About Me",
@@ -32,7 +32,7 @@ const AboutSection = ({
             <Img
               src={image}
               alt="Vishnu D"
-              fallbackSrc="/assets/images/placeholders/person.webp"
+              fallbackSrc={personFallbackImg}
               className="aspect-square size-[200px] rounded-full object-cover shadow-[0_0_0_5px_color-mix(in_srgb,var(--global-border-color),transparent_70%)] grayscale-50 transition-all duration-300 hover:grayscale-0"
               caption="Vishnu D"
             />
@@ -279,7 +279,7 @@ const AboutView = () => {
 
   return (
     <AboutSection
-      image={profileImg}
+      image="/images/vishnud.webp"
       aboutMe={aboutMe}
       moreAboutMe={moreAboutMe}
     />

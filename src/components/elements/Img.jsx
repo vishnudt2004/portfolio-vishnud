@@ -4,7 +4,15 @@ import { twMerge } from "tailwind-merge";
 
 import { ImageSquareXMarkIcon } from "./CustomIcons";
 
-const Img = ({ caption, src, fallback = "default", fallbackSrc, ...attr }) => {
+const Img = ({
+  caption,
+  src,
+  alt,
+  fallback = "default",
+  fallbackSrc,
+  fallbackAlt = "Fallback Image",
+  ...attr
+}) => {
   const [error, setError] = useState(false);
 
   if (error && !fallbackSrc) {
@@ -28,6 +36,7 @@ const Img = ({ caption, src, fallback = "default", fallbackSrc, ...attr }) => {
     <figure>
       <LazyLoadImage
         src={!error ? src : fallbackSrc}
+        alt={!error ? alt : fallbackAlt}
         {...attr}
         onError={() => setError(true)}
       />

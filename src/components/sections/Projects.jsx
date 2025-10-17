@@ -36,7 +36,7 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
     >
       <Img
         src={thumb}
-        alt={`${title} image`}
+        alt={`${title} Screenshot Image`}
         className="aspect-video object-cover grayscale-60 transition-all duration-300 group-hover:grayscale-0"
       />
       <div className="flex grow flex-col gap-2 p-4 sm:p-5">
@@ -119,7 +119,7 @@ const ProjectsView = () => {
       },
     },
     {
-      title: "My Portfolio (This Website)",
+      title: "Personal Portfolio (This Website)",
       descr:
         "A personal portfolio website showcasing my skills, projects, and more about my journey.",
       thumb: projectImage_portfolio,
