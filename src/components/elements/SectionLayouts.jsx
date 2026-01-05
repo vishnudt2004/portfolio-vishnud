@@ -3,6 +3,13 @@ import { twMerge } from "tailwind-merge";
 
 // Layout component names reflect their design on larger screens (desktop, tablet), but they may appear differently on smaller screens.
 
+const SectionTitle = ({ children }) => (
+  <h1 className="section-title relative self-center">
+    {children}
+    <span className="zig-zag-line absolute inset-x-0 -bottom-2 mx-auto w-[85%]" />
+  </h1>
+);
+
 const SimpleLayout = ({
   sectionTitle = "Section Title",
   main,
@@ -21,9 +28,7 @@ const SimpleLayout = ({
       className,
     )}
   >
-    {sectionTitle && (
-      <h1 className="section-title self-center">{sectionTitle}</h1>
-    )}
+    {sectionTitle && <SectionTitle>{sectionTitle}</SectionTitle>}
     <div>{main || children}</div>
   </div>
 );
@@ -37,7 +42,7 @@ const TwoColumnsLayout = ({
     id={id}
     className="m-auto flex max-w-6xl flex-col items-center justify-center gap-10 px-5 py-10"
   >
-    {sectionTitle && <h1 className="section-title">{sectionTitle}</h1>}
+    {sectionTitle && <SectionTitle>{sectionTitle}</SectionTitle>}
 
     <div className="mx-auto flex min-h-[50vh] w-full max-w-6xl flex-col gap-4 md:flex-row">
       {Object.values(cols).map((comp, ind) => (

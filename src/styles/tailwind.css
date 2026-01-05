@@ -1,10 +1,9 @@
 @import "tailwindcss";
 
 /* custom tailwind components */
-
 @layer components {
   .section-title {
-    @apply relative mb-4 text-center text-2xl tracking-wider before:absolute before:-bottom-1 before:left-1/2 before:-z-1 before:h-[1px] before:w-3/4 before:-translate-x-1/2 before:bg-(--global-border-color);
+    @apply mb-4 text-center text-2xl tracking-wider text-(--global-text-color);
   }
 
   .highlight-primary {
@@ -17,6 +16,26 @@
 
   .anchor {
     @apply relative inline-flex items-center text-[var(--anchor-color,var(--global-anchor-color))] before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-[var(--anchor-decoration-color,_var(--global-anchor-decoration-color))] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[var(--anchor-decoration-color_hover,_var(--global-anchor-decoration-color_hover))] after:transition-all hover:after:w-full;
+  }
+
+  .zig-zag-line {
+    --a: 90deg; /* control the angle */
+    --s: 10px; /* size of the zig-zag */
+    --b: 1px; /* control the thickness */
+
+    background: color-mix(in srgb, var(--global-text-color), transparent 40%);
+    height: calc(var(--b) + var(--s) / (2 * tan(var(--a) / 2)));
+    width: 100%;
+    --_g: var(--s) repeat-x
+      conic-gradient(
+        from calc(var(--a) / -2) at bottom,
+        #0000,
+        #000 1deg calc(var(--a) - 1deg),
+        #0000 var(--a)
+      );
+    mask:
+      50% calc(-1 * var(--b)) / var(--_g) exclude,
+      50% / var(--_g);
   }
 }
 

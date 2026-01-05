@@ -1,0 +1,65 @@
+@media (prefers-reduced-motion: reduce) {
+  /* Disable cursor motion & effects */
+  .cursor-ring {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Disable hover-based cursor effects */
+  body:has([class^="cursor-effect-"]:hover) .cursor-ring {
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+  }
+}
+
+body {
+  .cursor-ring,
+  .cursor-dot {
+    transition:
+      width 0.2s,
+      height 0.2s,
+      background 0.3s,
+      box-shadow 0.2s,
+      opacity 0.2s;
+  }
+
+  &:has(.cursor-effect-grow:hover, a:hover, button:hover) {
+    .cursor-ring {
+      --cursor-ring-size: 50px;
+      width: var(--cursor-ring-size);
+      height: var(--cursor-ring-size);
+    }
+
+    .cursor-dot {
+      box-shadow: 0 0 20px 5px var(--accent-color-1);
+    }
+  }
+
+  .cursor-effect-fadeout {
+    cursor: none;
+  }
+
+  &:has(.cursor-effect-fadeout:hover) {
+    .cursor-ring,
+    .cursor-dot {
+      opacity: 0;
+    }
+  }
+
+  &:has(.cursor-effect-subtle:hover):not(
+      :has(.cursor-effect-grow:hover, a:hover, button:hover)
+    ) {
+    .cursor-ring {
+      opacity: 0;
+    }
+
+    .cursor-dot {
+      opacity: 0.3;
+      width: 15px;
+      height: 15px;
+      background: var(--accent-color-1);
+    }
+  }
+}

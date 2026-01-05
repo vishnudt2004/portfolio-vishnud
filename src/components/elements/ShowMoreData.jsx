@@ -31,7 +31,7 @@ const ShowMoreData = ({
       {items.length > 0 ? (
         <div
           className={twMerge(
-            "grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 lg:grid-cols-3",
+            "cursor-effect-subtle group/smd grid grid-cols-1 justify-items-center gap-5 *:group-hover/smd:not-hover:opacity-75 sm:grid-cols-2 lg:grid-cols-3",
             props?.className ?? "",
           )}
           {...props}

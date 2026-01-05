@@ -62,6 +62,22 @@ const HeroStatus = ({ status: { color, msg } }) => {
   ) : null;
 };
 
+const HeroCta = ({ email }) => (
+  <div className="flex -translate-x-1 flex-col items-center gap-2">
+    <a
+      href={`mailto:${email}`}
+      className="hover:*:first:animate-fadeIn relative inline-grid place-items-center rounded-full border-2 p-1.5 opacity-85 duration-300 group-hover:scale-110 group-hover:opacity-100"
+      aria-label="Mail me"
+    >
+      <ChatBubbleOvalLeftEllipsisIcon className="size-4.5" />
+    </a>
+    <span className="inline-flex items-center gap-1.5 text-xs text-nowrap opacity-0 duration-300 group-hover:opacity-100">
+      <span>Say Hi!</span>
+      <HandRaisedIcon className="inline size-3.5 -translate-0.5 -rotate-20" />
+    </span>
+  </div>
+);
+
 const HeroSection = ({
   greeting,
   name,
@@ -84,29 +100,12 @@ const HeroSection = ({
         <div className="hero-main">
           <HeroFgMotion>
             <div className="flex flex-col flex-wrap items-center justify-center gap-7 text-center tracking-wider text-(--global-text-color)">
-              <h1 className="flex gap-2 text-xl sm:text-2xl">
+              <h1 className="flex text-xl sm:text-2xl">
                 <span className="inline-block transition-all duration-400 hover:tracking-wider">
                   <span className="font-semibold">{greeting}</span>
                   <HeroHighlighter className="ml-1">~ {name}</HeroHighlighter>.
                 </span>
-                <Tooltip
-                  content={
-                    <>
-                      Say Hello!
-                      <HandRaisedIcon className="ml-1.5 inline size-4 -translate-0.5 -rotate-20" />
-                    </>
-                  }
-                  side="top"
-                  sideOffset={8}
-                >
-                  <a
-                    href={`mailto:${email}`}
-                    className="hover:*:animate-fadeIn inline-grid place-items-center rounded-full border-2 p-1.5"
-                    aria-label="Mail me"
-                  >
-                    <ChatBubbleOvalLeftEllipsisIcon className="size-4.5" />
-                  </a>
-                </Tooltip>
+                <HeroCta email={email} />
               </h1>
 
               <p className="max-w-[700px] px-3">{tagline}</p>

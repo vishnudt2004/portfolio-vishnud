@@ -28,6 +28,7 @@
   /* Component-specific variables */
   --navbar-z-index: 1;
   --navbar-dropdown-z-index: 1;
+  --fullscreen-toggle-z-index: 1;
 
   /* Boiler-plate for Theme-specific variables */
   /* --global-background-color: ;

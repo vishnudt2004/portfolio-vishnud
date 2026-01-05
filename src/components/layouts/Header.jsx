@@ -1,4 +1,5 @@
 import { useState, createElement, useEffect, useRef } from "react";
+import { twMerge } from "tailwind-merge";
 import {
   CubeIcon,
   PhoneIcon,
@@ -119,23 +120,21 @@ const Navbar = ({
 
   return (
     <section
-      className={
-        "pointer-events-none fixed inset-x-0 z-(--navbar-z-index) flex w-dvw transition-all duration-500 max-sm:h-dvh " +
-        `${
-          !isSmallScreen
-            ? navbarVisible
-              ? "top-0"
-              : "-top-[calc(80px+1px)]"
-            : navbarVisible
-              ? "left-0"
-              : "-left-[calc(250px+1px)]"
-        } ` +
-        `${navbarVisible ? "backdrop-blur-xs" : ""}`
-      }
+      className={twMerge(
+        "pointer-events-none fixed inset-x-0 z-(--navbar-z-index) flex w-dvw transition-all duration-500 max-sm:h-dvh",
+        !isSmallScreen
+          ? navbarVisible
+            ? "top-0"
+            : "-top-[calc(80px+1px)]"
+          : navbarVisible
+            ? "left-0"
+            : "-left-[calc(250px+1px)]",
+        isSmallScreen && navbarVisible && "backdrop-blur-xs",
+      )}
     >
       <nav
         ref={(el) => (clickRefs.current[0] = el)}
-        className="pointer-events-auto flex w-full items-center justify-between border-b border-(--global-border-color) bg-(--global-background-color) px-5 py-3 max-sm:h-full max-sm:w-[250px] max-sm:flex-col max-sm:items-center max-sm:justify-start max-sm:gap-10 max-sm:border-r max-sm:border-b-0 max-sm:py-10"
+        className="pointer-events-auto flex w-full items-center justify-between border-b border-(--global-border-color)/25 bg-(--global-background-color) px-5 py-3 max-sm:h-full max-sm:w-[250px] max-sm:flex-col max-sm:items-center max-sm:justify-start max-sm:gap-10 max-sm:border-r max-sm:border-b-0 max-sm:py-10"
       >
         <NavbarBrandMotion
           screen={isSmallScreen ? "small" : "large"}
@@ -197,7 +196,7 @@ const Navbar = ({
 
 const NavBrand = ({ children, ...attr }) => (
   <div
-    className="group relative z-0 mx-2 flex cursor-pointer overflow-hidden py-0.5 text-center text-[1.2rem] tracking-[2px] text-(--global-menus-color)"
+    className="cursor-effect-fadeout group relative z-0 mx-2 flex cursor-pointer overflow-hidden py-0.5 text-center text-[1.2rem] tracking-[2px] text-(--global-menus-color)"
     {...attr}
     role="button"
   >

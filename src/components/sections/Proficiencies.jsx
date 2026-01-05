@@ -1,4 +1,5 @@
 import { createElement } from "react";
+import { twMerge } from "tailwind-merge";
 import {
   GlobeAltIcon,
   DeviceTabletIcon,
@@ -64,20 +65,25 @@ const ProficienciesSection = ({
             </Tooltip>
           </h2>
 
-          <ul className="flex flex-wrap gap-x-1 gap-y-2">
+          <ul className="group/list flex flex-wrap gap-y-2">
             {skills.map(({ category, skills }) => (
-              <li key={category} className="flex flex-col gap-y-2">
+              <li
+                key={category}
+                className="flex flex-col gap-y-1 group-hover/list:not-hover:[&>span]:opacity-50"
+              >
                 <span className="my-3 font-semibold">{category}</span>
 
                 <ul className="flex flex-wrap gap-x-1 gap-y-2">
                   {skills.map(({ name, icon = undefined }) => (
                     <li
                       key={name}
-                      className="highlight-secondary group relative flex! list-none items-center justify-center rounded-full text-sm"
+                      className={twMerge(
+                        "cursor-effect-subtle highlight-secondary group/item relative flex! list-none items-center justify-center rounded-full text-sm group-hover/list:not-hover:opacity-75",
+                      )}
                     >
                       {name}{" "}
                       {icon && (
-                        <span className="transition-center absolute inset-0 -top-10 m-auto size-0 rounded-full border border-(--global-border-color) bg-white p-2 text-black opacity-0 transition-all group-hover:size-10 group-hover:opacity-100">
+                        <span className="transition-center absolute inset-0 -top-17 m-auto size-0 overflow-hidden rounded-full border border-(--global-border-color) bg-white text-black opacity-100 transition-all group-hover/item:size-10 group-hover/item:p-2 group-hover/item:opacity-100">
                           {createElement(icon, {
                             className: "size-full",
                             color: "default",
@@ -100,12 +106,13 @@ const ProficienciesSection = ({
               <InformationCircleIcon className="size-5 cursor-help text-sm" />
             </Tooltip>
           </h2>
-          <div className="flex flex-wrap items-center justify-center gap-2 max-sm:scale-90">
+          <div className="group flex flex-wrap items-center justify-center gap-2 max-sm:scale-90">
             {techStack.techStackIcons.map(({ name, icon }) => (
-              <Tooltip key={name} content={name} sideOffset={-6}>
+              <Tooltip key={name} content={name}>
                 {createElement(icon, {
-                  className:
-                    "mb-2 size-15 rounded-full border-1 border-(--global-border-color)/50 bg-[#fafafa] p-4",
+                  className: twMerge(
+                    "mb-2 size-15 rounded-full border-1 border-(--global-border-color)/50 bg-white/15 p-4 group-hover:not-hover:opacity-60 transition-opacity hover:bg-white/25",
+                  ),
                   color: "default",
                   title: null,
                 })}
@@ -126,28 +133,28 @@ const ProficienciesView = () => {
       skills: [
         { name: "HTML", icon: SiHtml5 },
         { name: "CSS", icon: SiCss3 },
-        { name: "JavaScript", icon: SiJavascript },
-        { name: "TypeScript (intermediate)", icon: SiTypescript },
         { name: "SASS", icon: SiSass },
+        { name: "JavaScript", icon: SiJavascript },
+        { name: "TypeScript", icon: SiTypescript },
+        { name: "Tailwind CSS", icon: SiTailwindcss },
+        { name: "Bootstrap", icon: SiBootstrap },
+        { name: "jQuery", icon: SiJquery },
         {
           name: "EJS",
           icon: () => (
             <span className="font-semibold text-yellow-500">&lt;%</span>
           ),
         },
-        { name: "Tailwind CSS", icon: SiTailwindcss },
-        { name: "Bootstrap", icon: SiBootstrap },
-        { name: "jQuery", icon: SiJquery },
         { name: "React.js", icon: SiReact },
+        { name: "Next.js", icon: SiNextdotjs },
+        { name: "Redux", icon: SiRedux },
+        { name: "Framer Motion", icon: MotionIcon },
+        { name: "MDX", icon: SiMdx },
         { name: "Node.js", icon: SiNodedotjs },
         { name: "Express.js", icon: SiExpress },
         { name: "MongoDB", icon: SiMongodb },
-        { name: "Next.js", icon: SiNextdotjs },
         { name: "PostgreSQL", icon: SiPostgresql },
-        { name: "Prisma (beginner)", icon: SiPrisma },
-        { name: "Redux", icon: SiRedux },
-        { name: "MDX", icon: SiMdx },
-        { name: "Framer Motion", icon: MotionIcon },
+        { name: "Prisma", icon: SiPrisma },
       ],
     },
     {
@@ -210,7 +217,10 @@ const ProficienciesView = () => {
           href="https://nextjs.org/"
           className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
         >
-          Read more about <b className="mx-1">Next.js</b> development.
+          {/* Span wrapper prevents awkward text wrapping caused by flex layout */}
+          <span>
+            Read more about <b>Next.js</b> development.
+          </span>
         </Anchor>
       </div>
     ),

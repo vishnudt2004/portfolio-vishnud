@@ -5,18 +5,14 @@ export const useIsMobile = () => {
 
   useEffect(() => {
     // Check for a 'coarse' pointer, which indicates a touch device
-    const checkMobile = () => {
-      if (typeof window !== "undefined") {
-        return window.matchMedia("(pointer: coarse)").matches;
-      }
-      return false;
+    const check = () => {
+      if (typeof window === "undefined") return false;
+      return window.matchMedia("(hover: none) and (pointer: coarse)").matches;
     };
 
-    setIsMobile(checkMobile());
+    setIsMobile(check());
 
-    const handleResize = () => {
-      setIsMobile(checkMobile());
-    };
+    const handleResize = () => setIsMobile(check());
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

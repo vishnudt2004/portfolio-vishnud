@@ -18,12 +18,12 @@ const ShowcaseItem = ({
   return (
     <div
       className={twMerge(
-        "fancy-bg-1 relative flex w-full max-w-lg flex-col gap-1 border border-(--global-border-color)/50 p-5 transition-all hover:border-(--accent-color)",
+        "fancy-bg-1 relative z-0 flex w-full max-w-lg flex-col gap-1 border border-(--global-border-color)/50 bg-(--global-background-color) p-5 transition-all hover:border-(--accent-color)",
         className,
       )}
       style={{ "--accent-color": "var(--accent-color-1)", ...style }}
     >
-      <div className="absolute inset-0 -z-10 m-auto h-fit w-fit">
+      <div className="absolute inset-0 -z-1 m-auto h-fit w-fit">
         {bgOverlay}
       </div>
       <div className="mb-2 flex items-start gap-3 [&>*:first-child]:shrink-0">
