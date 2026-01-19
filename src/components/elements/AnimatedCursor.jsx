@@ -3,11 +3,56 @@ import { twMerge } from "tailwind-merge";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 
+const CURSOR_ACCENT_VAR = "--cursor-accent";
+const CURSOR_ACCENT_SCOPE_VAR = "--cursor-accent-scoped";
+
+const DEFAULT_CURSOR_ACCENT = "var(--accent-color-g)";
+
+function resolveCursorAccent(target) {
+  if (!target) return null;
+
+  const el = target.closest("[style], [data-cursor-accent]");
+  if (!el) return null;
+
+  return (
+    el.dataset.cursorAccent ||
+    getComputedStyle(el).getPropertyValue(CURSOR_ACCENT_SCOPE_VAR)?.trim()
+  );
+}
+
+export function useCursorAccentScope() {
+  useEffect(() => {
+    const handleMouseOver = (e) => {
+      const accent = resolveCursorAccent(e.target);
+      if (!accent) return;
+
+      document.body.style.setProperty(CURSOR_ACCENT_VAR, accent);
+    };
+
+    const handleMouseOut = (e) => {
+      const relatedAccent = resolveCursorAccent(e.relatedTarget);
+      if (relatedAccent) return;
+
+      document.body.style.setProperty(CURSOR_ACCENT_VAR, DEFAULT_CURSOR_ACCENT);
+    };
+
+    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseout", handleMouseOut);
+
+    return () => {
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
+    };
+  }, []);
+}
+
 export default function AnimatedCursor({ className }) {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
   const [hasMoved, setHasMoved] = useState(false);
   const isMobile = useIsMobile();
+
+  useCursorAccentScope();
 
   useEffect(() => {
     let x = window.innerWidth / 2;
@@ -25,12 +70,11 @@ export default function AnimatedCursor({ className }) {
       rx += (x - rx) * 0.12;
       ry += (y - ry) * 0.12;
 
-      if (dotRef.current) {
+      if (dotRef.current)
         dotRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      }
-      if (ringRef.current) {
+
+      if (ringRef.current)
         ringRef.current.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-      }
 
       requestAnimationFrame(loop);
     };
@@ -48,8 +92,9 @@ export default function AnimatedCursor({ className }) {
       {/* dot */}
       <div
         ref={dotRef}
+        aria-hidden="true"
         className={twMerge(
-          "cursor-dot pointer-events-none fixed top-0 left-0 z-999 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--global-text-color)",
+          "cursor-dot pointer-events-none fixed top-0 left-0 z-999 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--text-color-g)",
           !hasMoved && "opacity-0",
           className?.dot,
         )}
@@ -58,8 +103,9 @@ export default function AnimatedCursor({ className }) {
       {/* ring */}
       <div
         ref={ringRef}
+        aria-hidden="true"
         className={twMerge(
-          "cursor-ring pointer-events-none fixed top-0 left-0 z-998 size-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-(--global-text-color)",
+          "cursor-ring pointer-events-none fixed top-0 left-0 z-998 size-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-(--text-color-g)",
           !hasMoved && "opacity-0",
           className?.ring,
         )}

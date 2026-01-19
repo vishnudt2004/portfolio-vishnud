@@ -1,45 +1,46 @@
 :root {
-  --global-font-family: "Poppins", sans-serif;
+  /* -g = global */
 
-  --global-anchor-color: var(--color-blue-500); /* Link */
-  --global-anchor-decoration-color: color-mix(
+  --font-family-g: "Poppins", sans-serif;
+
+  --anchor-color-g: var(--color-blue-500);
+  --anchor-decoration-color-g: color-mix(
     in srgb,
-    var(--global-anchor-color),
+    var(--anchor-color-g),
     transparent 80%
-  ); /* Link decoration */
-  --global-anchor-decoration-color_hover: var(
-    --global-anchor-color
-  ); /* Link decoration - state: hover */
+  );
+  --anchor-decoration-color-g_hover: var(--anchor-color-g); /* a:hover */
 
-  --global-scrollbar-track-color: var(--global-background-color);
-  --global-scrollbar-thumb-color: var(--global-text-color);
+  --scrollbar-track-color-g: var(--background-color-g);
+  --scrollbar-thumb-color-g: var(--text-color-g);
 
-  --fancybg1-color: color-mix(
+  --fancy-bg-1-color: color-mix(
     in srgb,
-    var(--global-border-color),
+    var(--border-color-g),
     transparent 20%
   );
-  --fancybg2-color: color-mix(
+  --fancy-bg-2-color: color-mix(
     in srgb,
-    var(--global-border-color),
+    var(--border-color-g),
     transparent 80%
   );
 
-  /* Component-specific variables */
-  --navbar-z-index: 1;
-  --navbar-dropdown-z-index: 1;
-  --fullscreen-toggle-z-index: 1;
+  /* Z-index map */
+  --z-navbar: 3;
+  --z-dropdown: 3;
+  --z-overlay: 2;
+  --z-fullscreen-btn: 1;
 
-  /* Boiler-plate for Theme-specific variables */
-  /* --global-background-color: ;
-  --global-text-color: ;
-  --global-secondary-text-color: ;
-  --global-border-color: ;
-  --global-menus-color: ;
-  --global-primary-highlight-color: ;
-  --global-secondary-highlight-color: ;
+  /* Theme-dependent variables (themes.css) */
+  /* --background-color-g: ;
+  --text-color-g: ;
+  --text-secondary-color-g: ;
+  --border-color-g: ;
+  --menus-color-g: ;
+  --highlight-primary-color-g: ;
+  --highlight-secondary-color-g: ;
   --input-color: ; */
-  /* --accent-color-1:;
+  /* --accent-color-g:;
   --gradient-1: ;
   --gradient-2: ; */
 }

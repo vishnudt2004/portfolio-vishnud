@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "motion/react";
 
-const useScrollDirection = () => {
+export const useScrollDirection = () => {
   const hasScrolled = useRef(false);
 
   const { scrollY } = useScroll();
@@ -25,5 +25,3 @@ const useScrollDirection = () => {
 
   return scrollDirection;
 };
-
-export default useScrollDirection;

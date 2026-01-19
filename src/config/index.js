@@ -2,23 +2,16 @@ import { UI } from "./ui";
 import {
   LAYOUTS,
   SECTIONS,
-  ENABLED_SECTIONS,
-  FOOTER_QUICK_LINKS,
-  LAYOUT_IDS,
-  SECTION_IDS,
-} from "./sections";
+  ACTIVE_SECTIONS,
+  IDS_MAP,
+} from "./structure";
 
 const config = {
   UI,
   LAYOUTS,
   SECTIONS,
-  ENABLED_SECTIONS,
-  FOOTER_QUICK_LINKS,
-  LAYOUT_IDS,
-  SECTION_IDS,
+  ACTIVE_SECTIONS,
+  IDS_MAP,
 };
 
-const derivedConfig = {};
-
 export default config;
-export { derivedConfig };

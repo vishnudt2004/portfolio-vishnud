@@ -1,37 +1,64 @@
-import { isValidElement } from "react";
-import * as RTt from "@radix-ui/react-tooltip";
-import * as RPo from "@radix-ui/react-popover";
+import { isValidElement, useState } from "react";
+import * as RadixTooltip from "@radix-ui/react-tooltip";
+import * as RadixPopover from "@radix-ui/react-popover";
 import { twMerge } from "tailwind-merge";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-const DesktopTooltip = ({ content, children, className, ...props }) => (
-  <RTt.Root>
-    <RTt.Trigger asChild>
-      {isValidElement(children) ? (
-        children
-      ) : (
-        <span role="button">{children}</span>
-      )}
-    </RTt.Trigger>
-    <RTt.Portal>
-      <RTt.Content
-        side="bottom"
-        align="center"
-        sideOffset={5}
-        avoidCollisions
-        collisionPadding={5}
-        className={twMerge(
-          "data-[state=instant-open]:animate-fadeIn data-[state=delayed-open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--global-background-color) px-2 py-0.5 text-sm whitespace-nowrap text-(--global-text-color) transition-opacity duration-200",
-          className,
-        )}
-        {...props}
+const DesktopTooltip = ({ content, children, className, ...props }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <RadixTooltip.Root
+      open={open}
+      onOpenChange={(next) => {
+        if (next === false) return;
+        setOpen(true);
+      }}
+    >
+      <RadixTooltip.Trigger
+        asChild
+        onMouseOver={() => {
+          setOpen(true);
+        }}
+        onMouseOut={() => {
+          setOpen(false);
+        }}
+        onFocus={() => {
+          setOpen(true);
+        }}
+        onBlur={() => {
+          setOpen(false);
+        }}
       >
-        {content}
-      </RTt.Content>
-    </RTt.Portal>
-  </RTt.Root>
-);
+        {isValidElement(children) ? (
+          children
+        ) : (
+          <span tabIndex={0}>{children}</span>
+        )}
+      </RadixTooltip.Trigger>
+      <RadixTooltip.Portal>
+        <RadixTooltip.Content
+          onEscapeKeyDown={(e) => {
+            e.preventDefault(), setOpen(false);
+          }}
+          side="bottom"
+          align="center"
+          sideOffset={6}
+          avoidCollisions
+          collisionPadding={5}
+          className={twMerge(
+            "data-[state=instant-open]:animate-fadeIn data-[state=delayed-open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--background-color-g) px-2 py-0.5 text-sm whitespace-nowrap text-(--text-color-g) transition-opacity duration-200",
+            className,
+          )}
+          {...props}
+        >
+          {content}
+        </RadixTooltip.Content>
+      </RadixTooltip.Portal>
+    </RadixTooltip.Root>
+  );
+};
 
 const MobileTooltip = ({ content, children, className, ...props }) => {
   const isMobile = useIsMobile();
@@ -39,31 +66,31 @@ const MobileTooltip = ({ content, children, className, ...props }) => {
   if (!isMobile) return children;
 
   return (
-    <RPo.Root>
-      <RPo.Trigger asChild>
+    <RadixPopover.Root>
+      <RadixPopover.Trigger asChild>
         {isValidElement(children) ? (
           children
         ) : (
-          <span role="button">{children}</span>
+          <span tabIndex={0}>{children}</span>
         )}
-      </RPo.Trigger>
-      <RPo.Portal>
-        <RPo.Content
+      </RadixPopover.Trigger>
+      <RadixPopover.Portal>
+        <RadixPopover.Content
           side="bottom"
           align="center"
-          sideOffset={5}
+          sideOffset={6}
           avoidCollisions
           collisionPadding={5}
           className={twMerge(
-            "data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--global-background-color) px-2 py-0.5 text-sm whitespace-nowrap text-(--global-text-color) outline-0 transition-opacity duration-200",
+            "data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--background-color-g) px-2 py-0.5 text-sm whitespace-nowrap text-(--text-color-g) outline-0 transition-opacity duration-200",
             className,
           )}
           {...props}
         >
           {content}
-        </RPo.Content>
-      </RPo.Portal>
-    </RPo.Root>
+        </RadixPopover.Content>
+      </RadixPopover.Portal>
+    </RadixPopover.Root>
   );
 };
 

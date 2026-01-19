@@ -53,77 +53,108 @@ const ProficienciesSection = ({
   },
 }) => (
   <TwoColumnsLayout
-    id={config.SECTION_IDS.PROFICIENCIES}
+    sectionId={config.IDS_MAP.PROFICIENCIES}
     sectionTitle="Proficiencies"
-    cols={{
-      col1: () => (
-        <div className="fancy-bg-1 flex flex-col items-center gap-10 p-4">
-          <h2 className="flex items-center justify-center gap-2 text-center text-xl font-semibold tracking-wider">
-            Skill Sets
-            <Tooltip content="Hover on a skill to see its icon">
-              <InformationCircleIcon className="size-5 cursor-help text-sm" />
-            </Tooltip>
-          </h2>
+    left={
+      <div className="fancy-bg-1 flex flex-col items-center gap-10 p-4">
+        <h3 className="flex items-center justify-center gap-2 text-center text-xl font-semibold tracking-wider">
+          Skill Sets
+          <Tooltip content="Skill icons appear on interaction">
+            <button
+              type="button"
+              aria-label="Section information"
+              className="cursor-effect-subtle cursor-help rounded-full text-sm"
+            >
+              <InformationCircleIcon aria-hidden="true" className="size-5" />
+            </button>
+          </Tooltip>
+        </h3>
 
-          <ul className="group/list flex flex-wrap gap-y-2">
-            {skills.map(({ category, skills }) => (
-              <li
-                key={category}
-                className="flex flex-col gap-y-1 group-hover/list:not-hover:[&>span]:opacity-50"
+        <ul className="group/list flex flex-wrap gap-y-2">
+          {skills.map(({ category, skills }) => (
+            <li
+              key={category}
+              className="flex flex-col gap-y-1 group-focus-within/list:not-focus-within:[&>h4]:opacity-50 group-hover/list:not-hover:not-focus-within:[&>h4]:opacity-50"
+            >
+              <h4 id={`cat-${category}`} className="my-3 font-semibold">
+                {category}
+              </h4>
+
+              <ul
+                aria-labelledby={`cat-${category}`}
+                className="flex flex-wrap gap-x-1 gap-y-2"
               >
-                <span className="my-3 font-semibold">{category}</span>
-
-                <ul className="flex flex-wrap gap-x-1 gap-y-2">
-                  {skills.map(({ name, icon = undefined }) => (
-                    <li
-                      key={name}
-                      className={twMerge(
-                        "cursor-effect-subtle highlight-secondary group/item relative flex! list-none items-center justify-center rounded-full text-sm group-hover/list:not-hover:opacity-75",
-                      )}
-                    >
-                      {name}{" "}
-                      {icon && (
-                        <span className="transition-center absolute inset-0 -top-17 m-auto size-0 overflow-hidden rounded-full border border-(--global-border-color) bg-white text-black opacity-100 transition-all group-hover/item:size-10 group-hover/item:p-2 group-hover/item:opacity-100">
-                          {createElement(icon, {
-                            className: "size-full",
-                            color: "default",
-                          })}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ),
-      col2: () => (
-        <div className="flex flex-col items-center gap-5 p-1">
-          <h2 className="mb-5 flex items-center justify-center gap-2 text-center text-xl font-semibold tracking-wider">
-            Tech Stack
-            <Tooltip content="Hover on icon to see name">
-              <InformationCircleIcon className="size-5 cursor-help text-sm" />
-            </Tooltip>
-          </h2>
-          <div className="group flex flex-wrap items-center justify-center gap-2 max-sm:scale-90">
-            {techStack.techStackIcons.map(({ name, icon }) => (
-              <Tooltip key={name} content={name}>
+                {skills.map(({ name, icon = undefined }) => (
+                  <li
+                    key={name}
+                    tabIndex={0}
+                    className={twMerge(
+                      "focus-reset cursor-effect-subtle highlight-secondary group/item relative flex! list-none items-center justify-center rounded-full text-sm group-focus-within/list:not-focus:opacity-75 group-hover/list:not-hover:not-focus:opacity-75 focus-visible:outline-none",
+                    )}
+                  >
+                    {name}{" "}
+                    {icon && (
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 -top-17 m-auto size-0 origin-center overflow-hidden rounded-full border border-(--border-color-g) bg-white text-black opacity-100 duration-150 group-hover/item:size-10 group-hover/item:p-2 group-hover/item:opacity-100 group-focus-visible/item:size-10 group-focus-visible/item:p-2 group-focus-visible/item:opacity-100"
+                      >
+                        {createElement(icon, {
+                          className: "size-full",
+                          color: "default",
+                        })}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    }
+    right={
+      <div className="flex flex-col items-center gap-5 p-1">
+        <h3 className="mb-5 flex items-center justify-center gap-2 text-center text-xl font-semibold tracking-wider">
+          Tech Stack
+          <Tooltip content="Icon names appear on interaction">
+            <button
+              type="button"
+              aria-label="Section information"
+              className="cursor-effect-subtle cursor-help rounded-full text-sm"
+            >
+              <InformationCircleIcon aria-hidden="true" className="size-5" />
+            </button>
+          </Tooltip>
+        </h3>
+        <div className="group flex flex-wrap items-center justify-center gap-2 max-sm:scale-90">
+          {techStack.techStackIcons.map(({ name, icon }) => (
+            <Tooltip key={name} content={name}>
+              <button
+                type="button"
+                aria-label={name}
+                className="focus-reset cursor-effect-subtle inline-flex rounded-full transition-opacity group-hover:not-hover:not-focus:opacity-60 hover:bg-white/25 focus:bg-white/25 focus-visible:outline-none"
+              >
                 {createElement(icon, {
-                  className: twMerge(
-                    "mb-2 size-15 rounded-full border-1 border-(--global-border-color)/50 bg-white/15 p-4 group-hover:not-hover:opacity-60 transition-opacity hover:bg-white/25",
-                  ),
+                  "aria-hidden": true,
+                  className:
+                    "size-15 rounded-full border-1 border-(--border-color-g)/50 bg-white/15 p-4 ",
                   color: "default",
                   title: null,
                 })}
-              </Tooltip>
-            ))}
-          </div>
-          <div>{techStack.techStackDescription}</div>
+              </button>
+            </Tooltip>
+          ))}
         </div>
-      ),
-    }}
+        <div className="text-(--text-secondary-color-g)">
+          {techStack.techStackDescription}
+        </div>
+      </div>
+    }
   />
+);
+
+const S = (props) => (
+  <strong className="font-semibold text-(--text-color-g)" {...props} />
 );
 
 const ProficienciesView = () => {
@@ -202,24 +233,31 @@ const ProficienciesView = () => {
     ],
     techStackDescription: (
       <div className="flex flex-col gap-10 p-2 sm:p-4">
-        <div>
-          My main stack revolves around <b className="tracking-wider">React</b>{" "}
-          and <b className="tracking-wider">Next.js</b> for building modern,
-          performant UIs, supported by <b className="tracking-wider">Node.js</b>{" "}
-          (with <b className="tracking-wider">Express</b>) and{" "}
-          <b className="tracking-wider">MongoDB</b> on the backend. I also
-          explore tools and frameworks that improve <u>developer experience</u>,
-          like <b className="tracking-wider">TypeScript</b>,{" "}
-          <b className="tracking-wider">Prisma</b>, and{" "}
-          <b className="tracking-wider">TailwindCSS</b>.
+        <div className="flex flex-col gap-3">
+          <p>
+            My main stack revolves around <S>React</S> and <S>Next.js</S> for
+            building modern, performant UIs, supported by <S>Node.js</S> (with{" "}
+            <S>Express</S>) and <S>MongoDB</S> on the backend. I also explore
+            tools and frameworks that improve{" "}
+            <span className="underline underline-offset-2">
+              developer experience
+            </span>
+            , like <S>TypeScript</S>, <S>Prisma</S>, and <S>TailwindCSS</S>.
+          </p>
+
+          <p>
+            This stack allows me to build end-to-end applications — from UI and
+            state management to APIs, data modeling, and deployment.
+          </p>
         </div>
+
         <Anchor
           href="https://nextjs.org/"
           className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
         >
-          {/* Span wrapper prevents awkward text wrapping caused by flex layout */}
           <span>
-            Read more about <b>Next.js</b> development.
+            {/* prevents flex-related text wrapping issue */}
+            Read more about <strong>Next.js</strong> development.
           </span>
         </Anchor>
       </div>

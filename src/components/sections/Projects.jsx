@@ -1,7 +1,7 @@
+import { createElement } from "react";
 import { CloudIcon, GlobeAltIcon } from "@heroicons/react/24/solid";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 
-import config from "@/config";
 import Anchor from "@/components/elements/Anchor";
 import Img from "@/components/elements/Img";
 import ShowMoreData, {
@@ -22,45 +22,53 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
       docs: "var(--color-red-400)",
     },
     icon: {
-      repo: <CloudIcon className="inline-block size-4" />,
-      demo: <GlobeAltIcon className="inline-block size-4" />,
-      live: <GlobeAltIcon className="inline-block size-4" />,
-      docs: <GlobeAltIcon className="inline-block size-4" />,
+      repo: CloudIcon,
+      demo: GlobeAltIcon,
+      live: GlobeAltIcon,
+      docs: GlobeAltIcon,
     },
   };
 
   return (
     <div
       style={{ "--accent-color": "var(--color-purple-500)" }}
-      className="fancy-bg-2 group flex min-h-[470px] w-full max-w-lg flex-col overflow-hidden border border-(--global-border-color)/50 bg-(--global-background-color) transition-all hover:border-(--accent-color)"
+      className="fancy-bg-2 group flex min-h-[470px] w-full max-w-lg flex-col overflow-hidden rounded-3xl border border-(--border-color-g)/50 bg-(--background-color-g) transition focus-within:border-(--accent-color) hover:border-(--accent-color)"
     >
       <Img
         src={thumb}
-        alt={`${title} Screenshot Image`}
-        className="aspect-video object-cover grayscale-60 transition-all duration-300 group-hover:grayscale-0"
+        alt={`${title} Screenshot`}
+        className="aspect-video object-cover opacity-80 grayscale-60 duration-150 group-focus-within:opacity-100 group-focus-within:grayscale-0 group-hover:opacity-100 group-hover:grayscale-0"
       />
       <div className="flex grow flex-col gap-2 p-4 sm:p-5">
-        <span className="text-lg font-semibold sm:text-xl">{title}</span>
-        <p className="any-pointer-fine:secondary-scrollbar h-20 overflow-y-auto text-sm text-(--global-secondary-text-color)">
+        <h3 className="text-lg font-semibold sm:text-xl">{title}</h3>
+        <p className="any-pointer-fine:secondary-scrollbar h-20 overflow-y-auto text-sm text-(--text-secondary-color-g)">
           {descr}
         </p>
-        <div className="mb-2 flex flex-wrap gap-2 text-sm">
-          <span className="pt-1 leading-2 font-medium">Tech stack:</span>
+        <ul className="mb-2 flex flex-wrap gap-1.5 text-sm">
+          <li className="pt-1 leading-2 *:font-medium">
+            <strong>Tech stack:</strong>
+          </li>
           {techStack.map((tech, i) => (
-            <span
-              key={`tech-stack_${i}`}
-              className="bg-(--global-secondary-highlight-color) px-1.5 py-1 text-xs leading-2 text-(--global-text-color)"
+            <li
+              key={`tech-${i}`}
+              className="rounded-full bg-(--highlight-secondary-color-g) px-1.5 py-1 text-xs leading-2 text-(--text-color-g)"
             >
               {tech}
-            </span>
+            </li>
           ))}
-        </div>
-        <div className="mt-auto flex flex-wrap items-center gap-3 text-sm">
+        </ul>
+        <div
+          aria-label="Project links"
+          className="mt-auto flex flex-wrap items-center gap-3 text-sm"
+        >
           <span className="font-medium">Links:</span>
           {Object.entries(links).map(([type, link]) => (
             <Anchor key={type} color={linkProps.color[type]} href={link}>
               <span className="inline-flex! items-center justify-center gap-2">
-                {linkProps.icon[type]}
+                {createElement(linkProps.icon[type], {
+                  "aria-hidden": true,
+                  className: "inline-block size-4",
+                })}
                 {type.charAt(0).toUpperCase() + type.substring(1)}
               </span>
             </Anchor>
@@ -72,20 +80,25 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
 };
 
 const ProjectsSection = ({ projects, githubRepos }) => (
-  <SimpleLayout id={config.SECTION_IDS.PROJECTS} sectionTitle="Projects">
-    <ShowMoreData items={projects}>
+  <SimpleLayout sectionTitle="Projects">
+    <ShowMoreData
+      gridId="projects-grid"
+      items={projects}
+      style={{ "--cursor-accent-scoped": "var(--color-purple-500)" }}
+    >
       {(visibleItems) =>
-        visibleItems.map((project, ind) => (
-          <ProjectCard key={ind} {...project} />
+        visibleItems.map((project, i) => (
+          <ProjectCard key={`projItem$*-${i}`} {...project} />
         ))
       }
     </ShowMoreData>
 
     <ExploreMoreLink
+      aria-label="GitHub profile: vishnudt2004"
       text="Explore more projects on my GitHub"
       linkText={
         <span className="inline-flex items-center gap-1">
-          <SiGithub className="size-4.5" /> vishnudt2004
+          <SiGithub aria-hidden className="size-4.5" /> vishnudt2004
         </span>
       }
       href={githubRepos}

@@ -1,19 +1,18 @@
 import { twMerge } from "tailwind-merge";
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 
-import { addArtificialDelay } from "@/utils/jsUtils";
-
 const AnchorIcon = () => (
-  <span className="relative inline-flex shrink-0 overflow-hidden">
-    <ArrowUpRightIcon className="inline size-4 rounded-full group-[a:hover]:translate-x-4 group-[a:hover]:-translate-y-4 group-[a:hover]:duration-300" />
-    <ArrowUpRightIcon className="absolute right-4 -bottom-4 inline size-4 rounded-full group-[a:hover]:right-0 group-[a:hover]:bottom-0 group-[a:hover]:duration-300" />
+  <span className="relative inline-flex shrink-0 overflow-hidden *:group-[a:hover,a:focus-visible]:duration-300">
+    <ArrowUpRightIcon className="inline size-4 rounded-full group-[a:hover,a:focus-visible]:translate-x-4 group-[a:hover,a:focus-visible]:-translate-y-4" />
+    <ArrowUpRightIcon className="absolute right-4 -bottom-4 inline size-4 rounded-full group-[a:hover,a:focus-visible]:right-0 group-[a:hover,a:focus-visible]:bottom-0" />
   </span>
 );
 
 const Anchor = ({
   children,
-  color = "var(--global-anchor-color)",
+  color = "var(--anchor-color-g)",
   icon = <AnchorIcon />,
+  target,
   ...attr
 }) => {
   const style = {
@@ -24,18 +23,22 @@ const Anchor = ({
 
   return (
     <a
-      target="_blank"
+      target={target || "_blank"}
       rel="noopener noreferrer"
-      onClick={(e) => {
-        e.preventDefault();
-        const href = e.currentTarget.getAttribute("href");
-        if (href) addArtificialDelay(() => window.open(href, "_blank"));
-      }}
       {...attr}
       className={twMerge("group anchor", attr?.className)}
       style={style}
     >
-      {children}&nbsp;{icon && icon}
+      {children}
+      {target === "_blank" && (
+        <span className="sr-only">(opens in new tab)</span>
+      )}
+      &nbsp;
+      {icon && (
+        <span aria-hidden className="inline-flex">
+          {icon}
+        </span>
+      )}
     </a>
   );
 };

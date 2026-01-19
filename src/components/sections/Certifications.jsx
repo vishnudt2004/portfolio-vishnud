@@ -25,6 +25,7 @@ const CertificateItem = ({
   description,
   credentials,
   logo,
+  logoAlt,
 }) => (
   <ShowcaseItem
     title={title}
@@ -39,7 +40,7 @@ const CertificateItem = ({
             <ShowcaseItemBtn
               key={name}
               href={credential}
-              icon={<DocumentCheckIcon className="size-4" />}
+              icon={<DocumentCheckIcon aria-hidden className="size-4" />}
               aria-label="View Certification Credential"
             >
               {name}
@@ -49,7 +50,7 @@ const CertificateItem = ({
       ) : (
         <ShowcaseItemBtn
           href={credentials}
-          icon={<DocumentCheckIcon className="size-4" />}
+          icon={<DocumentCheckIcon aria-hidden className="size-4" />}
           aria-label="View Certification Credential"
         >
           View Credential
@@ -57,7 +58,8 @@ const CertificateItem = ({
       ))
     }
     logo={logo}
-    defaultLogo={CheckBadgeIcon}
+    logoAlt={logoAlt}
+    leadingIcon={CheckBadgeIcon}
     bgOverlay={<DocumentCheckIcon className="w-[120px] opacity-5" />}
     style={{ "--accent-color": "var(--color-green-500)" }}
   />
@@ -65,10 +67,14 @@ const CertificateItem = ({
 
 const CertificationsSection = ({ certificates }) => (
   <SimpleLayout
-    id={config.SECTION_IDS.CERTIFICATIONS}
+    sectionId={config.IDS_MAP.CERTIFICATIONS}
     sectionTitle="Certifications"
   >
-    <ShowMoreData items={certificates}>
+    <ShowMoreData
+      gridId="certifications-grid"
+      items={certificates}
+      style={{ "--cursor-accent-scoped": "var(--color-green-500)" }}
+    >
       {(visibleItems) =>
         visibleItems.map((certificate, ind) => (
           <CertificateItem key={ind} {...certificate} />
@@ -103,6 +109,7 @@ const CertificationsView = () => {
         },
       ],
       logo: fccIcon,
+      logoAlt: "freeCodeCamp Logo",
     },
     {
       title: "Frontend Developer (React)",
@@ -128,6 +135,7 @@ const CertificationsView = () => {
         },
       ],
       logo: hrIcon,
+      logoAlt: "HackerRank Logo",
     },
     {
       title: "Next.js App Router Fundamentals",
@@ -162,6 +170,7 @@ const CertificationsView = () => {
         },
       ],
       logo: vercelIcon,
+      logoAlt: "Vercel Logo",
     },
     {
       title: "HackerRank Basic Certificates",
@@ -190,6 +199,7 @@ const CertificationsView = () => {
         },
       ],
       logo: hrIcon,
+      logoAlt: "HackerRank Logo",
     },
   ];
 

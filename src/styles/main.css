@@ -15,9 +15,9 @@ body {
 }
 
 body {
-  background-color: var(--global-background-color);
-  color: var(--global-text-color);
-  font-family: var(--global-font-family);
+  background-color: var(--background-color-g);
+  color: var(--text-color-g);
+  font-family: var(--font-family-g);
   cursor: default;
 }
 
@@ -27,33 +27,26 @@ html::-webkit-scrollbar {
 }
 
 html::-webkit-scrollbar-track {
-  background: var(--global-scrollbar-track-color);
-  /* border-left: 1px solid var(--global-border-color); */
+  background: var(--scrollbar-track-color-g);
 }
 
 html::-webkit-scrollbar-thumb {
-  background: var(--global-scrollbar-thumb-color);
-  border: 3px solid var(--global-scrollbar-track-color);
+  background: var(--scrollbar-thumb-color-g);
+  border: 3px solid var(--scrollbar-track-color-g);
 }
 
-* {
+html::selection {
+  background-color: var(--text-color-g);
+  color: var(--background-color-g);
+}
+
+*:not(.focus-reset):focus-visible {
+  outline: 2px solid var(--text-color-g);
+  outline-offset: 4px;
+  transition: none;
+}
+
+button,
+a[role="button"] {
   user-select: none;
-}
-
-/* Smooth transition for theme changes */
-body,
-#header nav,
-#footer,
-#hero,
-#about,
-#proficiencies,
-#projects,
-#contact-form,
-#achievements,
-#certifications,
-#activities,
-#experience {
-  transition:
-    background-color 0.4s ease,
-    color 0.4s ease;
 }

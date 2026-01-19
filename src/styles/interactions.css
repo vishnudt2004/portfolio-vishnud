@@ -1,55 +1,65 @@
-@media (prefers-reduced-motion: reduce) {
-  /* Disable cursor motion & effects */
-  .cursor-ring {
-    transition: none !important;
-    animation: none !important;
-    transform: none !important;
-  }
+/* theme transition */
+body {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
 
-  /* Disable hover-based cursor effects */
-  body:has([class^="cursor-effect-"]:hover) .cursor-ring {
-    transform: none !important;
-    box-shadow: none !important;
-    opacity: 1 !important;
-  }
+/* animated cursor */
+
+body {
+  --cursor-accent: var(--accent-color-g);
+}
+
+.cursor-ring,
+.cursor-dot {
+  transition:
+    width 0.2s,
+    height 0.2s,
+    background 0.3s,
+    box-shadow 0.2s,
+    opacity 0.2s;
 }
 
 body {
-  .cursor-ring,
-  .cursor-dot {
-    transition:
-      width 0.2s,
-      height 0.2s,
-      background 0.3s,
-      box-shadow 0.2s,
-      opacity 0.2s;
-  }
-
-  &:has(.cursor-effect-grow:hover, a:hover, button:hover) {
+  &:has(
+      .cursor-effect-active:hover,
+      a:not(.cursor-effect-subtle):hover,
+      button:not(.cursor-effect-subtle):hover
+    ) {
     .cursor-ring {
-      --cursor-ring-size: 50px;
+      --cursor-ring-size: 45px;
       width: var(--cursor-ring-size);
       height: var(--cursor-ring-size);
     }
 
     .cursor-dot {
-      box-shadow: 0 0 20px 5px var(--accent-color-1);
+      box-shadow: 0 0 10px 2px var(--cursor-accent);
     }
   }
 
-  .cursor-effect-fadeout {
+  .cursor-effect-hidden {
     cursor: none;
   }
 
-  &:has(.cursor-effect-fadeout:hover) {
+  &:has(.cursor-effect-hidden:hover) {
     .cursor-ring,
     .cursor-dot {
       opacity: 0;
+      display: none;
+      transition:
+        opacity 0.3s,
+        display 0.3s allow-discrete;
     }
   }
 
-  &:has(.cursor-effect-subtle:hover):not(
-      :has(.cursor-effect-grow:hover, a:hover, button:hover)
+  &:has(.cursor-effect-subtle:hover)
+    *:not(
+      :has(
+        .cursor-effect-active:hover,
+        a:not(.cursor-effect-subtle):hover,
+        button:not(.cursor-effect-subtle):hover
+      )
     ) {
     .cursor-ring {
       opacity: 0;
@@ -57,9 +67,23 @@ body {
 
     .cursor-dot {
       opacity: 0.3;
-      width: 15px;
-      height: 15px;
-      background: var(--accent-color-1);
+      width: 12px;
+      height: 12px;
+      background: var(--cursor-accent);
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none;
+  }
+
+  /* Disable cursor motion & effects */
+  .cursor-ring,
+  .cursor-dot {
+    display: none;
   }
 }

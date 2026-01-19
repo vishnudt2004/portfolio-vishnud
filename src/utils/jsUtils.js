@@ -19,13 +19,4 @@ const setHTMLOverflowY = (condition) => {
   document.documentElement.style.overflowY = condition ? "hidden" : "auto";
 };
 
-function addArtificialDelay(action = () => {}, delay = 200) {
-  setTimeout(action, delay);
-}
-
-export {
-  scrollIntoTop,
-  scrollIntoSection,
-  setHTMLOverflowY,
-  addArtificialDelay,
-};
+export { scrollIntoTop, scrollIntoSection, setHTMLOverflowY };

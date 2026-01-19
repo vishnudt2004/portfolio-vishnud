@@ -12,7 +12,15 @@ import { LinkedinIcon } from "@/components/elements/CustomIcons";
 
 import linkedInIcon from "@/assets/images/icons/linkedin.svg";
 
-const ActivityItem = ({ title, platform, date, description, links, logo }) => (
+const ActivityItem = ({
+  title,
+  platform,
+  date,
+  description,
+  links,
+  logo,
+  logoAlt,
+}) => (
   <ShowcaseItem
     title={title}
     subtitle={platform}
@@ -44,7 +52,8 @@ const ActivityItem = ({ title, platform, date, description, links, logo }) => (
       ))
     }
     logo={logo}
-    defaultLogo={GlobeAltIcon}
+    logoAlt={logoAlt}
+    leadingIcon={GlobeAltIcon}
     bgOverlay={<ChatBubbleLeftRightIcon className="w-[120px] opacity-5" />}
     style={{
       "--accent-color": "var(--color-blue-500)",
@@ -53,8 +62,12 @@ const ActivityItem = ({ title, platform, date, description, links, logo }) => (
 );
 
 const ActivitiesSection = ({ activities, linkedinActivities }) => (
-  <SimpleLayout id={config.SECTION_IDS.ACTIVITIES} sectionTitle="Activities">
-    <ShowMoreData items={activities}>
+  <SimpleLayout sectionId={config.IDS_MAP.ACTIVITIES} sectionTitle="Activities">
+    <ShowMoreData
+      gridId="activities-grid"
+      items={activities}
+      style={{ "--cursor-accent-scoped": "var(--color-blue-500)" }}
+    >
       {(visibleItems) =>
         visibleItems.map((certificate, ind) => (
           <ActivityItem key={ind} {...certificate} />
@@ -63,10 +76,11 @@ const ActivitiesSection = ({ activities, linkedinActivities }) => (
     </ShowMoreData>
 
     <ExploreMoreLink
+      aria-label="LinkedIn profile: vishnudt2004"
       text="Explore more activities on my LinkedIn"
       linkText={
         <span className="inline-flex items-center gap-1">
-          <LinkedinIcon className="size-4.5" /> vishnu-dt
+          <LinkedinIcon aria-hidden className="size-4.5" /> vishnu-dt
         </span>
       }
       href={linkedinActivities}
@@ -85,6 +99,7 @@ const ActivitiesView = () => {
       links:
         "https://www.linkedin.com/posts/vishnu-dt_sdlc-softwaredevelopmentlifecycle-activity-7376627958553247744-5di0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEsLsUsBfZc9gFzsMKzBoCpNd0R3kL9RBFw",
       logo: linkedInIcon,
+      logoAlt: "LinkedIn Logo",
     },
     {
       title: "Terminology Series: React/Next.js (9 Parts)",
@@ -115,6 +130,7 @@ const ActivitiesView = () => {
         },
       ],
       logo: linkedInIcon,
+      logoAlt: "LinkedIn Logo",
     },
     {
       title: "10 Reasons Why I Love Next.js 💙",
@@ -133,6 +149,7 @@ const ActivitiesView = () => {
         },
       ],
       logo: linkedInIcon,
+      logoAlt: "LinkedIn Logo",
     },
     {
       title: "How I Learned Next.js Fundamentals",
@@ -143,6 +160,7 @@ const ActivitiesView = () => {
       links:
         "https://www.linkedin.com/pulse/how-i-learned-fundamentals-nextjs-app-router-project-based-vishnu-d-ifxdc",
       logo: linkedInIcon,
+      logoAlt: "LinkedIn Logo",
     },
     {
       title: "🎓 From Curious Kid to Web Dev",
@@ -153,6 +171,7 @@ const ActivitiesView = () => {
       links:
         "https://www.linkedin.com/posts/vishnu-dt_sharing-my-journey-so-far-as-a-computer-science-activity-7319366449842597888-yenx?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEsLsUsBfZc9gFzsMKzBoCpNd0R3kL9RBFw",
       logo: linkedInIcon,
+      logoAlt: "LinkedIn Logo",
     },
   ];
 

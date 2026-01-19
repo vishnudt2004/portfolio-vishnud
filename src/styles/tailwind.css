@@ -3,19 +3,19 @@
 /* custom tailwind components */
 @layer components {
   .section-title {
-    @apply mb-4 text-center text-2xl tracking-wider text-(--global-text-color);
+    @apply mb-4 text-center text-2xl tracking-wider text-(--text-color-g);
   }
 
   .highlight-primary {
-    @apply mx-0.5 inline-block bg-(--global-primary-highlight-color) px-2 text-(--global-background-color);
+    @apply mx-0.5 inline-block bg-(--highlight-primary-color-g) px-2 text-(--background-color-g);
   }
 
   .highlight-secondary {
-    @apply mx-0.5 inline-block bg-(--global-secondary-highlight-color) px-2 text-(--global-text-color);
+    @apply mx-0.5 inline-block bg-(--highlight-secondary-color-g) px-2 text-(--text-color-g);
   }
 
   .anchor {
-    @apply relative inline-flex items-center text-[var(--anchor-color,var(--global-anchor-color))] before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-[var(--anchor-decoration-color,_var(--global-anchor-decoration-color))] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[var(--anchor-decoration-color_hover,_var(--global-anchor-decoration-color_hover))] after:transition-all hover:after:w-full;
+    @apply relative inline-flex items-center text-[var(--anchor-color,var(--anchor-color-g))] before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-[var(--anchor-decoration-color,_var(--anchor-decoration-color-g))] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[var(--anchor-decoration-color_hover,_var(--anchor-decoration-color-g_hover))] after:duration-150 hover:after:w-full;
   }
 
   .zig-zag-line {
@@ -23,7 +23,7 @@
     --s: 10px; /* size of the zig-zag */
     --b: 1px; /* control the thickness */
 
-    background: color-mix(in srgb, var(--global-text-color), transparent 40%);
+    background: color-mix(in srgb, var(--text-color-g), transparent 40%);
     height: calc(var(--b) + var(--s) / (2 * tan(var(--a) / 2)));
     width: 100%;
     --_g: var(--s) repeat-x
@@ -50,7 +50,7 @@
 
   @keyframes textAnim {
     to {
-      color: var(--accent-color-1);
+      color: var(--accent-color-g);
     }
   }
 
@@ -76,11 +76,11 @@
 /* custom tailwind utilities */
 
 @utility fancy-bg-1 {
-  @apply bg-[radial-gradient(var(--fancybg1-color)_1px,transparent_1px)] bg-[length:16px_16px];
+  @apply bg-[radial-gradient(var(--fancy-bg-1-color)_1px,transparent_1px)] bg-[length:16px_16px];
 }
 
 @utility fancy-bg-2 {
-  @apply bg-[repeating-linear-gradient(45deg,var(--fancybg2-color)_0,var(--fancybg2-color)_1.5px,transparent_0,transparent_50%)] bg-[length:15px_15px];
+  @apply bg-[repeating-linear-gradient(45deg,var(--fancy-bg-2-color)_0,var(--fancy-bg-2-color)_1.5px,transparent_0,transparent_50%)] bg-[length:15px_15px];
 }
 
 @utility secondary-scrollbar {
@@ -93,11 +93,11 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    @apply rounded-lg border-1 border-(--global-background-color) bg-[color-mix(in_srgb,_var(--global-text-color)_30%,_transparent)];
+    @apply rounded-lg border-1 border-(--background-color-g) bg-[color-mix(in_srgb,_var(--text-color-g)_30%,_transparent)];
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    @apply bg-[color-mix(in_srgb,_var(--global-text-color)_55%,_transparent)];
+    @apply bg-[color-mix(in_srgb,_var(--text-color-g)_55%,_transparent)];
   }
 }
 

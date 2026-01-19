@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import {
   ArrowDownIcon,
@@ -8,6 +8,7 @@ import {
 import Anchor from "./Anchor";
 
 const ShowMoreData = ({
+  gridId,
   children,
   items = [],
   initialCount = 3,
@@ -18,20 +19,46 @@ const ShowMoreData = ({
   ...props
 }) => {
   const [visibleCount, setVisibleCount] = useState(initialCount);
+  const undGridId = useId();
 
-  const hasMore = !loadAll && visibleCount < items.length;
-  const visibleItems = loadAll ? items : items.slice(0, visibleCount);
+  const hasMore = visibleCount < items.length;
+  const visibleItems = items.slice(0, visibleCount);
+
+  const prevCountRef = useRef(initialCount);
+  const containerRef = useRef(null);
+
+  const getFocusable = (el) =>
+    el.querySelector(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    );
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const childrenEls = Array.from(containerRef.current.children);
+    const firstNewItem = childrenEls[prevCountRef.current];
+
+    const focusTarget = firstNewItem && getFocusable(firstNewItem);
+    focusTarget?.focus();
+
+    prevCountRef.current = visibleCount;
+  }, [visibleCount]);
 
   const handleShowMore = () => {
-    setVisibleCount((prev) => Math.min(prev + loadCount, items.length));
+    setVisibleCount((prev) =>
+      loadAll ? items.length : Math.min(prev + loadCount, items.length),
+    );
   };
 
   return (
-    <div>
+    <>
       {items.length > 0 ? (
         <div
+          ref={containerRef}
+          id={gridId ?? undGridId}
+          aria-live="polite"
           className={twMerge(
-            "cursor-effect-subtle group/smd grid grid-cols-1 justify-items-center gap-5 *:group-hover/smd:not-hover:opacity-75 sm:grid-cols-2 lg:grid-cols-3",
+            "cursor-effect-subtle group/smd grid grid-cols-1 justify-items-center gap-5 *:group-hover/smd:not-hover:not-focus-within:opacity-75 sm:grid-cols-2 lg:grid-cols-3",
             props?.className ?? "",
           )}
           {...props}
@@ -42,26 +69,22 @@ const ShowMoreData = ({
         noResultElement
       )}
 
-      {!loadAll && hasMore ? (
-        <div className="mt-4 flex justify-center">
+      <div className="mt-5 flex justify-center">
+        {hasMore ? (
           <button
+            aria-controls={gridId ?? undGridId}
             onClick={handleShowMore}
-            className="flex cursor-pointer items-center gap-1 bg-(--global-text-color) px-2.5 py-1 text-sm tracking-wide text-(--global-background-color) transition-opacity hover:opacity-80"
+            className="flex cursor-pointer items-center gap-1 rounded-full bg-(--text-color-g)/90 px-2.5 py-1 text-sm tracking-wide text-(--background-color-g) transition-colors hover:bg-(--text-color-g) focus:bg-(--text-color-g)"
           >
-            <ArrowDownIcon className="w-3.5 shrink-0" /> More...
+            <ArrowDownIcon aria-hidden className="w-3.5 shrink-0" /> More...
           </button>
-        </div>
-      ) : (
-        !loadAll &&
-        items.length > 0 && (
-          <div className="mt-5 flex justify-center">
-            {!(items.length <= initialCount) && (
-              <span>{endMessageElement}</span>
-            )}
-          </div>
-        )
-      )}
-    </div>
+        ) : (
+          !loadAll &&
+          items.length > 0 &&
+          !(items.length <= initialCount) && <span>{endMessageElement}</span>
+        )}
+      </div>
+    </>
   );
 };
 
@@ -80,8 +103,8 @@ const ExploreMoreLink = ({
   ...props
 }) => (
   <div className="mt-5 flex flex-wrap justify-center gap-2 text-center text-sm">
-    <span className="text-(--global-secondary-text-color)">{text}:</span>
-    <Anchor color="var(--global-text-color)" href={href} {...props}>
+    <span className="text-(--text-secondary-color-g)">{text}:</span>
+    <Anchor color="var(--text-color-g)" href={href} {...props}>
       {linkText}
     </Anchor>
   </div>

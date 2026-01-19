@@ -1,84 +1,116 @@
-import { Fragment, useState } from "react";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
+import { useEffect, useRef, useState } from "react";
+import { PaintBrushIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
 import config from "@/config";
 import { useTheme } from "@/contexts/ThemeContext";
-
-import { DropdownBox, DropdownMenuItem } from "./Dropdown";
-
-const ThemeSwitcher = () => {
-  const { theme, nextTheme, cycleTheme } = useTheme();
-
-  return (
-    <button
-      title={nextTheme}
-      className="cursor-pointer place-items-center rounded-full bg-(--global-text-color) p-3 text-(--global-background-color) transition-transform hover:rotate-245"
-      onClick={cycleTheme}
-      aria-label="Toggle Dark Mode"
-    >
-      {theme !== "light" ? (
-        <SunIcon className="h-3 w-3" />
-      ) : (
-        <MoonIcon className="h-3 w-3" />
-      )}
-    </button>
-  );
-};
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./Dropdown";
 
 const { INITIAL_THEMES, THEMES } = config.UI;
 
 const ManualThemeSwitcher = ({
   initialThemes = INITIAL_THEMES,
   allThemes = THEMES,
-  onChange = () => "",
+  onThemeChange,
+  onOpenChange,
+  containerRef,
 }) => {
   const { theme: activeTheme, setTheme: setTheme } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
+
+  const firstItemRef = useRef(null);
+
+  useEffect(() => {
+    if (!showAll) return;
+    if (document.activeElement === firstItemRef.current) return;
+    firstItemRef.current?.focus();
+  }, [showAll]);
 
   const handleThemeChange = (theme) => {
     setTheme(() => theme);
-    onChange();
+    onThemeChange && onThemeChange();
+  };
+
+  const handleShowMore = (e) => {
+    e.preventDefault();
+    setShowAll(true);
   };
 
   const displayName = (str) =>
     str.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
   return (
-    <DropdownBox>
-      {showAll
-        ? allThemes.map(({ category, themes }) => (
-            <Fragment key={category}>
-              <span className="my-1 text-center text-xs italic opacity-50">
-                {category}
-              </span>
-              {themes.map((theme) => (
+    <DropdownMenu
+      open={isOpen}
+      onOpenChange={() => (
+        setShowAll(false), setIsOpen((p) => !p), onOpenChange && onOpenChange()
+      )}
+    >
+      <DropdownMenuTrigger asChild>
+        <button
+          className="transition-scale scale-90 cursor-pointer place-items-center rounded-full bg-(--text-color-g) p-3 text-(--background-color-g) *:size-4 hover:scale-100 active:scale-90"
+          aria-label="Change theme"
+        >
+          {!isOpen ? (
+            <PaintBrushIcon aria-hidden="true" />
+          ) : (
+            <XMarkIcon aria-hidden="true" />
+          )}
+        </button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent
+        sideOffset={5}
+        isOpen={isOpen}
+        containerRef={containerRef}
+        onEscapeKeyDown={(e) => e.stopPropagation()}
+      >
+        {showAll ? (
+          allThemes.map(({ category, themes }, index) => (
+            <DropdownMenuGroup key={category}>
+              <DropdownMenuLabel>{category}</DropdownMenuLabel>
+
+              {themes.map((theme, i) => (
                 <DropdownMenuItem
                   key={theme}
+                  ref={index === 0 && i === 0 ? firstItemRef : undefined}
                   active={activeTheme === theme}
-                  onClick={() => handleThemeChange(theme)}
+                  onSelect={() => handleThemeChange(theme)}
                 >
                   {displayName(theme)}
                 </DropdownMenuItem>
               ))}
-            </Fragment>
-          ))
-        : initialThemes.map((theme) => (
-            <DropdownMenuItem
-              key={theme}
-              active={activeTheme === theme}
-              onClick={() => handleThemeChange(theme)}
-            >
-              {displayName(theme)}
-            </DropdownMenuItem>
-          ))}
 
-      {!showAll && (
-        <DropdownMenuItem onClick={() => setShowAll(true)}>
-          More…
-        </DropdownMenuItem>
-      )}
-    </DropdownBox>
+              {index !== allThemes.length - 1 && <DropdownMenuSeparator />}
+            </DropdownMenuGroup>
+          ))
+        ) : (
+          <>
+            {initialThemes.map((theme) => (
+              <DropdownMenuItem
+                key={theme}
+                active={activeTheme === theme}
+                onSelect={() => handleThemeChange(theme)}
+              >
+                {displayName(theme)}
+              </DropdownMenuItem>
+            ))}
+
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onSelect={handleShowMore}>More…</DropdownMenuItem>
+          </>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
-export { ThemeSwitcher, ManualThemeSwitcher };
+export default ManualThemeSwitcher;

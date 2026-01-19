@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useClickOutside = ({
+export const useClickOutside = ({
   refs, // Accepts a single ref or a ref containing an array of DOM references to detect inside clicks
   callback, // Function to run on outside click
   active = false, // Boolean or array of booleans. Activates listener only if true / all true.
@@ -35,5 +35,3 @@ const useClickOutside = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [refs, callback, active]);
 };
-
-export default useClickOutside;

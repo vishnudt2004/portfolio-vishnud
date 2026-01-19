@@ -1,112 +1,129 @@
-import { useMemo } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { cloneElement, Fragment, isValidElement } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import { useTheme } from "@/contexts/ThemeContext";
 
-// Categorization of animations:
-// Base motion wrapper – for global use
-// Predefined animations – for component-specific use
-// AnimatePresence wrappers – for component-specific use
-
-// Base motion wrappers – for global use
-
-const MotionWrapper = ({ as = "span", children, ...props }) => {
-  if (!children || Array.isArray(children)) {
-    throw new Error("MotionWrapper must have exactly one child element.");
+function Motion({ asChild = false, as, children, ...motionProps }) {
+  if (!children) {
+    throw new Error("Motion requires children.");
   }
 
-  // Precompute custom motion
-  const CustomMotion = useMemo(() => {
-    if (
-      children &&
-      typeof children.type !== "string" &&
-      typeof children !== "string"
-    ) {
-      return motion.create(children.type, { forwardMotionProps: true });
+  // asChild MODE
+
+  if (asChild) {
+    if (as) {
+      throw new Error("Motion: `asChild` and `as` cannot be used together.");
     }
-    return null;
-  }, [children]);
 
-  // Text node
-  if (typeof children === "string") {
-    const MotionComponent = motion[as];
-    return <MotionComponent {...props}>{children}</MotionComponent>;
+    if (!isValidElement(children)) {
+      throw new Error("Motion asChild requires a single React element.");
+    }
+
+    if (children.type === Fragment) {
+      throw new Error("Motion cannot animate React.Fragment.");
+    }
+
+    return cloneElement(children, {
+      ...motionProps,
+      ...children.props,
+    });
   }
 
-  // HTML tag
-  if (typeof children.type === "string") {
-    const MotionComponent = motion[children.type];
-    return <MotionComponent {...children.props} {...props} />;
+  // as PROP MODE
+
+  if (as) {
+    if (typeof as !== "string") {
+      throw new Error("Motion `as` must be a valid HTML tag.");
+    }
+
+    const MotionElement = motion[as];
+
+    return <MotionElement {...motionProps}>{children}</MotionElement>;
   }
 
-  // Custom React component
-  if (CustomMotion) {
-    return <CustomMotion {...children.props} {...props} />;
+  // DEFAULT / WRAPPER MODE
+
+  if (!isValidElement(children)) {
+    // Must be exactly ONE valid HTML element
+    throw new Error(
+      "Motion default mode requires a single HTML element child.",
+    );
   }
 
-  return null;
-};
+  if (children.type === Fragment) {
+    throw new Error("Motion cannot animate React.Fragment.");
+  }
+
+  if (typeof children.type !== "string") {
+    throw new Error(
+      "Motion default mode only supports native HTML elements. Use `asChild` for custom components.",
+    );
+  }
+
+  const MotionElement = motion[children.type];
+
+  return (
+    <MotionElement {...motionProps} {...children.props}>
+      {children.props.children}
+    </MotionElement>
+  );
+}
 
 const MotionOnScroll = ({ children, ...rest }) => {
   return (
-    <MotionWrapper
+    <Motion
       initial={{ scale: 0.8, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1, transition: { duration: 0.5 } }}
+      whileInView={{ scale: 1, opacity: 1, transition: { duration: 0.3 } }}
       viewport={{ once: true, amount: 0.1 }} // Ensures performance, Trigger when 10% is visible
       {...rest}
     >
       {children}
-    </MotionWrapper>
+    </Motion>
   );
 };
 
 // Predefined animations – for component-specific use
 
-const HeroBgOverlayMotion = ({ children }) => {
+const HeroBgOverlayMotion = ({ children, ...motionProps }) => {
   const { theme } = useTheme();
+  const reduce = useReducedMotion();
 
   return (
     <AnimatePresence mode="wait">
-      <MotionWrapper
+      <Motion
         key={theme}
         initial={{ scale: 0.5, opacity: 0 }}
         animate={{
           scale: 1,
           opacity: 0.7,
-          transition: {
-            type: "spring",
-            stiffness: 200,
-            damping: 10,
-            mass: 1.2,
-            delay: 0.6,
-          },
+          transition: reduce
+            ? { duration: 0 }
+            : {
+                type: "spring",
+                stiffness: 200,
+                damping: 10,
+                mass: 1.2,
+                delay: 0.4,
+              },
         }}
+        {...motionProps}
       >
         {children}
-      </MotionWrapper>
+      </Motion>
     </AnimatePresence>
   );
 };
 
-const HeroFgMotion = ({ children, delay = 0.9 }) => (
-  <MotionWrapper
-    initial={{ opacity: 0 }}
-    animate={{
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-        delay,
-      },
-    }}
-  >
-    {children}
-  </MotionWrapper>
-);
+const NavbarBrandMotion = ({
+  children,
+  screen = "small",
+  navbarVisible,
+  ...motionProps
+}) => {
+  const reduce = useReducedMotion();
 
-const NavbarBrandMotion = ({ children, screen = "small", navbarVisible }) => {
   const menuVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
+    hidden: reduce ? { opacity: 0 } : { scale: 0.8, opacity: 0 },
     visible: {
       scale: 1,
       opacity: 1,
@@ -115,7 +132,7 @@ const NavbarBrandMotion = ({ children, screen = "small", navbarVisible }) => {
   };
 
   return (
-    <MotionWrapper
+    <Motion
       initial={screen === "large" ? menuVariants.hidden : false}
       variants={screen === "small" ? menuVariants : undefined}
       animate={
@@ -125,9 +142,10 @@ const NavbarBrandMotion = ({ children, screen = "small", navbarVisible }) => {
             ? "visible"
             : "hidden"
       }
+      {...motionProps}
     >
       {children}
-    </MotionWrapper>
+    </Motion>
   );
 };
 
@@ -136,89 +154,98 @@ const NavbarMenusMotion = ({
   screen = "small",
   navbarVisible,
   delay = 0,
+  ...motionProps
 }) => {
-  const menuVariants = {
-    hidden: { opacity: 0, x: -20 },
+  const reduce = useReducedMotion();
+
+  const motion_desktop = {
+    initial: { y: -20, opacity: 0 },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.3, delay } },
+  };
+
+  const menuVariants_mobile = {
+    hidden: reduce ? { opacity: 0 } : { opacity: 0, x: -20 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { delay: 0.3 + delay, duration: 0.5 },
+      transition: { delay: 0.3 + delay, duration: 0.3 },
     },
   };
 
   return (
-    <MotionWrapper
-      initial={screen === "large" ? { y: -20, opacity: 0 } : false}
-      variants={screen === "small" ? menuVariants : undefined}
+    <Motion
+      initial={screen === "large" ? motion_desktop.initial : false}
+      variants={screen === "small" ? menuVariants_mobile : undefined}
       animate={
         screen === "large"
-          ? { y: 0, opacity: 1, transition: { duration: 0.5, delay } }
+          ? motion_desktop.animate
           : navbarVisible
             ? "visible"
             : "hidden"
       }
+      {...motionProps}
     >
       {children}
-    </MotionWrapper>
+    </Motion>
   );
 };
 
-const SectionRevealMotion = ({ isHero, children }) =>
-  isHero ? (
-    children
-  ) : (
+const SectionRevealMotion = ({ isHero, children, ...motionProps }) => {
+  const reduce = useReducedMotion();
+
+  if (isHero || reduce) return children;
+
+  return (
     <MotionOnScroll
-      initial={{ opacity: 0, filter: "blur(5px)" }}
+      initial={{ opacity: 0, filter: "blur(3px)" }}
       whileInView={{
         opacity: 1,
         filter: "blur(0px)",
-        transition: { duration: 0.7, ease: "easeOut" },
+        transition: { duration: 0.3, ease: "easeOut" },
       }}
+      {...motionProps}
     >
       {children}
     </MotionOnScroll>
   );
+};
 
-// AnimatePresence wrappers – for component-specific use
+const DropdownMotion = ({ children, isOpen, ...motionProps }) => {
+  const reduce = useReducedMotion();
 
-const NavbarDropdownAnimatePresence = ({ children, dropDownVisible }) => {
   const dropDownVariants = {
     open: {
       opacity: 1,
-      clipPath: "inset(0% 0% 0% 0%)",
+      ...(reduce ? { y: 0 } : { clipPath: "inset(0% 0% 0% 0%)" }),
       transition: { duration: 0.3, ease: "easeInOut" },
     },
     closed: {
       opacity: 0,
-      clipPath: "inset(0% 0% 100% 0%)",
+      ...(reduce ? { y: -3 } : { clipPath: "inset(0% 0% 100% 0%)" }),
       transition: { duration: 0.3, ease: "easeInOut" },
     },
   };
 
-  return (
-    <AnimatePresence mode="wait">
-      {dropDownVisible && (
-        <MotionWrapper
-          key="dropdown"
-          variants={dropDownVariants}
-          animate={dropDownVisible ? "open" : "closed"}
-          initial="closed"
-          exit="closed"
-        >
-          {children}
-        </MotionWrapper>
-      )}
-    </AnimatePresence>
-  );
+  return isOpen ? (
+    <Motion
+      key="dropdown"
+      variants={dropDownVariants}
+      animate={isOpen ? "open" : "closed"}
+      initial="closed"
+      exit="closed"
+      {...motionProps}
+    >
+      {children}
+    </Motion>
+  ) : null;
 };
 
 export {
-  MotionWrapper,
+  Motion,
   MotionOnScroll,
   HeroBgOverlayMotion,
-  HeroFgMotion,
   NavbarBrandMotion,
   NavbarMenusMotion,
-  NavbarDropdownAnimatePresence,
+  DropdownMotion,
   SectionRevealMotion,
 };

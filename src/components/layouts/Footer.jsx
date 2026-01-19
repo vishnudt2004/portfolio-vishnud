@@ -11,43 +11,42 @@ import {
 
 import config from "@/config";
 import { scrollIntoSection } from "@/utils/jsUtils";
-import Tooltip from "@/components/elements/Tooltip";
+import SocialBtn from "@/components/elements/SocialBtn";
 import { LinkedinIcon } from "@/components/elements/CustomIcons";
 
-const { LAYOUT_IDS, FOOTER_QUICK_LINKS } = config;
+const { IDS_MAP, SECTIONS } = config;
 
 const FooterSectionHeading = ({ children, icon }) => (
-  <span className="flex items-center gap-2 text-xl font-medium">
+  <h2 className="flex items-center gap-2 text-xl font-medium">
     {children} {icon}
-  </span>
+  </h2>
 );
 
 const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
   return (
     <footer
-      id={LAYOUT_IDS.FOOTER}
-      className="fancy-bg-2 relative min-h-[50vh] border-t border-(--global-border-color) p-6 text-(--global-text-color)"
+      id={IDS_MAP.FOOTER}
+      className="fancy-bg-2 relative min-h-[50vh] border-t border-(--border-color-g) p-6 text-(--text-color-g)"
     >
       <div className="mx-auto mb-[40px] grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
         {/* Column */}
-        <div className="flex flex-col gap-3 border-(--global-border-color) max-md:border-b md:border-r">
-          <FooterSectionHeading icon={<PhoneIcon className="size-4.5" />}>
+        <div className="flex flex-col gap-3 border-(--border-color-g) max-md:border-b md:border-r">
+          <FooterSectionHeading
+            icon={<PhoneIcon aria-hidden className="size-4.5" />}
+          >
             Contacts
           </FooterSectionHeading>
 
-          <ul className="flex h-full flex-wrap gap-2 p-5">
+          <ul className="flex h-full flex-wrap gap-4 p-5">
             {contacts.map(({ name, link, icon, ariaLabel }) => (
               <li key={name}>
-                <Tooltip content={name}>
-                  <a
-                    href={link}
-                    target="_blank"
-                    className="inline-flex size-12 items-center justify-center rounded-full border border-(--global-border-color) bg-(--global-background-color) p-2.5 text-(--global-text-color) transition-all duration-400 hover:bg-(--global-text-color) hover:text-(--global-background-color)"
-                    aria-label={ariaLabel}
-                  >
-                    {icon}
-                  </a>
-                </Tooltip>
+                <SocialBtn
+                  name={name}
+                  link={link}
+                  icon={icon}
+                  aria-label={`${ariaLabel} (opens in new tab)`}
+                  labelWidth="8ch"
+                />
               </li>
             ))}
           </ul>
@@ -56,7 +55,9 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
         {/* Column */}
         <div>
           <FooterSectionHeading
-            icon={<ArrowRightEndOnRectangleIcon className="size-5" />}
+            icon={
+              <ArrowRightEndOnRectangleIcon aria-hidden className="size-5" />
+            }
           >
             Quick Links
           </FooterSectionHeading>
@@ -64,8 +65,9 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
             {quickLinks.map((qLink) => (
               <li key={qLink.id}>
                 <button
+                  type="button"
+                  onClick={() => scrollIntoSection(undefined, qLink.id)}
                   className="cursor-pointer hover:underline"
-                  onClick={(e) => scrollIntoSection(e, qLink.id)}
                 >
                   {qLink.name}
                 </button>
@@ -75,7 +77,7 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
         </div>
       </div>
 
-      <p className="absolute inset-x-0 bottom-0 bg-(--global-border-color)/25 p-2 text-center text-xs text-(--global-text-color)">
+      <p className="absolute inset-x-0 bottom-0 bg-(--border-color-g)/25 p-2 text-center text-xs text-(--text-color-g)">
         {cpyText}
       </p>
     </footer>
@@ -87,37 +89,60 @@ const Footer = () => {
     {
       name: "GitHub",
       link: "https://github.com/vishnudt2004",
-      icon: <SiGithub title={null} className="scale-110" />,
+      icon: <SiGithub aria-hidden title={null} className="scale-110" />,
       ariaLabel: "GitHub Profile",
     },
     {
       name: "LinkedIn",
       link: "https://www.linkedin.com/in/vishnu-dt",
-      icon: <LinkedinIcon title={null} className="scale-115" />,
+      icon: <LinkedinIcon aria-hidden title={null} className="scale-115" />,
       ariaLabel: "LinkedIn Profile",
     },
     {
       name: "LeetCode",
       link: "https://leetcode.com/vishnud2004",
-      icon: <SiLeetcode title={null} color="default" className="scale-100" />,
+      icon: (
+        <SiLeetcode
+          aria-hidden
+          title={null}
+          color="default"
+          className="scale-100"
+        />
+      ),
       ariaLabel: "LeetCode Profile",
     },
     {
-      name: "HackerRank",
+      name: "Hacker Rank",
       link: "https://www.hackerrank.com/profile/vishnu_d_t_2004",
-      icon: <SiHackerrank title={null} color="default" className="scale-95" />,
+      icon: (
+        <SiHackerrank
+          aria-hidden
+          title={null}
+          color="default"
+          className="scale-95"
+        />
+      ),
       ariaLabel: "HackerRank Profile",
     },
     {
       name: "Email",
       link: "mailto:vishnu.d.t.2004@gmail.com",
-      icon: <SiGmail title={null} color="default" className="scale-95" />,
+      icon: (
+        <SiGmail
+          aria-hidden
+          title={null}
+          color="default"
+          className="scale-95"
+        />
+      ),
       ariaLabel: "Mail me",
     },
     // Phone: "tel:+91936350XXXX",
   ];
 
-  const quickLinks = FOOTER_QUICK_LINKS;
+  const quickLinks = SECTIONS.filter((s) => s.enabled && s.id !== "hero").map(
+    (s) => ({ id: s.id, name: s.name }),
+  );
 
   const cpyText = (
     <>&copy; {new Date().getFullYear()} Vishnu D. All Rights Reserved.</>

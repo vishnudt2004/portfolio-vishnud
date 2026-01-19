@@ -20,12 +20,14 @@ const Img = ({
       return (
         <div
           {...attr}
+          role="img"
+          aria-label={fallbackAlt}
           className={twMerge(
-            "grid size-50 place-items-center content-center bg-(--global-background-color) stroke-(--global-text-color)!",
+            "grid size-50 place-items-center content-center bg-(--background-color-g) stroke-(--text-color-g)!",
             attr?.className,
           )}
         >
-          <ImageSquareXMarkIcon />
+          <ImageSquareXMarkIcon aria-hidden />
           No Image
         </div>
       );

@@ -22,13 +22,14 @@ const AchievementItem = ({
   description,
   credentials,
   logo,
+  logoAlt,
   className,
 }) => (
   <ShowcaseItem
     title={title}
     subtitle={
       (event || location) && (
-        <span className="mb-2 inline text-sm font-semibold text-(--global-secondary-text-color)">
+        <span className="mb-2 inline text-sm font-semibold text-(--text-secondary-color-g)">
           {event} {location && "@"}{" "}
           {location && <span className="italic">{location}</span>}
         </span>
@@ -43,25 +44,27 @@ const AchievementItem = ({
           {credentials.map(({ name, credential }) => (
             <ShowcaseItemBtn
               key={name}
-              href={credential}
               aria-label="View Achievement Details"
+              href={credential}
+              icon={<InformationCircleIcon aria-hidden className="size-4" />}
             >
-              <InformationCircleIcon className="size-4" /> {name}
+              {name}
             </ShowcaseItemBtn>
           ))}
         </div>
       ) : (
         <ShowcaseItemBtn
-          href={credentials}
-          icon={<InformationCircleIcon className="size-4" />}
           aria-label="View Achievement Details"
+          href={credentials}
+          icon={<InformationCircleIcon aria-hidden className="size-4" />}
         >
           See Details
         </ShowcaseItemBtn>
       ))
     }
     logo={logo}
-    defaultLogo={TrophyIcon}
+    logoAlt={logoAlt}
+    leadingIcon={TrophyIcon}
     bgOverlay={<TrophySolidIcon className="w-[120px] opacity-5" />}
     style={{
       "--accent-color": "var(--color-yellow-500)",
@@ -72,10 +75,14 @@ const AchievementItem = ({
 
 const AchievementsSection = ({ achievements }) => (
   <SimpleLayout
-    id={config.SECTION_IDS.ACHIEVEMENTS}
+    sectionId={config.IDS_MAP.ACHIEVEMENTS}
     sectionTitle="Achievements"
   >
-    <ShowMoreData items={achievements}>
+    <ShowMoreData
+      gridId="achievements-grid"
+      items={achievements}
+      style={{ "--cursor-accent-scoped": "var(--color-yellow-500)" }}
+    >
       {(visibleItems) =>
         visibleItems.map((achievement, ind) => (
           <AchievementItem key={ind} {...achievement} />

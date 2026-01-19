@@ -24,14 +24,12 @@ export default function FullscreenToggle() {
       <button
         type="button"
         onClick={toggle}
+        aria-description="Full screen mode"
         aria-label="Toggle fullscreen mode"
-        className="inline-flex cursor-pointer items-center justify-center rounded-full bg-(--global-text-color) p-3 text-(--global-background-color) opacity-85 transition hover:scale-105 hover:opacity-100 focus:outline-none"
+        aria-pressed={isFullscreen}
+        className="inline-flex cursor-pointer items-center justify-center rounded-full border border-(--border-color-g) bg-(--background-color-g) p-3 shadow-md transition *:size-6 hover:scale-105 focus:scale-105 focus:opacity-100 active:scale-90"
       >
-        {isFullscreen ? (
-          <ArrowsPointingInIcon className="size-6" />
-        ) : (
-          <ArrowsPointingOutIcon className="size-6" />
-        )}
+        {isFullscreen ? <ArrowsPointingInIcon /> : <ArrowsPointingOutIcon />}
       </button>
     </Tooltip>
   );

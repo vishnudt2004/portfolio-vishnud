@@ -4,7 +4,8 @@ import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 import config from "@/config";
 import Anchor from "@/components/elements/Anchor";
 import Img from "@/components/elements/Img";
-import { Divider } from "@/components/elements/Divider";
+import Divider from "@/components/elements/Divider";
+import SocialBtn from "@/components/elements/SocialBtn";
 import Tooltip from "@/components/elements/Tooltip";
 import { TwoColumnsLayout } from "@/components/elements/SectionLayouts";
 import {
@@ -25,20 +26,18 @@ const AboutSection = ({
   return (
     <>
       <TwoColumnsLayout
-        id={config.SECTION_IDS.ABOUT}
+        sectionId={config.IDS_MAP.ABOUT}
         sectionTitle={title}
-        cols={{
-          col1: () => (
-            <Img
-              src={image}
-              alt="Vishnu D"
-              fallbackSrc={personFallbackImg}
-              className="cursor-effect-fadeout aspect-square size-[200px] rounded-full object-cover shadow-[0_0_0_5px_color-mix(in_srgb,var(--global-border-color),transparent_70%)] grayscale-50 transition-all duration-300 hover:grayscale-0"
-              caption="Vishnu D"
-            />
-          ),
-          col2: () => <div className="fancy-bg-1 p-4">{aboutMe}</div>,
-        }}
+        left={
+          <Img
+            src={image}
+            alt="Vishnu D"
+            fallbackSrc={personFallbackImg}
+            className="cursor-effect-hidden aspect-square size-[200px] rounded-full object-cover shadow-[0_0_0_5px_color-mix(in_srgb,var(--border-color-g),transparent_70%)] grayscale-50 duration-300 hover:grayscale-0"
+            caption="Vishnu D"
+          />
+        }
+        right={<div className="fancy-bg-1 p-4">{aboutMe}</div>}
       />
 
       {moreAboutMe.length && <Divider />}
@@ -47,15 +46,29 @@ const AboutSection = ({
         <TwoColumnsLayout
           key={ind}
           sectionTitle={section.title}
-          cols={{
-            col1: () => <div className="p-4 max-sm:p-2">{section.col1}</div>,
-            col2: () => <div className="p-4 max-sm:p-2">{section.col2}</div>,
-          }}
+          left={<div className="p-4 max-sm:p-2">{section.left}</div>}
+          right={<div className="p-4 max-sm:p-2">{section.right}</div>}
         />
       ))}
     </>
   );
 };
+
+const ContentBlock = ({ children }) => (
+  <div className="flex flex-col gap-10 text-(--text-secondary-color-g)">
+    {children}
+  </div>
+);
+
+const ContentSubBlock = ({ children }) => (
+  <div className="flex flex-col gap-4">{children}</div>
+);
+
+const MoreAboutSubTitle = ({ children }) => (
+  <h3 className="font-semibold tracking-wider text-(--text-color-g)">
+    {children}
+  </h3>
+);
 
 const Highlighter = ({ type = "primary", children, ...attr }) => (
   <span
@@ -69,16 +82,10 @@ const Underline = ({ children }) => (
   <span className="underline underline-offset-4">{children}</span>
 );
 
-const MoreAboutSubTitle = ({ children }) => (
-  <h2 className="mb-4 font-semibold tracking-wider text-(--global-text-color)">
-    {children}
-  </h2>
-);
-
 const AboutView = () => {
   const aboutMe = (
-    <div className="flex flex-col gap-10 text-(--global-secondary-text-color)">
-      <span className="text-(--global-secondary-text-color)">
+    <ContentBlock>
+      <p>
         I'm Vishnu, a self-taught{" "}
         <Highlighter>Full-Stack Developer</Highlighter> focused on{" "}
         <Underline>React, Next.js, and modern web tooling</Underline>. I enjoy
@@ -86,110 +93,114 @@ const AboutView = () => {
         <Underline>clean, modular, and maintainable</Underline>, while also
         making the developer experience smoother through good documentation and
         reusable components.
-      </span>
+      </p>
 
       <Anchor
+        aria-label="Open resume PDF"
         href="https://vishnudt2004.github.io/vishnud-resume/vishnud-resume.pdf"
         className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
       >
         Check out my <Highlighter className="mx-1.5">Resume</Highlighter> here.
       </Anchor>
 
-      <ul className="flex h-full flex-wrap gap-2 p-3 max-md:self-center">
+      <ul className="flex h-full flex-wrap gap-4 p-3 max-md:self-center">
         {[
+          {
+            name: "Email",
+            link: "mailto:vishnu.d.t.2004@gmail.com",
+            icon: (
+              <SiGmail
+                aria-hidden
+                title={null}
+                color="default"
+                className="scale-95"
+              />
+            ),
+            ariaLabel: "Mail Me",
+          },
           {
             name: "GitHub",
             link: "https://github.com/vishnudt2004",
-            icon: <SiGithub title={null} className="scale-110" />,
+            icon: <SiGithub aria-hidden title={null} className="scale-110" />,
             ariaLabel: "GitHub Profile",
           },
           {
             name: "LinkedIn",
             link: "https://www.linkedin.com/in/vishnu-dt",
-            icon: <LinkedinIcon title={null} className="scale-120" />,
+            icon: (
+              <LinkedinIcon aria-hidden title={null} className="scale-120" />
+            ),
             ariaLabel: "LinkedIn Profile",
-          },
-          {
-            name: "Email",
-            link: "mailto:vishnu.d.t.2004@gmail.com",
-            icon: <SiGmail title={null} color="default" className="scale-95" />,
-            ariaLabel: "Mail Me",
           },
         ].map(({ name, link, icon, ariaLabel }) => (
           <li key={name}>
-            <Tooltip content={name}>
-              <a
-                href={link}
-                target="_blank"
-                className="inline-flex size-11 items-center justify-center rounded-full border-1 border-(--global-border-color) bg-(--global-background-color) p-2.5 text-(--global-text-color) transition-all duration-400 hover:bg-(--global-text-color) hover:text-(--global-background-color)"
-                aria-label={ariaLabel}
-              >
-                {icon}
-              </a>
-            </Tooltip>
+            <SocialBtn
+              name={name}
+              link={link}
+              icon={icon}
+              aria-label={`${ariaLabel} (opens in new tab)`}
+            />
           </li>
         ))}
       </ul>
-    </div>
+    </ContentBlock>
   );
 
   const moreAboutMe = [
     {
       title: "Journey & Focus",
-      col1: (
-        <div className="flex flex-col gap-10 text-(--global-secondary-text-color)">
-          <div className="flex flex-col">
+      left: (
+        <ContentBlock>
+          <ContentSubBlock>
             <MoreAboutSubTitle>How I Got Started?</MoreAboutSubTitle>
-            <div>
+            <p>
               I began with MERN stack basics during college and slowly expanded
               into the Next.js ecosystem. What started as curiosity turned into
               a consistent practice of building and shipping projects — from
               blogs and portfolios to my own{" "}
               <Underline>UI component system with a CLI</Underline>.
-            </div>
-          </div>
+            </p>
+          </ContentSubBlock>
 
-          <div className="flex flex-col">
+          <ContentSubBlock>
             <MoreAboutSubTitle>How I Learned?</MoreAboutSubTitle>
-            <div>
+            <p>
               At first, I spent a lot of time chasing tutorials. But over time,
               I realized the best way to grow was through{" "}
               <Underline>official documentation</Underline> and building things
               myself. That’s how I picked up <Underline>Next.js</Underline> and{" "}
               <Underline>TypeScript</Underline> — with fewer external resources
               and more hands-on building.
-            </div>
-          </div>
-        </div>
+            </p>
+          </ContentSubBlock>
+        </ContentBlock>
       ),
-      col2: (
-        <div className="flex flex-col text-(--global-secondary-text-color)">
-          <MoreAboutSubTitle>What I Focus On?</MoreAboutSubTitle>
-          <ul className="flex list-disc flex-col gap-4 px-5">
-            <li>
-              Building clean, maintainable full-stack apps (React, Next.js,
-              Node.js, etc.)
-            </li>
-            <li>
-              Focusing on reusability and clear documentation in UI development.
-            </li>
-            <li>
-              Enhancing developer experience with tools, automation, and
-              streamlined workflows
-            </li>
-            <li>Deploying & scaling apps with modern hosting solutions</li>
-            <li>Constantly exploring and adapting to new technologies</li>
-          </ul>
-        </div>
+      right: (
+        <ContentBlock>
+          <ContentSubBlock>
+            <MoreAboutSubTitle>What I Focus On?</MoreAboutSubTitle>
+            <ul className="flex list-disc flex-col gap-4 px-5">
+              {[
+                "Building clean, maintainable full-stack apps (React, Next.js, Node.js, etc.)",
+                "Focusing on reusability and clear documentation in UI development.",
+                "Enhancing developer experience with tools, automation, and streamlined workflows",
+                "Deploying & scaling apps with modern hosting solutions",
+                "Constantly exploring and adapting to new technologies",
+              ].map((li, i) => (
+                <li key={`li$*-${i}`}>{li}</li>
+              ))}
+            </ul>
+          </ContentSubBlock>
+        </ContentBlock>
       ),
     },
     {
       title: "Building With Purpose",
-      col1: (
-        <div className="flex flex-col gap-10 text-(--global-secondary-text-color)">
-          <div className="flex flex-col">
+      left: (
+        <ContentBlock>
+          <ContentSubBlock>
             <MoreAboutSubTitle>My Philosophy</MoreAboutSubTitle>
-            <div>
+            <p>
               I believe frontend reflects my{" "}
               <Underline>taste for clean design</Underline>, while backend
               reflects my{" "}
@@ -197,32 +208,32 @@ const AboutView = () => {
               writing <Underline>clean, modular code</Underline> rather than
               just “workable code,” and I aim to create applications that feel
               seamless to develop and intuitive to use.
-            </div>
-          </div>
+            </p>
+          </ContentSubBlock>
 
-          <div className="flex flex-col">
+          <ContentSubBlock>
             <MoreAboutSubTitle>Products over Projects</MoreAboutSubTitle>
-            <div>
+            <p>
               To me, projects are for practice, but{" "}
               <Underline>products are purposeful</Underline>. A product means
               usability, solving real problems, and lasting value. That’s the
               kind of software I want to keep creating — things that live beyond
               experiments.
-              <br />
-              <br />
+            </p>
+            <p>
               In short, I prefer quality over quantity — a principle that
               applies to software as well. I focus on creating well-crafted,
               bug-free applications rather than just increasing the number of
               projects.
-            </div>
-          </div>
-        </div>
+            </p>
+          </ContentSubBlock>
+        </ContentBlock>
       ),
-      col2: (
-        <div className="flex flex-col gap-10 text-(--global-secondary-text-color)">
-          <div className="flex flex-col">
+      right: (
+        <ContentBlock>
+          <ContentSubBlock>
             <MoreAboutSubTitle>What I’m Aiming For?</MoreAboutSubTitle>
-            <div>
+            <p>
               I’m looking for opportunities to apply my skills to real-world
               products, particularly in <Underline>front-end</Underline>,{" "}
               <Underline>back-end</Underline>,{" "}
@@ -230,24 +241,20 @@ const AboutView = () => {
               contributions. I’m excited to keep learning, collaborate with
               teams, and push projects beyond personal experiments into
               production-ready solutions.
-              <br />
-              <br />
-              <span>
-                My interests aren’t just building full-stack applications — I
-                love making them smoother and providing the{" "}
-                <b>best experience to users</b>. I also enjoy creating{" "}
-                <Underline>educational posts</Underline>.
-              </span>
-              <br />
-              <br />
-              <span>
-                I’m eager to grow further in this field by joining a meaningful
-                team.
-              </span>
-            </div>
-          </div>
+            </p>
+            <p>
+              My interests aren’t just building full-stack applications — I love
+              making them smoother and providing the{" "}
+              <strong>best experience to users</strong>. I also enjoy creating{" "}
+              <Underline>educational posts</Underline>.
+            </p>
+            <p>
+              I’m eager to grow further in this field by joining a meaningful
+              team.
+            </p>
+          </ContentSubBlock>
 
-          <div className="flex justify-center gap-3 *:rounded-full *:bg-(--global-border-color)/50">
+          <div className="flex justify-center gap-3 *:rounded-full *:bg-(--border-color-g)/50">
             {[
               {
                 tip: "UI/UX • Result • Quality",
@@ -263,16 +270,16 @@ const AboutView = () => {
               },
             ].map(({ tip, icon }, i) => (
               <Tooltip key={i} content={tip}>
-                <span>
+                <span aria-hidden>
                   {createElement(icon, {
                     className:
-                      "size-22 p-6 [--color-1:var(--global-text-color)]! [--color-2:var(--accent-color-1)]! max-sm:size-20 hover:animate-fadeIn transition hover:-translate-y-1",
+                      "size-22 p-6 [--color-1:var(--text-color-g)]! [--color-2:var(--accent-color-g)]! max-sm:size-20 hover:animate-fadeIn transition hover:-translate-y-1",
                   })}
                 </span>
               </Tooltip>
             ))}
           </div>
-        </div>
+        </ContentBlock>
       ),
     },
   ];
