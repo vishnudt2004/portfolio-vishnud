@@ -4,6 +4,8 @@ import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 import config from "@/config";
 import { SimpleLayout } from "@/components/elements/SectionLayouts";
 import ShowcaseItem, {
+  Br,
+  List,
   ShowcaseItemBtn,
 } from "@/components/elements/ShowcaseItem";
 import ShowMoreData from "@/components/elements/ShowMoreData";
@@ -94,10 +96,10 @@ const CertificationsView = () => {
         <>
           Completed the <span className="underline">Responsive Web Design</span>{" "}
           certification by building{" "}
-          <span className="underline">5 responsive projects</span>, each testing
-          my understanding of semantic HTML, CSS layout, Flexbox, and media
-          queries. Passing all project tests earned me the certification and
-          validated my grasp of the core principles of modern web design.
+          <span className="underline">5 responsive projects</span>, covering
+          semantic HTML, CSS layouts, Flexbox, and media queries. Successfully
+          passed all project tests, validating core modern web design
+          principles.
         </>
       ),
       credentials: [
@@ -111,6 +113,7 @@ const CertificationsView = () => {
       logo: fccIcon,
       logoAlt: "freeCodeCamp Logo",
     },
+
     {
       title: "Frontend Developer (React)",
       issuer: "HackerRank",
@@ -119,11 +122,11 @@ const CertificationsView = () => {
         <>
           Earned the{" "}
           <span className="underline">Frontend Developer (React)</span>{" "}
-          certificate through a 60-minute test consisting of coding challenges
-          and multiple-choice questions. The assessment covered{" "}
-          <span className="underline">React, CSS, and JavaScript</span> —
-          including implementing features in React, answering CSS-based MCQs,
-          and writing required functionality in JavaScript. Cleared in a single
+          certificate through a 60-minute assessment of coding challenges and
+          MCQs. Covered{" "}
+          <span className="underline">React, CSS, and JavaScript</span>,
+          including implementing features in React, solving CSS-based questions,
+          and writing required JavaScript functionality. Cleared in a single
           attempt.
         </>
       ),
@@ -137,6 +140,7 @@ const CertificationsView = () => {
       logo: hrIcon,
       logoAlt: "HackerRank Logo",
     },
+
     {
       title: "Next.js App Router Fundamentals",
       issuer: "Vercel",
@@ -144,12 +148,11 @@ const CertificationsView = () => {
       description: (
         <>
           Completed the <span className="underline">Next.js App Router</span>{" "}
-          course by Vercel, covering essential concepts such as file-based
-          routing, layouts, nested routes, NextAuth integration, and TypeScript
-          support. The course included{" "}
-          <span className="underline">16 chapters</span>, and I documented each
-          one thoroughly with commit messages and a markdown table for future
-          reference and to help others.
+          course by Vercel, covering file-based routing, layouts, nested routes,
+          authentication & NextAuth integration, and TypeScript support. The
+          course included <span className="underline">16 chapters</span>, all
+          documented with clear commit messages and a markdown reference table
+          for future use and knowledge sharing.
         </>
       ),
       credentials: [
@@ -172,21 +175,36 @@ const CertificationsView = () => {
       logo: vercelIcon,
       logoAlt: "Vercel Logo",
     },
+
     {
       title: "HackerRank Basic Certificates",
       issuer: "HackerRank",
       date: "Apr 2025",
       description: (
         <>
-          Achieved three distinct basic-level certificates in{" "}
+          Earned three basic-level certificates in{" "}
           <span className="underline">CSS, JavaScript, and React</span> from
-          HackerRank. <b>CSS (20 mins):</b> Covered cascading & inheritance,
-          text styling, layouts, and box model fundamentals;{" "}
-          <b>JavaScript (1 hr 30 mins):</b> Included functions, currying,
-          hoisting, scope, inheritance, events, and error handling;{" "}
-          <b>React (1 hr 30 mins):</b> Focused on basic routing, rendering
-          elements, state management, handling events, ES6 concepts, and form
-          validation. All cleared on the first attempt.
+          HackerRank.
+          <Br />
+          <List
+            items={[
+              <>
+                <b>CSS (20 mins):</b> Covered cascading, inheritance, text
+                formatting, layouts, and box model fundamentals
+              </>,
+              <>
+                <b>JavaScript (1 hr 30 mins):</b> Focused on functions,
+                currying, hoisting, scope, inheritance, events, and error
+                handling
+              </>,
+              <>
+                <b>React (1 hr 30 mins):</b> Covered routing basics, rendering,
+                state management, ES6 concepts, and form validation
+              </>,
+            ]}
+          />
+          <Br />
+          All cleared on the first attempt.
         </>
       ),
       credentials: [

@@ -7,6 +7,8 @@ import { TrophyIcon } from "@heroicons/react/24/outline";
 import config from "@/config";
 import { SimpleLayout } from "@/components/elements/SectionLayouts";
 import ShowcaseItem, {
+  Br,
+  List,
   ShowcaseItemBtn,
 } from "@/components/elements/ShowcaseItem";
 import ShowMoreData from "@/components/elements/ShowMoreData";
@@ -95,32 +97,28 @@ const AchievementsSection = ({ achievements }) => (
 const AchievementsView = () => {
   const achievements = [
     {
-      title: "1st Place – Web Development Contest",
-      event: "Mirror 2K25, Intercollegiate Event",
-      location: "Erode Arts and Science College, Erode",
-      date: "Oct 2025",
+      title: "Portfolio Redesign & Iterative Improvements",
+      event: "Portfolio Update",
+      date: "Sep 2025 – Jan 2026",
       description: (
         <>
-          Developed a webpage in 1 hour using only{" "}
-          <span className="underline">HTML, CSS, and JavaScript</span>, with
-          internet access allowed only for images. Topic was chosen by drawing
-          lots, and I built it as part of a team of two. Competed among multiple
-          teams, secured 1st place, and won{" "}
-          <span className="highlight-primary rounded-md">₹ 1000</span> and a
-          medal.
-          <br />
-          <br />
-          <span className="italic">Topic was: Digital Literacy for all.</span>
+          <List
+            items={[
+              <>
+                <strong>[Sep 2025]</strong> Complete redesign with cleaner UI
+                and improved UX; added smooth transitions, multiple themes, new
+                sections (Certifications, Activities), and a unified showcase
+                layout
+              </>,
+              <>
+                <strong>[Jan 2026]</strong> Major semantic and accessibility
+                (a11y) improvements, UI refinements, and deeper refactors to
+                improve correctness and code quality; released v1.6.1
+              </>,
+            ]}
+          />
         </>
       ),
-      credentials: [{ name: "Credential (Coming soon)" }],
-    },
-    {
-      title: "Portfolio Redesign",
-      event: "Portfolio Update",
-      date: "Sep 2025",
-      description:
-        "Completely revamped personal portfolio with a cleaner, more consistent UI and improved UX, including smooth transitions multiple new themes, added sections (Certifications, Activities) with a consistent showcase design across sections and updated content. Refactored code for better maintainability and enhanced overall user experience.",
       credentials: [
         {
           name: "Explore this site",
@@ -128,14 +126,45 @@ const AchievementsView = () => {
         },
       ],
     },
+
+    {
+      title: "1st Place – Web Development Contest",
+      event: "Mirror 2K25, Intercollegiate Event",
+      location: "Erode Arts and Science College, Erode",
+      date: "Oct 2025",
+      description: (
+        <>
+          <List
+            items={[
+              <>
+                Built a webpage in 1 hour using{" "}
+                <span className="underline">HTML, CSS, and JavaScript</span>{" "}
+                (images-only internet)
+              </>,
+              <>Topic assigned by draw; worked as a 2-member team</>,
+              <>
+                Secured 1st place among multiple teams; won{" "}
+                <span className="highlight-primary rounded-md">₹1000</span> and
+                a medal
+              </>,
+            ]}
+          />
+          <Br />
+          <span className="italic">Topic: Digital Literacy for All</span>
+        </>
+      ),
+      credentials: [{ name: "Credential (Coming soon)" }],
+    },
+
     {
       title: "Open Source – Simple UI Components",
       event: "Open Source, NPM",
       date: "Sep 2025",
       description:
-        "Built SUIC, an open-source, local-first collection of reusable UI and frontend utility components. published with an NPM CLI (npx suic-cli) for seamless installation as editable source code with documentation support.",
+        "Built SUIC, an open-source, local-first collection of reusable UI and frontend utility components. Published with an NPM CLI (npx suic-cli) for installing editable source code with documentation support.",
       credentials: "https://npmjs.com/package/suic-cli/",
     },
+
     {
       title: "1st Place – Web Development Contest",
       event: "Mirror 2K24, Intercollegiate Event",
@@ -143,26 +172,38 @@ const AchievementsView = () => {
       date: "Oct 2024",
       description: (
         <>
-          Developed a webpage in 45 minutes using only the provided images, no
-          internet access. Chose one of two given sets of images and built it
-          using <span className="underline">HTML, CSS, and JavaScript</span> as
-          a team of two. Competed among multiple teams, secured 1st place, and
-          won <span className="highlight-primary rounded-md">₹ 1000</span> and a
-          medal.
-          <br />
-          <br />
-          <span className="italic">Titled: Green Nature (Organization).</span>
+          <List
+            items={[
+              <>
+                Built a webpage in 45 minutes using provided images only (no
+                internet)
+              </>,
+              <>
+                Selected one of two image sets; developed using{" "}
+                <span className="underline">HTML, CSS, and JavaScript</span> as
+                a 2-member team
+              </>,
+              <>
+                Secured 1st place among multiple teams; won{" "}
+                <span className="highlight-primary rounded-md">₹1000</span> and
+                a medal
+              </>,
+            ]}
+          />
+          <Br />
+          <span className="italic">Theme: Green Nature (Organization)</span>
         </>
       ),
       credentials: achievement1,
     },
+
     {
       title: "1st Place – Logo Design Competition",
       event: "CS Department Function",
       location: "Govt. Arts & Science College – Komarapalayam, Namakkal (Dt.)",
       date: "May 2022",
       description:
-        "Received the book 'Yevuganai Manithan: Abdul Kalam Vazhkai Varalarum, Kavithaigalum' as a prize during the 75th Independence Day Celebration, 2022",
+        "Won 1st place in a logo design competition conducted by the CS Department during the 75th Independence Day Celebration (2022). Awarded a commemorative book as the prize.",
       credentials: achievement2,
     },
   ];

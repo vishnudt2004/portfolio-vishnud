@@ -44,8 +44,7 @@ const Img = ({
       />
       {caption && (
         <>
-          <br />
-          <figcaption className="mt-1 text-center leading-0">
+          <figcaption className="mt-6 text-center leading-0">
             {caption}
           </figcaption>
         </>

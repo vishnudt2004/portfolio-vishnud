@@ -50,9 +50,11 @@ const ShowcaseItem = ({
           })
         )}
         <div>
-          <span className="text-lg font-semibold">{title}</span>
+          <h3 className="text-lg font-semibold">{title}</h3>
+
           <p className="text-sm font-semibold text-(--text-secondary-color-g)">
             <span className="mr-2">{subtitle}</span>
+
             <span className="mt-1 inline-block rounded-full bg-[color-mix(in_srgb,var(--accent-color),var(--background-color-g)_50%)] px-2 py-0.5 text-xs font-medium text-[color-mix(in_srgb,var(--accent-color),var(--text-color-g)_70%)]">
               {date}
             </span>
@@ -84,5 +86,30 @@ const ShowcaseItemBtn = ({ children, icon, href, className }) => (
   </a>
 );
 
+const List = ({ items }) =>
+  items.map((item, i) => (
+    <>
+      • {item}
+      {i !== items.length - 1 && <Br emptyLine={false} />}
+    </>
+  ));
+
+const Br = ({ emptyLine = true, className }) => (
+  <>
+    <br aria-hidden="true" className={className} />
+    {emptyLine && <br aria-hidden="true" className={className} />}
+  </>
+); // Visual spacing
+
+const Hr = ({ className }) => (
+  <hr
+    aria-hidden
+    className={twMerge(
+      "mx-auto my-2 w-full text-(--border-color-g)/50",
+      className,
+    )}
+  />
+);
+
 export default ShowcaseItem;
-export { ShowcaseItemBtn };
+export { ShowcaseItemBtn, Br, Hr, List };
