@@ -94,8 +94,39 @@ const AchievementsSection = ({ achievements }) => (
   </SimpleLayout>
 );
 
+const Hl = (props) => (
+  <span className="highlight-primary rounded-md px-1.25 leading-4" {...props} />
+); // Highlight
+
 const AchievementsView = () => {
   const achievements = [
+    {
+      title: "1st Place – Web Development Contest",
+      event: "CS Department Function",
+      location: "Govt. Arts & Science College – Komarapalayam",
+      date: "Jan 2026",
+      description: (
+        <>
+          <List
+            items={[
+              <>
+                Cleared a technical MCQ round (20/20) and built a two-page
+                e-commerce website (landing + products page) in 40 minutes using
+                HTML, CSS, and Tailwind CSS based on a single provided topic
+              </>,
+              <>
+                Secured <Hl>1st place</Hl> as a solo participant and won a{" "}
+                <Hl>certificate</Hl>
+              </>,
+            ]}
+          />
+          <Br />
+          <span className="italic">Theme: E-commerce</span>
+        </>
+      ),
+      credentials: [{ name: "Credential (Coming soon)" }],
+    },
+
     {
       title: "Portfolio Redesign & Iterative Improvements",
       event: "Portfolio Update",
@@ -113,7 +144,7 @@ const AchievementsView = () => {
               <>
                 <strong>[Jan 2026]</strong> Major semantic and accessibility
                 (a11y) improvements, UI refinements, and deeper refactors to
-                improve correctness and code quality; released v1.6.1
+                improve correctness and code quality; released <Hl>v1.6.1</Hl>
               </>,
             ]}
           />
@@ -137,15 +168,15 @@ const AchievementsView = () => {
           <List
             items={[
               <>
-                Built a webpage in 1 hour using{" "}
+                Cleared a technical MCQ round and Built a webpage in 1 hour
+                using{" "}
                 <span className="underline">HTML, CSS, and JavaScript</span>{" "}
                 (images-only internet)
               </>,
               <>Topic assigned by draw; worked as a 2-member team</>,
               <>
-                Secured 1st place among multiple teams; won{" "}
-                <span className="highlight-primary rounded-md">₹1000</span> and
-                a medal
+                Secured <Hl>1st place</Hl> among multiple teams; won{" "}
+                <Hl>₹1000</Hl> and a medal
               </>,
             ]}
           />
@@ -160,8 +191,14 @@ const AchievementsView = () => {
       title: "Open Source – Simple UI Components",
       event: "Open Source, NPM",
       date: "Sep 2025",
-      description:
-        "Built SUIC, an open-source, local-first collection of reusable UI and frontend utility components. Published with an NPM CLI (npx suic-cli) for installing editable source code with documentation support.",
+      description: (
+        <>
+          Built <Hl>SUIC</Hl>, an open-source, local-first collection of
+          reusable UI and frontend utility components. Published with an{" "}
+          <Hl>NPM CLI</Hl> (npx suic-cli) for installing editable source code
+          with documentation support.
+        </>
+      ),
       credentials: "https://npmjs.com/package/suic-cli/",
     },
 
@@ -175,8 +212,8 @@ const AchievementsView = () => {
           <List
             items={[
               <>
-                Built a webpage in 45 minutes using provided images only (no
-                internet)
+                Cleared a technical MCQ round and Built a webpage in 45 minutes
+                using provided images only (no internet)
               </>,
               <>
                 Selected one of two image sets; developed using{" "}
@@ -184,9 +221,8 @@ const AchievementsView = () => {
                 a 2-member team
               </>,
               <>
-                Secured 1st place among multiple teams; won{" "}
-                <span className="highlight-primary rounded-md">₹1000</span> and
-                a medal
+                Secured <Hl>1st place</Hl> among multiple teams; won{" "}
+                <Hl>₹1000</Hl> and a medal
               </>,
             ]}
           />
@@ -200,10 +236,15 @@ const AchievementsView = () => {
     {
       title: "1st Place – Logo Design Competition",
       event: "CS Department Function",
-      location: "Govt. Arts & Science College – Komarapalayam, Namakkal (Dt.)",
+      location: "Govt. Arts & Science College – Komarapalayam",
       date: "May 2022",
-      description:
-        "Won 1st place in a logo design competition conducted by the CS Department during the 75th Independence Day Celebration (2022). Awarded a commemorative book as the prize.",
+      description: (
+        <>
+          Won 1st place in a logo design competition conducted by the CS
+          Department during the 75th Independence Day Celebration (2022).
+          Awarded a commemorative <Hl>book</Hl> as the prize.
+        </>
+      ),
       credentials: achievement2,
     },
   ];

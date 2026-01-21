@@ -22,8 +22,9 @@
     --a: 90deg; /* control the angle */
     --s: 10px; /* size of the zig-zag */
     --b: 1px; /* control the thickness */
+    --color: var(--text-color-g);
 
-    background: color-mix(in srgb, var(--text-color-g), transparent 40%);
+    background: color-mix(in srgb, var(--color), transparent 40%);
     height: calc(var(--b) + var(--s) / (2 * tan(var(--a) / 2)));
     width: 100%;
     --_g: var(--s) repeat-x

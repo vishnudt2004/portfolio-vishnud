@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, Fragment } from "react";
 import { twMerge } from "tailwind-merge";
 
 import Img from "./Img";
@@ -88,10 +88,10 @@ const ShowcaseItemBtn = ({ children, icon, href, className }) => (
 
 const List = ({ items }) =>
   items.map((item, i) => (
-    <>
+    <Fragment key={`liItem$*-${i}`}>
       • {item}
       {i !== items.length - 1 && <Br emptyLine={false} />}
-    </>
+    </Fragment>
   ));
 
 const Br = ({ emptyLine = true, className }) => (

@@ -37,9 +37,12 @@ const ProjectCard = ({ title, descr, thumb, techStack, links }) => {
       <Img
         src={thumb}
         alt={`${title} Screenshot`}
-        className="aspect-video object-cover opacity-80 grayscale-60 duration-150 group-focus-within:opacity-100 group-focus-within:grayscale-0 group-hover:opacity-100 group-hover:grayscale-0"
+        className={
+          "aspect-video object-cover grayscale-60 duration-150 group-focus-within:opacity-100 group-focus-within:grayscale-0 group-hover:opacity-100 group-hover:grayscale-0"
+          // "mx-auto mt-0.75 w-[98%] rounded-[20px]"
+        }
       />
-      <div className="flex grow flex-col gap-2 p-4 sm:p-5">
+      <div className="flex grow flex-col gap-2 p-4">
         <h3 className="text-lg font-semibold sm:text-xl">{title}</h3>
         <p className="any-pointer-fine:secondary-scrollbar h-20 overflow-y-auto text-sm text-(--text-secondary-color-g)">
           {descr}
@@ -121,10 +124,10 @@ const ProjectsView = () => {
         "Redux",
         "QuillJs",
         "JWT",
-        "Google OAuth2.0",
+        "Google OAuth",
         "Mongoose",
-        "React Router DOM",
-        "Styled Components",
+        "React Router",
+        "CSS-in-JS",
       ],
       links: {
         demo: "https://globblog.vercel.app/",
@@ -132,7 +135,11 @@ const ProjectsView = () => {
       },
     },
     {
-      title: "Personal Portfolio (This Website)",
+      title: (
+        <>
+          Personal Portfolio <span className="text-sm">(This Website)</span>
+        </>
+      ),
       descr:
         "A personal portfolio website showcasing my skills, projects, and more about my journey.",
       thumb: projectImage_portfolio,
@@ -142,7 +149,7 @@ const ProjectsView = () => {
         "JavaScript",
         "React",
         "Tailwind CSS",
-        "Motion (framer-motion)",
+        "Framer Motion",
       ],
       links: {
         live: "https://portfolio-vishnud.vercel.app/",
@@ -155,12 +162,12 @@ const ProjectsView = () => {
         "A personal, local-first collection of reusable UI and frontend utility components — installable via CLI.",
       thumb: projectImage_suic,
       techStack: [
+        "React",
         "Next.js",
         "TypeScript",
         "MDX",
         "Tailwind CSS",
-        "React",
-        "Motion (framer-motion)",
+        "Framer Motion",
         "Node.js",
         "etc..",
       ],

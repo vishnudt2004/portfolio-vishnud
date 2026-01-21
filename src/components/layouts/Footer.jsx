@@ -1,7 +1,5 @@
-import {
-  ArrowRightEndOnRectangleIcon,
-  PhoneIcon,
-} from "@heroicons/react/24/solid";
+import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/solid";
+import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import {
   SiGithub,
   SiLeetcode,
@@ -32,7 +30,12 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
         {/* Column */}
         <div className="flex flex-col gap-3 border-(--border-color-g) max-md:border-b md:border-r">
           <FooterSectionHeading
-            icon={<PhoneIcon aria-hidden className="size-4.5" />}
+            icon={
+              <ChatBubbleOvalLeftEllipsisIcon
+                aria-hidden
+                className="size-4.5"
+              />
+            }
           >
             Contacts
           </FooterSectionHeading>

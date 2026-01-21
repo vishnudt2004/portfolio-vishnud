@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { PaintBrushIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 import config from "@/config";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./Dropdown";
+import { PaletteRoundIcon } from "./CustomIcons";
 
 const { INITIAL_THEMES, THEMES } = config.UI;
 
@@ -56,11 +57,14 @@ const ManualThemeSwitcher = ({
     >
       <DropdownMenuTrigger asChild>
         <button
-          className="transition-scale scale-90 cursor-pointer place-items-center rounded-full bg-(--text-color-g) p-3 text-(--background-color-g) *:size-4 hover:scale-100 active:scale-90"
+          className="scale-90 cursor-pointer place-items-center rounded-full bg-(--menus-color-g) p-2.5 text-(--background-color-g) shadow transition-transform *:size-4.5 hover:scale-100 focus:scale-100 active:scale-90"
           aria-label="Change theme"
         >
           {!isOpen ? (
-            <PaintBrushIcon aria-hidden="true" />
+            <PaletteRoundIcon
+              aria-hidden="true"
+              className="[&_path]:fill-(--background-color-g)"
+            />
           ) : (
             <XMarkIcon aria-hidden="true" />
           )}

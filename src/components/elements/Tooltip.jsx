@@ -44,11 +44,11 @@ const DesktopTooltip = ({ content, children, className, ...props }) => {
           }}
           side="bottom"
           align="center"
-          sideOffset={6}
+          sideOffset={5}
           avoidCollisions
           collisionPadding={5}
           className={twMerge(
-            "data-[state=instant-open]:animate-fadeIn data-[state=delayed-open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--background-color-g) px-2 py-0.5 text-sm whitespace-nowrap text-(--text-color-g) transition-opacity duration-200",
+            "data-[state=instant-open]:animate-fadeIn data-[state=delayed-open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--background-color-g) px-2 py-0.5 text-sm whitespace-nowrap text-(--text-color-g) transition-opacity duration-200 leading-3.5",
             className,
           )}
           {...props}
@@ -78,7 +78,7 @@ const MobileTooltip = ({ content, children, className, ...props }) => {
         <RadixPopover.Content
           side="bottom"
           align="center"
-          sideOffset={6}
+          sideOffset={5}
           avoidCollisions
           collisionPadding={5}
           className={twMerge(

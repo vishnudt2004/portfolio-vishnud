@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import {
-  CubeIcon,
-  PhoneIcon,
-  UserIcon,
   XMarkIcon,
   Squares2X2Icon,
   SparklesIcon,
+  UserIcon,
+  FolderMinusIcon,
+  ChatBubbleLeftIcon,
 } from "@heroicons/react/24/solid";
 
 import config from "@/config";
@@ -44,11 +44,11 @@ function NavMenus({
             <li>
               <button
                 type="button"
-                className="relative flex cursor-pointer items-center gap-1 text-[14px] tracking-[2px] text-(--menus-color-g) duration-300 group-hover:not-hover:not-focus:opacity-60 before:absolute before:-bottom-1 before:m-auto before:h-[2px] before:w-0 before:bg-(--border-color-g) before:duration-300 hover:before:w-full max-sm:w-fit max-sm:before:-bottom-2"
+                className="relative flex cursor-pointer items-center gap-1.25 text-[14px] tracking-widest text-(--menus-color-g) duration-300 group-hover:not-hover:not-focus:opacity-60 before:absolute before:-bottom-1 before:m-auto before:h-[2px] before:w-0 before:bg-(--border-color-g) before:duration-300 hover:before:w-full max-sm:w-fit max-sm:before:-bottom-2"
                 onClick={() => onItemClick(id)}
               >
                 {name}
-                <Icon aria-hidden="true" className="size-3.5" />
+                <Icon aria-hidden className="size-3.5 opacity-90" />
               </button>
             </li>
           </NavbarMenusMotion>
@@ -247,12 +247,12 @@ const Header = () => {
     },
     {
       name: "Projects",
-      icon: CubeIcon,
+      icon: FolderMinusIcon,
       id: IDS_MAP.PROJECTS,
     },
     {
       name: "Contact",
-      icon: PhoneIcon,
+      icon: ChatBubbleLeftIcon,
       id: IDS_MAP.FOOTER,
     },
   ];

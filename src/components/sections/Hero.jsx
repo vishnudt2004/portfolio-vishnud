@@ -175,7 +175,7 @@ const HeroView = () => (
       role: "Full-stack Developer",
       email: "vishnu.d.t.2004@gmail.com",
     }}
-    tagline="I build modern web applications with clean, maintainable code and seamless user experiences."
+    tagline="I build modern web applications with a focus on clean architecture and thoughtful user experience."
     techIcons={[
       { name: "React.js", icon: SiReact },
       {

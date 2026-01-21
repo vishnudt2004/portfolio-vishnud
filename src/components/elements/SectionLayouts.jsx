@@ -4,15 +4,16 @@ import { getSectionTitleId } from "@/utils/siteUtils";
 
 // Layout naming is based on desktop structure; mobile adapts as needed.
 
-const SectionTitle = ({ children, sectionId }) => (
+const SectionTitle = ({ children, sectionId, className, ...props }) => (
   <h2
     id={sectionId ? getSectionTitleId(sectionId) : undefined}
-    className="section-title relative self-center"
+    className={twMerge("section-title relative self-center", className)}
+    {...props}
   >
     {children}
     <span
       aria-hidden="true"
-      className="zig-zag-line absolute inset-x-0 -bottom-2 mx-auto w-[85%]"
+      className="zig-zag-line absolute inset-x-0 -bottom-2 mx-auto w-[85%] [--color:var(--accent-color)]"
     />
   </h2>
 );
@@ -24,6 +25,7 @@ const SimpleLayout = ({
     <span className="block text-center text-sm opacity-50">Content</span>
   ),
   className,
+  titleProps,
 }) => (
   <div
     className={twMerge(
@@ -32,7 +34,9 @@ const SimpleLayout = ({
     )}
   >
     {sectionTitle && (
-      <SectionTitle sectionId={sectionId}>{sectionTitle}</SectionTitle>
+      <SectionTitle sectionId={sectionId} {...titleProps}>
+        {sectionTitle}
+      </SectionTitle>
     )}
     <div className="section-body">{children}</div>
   </div>
@@ -43,10 +47,13 @@ const TwoColumnsLayout = ({
   sectionId,
   left = <>Column&nbsp;1</>,
   right = <>Column&nbsp;2</>,
+  titleProps,
 }) => (
   <div className="m-auto flex max-w-6xl flex-col items-center justify-center gap-10 px-5 py-10">
     {sectionTitle && (
-      <SectionTitle sectionId={sectionId}>{sectionTitle}</SectionTitle>
+      <SectionTitle sectionId={sectionId} {...titleProps}>
+        {sectionTitle}
+      </SectionTitle>
     )}
 
     <div className="mx-auto flex min-h-[50vh] w-full max-w-6xl flex-col gap-4 md:flex-row">
