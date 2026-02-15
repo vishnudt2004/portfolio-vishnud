@@ -66,6 +66,14 @@ export default function AnimatedCursor({ className }) {
       setHasMoved(true);
     };
 
+    const down = () => {
+      ringRef.current?.classList.add("ring-active");
+    };
+
+    const up = () => {
+      ringRef.current?.classList.remove("ring-active");
+    };
+
     const loop = () => {
       rx += (x - rx) * 0.12;
       ry += (y - ry) * 0.12;
@@ -80,9 +88,15 @@ export default function AnimatedCursor({ className }) {
     };
 
     window.addEventListener("mousemove", move);
+    window.addEventListener("mousedown", down);
+    window.addEventListener("mouseup", up);
     requestAnimationFrame(loop);
 
-    return () => window.removeEventListener("mousemove", move);
+    return () => {
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mousedown", down);
+      window.removeEventListener("mouseup", up);
+    };
   }, []);
 
   if (isMobile) return;
@@ -94,7 +108,7 @@ export default function AnimatedCursor({ className }) {
         ref={dotRef}
         aria-hidden="true"
         className={twMerge(
-          "cursor-dot pointer-events-none fixed top-0 left-0 z-999 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--text-color-g)",
+          "cursor-dot pointer-events-none fixed top-0 left-0 z-999 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--text-color-g)/25",
           !hasMoved && "opacity-0",
           className?.dot,
         )}
@@ -105,7 +119,7 @@ export default function AnimatedCursor({ className }) {
         ref={ringRef}
         aria-hidden="true"
         className={twMerge(
-          "cursor-ring pointer-events-none fixed top-0 left-0 z-998 size-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-(--text-color-g)",
+          "cursor-ring pointer-events-none fixed top-0 left-0 z-998 size-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-(--text-color-g)/25",
           !hasMoved && "opacity-0",
           className?.ring,
         )}

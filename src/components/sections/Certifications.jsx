@@ -1,14 +1,22 @@
-import { DocumentCheckIcon } from "@heroicons/react/24/solid";
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+import {
+  RiCertificateLine,
+  RiCertificateFill,
+  RiFileCheckFill,
+} from "@remixicon/react";
 
-import config from "@/config";
-import { SimpleLayout } from "@/components/elements/SectionLayouts";
-import ShowcaseItem, {
+import { IDS } from "@/config/constants";
+import { take } from "@/utils/jsUtils";
+import {
+  SectionBtns,
+  SimpleLayout,
+} from "@/components/elements/SectionLayouts";
+import Card, {
   Br,
   List,
-  ShowcaseItemBtn,
-} from "@/components/elements/ShowcaseItem";
-import ShowMoreData from "@/components/elements/ShowMoreData";
+  CardActions,
+  CardButton,
+} from "@/components/elements/Card";
+import LoadMoreGrid from "@/components/elements/LoadMoreGrid";
 
 import vercelIcon from "@/assets/images/icons/vercel.svg";
 import hrIcon from "@/assets/images/icons/hackerrank.svg";
@@ -21,6 +29,7 @@ import certificate3_css from "@/assets/images/certifications-certificates/certif
 import certificate4 from "@/assets/images/certifications-certificates/certificate-4.webp";
 
 const CertificateItem = ({
+  id,
   title,
   issuer,
   date,
@@ -29,199 +38,198 @@ const CertificateItem = ({
   logo,
   logoAlt,
 }) => (
-  <ShowcaseItem
+  <Card
+    id={id}
     title={title}
     subtitle={issuer}
     date={date}
     description={description}
-    credentials={
-      credentials &&
-      (Array.isArray(credentials) ? (
-        <div className="mt-auto flex flex-wrap gap-2">
-          {credentials.map(({ name, credential }) => (
-            <ShowcaseItemBtn
-              key={name}
-              href={credential}
-              icon={<DocumentCheckIcon aria-hidden className="size-4" />}
-              aria-label="View Certification Credential"
-            >
-              {name}
-            </ShowcaseItemBtn>
-          ))}
-        </div>
-      ) : (
-        <ShowcaseItemBtn
-          href={credentials}
-          icon={<DocumentCheckIcon aria-hidden className="size-4" />}
-          aria-label="View Certification Credential"
-        >
-          View Credential
-        </ShowcaseItemBtn>
-      ))
+    actions={
+      <CardActions
+        actions={credentials}
+        fallbackLabel="View Credential"
+        itemId={id}
+      >
+        {({ key, id, label, ariaLabelledby, href }) => (
+          <CardButton
+            key={key}
+            id={id}
+            href={href}
+            icon={<RiFileCheckFill aria-hidden className="size-4" />}
+            aria-labelledby={ariaLabelledby}
+          >
+            {label}
+          </CardButton>
+        )}
+      </CardActions>
     }
     logo={logo}
     logoAlt={logoAlt}
-    leadingIcon={CheckBadgeIcon}
-    bgOverlay={<DocumentCheckIcon className="w-[120px] opacity-5" />}
+    leadingIcon={RiCertificateLine}
+    bgOverlay={<RiCertificateFill className="size-[120px] opacity-5" />}
     style={{ "--accent-color": "var(--color-green-500)" }}
   />
 );
 
 const CertificationsSection = ({ certificates }) => (
-  <SimpleLayout
-    sectionId={config.IDS_MAP.CERTIFICATIONS}
-    sectionTitle="Certifications"
-  >
-    <ShowMoreData
+  <SimpleLayout sectionId={IDS.certifications} sectionTitle="Certifications">
+    <LoadMoreGrid
       gridId="certifications-grid"
       items={certificates}
       style={{ "--cursor-accent-scoped": "var(--color-green-500)" }}
     >
       {(visibleItems) =>
-        visibleItems.map((certificate, ind) => (
-          <CertificateItem key={ind} {...certificate} />
+        visibleItems.map((certificate) => (
+          <CertificateItem key={certificate.id} {...certificate} />
         ))
       }
-    </ShowMoreData>
+    </LoadMoreGrid>
+
+    <SectionBtns
+      primary={{ label: "View all certifications", href: "/certifications" }}
+    />
   </SimpleLayout>
 );
 
-const CertificationsView = () => {
-  const certificates = [
-    {
-      title: "Responsive Web Design",
-      issuer: "freeCodeCamp",
-      date: "Sep 2025",
-      description: (
-        <>
-          Completed the <span className="underline">Responsive Web Design</span>{" "}
-          certification by building{" "}
-          <span className="underline">5 responsive projects</span>, covering
-          semantic HTML, CSS layouts, Flexbox, and media queries. Successfully
-          passed all project tests, validating core modern web design
-          principles.
-        </>
-      ),
-      credentials: [
-        { name: "View Certificate", credential: certificate4 },
-        {
-          name: "Certificate Link",
-          credential:
-            "https://www.freecodecamp.org/certification/vishnu-d-t-2004/responsive-web-design",
-        },
-      ],
-      logo: fccIcon,
-      logoAlt: "freeCodeCamp Logo",
-    },
+const certificates = [
+  {
+    id: "certificate-1",
+    title: "Next.js App Router Fundamentals",
+    issuer: "Vercel",
+    date: "May 2025",
+    description: (
+      <>
+        Completed the <span className="underline">Next.js App Router</span>{" "}
+        course by Vercel, covering file-based routing, layouts, nested routes,
+        authentication & NextAuth integration, and TypeScript support. The
+        course included <span className="underline">16 chapters</span>, all
+        documented with clear commit messages and a markdown reference table for
+        future use and knowledge sharing.
+      </>
+    ),
+    credentials: [
+      { label: "View Certificate", href: certificate1 },
+      {
+        label: "Certificate Link",
+        href: "https://nextjs.org/learn/certificate?course=dashboard-app&user=56300&certId=dashboard-app-56300-1747598384094",
+      },
+      {
+        label: "Related LinkedIn Post",
+        href: "https://www.linkedin.com/pulse/how-i-learned-fundamentals-nextjs-app-router-project-based-vishnu-d-ifxdc",
+      },
+      {
+        label: "GitHub Repo",
+        href: "https://github.com/vishnudt2004/nextjs-dashboard",
+      },
+    ],
+    logo: vercelIcon,
+    logoAlt: "Vercel Logo",
+  },
 
-    {
-      title: "Frontend Developer (React)",
-      issuer: "HackerRank",
-      date: "Sep 2025",
-      description: (
-        <>
-          Earned the{" "}
-          <span className="underline">Frontend Developer (React)</span>{" "}
-          certificate through a 60-minute assessment of coding challenges and
-          MCQs. Covered{" "}
-          <span className="underline">React, CSS, and JavaScript</span>,
-          including implementing features in React, solving CSS-based questions,
-          and writing required JavaScript functionality. Cleared in a single
-          attempt.
-        </>
-      ),
-      credentials: [
-        { name: "View Certificate", credential: certificate2 },
-        {
-          name: "Certificate Link",
-          credential: "https://www.hackerrank.com/certificates/7a2fef995346",
-        },
-      ],
-      logo: hrIcon,
-      logoAlt: "HackerRank Logo",
-    },
+  {
+    id: "certificate-2",
+    title: "Frontend Developer (React)",
+    issuer: "HackerRank",
+    date: "Sep 2025",
+    description: (
+      <>
+        Earned the <span className="underline">Frontend Developer (React)</span>{" "}
+        certificate through a 60-minute assessment of coding challenges and
+        MCQs. Covered{" "}
+        <span className="underline">React, CSS, and JavaScript</span>, including
+        implementing features in React, solving CSS-based questions, and writing
+        required JavaScript functionality. Cleared in a single attempt.
+      </>
+    ),
+    credentials: [
+      { label: "View Certificate", href: certificate2 },
+      {
+        label: "Certificate Link",
+        href: "https://www.hackerrank.com/certificates/7a2fef995346",
+      },
+    ],
+    logo: hrIcon,
+    logoAlt: "HackerRank Logo",
+  },
 
-    {
-      title: "Next.js App Router Fundamentals",
-      issuer: "Vercel",
-      date: "May 2025",
-      description: (
-        <>
-          Completed the <span className="underline">Next.js App Router</span>{" "}
-          course by Vercel, covering file-based routing, layouts, nested routes,
-          authentication & NextAuth integration, and TypeScript support. The
-          course included <span className="underline">16 chapters</span>, all
-          documented with clear commit messages and a markdown reference table
-          for future use and knowledge sharing.
-        </>
-      ),
-      credentials: [
-        { name: "View Certificate", credential: certificate1 },
-        {
-          name: "Certificate Link",
-          credential:
-            "https://nextjs.org/learn/certificate?course=dashboard-app&user=56300&certId=dashboard-app-56300-1747598384094",
-        },
-        {
-          name: "Related LinkedIn Post",
-          credential:
-            "https://www.linkedin.com/pulse/how-i-learned-fundamentals-nextjs-app-router-project-based-vishnu-d-ifxdc",
-        },
-        {
-          name: "GitHub Repo",
-          credential: "https://github.com/vishnudt2004/nextjs-dashboard",
-        },
-      ],
-      logo: vercelIcon,
-      logoAlt: "Vercel Logo",
-    },
+  {
+    id: "certificate-3",
+    title: "Responsive Web Design",
+    issuer: "freeCodeCamp",
+    date: "Sep 2025",
+    description: (
+      <>
+        Completed the <span className="underline">Responsive Web Design</span>{" "}
+        certification by building{" "}
+        <span className="underline">5 responsive projects</span>, covering
+        semantic HTML, CSS layouts, Flexbox, and media queries. Successfully
+        passed all project tests, validating core modern web design principles.
+      </>
+    ),
+    credentials: [
+      { label: "View Certificate", href: certificate4 },
+      {
+        label: "Certificate Link",
+        href: "https://www.freecodecamp.org/certification/vishnu-d-t-2004/responsive-web-design",
+      },
+    ],
+    logo: fccIcon,
+    logoAlt: "freeCodeCamp Logo",
+  },
 
-    {
-      title: "HackerRank Basic Certificates",
-      issuer: "HackerRank",
-      date: "Apr 2025",
-      description: (
-        <>
-          Earned three basic-level certificates in{" "}
-          <span className="underline">CSS, JavaScript, and React</span> from
-          HackerRank.
-          <Br />
-          <List
-            items={[
-              <>
-                <b>CSS (20 mins):</b> Covered cascading, inheritance, text
-                formatting, layouts, and box model fundamentals
-              </>,
-              <>
-                <b>JavaScript (1 hr 30 mins):</b> Focused on functions,
-                currying, hoisting, scope, inheritance, events, and error
-                handling
-              </>,
-              <>
-                <b>React (1 hr 30 mins):</b> Covered routing basics, rendering,
-                state management, ES6 concepts, and form validation
-              </>,
-            ]}
-          />
-          <Br />
-          All cleared on the first attempt.
-        </>
-      ),
-      credentials: [
-        { name: "CSS (Basic)", credential: certificate3_css },
-        { name: "JS (Basic)", credential: certificate3_js },
-        { name: "React (Basic)", credential: certificate3_react },
-        {
-          name: "Certificates Link",
-          credential: "https://www.hackerrank.com/profile/vishnu_d_t_2004",
-        },
-      ],
-      logo: hrIcon,
-      logoAlt: "HackerRank Logo",
-    },
-  ];
+  {
+    id: "certificate-4",
+    title: "HackerRank Basic Certificates",
+    issuer: "HackerRank",
+    date: "Apr 2025",
+    description: (
+      <>
+        Earned three basic-level certificates in{" "}
+        <span className="underline">CSS, JavaScript, and React</span> from
+        HackerRank.
+        <Br />
+        <List
+          items={[
+            <>
+              <b>CSS (20 mins):</b> Covered cascading, inheritance, text
+              formatting, layouts, and box model fundamentals
+            </>,
+            <>
+              <b>JavaScript (1 hr 30 mins):</b> Focused on functions, currying,
+              hoisting, scope, inheritance, events, and error handling
+            </>,
+            <>
+              <b>React (1 hr 30 mins):</b> Covered routing basics, rendering,
+              state management, ES6 concepts, and form validation
+            </>,
+          ]}
+        />
+        <Br />
+        All cleared on the first attempt.
+      </>
+    ),
+    credentials: [
+      { label: "CSS (Basic)", href: certificate3_css },
+      { label: "JS (Basic)", href: certificate3_js },
+      { label: "React (Basic)", href: certificate3_react },
+      {
+        label: "Certificates Link",
+        href: "https://www.hackerrank.com/profile/vishnu_d_t_2004",
+      },
+    ],
+    logo: hrIcon,
+    logoAlt: "HackerRank Logo",
+  },
+];
 
-  return <CertificationsSection certificates={certificates} />;
+const CertificationsView = ({ all }) => {
+  const FEATURED_COUNT = 3;
+
+  return (
+    <CertificationsSection
+      certificates={all ? certificates : take(certificates, FEATURED_COUNT)}
+    />
+  );
 };
 
 export default CertificationsView;

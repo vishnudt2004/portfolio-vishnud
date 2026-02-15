@@ -21,20 +21,37 @@ body {
     opacity 0.2s;
 }
 
+.cursor-ring {
+  transition:
+    width 0.2s,
+    height 0.2s,
+    transform 150ms ease;
+
+  &.ring-active {
+    --ring-size: 25px;
+    width: var(--ring-size);
+    height: var(--ring-size);
+  }
+}
+
 body {
   &:has(
       .cursor-effect-active:hover,
-      a:not(.cursor-effect-subtle):hover,
-      button:not(.cursor-effect-subtle):hover
+      a[href]:not(.cursor-effect-subtle):hover,
+      button:not([disabled], .cursor-effect-subtle):hover
     ) {
     .cursor-ring {
-      --cursor-ring-size: 45px;
-      width: var(--cursor-ring-size);
-      height: var(--cursor-ring-size);
+      border-color: color-mix(in srgb, var(--text-color-g), transparent 50%);
+
+      &:not(.ring-active) {
+        --ring-size: 40px;
+        width: var(--ring-size);
+        height: var(--ring-size);
+      }
     }
 
     .cursor-dot {
-      box-shadow: 0 0 10px 2px var(--cursor-accent);
+      background-color: var(--text-color-g);
     }
   }
 
@@ -57,8 +74,8 @@ body {
     *:not(
       :has(
         .cursor-effect-active:hover,
-        a:not(.cursor-effect-subtle):hover,
-        button:not(.cursor-effect-subtle):hover
+        a[href]:not(.cursor-effect-subtle):hover,
+        button:not([disabled], .cursor-effect-subtle):hover
       )
     ) {
     .cursor-ring {
@@ -66,9 +83,10 @@ body {
     }
 
     .cursor-dot {
+      --dot-size: 12px;
       opacity: 0.3;
-      width: 12px;
-      height: 12px;
+      width: var(--dot-size);
+      height: var(--dot-size);
       background: var(--cursor-accent);
     }
   }

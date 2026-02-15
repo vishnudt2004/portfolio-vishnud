@@ -50,7 +50,7 @@ const DropdownMenuItem = ({ active, ...props }) => (
       "cursor-pointer bg-(--background-color-g) px-4 py-1 text-center text-sm text-(--text-color-g) focus-visible:m-1",
       active
         ? "border-2 border-(--accent-color-g)"
-        : "hover:bg-(--text-color-g)/5",
+        : "focus-reset outline-offset-1 outline-(--text-color-g) hover:bg-(--text-color-g)/5 focus:bg-(--text-color-g)/5 focus-visible:outline-2",
     )}
     {...props}
     disabled={active}

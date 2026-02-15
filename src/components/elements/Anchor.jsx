@@ -1,10 +1,18 @@
 import { twMerge } from "tailwind-merge";
-import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
+import { RiArrowRightUpLongLine } from "@remixicon/react";
 
-const AnchorIcon = () => (
-  <span className="relative inline-flex shrink-0 overflow-hidden *:group-[a:hover,a:focus-visible]:duration-300">
-    <ArrowUpRightIcon className="inline size-4 rounded-full group-[a:hover,a:focus-visible]:translate-x-4 group-[a:hover,a:focus-visible]:-translate-y-4" />
-    <ArrowUpRightIcon className="absolute right-4 -bottom-4 inline size-4 rounded-full group-[a:hover,a:focus-visible]:right-0 group-[a:hover,a:focus-visible]:bottom-0" />
+const AnchorIcon = ({ icon = <RiArrowRightUpLongLine />, className }) => (
+  <span
+    className={twMerge(
+      "relative inline-flex shrink-0 overflow-hidden",
+      "*:inline *:size-4.5 *:rounded-full *:group-[a:hover,a:focus-visible]:duration-300",
+      "*:first:group-[a:hover,a:focus-visible]:translate-x-4 *:first:group-[a:hover,a:focus-visible]:-translate-y-4",
+      "*:last:absolute *:last:right-4 *:last:-bottom-4 *:last:group-[a:hover,a:focus-visible]:right-0 *:last:group-[a:hover,a:focus-visible]:bottom-0",
+      className,
+    )}
+  >
+    {icon}
+    {icon}
   </span>
 );
 
@@ -12,7 +20,7 @@ const Anchor = ({
   children,
   color = "var(--anchor-color-g)",
   icon = <AnchorIcon />,
-  target,
+  target = "_blank",
   ...attr
 }) => {
   const style = {
@@ -23,7 +31,7 @@ const Anchor = ({
 
   return (
     <a
-      target={target || "_blank"}
+      target={target}
       rel="noopener noreferrer"
       {...attr}
       className={twMerge("group anchor", attr?.className)}
@@ -35,7 +43,7 @@ const Anchor = ({
       )}
       &nbsp;
       {icon && (
-        <span aria-hidden className="inline-flex">
+        <span aria-hidden className="-ml-px inline-flex">
           {icon}
         </span>
       )}
@@ -44,3 +52,4 @@ const Anchor = ({
 };
 
 export default Anchor;
+export { AnchorIcon };

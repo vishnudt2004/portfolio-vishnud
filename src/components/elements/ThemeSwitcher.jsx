@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { RiCloseFill, RiPaletteFill } from "@remixicon/react";
 
 import config from "@/config";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -12,7 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./Dropdown";
-import { PaletteRoundIcon } from "./CustomIcons";
 
 const { INITIAL_THEMES, THEMES } = config.UI;
 
@@ -57,16 +56,13 @@ const ManualThemeSwitcher = ({
     >
       <DropdownMenuTrigger asChild>
         <button
-          className="scale-90 cursor-pointer place-items-center rounded-full bg-(--menus-color-g) p-2.5 text-(--background-color-g) shadow transition-transform *:size-4.5 hover:scale-100 focus:scale-100 active:scale-90"
+          className="scale-90 place-items-center rounded-full bg-(--menus-color-g) p-2.5 text-(--background-color-g) shadow transition-transform *:size-4.5 hover:scale-100 focus:scale-100 active:scale-90"
           aria-label="Change theme"
         >
           {!isOpen ? (
-            <PaletteRoundIcon
-              aria-hidden="true"
-              className="[&_path]:fill-(--background-color-g)"
-            />
+            <RiPaletteFill aria-hidden />
           ) : (
-            <XMarkIcon aria-hidden="true" />
+            <RiCloseFill aria-hidden />
           )}
         </button>
       </DropdownMenuTrigger>

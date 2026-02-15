@@ -3,14 +3,15 @@ const DISABLED = true;
 
 import { twMerge } from "tailwind-merge";
 import {
-  ChatBubbleLeftIcon,
-  EnvelopeIcon,
-  PaperAirplaneIcon,
-  TagIcon,
-  UserIcon,
-} from "@heroicons/react/24/solid";
+  RiEditBoxFill,
+  RiMailFill,
+  RiPriceTag3Fill,
+  RiSendPlaneFill,
+  RiUser3Fill,
+} from "@remixicon/react";
 
-import config from "@/config";
+import { IDS } from "@/config/constants";
+import Button from "@/elements/Button";
 import { SimpleLayout } from "@/components/elements/SectionLayouts";
 
 const Input = ({
@@ -50,10 +51,7 @@ const Input = ({
 
 const ContactForm = () => {
   return (
-    <SimpleLayout
-      sectionId={config.IDS_MAP.CONTACTFORM}
-      sectionTitle="Contact Me"
-    >
+    <SimpleLayout sectionId={IDS.contactForm} sectionTitle="Contact Me">
       <form noValidate={DISABLED}>
         <fieldset
           disabled={DISABLED}
@@ -66,7 +64,7 @@ const ContactForm = () => {
             name="name"
             label="Your Name"
             placeholder="Your Name"
-            icon={UserIcon}
+            icon={RiUser3Fill}
             autoComplete="name"
           />
           <Input
@@ -75,7 +73,7 @@ const ContactForm = () => {
             name="email"
             label="Your Email"
             placeholder="Your Email"
-            icon={EnvelopeIcon}
+            icon={RiMailFill}
             autoComplete="email"
           />
           <Input
@@ -84,7 +82,7 @@ const ContactForm = () => {
             name="subject"
             label="Subject"
             placeholder="Subject"
-            icon={TagIcon}
+            icon={RiPriceTag3Fill}
             autoComplete="off"
           />
           <Input
@@ -93,21 +91,17 @@ const ContactForm = () => {
             name="message"
             label="Your Message"
             placeholder="Your Message"
-            icon={ChatBubbleLeftIcon}
+            icon={RiEditBoxFill}
             className="max-h-40 min-h-20"
           />
 
-          <button
+          <Button
             type="submit"
             disabled={DISABLED}
-            className="*: mt-4 flex w-fit max-w-full cursor-pointer items-center justify-center gap-4 rounded-full bg-(--text-color-g)/80 px-4 py-1.5 text-(--background-color-g) transition hover:bg-(--text-color-g) focus:bg-(--text-color-g) active:scale-90 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-(--text-color-g)/80 disabled:active:scale-100"
+            className="mt-4 px-4 py-1.5"
           >
-            Send{" "}
-            <PaperAirplaneIcon
-              aria-hidden
-              className="h-4 w-4 -translate-y-0.5 -rotate-35"
-            />
-          </button>
+            Send <RiSendPlaneFill aria-hidden className="size-4" />
+          </Button>
         </fieldset>
       </form>
     </SimpleLayout>

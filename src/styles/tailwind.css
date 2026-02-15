@@ -15,16 +15,24 @@
   }
 
   .anchor {
-    @apply relative inline-flex items-center text-[var(--anchor-color,var(--anchor-color-g))] before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-[var(--anchor-decoration-color,_var(--anchor-decoration-color-g))] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[var(--anchor-decoration-color_hover,_var(--anchor-decoration-color-g_hover))] after:duration-150 hover:after:w-full;
+    @apply relative inline-flex items-center text-(--anchor-color,var(--anchor-color-g)) before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-(--anchor-decoration-color,var(--anchor-decoration-color-g)) after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-(--anchor-decoration-color_hover,var(--anchor-color-g)) after:duration-150 hover:after:w-full focus:after:w-full;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-1 rounded-full bg-(--btn-color,var(--btn-color-g))/90 px-2.5 py-1 text-sm font-medium tracking-wide text-(--btn-fg-color,var(--btn-fg-color-g)) transition-colors hover:bg-(--btn-color,var(--btn-color-g)) focus:bg-(--btn-color,var(--btn-color-g));
+  }
+
+  .btn.btn-secondary {
+    @apply bg-transparent text-(--btn-secondary-color,var(--btn-secondary-color-g))/85 ring ring-(--btn-secondary-color,var(--btn-secondary-color-g))/50 transition ring-inset hover:text-(--btn-secondary-color,var(--btn-secondary-color-g)) hover:ring-(--btn-secondary-color,var(--btn-secondary-color-g)) focus:text-(--btn-secondary-color,var(--btn-secondary-color-g)) focus:ring-(--btn-secondary-color,var(--btn-secondary-color-g));
   }
 
   .zig-zag-line {
     --a: 90deg; /* control the angle */
     --s: 10px; /* size of the zig-zag */
-    --b: 1px; /* control the thickness */
-    --color: var(--text-color-g);
+    --b: 2px; /* control the thickness */
+    --color: var(--border-color-g);
 
-    background: color-mix(in srgb, var(--color), transparent 40%);
+    background: var(--color);
     height: calc(var(--b) + var(--s) / (2 * tan(var(--a) / 2)));
     width: 100%;
     --_g: var(--s) repeat-x
@@ -77,7 +85,10 @@
 /* custom tailwind utilities */
 
 @utility fancy-bg-1 {
-  @apply bg-[radial-gradient(var(--fancy-bg-1-color)_1px,transparent_1px)] bg-[length:16px_16px];
+  --gap: 25px;
+  --color: var(--fancy-bg-1-color);
+  --size: 0.08em; /* 1.3px */
+  @apply bg-[radial-gradient(var(--color)_var(--size),transparent_var(--size))] bg-size-[var(--gap)_var(--gap)];
 }
 
 @utility fancy-bg-2 {

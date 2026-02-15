@@ -9,7 +9,10 @@
     var(--anchor-color-g),
     transparent 80%
   );
-  --anchor-decoration-color-g_hover: var(--anchor-color-g); /* a:hover */
+
+  --btn-color-g: var(--text-color-g);
+  --btn-fg-color-g: var(--background-color-g);
+  --btn-secondary-color-g: var(--text-color-g);
 
   --scrollbar-track-color-g: var(--background-color-g);
   --scrollbar-thumb-color-g: var(--text-color-g);
@@ -22,7 +25,7 @@
   --fancy-bg-2-color: color-mix(
     in srgb,
     var(--border-color-g),
-    transparent 80%
+    transparent 70%
   );
 
   /* Z-index map */

@@ -1,10 +1,6 @@
 import { useFullscreen } from "@/hooks/useFullScreen";
-import {
-  ArrowsPointingInIcon,
-  ArrowsPointingOutIcon,
-} from "@heroicons/react/24/solid";
-
 import { DesktopTooltip as Tooltip } from "./Tooltip";
+import { FullscreenEnterIcon, FullscreenExitIcon } from "./CustomIcons";
 
 export default function FullscreenToggle() {
   const { isFullscreen, enter, exit } = useFullscreen({
@@ -24,12 +20,15 @@ export default function FullscreenToggle() {
       <button
         type="button"
         onClick={toggle}
-        aria-description="Full screen mode"
         aria-label="Toggle fullscreen mode"
         aria-pressed={isFullscreen}
-        className="inline-flex cursor-pointer items-center justify-center rounded-full border border-(--border-color-g) bg-(--background-color-g) p-3 shadow-md transition *:size-6 hover:scale-105 focus:scale-105 focus:opacity-100 active:scale-90"
+        className="inline-flex items-center justify-center rounded-full border border-(--border-color-g) bg-(--background-color-g) p-3 shadow-md transition *:size-6 hover:scale-105 focus:scale-105 focus:opacity-100 active:scale-90"
       >
-        {isFullscreen ? <ArrowsPointingInIcon /> : <ArrowsPointingOutIcon />}
+        {isFullscreen ? (
+          <FullscreenExitIcon style={{ "--color": "var(--text-color-g)" }} />
+        ) : (
+          <FullscreenEnterIcon style={{ "--color": "var(--text-color-g)" }} />
+        )}
       </button>
     </Tooltip>
   );

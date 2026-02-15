@@ -2,13 +2,17 @@ import { createElement, Fragment } from "react";
 import { twMerge } from "tailwind-merge";
 
 import Img from "./Img";
+import Button from "./Button";
 
-const ShowcaseItem = ({
+const getTitleId = (id) => (id ? `${id}-title` : undefined); // sync
+
+const Card = ({
+  id,
   title,
   subtitle,
   date,
   description,
-  credentials,
+  actions,
   leadingIcon,
   logo,
   logoAlt,
@@ -16,6 +20,8 @@ const ShowcaseItem = ({
   style,
   className,
 }) => {
+  const titleId = getTitleId(id);
+
   return (
     <div
       className={twMerge(
@@ -50,7 +56,9 @@ const ShowcaseItem = ({
           })
         )}
         <div>
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <h3 id={titleId} className="text-lg font-semibold">
+            {title}
+          </h3>
 
           <p className="text-sm font-semibold text-(--text-secondary-color-g)">
             <span className="mr-2">{subtitle}</span>
@@ -66,24 +74,49 @@ const ShowcaseItem = ({
         {description}
       </p>
 
-      {credentials}
+      {actions}
     </div>
   );
 };
 
-const ShowcaseItemBtn = ({ children, icon, href, className }) => (
-  <a
-    aria-label={`${children} (opens in new tab)`}
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={twMerge(
-      "mt-auto inline-flex w-fit items-center justify-center gap-1 rounded-full bg-(--accent-color)/90 px-2 py-1 text-sm text-white transition-colors hover:bg-(--accent-color) focus:bg-(--accent-color)",
-      className,
-    )}
-  >
-    {icon} {children}
-  </a>
+const CardActions = ({ itemId, actions, fallbackLabel, children }) => {
+  if (!actions?.length) return null;
+
+  const titleId = getTitleId(itemId);
+
+  return (
+    <div className="mt-auto flex flex-wrap gap-2">
+      {actions.map(({ label, href }, i) => {
+        const actionId = `${itemId}-action-${i}`;
+        const finalLabel = label || fallbackLabel;
+
+        return children({
+          actionId,
+          id: actionId,
+          titleId,
+          label: finalLabel,
+          href,
+          ariaLabelledby: `${actionId} ${titleId}`,
+          key: actionId,
+        });
+      })}
+    </div>
+  );
+};
+
+const CardButton = ({ children, icon, href, className, ...attr }) => (
+  <Button asChild color="var(--accent-color)" fgColor="white" icon={icon}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={twMerge("mt-auto w-fit", className)}
+      {...attr}
+    >
+      {children}
+      <span className="sr-only">(opens in new tab)</span>
+    </a>
+  </Button>
 );
 
 const List = ({ items }) =>
@@ -99,7 +132,7 @@ const Br = ({ emptyLine = true, className }) => (
     <br aria-hidden="true" className={className} />
     {emptyLine && <br aria-hidden="true" className={className} />}
   </>
-); // Visual spacing
+);
 
 const Hr = ({ className }) => (
   <hr
@@ -111,5 +144,5 @@ const Hr = ({ className }) => (
   />
 );
 
-export default ShowcaseItem;
-export { ShowcaseItemBtn, Br, Hr, List };
+export default Card;
+export { CardActions, CardButton, Br, Hr, List };

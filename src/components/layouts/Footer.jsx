@@ -1,5 +1,5 @@
-import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/solid";
-import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
+import { twMerge } from "tailwind-merge";
+import { RiCompass4Line, RiLinksLine } from "@remixicon/react";
 import {
   SiGithub,
   SiLeetcode,
@@ -7,12 +7,11 @@ import {
   SiGmail,
 } from "@icons-pack/react-simple-icons";
 
-import config from "@/config";
-import { scrollIntoSection } from "@/utils/jsUtils";
+import { IDS } from "@/config/constants";
+import { filterActiveSections } from "@/utils/siteUtils";
+import { useNavigateToSection } from "@/hooks/useNavigateToSection";
 import SocialBtn from "@/components/elements/SocialBtn";
 import { LinkedinIcon } from "@/components/elements/CustomIcons";
-
-const { IDS_MAP, SECTIONS } = config;
 
 const FooterSectionHeading = ({ children, icon }) => (
   <h2 className="flex items-center gap-2 text-xl font-medium">
@@ -20,34 +19,30 @@ const FooterSectionHeading = ({ children, icon }) => (
   </h2>
 );
 
-const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
+const FooterLayout = ({ connections, quickLinks, cpyText }) => {
+  const navigateToSection = useNavigateToSection();
+
   return (
     <footer
-      id={IDS_MAP.FOOTER}
+      id={IDS.footer}
       className="fancy-bg-2 relative min-h-[50vh] border-t border-(--border-color-g) p-6 text-(--text-color-g)"
     >
       <div className="mx-auto mb-[40px] grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
         {/* Column */}
         <div className="flex flex-col gap-3 border-(--border-color-g) max-md:border-b md:border-r">
           <FooterSectionHeading
-            icon={
-              <ChatBubbleOvalLeftEllipsisIcon
-                aria-hidden
-                className="size-4.5"
-              />
-            }
+            icon={<RiLinksLine aria-hidden className="size-5.5" />}
           >
-            Contacts
+            Connect
           </FooterSectionHeading>
 
           <ul className="flex h-full flex-wrap gap-4 p-5">
-            {contacts.map(({ name, link, icon, ariaLabel }) => (
-              <li key={name}>
+            {connections.map(({ label, link, icon }) => (
+              <li key={label}>
                 <SocialBtn
-                  name={name}
+                  label={label}
                   link={link}
                   icon={icon}
-                  aria-label={`${ariaLabel} (opens in new tab)`}
                   labelWidth="8ch"
                 />
               </li>
@@ -58,21 +53,24 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
         {/* Column */}
         <div>
           <FooterSectionHeading
-            icon={
-              <ArrowRightEndOnRectangleIcon aria-hidden className="size-5" />
-            }
+            icon={<RiCompass4Line aria-hidden className="size-5.5" />}
           >
             Quick Links
           </FooterSectionHeading>
-          <ul className="mt-2 w-fit columns-2 space-y-2 pt-4 pl-3">
-            {quickLinks.map((qLink) => (
-              <li key={qLink.id}>
+          <ul
+            className={twMerge(
+              "mt-2 w-fit columns-2 space-y-2 pt-4 pl-3",
+              quickLinks.length > 6 && "lg:columns-3",
+            )}
+          >
+            {quickLinks.map(({ id, label }) => (
+              <li key={id}>
                 <button
                   type="button"
-                  onClick={() => scrollIntoSection(undefined, qLink.id)}
-                  className="cursor-pointer hover:underline"
+                  className="leading-4 hover:underline focus:underline"
+                  onClick={() => navigateToSection(id)}
                 >
-                  {qLink.name}
+                  {label}
                 </button>
               </li>
             ))}
@@ -88,21 +86,19 @@ const FooterCreator = ({ contacts, quickLinks, cpyText }) => {
 };
 
 const Footer = () => {
-  const contacts = [
+  const connections = [
     {
-      name: "GitHub",
+      label: "GitHub",
       link: "https://github.com/vishnudt2004",
       icon: <SiGithub aria-hidden title={null} className="scale-110" />,
-      ariaLabel: "GitHub Profile",
     },
     {
-      name: "LinkedIn",
+      label: "LinkedIn",
       link: "https://www.linkedin.com/in/vishnu-dt",
       icon: <LinkedinIcon aria-hidden title={null} className="scale-115" />,
-      ariaLabel: "LinkedIn Profile",
     },
     {
-      name: "LeetCode",
+      label: "LeetCode",
       link: "https://leetcode.com/vishnud2004",
       icon: (
         <SiLeetcode
@@ -112,10 +108,9 @@ const Footer = () => {
           className="scale-100"
         />
       ),
-      ariaLabel: "LeetCode Profile",
     },
     {
-      name: "Hacker Rank",
+      label: "Hacker Rank",
       link: "https://www.hackerrank.com/profile/vishnu_d_t_2004",
       icon: (
         <SiHackerrank
@@ -125,10 +120,9 @@ const Footer = () => {
           className="scale-95"
         />
       ),
-      ariaLabel: "HackerRank Profile",
     },
     {
-      name: "Email",
+      label: "Email",
       link: "mailto:vishnu.d.t.2004@gmail.com",
       icon: (
         <SiGmail
@@ -138,22 +132,29 @@ const Footer = () => {
           className="scale-95"
         />
       ),
-      ariaLabel: "Mail me",
     },
     // Phone: "tel:+91936350XXXX",
   ];
 
-  const quickLinks = SECTIONS.filter((s) => s.enabled && s.id !== "hero").map(
-    (s) => ({ id: s.id, name: s.name }),
-  );
+  const quickLinks = filterActiveSections([
+    { id: "about", label: "About" },
+    { id: "proficiencies", label: "Proficiencies" },
+    { id: "projects", label: "Projects" },
+    { id: "experience", label: "Experience" },
+    { id: "achievements", label: "Achievements" },
+    { id: "certifications", label: "Certifications" },
+    { id: "activities", label: "Activities" },
+    { id: "testimonials", label: "Testimonials" },
+    { id: "contact-form", label: "Contact Form" },
+  ]);
 
   const cpyText = (
     <>&copy; {new Date().getFullYear()} Vishnu D. All Rights Reserved.</>
   );
 
   return (
-    <FooterCreator
-      contacts={contacts}
+    <FooterLayout
+      connections={connections}
       quickLinks={quickLinks}
       cpyText={cpyText}
     />

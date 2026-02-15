@@ -48,7 +48,7 @@ const DesktopTooltip = ({ content, children, className, ...props }) => {
           avoidCollisions
           collisionPadding={5}
           className={twMerge(
-            "data-[state=instant-open]:animate-fadeIn data-[state=delayed-open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--background-color-g) px-2 py-0.5 text-sm whitespace-nowrap text-(--text-color-g) transition-opacity duration-200 leading-3.5",
+            "data-[state=instant-open]:animate-fadeIn data-[state=delayed-open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--background-color-g) px-1 py-0.5 text-sm leading-3.5 whitespace-nowrap text-(--text-color-g) transition-opacity duration-200",
             className,
           )}
           {...props}
@@ -104,5 +104,12 @@ const HybridTooltip = (props) => {
   return <DesktopTooltip {...props} />;
 };
 
+// Shortened alias
+const Tip = ({ children, tip, ...props }) => (
+  <HybridTooltip content={tip} {...props}>
+    {children}
+  </HybridTooltip>
+);
+
 export default HybridTooltip;
-export { DesktopTooltip, MobileTooltip };
+export { DesktopTooltip, MobileTooltip, Tip };

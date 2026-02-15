@@ -5,9 +5,7 @@ const scrollIntoTop = (e) => {
   window.scrollTo(0, 0);
 };
 
-const scrollIntoSection = (e, id, offset = -65) => {
-  e?.preventDefault();
-
+const scrollToSection = (id, offset = -65) => {
   const el = document.getElementById(id);
   if (!el) return;
 
@@ -19,4 +17,6 @@ const setHTMLOverflowY = (condition) => {
   document.documentElement.style.overflowY = condition ? "hidden" : "auto";
 };
 
-export { scrollIntoTop, scrollIntoSection, setHTMLOverflowY };
+const take = (arr, max) => (max ? arr.slice(0, max) : arr);
+
+export { scrollIntoTop, scrollToSection, setHTMLOverflowY, take };
