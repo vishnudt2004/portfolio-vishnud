@@ -11,7 +11,7 @@ import {
 } from "@remixicon/react";
 
 import { IDS } from "@/config/constants";
-import Button from "@/ui/Button";
+import Button from "@/components/ui/Button";
 import { SimpleLayout } from "@/components/ui/SectionLayouts";
 
 const Input = ({
