@@ -7,7 +7,14 @@ import { DropdownMotion } from "./Animations";
 const DropdownMenu = (props) => (
   <RadixDropdownMenu.Root modal={false} {...props} />
 );
-const DropdownMenuTrigger = RadixDropdownMenu.Trigger;
+const DropdownMenuTrigger = (props) => (
+  <RadixDropdownMenu.Trigger
+    onKeyDown={(e) => {
+      if (e.key === "ArrowDown") e.preventDefault(); // Prevent opening via ArrowDown
+    }}
+    {...props}
+  />
+);
 
 const DropdownMenuArrow = RadixDropdownMenu.Arrow;
 
@@ -22,13 +29,15 @@ const DropdownMenuContent = ({
     <AnimatePresence mode="wait">
       {isOpen && (
         <RadixDropdownMenu.Portal
-          container={containerRef ? containerRef : document.body}
+          container={containerRef ? containerRef?.current : document.body}
           forceMount
         >
           <RadixDropdownMenu.Content {...props} ref={forwardedRef} loop asChild>
             <DropdownMotion isOpen={isOpen}>
-              <div className="secondary-scrollbar z-(--z-dropdown) max-h-50 w-40 gap-1 overflow-y-auto border border-(--border-color-g) bg-(--background-color-g) p-1">
-                {children}
+              <div className="z-(--z-dropdown) w-40 overflow-hidden rounded-2xl border border-(--border-color-g) bg-(--bg-color-g)">
+                <div className="secondary-scrollbar max-h-50 overflow-y-auto p-1">
+                  {children}
+                </div>
               </div>
             </DropdownMotion>
           </RadixDropdownMenu.Content>
@@ -47,10 +56,10 @@ const DropdownMenuLabel = (props) => (
 const DropdownMenuItem = ({ active, ...props }) => (
   <RadixDropdownMenu.Item
     className={twMerge(
-      "cursor-pointer bg-(--background-color-g) px-4 py-1 text-center text-sm text-(--text-color-g) focus-visible:m-1",
+      "cursor-pointer rounded-[11px] bg-(--bg-color-g) px-4 py-1 text-center text-sm text-(--text-color-g)",
       active
-        ? "border-2 border-(--accent-color-g)"
-        : "focus-reset outline-offset-1 outline-(--text-color-g) hover:bg-(--text-color-g)/5 focus:bg-(--text-color-g)/5 focus-visible:outline-2",
+        ? "my-1 bg-(--accent-color-g)/25"
+        : "focus-reset hover:bg-(--text-color-g)/25 focus-visible:bg-(--text-color-g)/25 focus-visible:outline-0",
     )}
     {...props}
     disabled={active}

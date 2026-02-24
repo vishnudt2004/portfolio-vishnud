@@ -2,11 +2,11 @@
 
 html,
 html.theme-light {
-  --background-color-g: #f5f5f5;
+  --bg-color-g: #f5f5f5;
   --text-color-g: #1e1e1e;
   --text-secondary-color-g: var(--color-gray-700);
   --border-color-g: #ddd;
-  --menus-color-g: #555;
+  --menus-color-g: #1e1e1e;
   --highlight-primary-color-g: #222;
   --highlight-secondary-color-g: #ddd;
 
@@ -39,17 +39,17 @@ html.theme-pitch-black {
 }
 
 html.theme-dark {
-  --background-color-g: #0b1215;
+  --bg-color-g: #0b1215;
 }
 
 html.theme-pitch-black {
-  --background-color-g: #0c0c0c;
+  --bg-color-g: #000;
 }
 
 /* Soft & Neutral */
 
 html.theme-paper {
-  --background-color-g: #f8f4ef;
+  --bg-color-g: #f8f4ef;
   --text-color-g: #052344;
   --text-secondary-color-g: #003e81;
   --border-color-g: #ddd6c0;
@@ -64,7 +64,7 @@ html.theme-paper {
 }
 
 html.theme-sepia {
-  --background-color-g: #f4ecd8;
+  --bg-color-g: #f4ecd8;
   --text-color-g: #5b4636;
   --text-secondary-color-g: #8b6f58;
   --border-color-g: #d6c3a3;
@@ -83,7 +83,7 @@ html.theme-sepia {
 }
 
 html.theme-minty {
-  --background-color-g: #e8fff4;
+  --bg-color-g: #e8fff4;
   --text-color-g: #2b4a42;
   --text-secondary-color-g: #558f77;
   --border-color-g: #a1e0c9;
@@ -102,7 +102,7 @@ html.theme-minty {
 }
 
 html.theme-lavender {
-  --background-color-g: #f5f0ff;
+  --bg-color-g: #f5f0ff;
   --text-color-g: #4a3f72;
   --text-secondary-color-g: #7a699e;
   --border-color-g: #d1c3eb;
@@ -121,7 +121,7 @@ html.theme-lavender {
 }
 
 html.theme-aqua-zen {
-  --background-color-g: #f5f5f5;
+  --bg-color-g: #f5f5f5;
   --text-color-g: #424242;
   --text-secondary-color-g: #229799;
   --border-color-g: #48cfcb;
@@ -136,7 +136,7 @@ html.theme-aqua-zen {
 }
 
 html.theme-sunrise {
-  --background-color-g: #faf5ed;
+  --bg-color-g: #faf5ed;
   --text-color-g: #663c00;
   --text-secondary-color-g: #996633;
   --border-color-g: #f5d6b3;
@@ -155,7 +155,7 @@ html.theme-sunrise {
 }
 
 html.theme-arctic-sky {
-  --background-color-g: #daecf7;
+  --bg-color-g: #daecf7;
   --text-color-g: #004466;
   --text-secondary-color-g: #006699;
   --border-color-g: #95bfdb;
@@ -176,7 +176,7 @@ html.theme-arctic-sky {
 /* Pastel & Romantic */
 
 html.theme-pastel {
-  --background-color-g: #fff1f6;
+  --bg-color-g: #fff1f6;
   --text-color-g: #5c4a4a;
   --text-secondary-color-g: #a47c7c;
   --border-color-g: #ebd6d6;
@@ -195,7 +195,7 @@ html.theme-pastel {
 }
 
 html.theme-cotton-candy {
-  --background-color-g: #ffedfa;
+  --bg-color-g: #ffedfa;
   --text-color-g: #be5985;
   --text-secondary-color-g: #ec7fa9;
   --border-color-g: #ffb8e0;
@@ -210,7 +210,7 @@ html.theme-cotton-candy {
 }
 
 html.theme-vintage-rose {
-  --background-color-g: #ebe8db;
+  --bg-color-g: #ebe8db;
   --text-color-g: #3d0301;
   --text-secondary-color-g: #b03052;
   --border-color-g: #d76c82;
@@ -225,7 +225,7 @@ html.theme-vintage-rose {
 }
 
 html.theme-red-harmony {
-  --background-color-g: #f1faee;
+  --bg-color-g: #f1faee;
   --text-color-g: #222222;
   --border-color-g: #e63946;
   --menus-color-g: #c91e32;
@@ -244,7 +244,7 @@ html.theme-red-harmony {
 }
 
 html.theme-red-rose {
-  --background-color-g: #fdf0f0;
+  --bg-color-g: #fdf0f0;
   --text-color-g: #3d0301;
   --border-color-g: #d76c82;
   --menus-color-g: #b03052;
@@ -265,7 +265,7 @@ html.theme-red-rose {
 /* Dev Favorites */
 
 html.theme-one-dark-pro {
-  --background-color-g: #282c34;
+  --bg-color-g: #282c34;
   --text-color-g: #c5cedd;
   --text-secondary-color-g: #72baf5;
   --border-color-g: #3e4451;
@@ -280,7 +280,7 @@ html.theme-one-dark-pro {
 }
 
 html.theme-dracula {
-  --background-color-g: #282a36;
+  --bg-color-g: #282a36;
   --text-color-g: #f8f8f2;
   --text-secondary-color-g: #bd93f9;
   --border-color-g: #44475a;
@@ -295,7 +295,7 @@ html.theme-dracula {
 }
 
 html.theme-postman {
-  --background-color-g: #faf6f3;
+  --bg-color-g: #faf6f3;
   --text-color-g: #2d2d2d;
   --text-secondary-color-g: #5c5c5c;
   --border-color-g: #e0e0e0;
@@ -312,7 +312,7 @@ html.theme-postman {
 /* Tech & Futuristic */
 
 html.theme-dark-matter {
-  --background-color-g: #000000;
+  --bg-color-g: #000000;
   --text-color-g: #e0e0e0;
   --text-secondary-color-g: #9e9e9e;
   --border-color-g: #2b2b2b;
@@ -327,7 +327,7 @@ html.theme-dark-matter {
 }
 
 html.theme-forest-essence {
-  --background-color-g: #0f231c;
+  --bg-color-g: #0f231c;
   --text-color-g: #38b37c;
   --text-secondary-color-g: #669e79;
   --border-color-g: #27391c;
@@ -342,7 +342,7 @@ html.theme-forest-essence {
 }
 
 html.theme-cyber {
-  --background-color-g: #090909;
+  --bg-color-g: #090909;
   --text-color-g: #f1f1f1;
   --text-secondary-color-g: #ececec;
   --border-color-g: #222;
@@ -363,7 +363,7 @@ html.theme-cyber {
 }
 
 html.theme-synthwave {
-  --background-color-g: #1d0227;
+  --bg-color-g: #1d0227;
   --text-color-g: #ff77ff;
   --text-secondary-color-g: #e267e2;
   --border-color-g: #381c41;
@@ -378,7 +378,7 @@ html.theme-synthwave {
 }
 
 html.theme-ocean-glow {
-  --background-color-g: #0d1321;
+  --bg-color-g: #0d1321;
   --text-color-g: #e6fcff;
   --text-secondary-color-g: #81c7c7;
   --border-color-g: #263459;
@@ -399,7 +399,7 @@ html.theme-ocean-glow {
 }
 
 html.theme-aurora {
-  --background-color-g: #0a0e14;
+  --bg-color-g: #0a0e14;
   --text-color-g: #e6fcff;
   --text-secondary-color-g: #81c7c7;
   --border-color-g: #263459;

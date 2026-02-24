@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { useIsMobile } from "@/hooks/useIsMobile";
+import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
 
 const CURSOR_ACCENT_VAR = "--cursor-accent";
 const CURSOR_ACCENT_SCOPE_VAR = "--cursor-accent-scoped";
@@ -50,7 +50,7 @@ export default function AnimatedCursor({ className }) {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
   const [hasMoved, setHasMoved] = useState(false);
-  const isMobile = useIsMobile();
+  const isTouch = useIsTouchDevice();
 
   useCursorAccentScope();
 
@@ -99,7 +99,7 @@ export default function AnimatedCursor({ className }) {
     };
   }, []);
 
-  if (isMobile) return;
+  if (isTouch) return;
 
   return (
     <>

@@ -2,17 +2,9 @@ import { RiFileInfoFill, RiTrophyFill, RiTrophyLine } from "@remixicon/react";
 
 import { IDS } from "@/config/constants";
 import { take } from "@/utils/jsUtils";
-import {
-  SectionBtns,
-  SimpleLayout,
-} from "@/components/elements/SectionLayouts";
-import Card, {
-  Br,
-  List,
-  CardActions,
-  CardButton,
-} from "@/components/elements/Card";
-import LoadMoreGrid from "@/components/elements/LoadMoreGrid";
+import { SectionBtns, SimpleLayout } from "@/components/ui/SectionLayouts";
+import Card, { Br, List, CardActions, CardButton } from "@/components/ui/Card";
+import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 
 import achievement1 from "@/assets/images/achievements-certificate/achievement-1.webp";
 import achievement2 from "@/assets/images/achievements-certificate/achievement-2.webp";
@@ -114,7 +106,7 @@ const achievements = [
             </>,
             <>
               Secured <Hl>1st place</Hl> as a solo participant and won a{" "}
-              <Hl>certificate</Hl>
+              <Hl>certificate</Hl> and a <Hl>book</Hl>
             </>,
           ]}
         />

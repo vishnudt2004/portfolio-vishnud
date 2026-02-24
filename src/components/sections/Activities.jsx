@@ -2,14 +2,14 @@ import { RiArticleFill, RiArticleLine } from "@remixicon/react";
 
 import { IDS } from "@/config/constants";
 import { take } from "@/utils/jsUtils";
-import Anchor from "@/components/elements/Anchor";
+import Anchor from "@/components/ui/Anchor";
 import {
   SectionBtns,
   SimpleLayout,
-} from "@/components/elements/SectionLayouts";
-import Card, { Br, CardActions } from "@/components/elements/Card";
-import LoadMoreGrid from "@/components/elements/LoadMoreGrid";
-import { LinkedinIcon } from "@/components/elements/CustomIcons";
+} from "@/components/ui/SectionLayouts";
+import Card, { Br, CardActions } from "@/components/ui/Card";
+import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
+import { LinkedinIcon } from "@/components/ui/CustomIcons";
 
 import linkedInIcon from "@/assets/images/icons/linkedin.svg";
 

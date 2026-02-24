@@ -25,7 +25,7 @@ const Card = ({
   return (
     <div
       className={twMerge(
-        "fancy-bg-1 relative z-0 flex w-full max-w-lg flex-col gap-1 rounded-3xl border border-(--border-color-g)/50 bg-(--background-color-g) p-5 transition focus-within:border-(--accent-color) hover:border-(--accent-color)",
+        "fancy-bg-1 relative z-0 flex w-full max-w-lg flex-col gap-1 rounded-3xl border border-(--border-color-g)/50 bg-(--bg-color-g) p-5 transition focus-within:border-(--accent-color) hover:border-(--accent-color)",
         className,
       )}
       style={{
@@ -63,7 +63,7 @@ const Card = ({
           <p className="text-sm font-semibold text-(--text-secondary-color-g)">
             <span className="mr-2">{subtitle}</span>
 
-            <span className="mt-1 inline-block rounded-full bg-[color-mix(in_srgb,var(--accent-color),var(--background-color-g)_50%)] px-2 py-0.5 text-xs font-medium text-[color-mix(in_srgb,var(--accent-color),var(--text-color-g)_70%)]">
+            <span className="mt-1 inline-block rounded-full bg-[color-mix(in_srgb,var(--accent-color),var(--bg-color-g)_50%)] px-2 py-0.5 text-xs font-medium text-[color-mix(in_srgb,var(--accent-color),var(--text-color-g)_70%)]">
               {date}
             </span>
           </p>

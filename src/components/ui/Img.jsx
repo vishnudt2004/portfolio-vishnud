@@ -9,7 +9,7 @@ const DefaultFallback = ({ fallbackAlt, ...attr }) => (
     role="img"
     aria-label={fallbackAlt}
     className={twMerge(
-      "grid size-full place-items-center content-center gap-2 bg-(--background-color-g) text-sm",
+      "grid size-full place-items-center content-center gap-2 bg-(--bg-color-g) text-sm",
       attr?.className,
     )}
   >
@@ -45,7 +45,7 @@ const Img = ({
       />
       {caption && (
         <>
-          <figcaption className="mt-6 text-center leading-0">
+          <figcaption className="mt-6 text-center leading-0 tracking-wide">
             {caption}
           </figcaption>
         </>

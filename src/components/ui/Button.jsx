@@ -32,4 +32,30 @@ const Button = ({
   );
 };
 
+const IconBtn = ({
+  color = "var(--menus-color-g)",
+  children,
+  className,
+  ...props
+}) => {
+  const style = {
+    "--color": color,
+  };
+
+  return (
+    <button
+      type="button"
+      {...props}
+      style={style}
+      className={twMerge(
+        "focus-reset grid place-items-center rounded-full p-2 text-(--color) transition-transform *:size-4.5 hover:bg-(--color)/25 focus-visible:bg-(--color)/25 focus-visible:outline-0 active:scale-90",
+        className,
+      )}
+    >
+      {children}
+    </button>
+  );
+};
+
 export default Button;
+export { IconBtn };

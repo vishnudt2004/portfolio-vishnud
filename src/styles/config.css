@@ -11,10 +11,10 @@
   );
 
   --btn-color-g: var(--text-color-g);
-  --btn-fg-color-g: var(--background-color-g);
+  --btn-fg-color-g: var(--bg-color-g);
   --btn-secondary-color-g: var(--text-color-g);
 
-  --scrollbar-track-color-g: var(--background-color-g);
+  --scrollbar-track-color-g: var(--bg-color-g);
   --scrollbar-thumb-color-g: var(--text-color-g);
 
   --fancy-bg-1-color: color-mix(
@@ -29,13 +29,13 @@
   );
 
   /* Z-index map */
+  --z-tooltip: 4;
   --z-navbar: 3;
   --z-dropdown: 3;
   --z-overlay: 2;
-  --z-fullscreen-btn: 1;
 
   /* Theme-dependent variables (themes.css) */
-  /* --background-color-g: ;
+  /* --bg-color-g: ;
   --text-color-g: ;
   --text-secondary-color-g: ;
   --border-color-g: ;

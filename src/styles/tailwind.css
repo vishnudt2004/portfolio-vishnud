@@ -7,7 +7,7 @@
   }
 
   .highlight-primary {
-    @apply mx-0.5 inline-block bg-(--highlight-primary-color-g) px-2 text-(--background-color-g);
+    @apply mx-0.5 inline-block bg-(--highlight-primary-color-g) px-2 text-(--bg-color-g);
   }
 
   .highlight-secondary {
@@ -15,7 +15,7 @@
   }
 
   .anchor {
-    @apply relative inline-flex items-center text-(--anchor-color,var(--anchor-color-g)) before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-(--anchor-decoration-color,var(--anchor-decoration-color-g)) after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-(--anchor-decoration-color_hover,var(--anchor-color-g)) after:duration-150 hover:after:w-full focus:after:w-full;
+    @apply relative inline-flex items-center rounded-sm text-(--anchor-color,var(--anchor-color-g)) before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-(--anchor-decoration-color,var(--anchor-decoration-color-g)) after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-(--anchor-decoration-color_hover,var(--anchor-color-g)) after:duration-150 hover:after:w-full focus:after:w-full focus-visible:px-1;
   }
 
   .btn {
@@ -53,15 +53,8 @@
 @theme {
   --breakpoint-xs: 30rem;
 
-  --animate-textAnimation1: textAnim 2s infinite;
   --animate-fadeIn: fadeIn 0.3s ease-out forwards;
   --animate-fadeOut: fadeOut 0.3s ease-out forwards;
-
-  @keyframes textAnim {
-    to {
-      color: var(--accent-color-g);
-    }
-  }
 
   @keyframes fadeIn {
     from {
@@ -105,7 +98,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    @apply rounded-lg border-1 border-(--background-color-g) bg-[color-mix(in_srgb,_var(--text-color-g)_30%,_transparent)];
+    @apply rounded-lg border-1 border-(--bg-color-g) bg-[color-mix(in_srgb,_var(--text-color-g)_30%,_transparent)];
   }
 
   &::-webkit-scrollbar-thumb:hover {

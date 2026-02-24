@@ -1,4 +1,4 @@
-// Scroll & Overflow Utilities
+// TEMP: Consolidated utils — split by domain when scale or reuse increases.
 
 const scrollIntoTop = (e) => {
   e && e.preventDefault();
@@ -13,10 +13,6 @@ const scrollToSection = (id, offset = -65) => {
   window.scrollTo({ top: y, behavior: "smooth" });
 };
 
-const setHTMLOverflowY = (condition) => {
-  document.documentElement.style.overflowY = condition ? "hidden" : "auto";
-};
-
 const take = (arr, max) => (max ? arr.slice(0, max) : arr);
 
-export { scrollIntoTop, scrollToSection, setHTMLOverflowY, take };
+export { scrollIntoTop, scrollToSection, take };

@@ -6,9 +6,9 @@ import { SiNextdotjs, SiReact } from "@icons-pack/react-simple-icons";
 import { IDS } from "@/config/constants";
 import { scrollToSection } from "@/utils/jsUtils";
 import { sectionTitleId } from "@/utils/siteUtils";
-import { Tip } from "@/components/elements/Tooltip";
-import { HeroBgOverlayMotion } from "@/components/elements/Animations";
-import { DownCircleIcon, HandIcon } from "@/components/elements/CustomIcons";
+import { Tip } from "@/components/ui/Tooltip";
+import { HeroBgOverlayMotion } from "@/components/ui/Animations";
+import { DownCircleIcon, HandIcon } from "@/components/ui/CustomIcons";
 
 const ScrollDownButton = () => {
   return (
@@ -62,7 +62,7 @@ const HeroStatus = ({ status: { color, msg } }) => {
     <div
       role="status"
       aria-live="polite"
-      className="flex items-center gap-2 rounded-full bg-(--background-color-g)/75 px-2 py-1 text-xs"
+      className="flex items-center gap-2 rounded-full bg-(--bg-color-g)/75 px-2 py-1 text-xs"
     >
       <span
         aria-hidden
@@ -85,7 +85,7 @@ const HeroCta = ({ email }) => (
 
     <span
       aria-hidden
-      className="absolute -top-6 left-1/2 inline-flex -translate-x-1/2 items-center gap-1 rounded-full bg-(--background-color-g)/25 px-1 text-xs text-nowrap opacity-0 duration-300 group-focus-within:opacity-100 group-hover:opacity-100"
+      className="absolute -top-6 left-1/2 inline-flex -translate-x-1/2 items-center gap-1 rounded-full bg-(--bg-color-g)/25 px-1 text-xs text-nowrap opacity-0 duration-300 group-focus-within:opacity-100 group-hover:opacity-100"
     >
       <span>Say Hi!</span>
       <HandIcon className="inline size-3.5 fill-(--text-color-g)" />
@@ -113,7 +113,7 @@ const HeroIdentity = ({ greeting, name, role, email }) => (
       <HeroCta email={email} />
     </div>
 
-    <span className="mt-5 block bg-(--background-color-g)/25 px-2 py-0.5 text-sm font-semibold tracking-wide">
+    <span className="mt-5 block bg-(--bg-color-g)/25 px-2 py-0.5 text-sm font-semibold tracking-wide">
       {role}
     </span>
   </div>
@@ -130,7 +130,7 @@ const HeroSection = ({
     <div className="relative flex h-svh flex-col items-center justify-center gap-20 pt-15">
       <div
         aria-hidden
-        className="fancy-bg-1 absolute inset-10 -z-1 sm:inset-14 sm:top-20"
+        className="fancy-bg-1 absolute inset-10 -z-1 sm:inset-14 sm:top-17"
       />
 
       <div className="group relative flex flex-col items-center justify-center">
@@ -140,7 +140,7 @@ const HeroSection = ({
           <div className="flex flex-col flex-wrap items-center justify-center gap-5 text-center text-(--text-color-g) sm:gap-8">
             <HeroIdentity {...identity} />
 
-            <p className="max-w-[600px] bg-(--background-color-g)/25 px-3 py-0.5">
+            <p className="max-w-[600px] bg-(--bg-color-g)/25 px-3 py-0.5">
               {tagline}
             </p>
 

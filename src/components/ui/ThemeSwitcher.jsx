@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { RiCloseFill, RiPaletteFill } from "@remixicon/react";
 
-import config from "@/config";
+import { UI } from "@/config";
 import { useTheme } from "@/contexts/ThemeContext";
+import { IconBtn } from "./Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,14 +14,15 @@ import {
   DropdownMenuTrigger,
 } from "./Dropdown";
 
-const { INITIAL_THEMES, THEMES } = config.UI;
+const { FEATURED_THEMES, THEMES } = UI;
 
-const ManualThemeSwitcher = ({
-  initialThemes = INITIAL_THEMES,
+const ThemeSwitcher = ({
+  initialThemes = FEATURED_THEMES,
   allThemes = THEMES,
   onThemeChange,
   onOpenChange,
   containerRef,
+  triggerTabIndex = 0,
 }) => {
   const { theme: activeTheme, setTheme: setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
@@ -50,21 +52,18 @@ const ManualThemeSwitcher = ({
   return (
     <DropdownMenu
       open={isOpen}
-      onOpenChange={() => (
-        setShowAll(false), setIsOpen((p) => !p), onOpenChange && onOpenChange()
+      onOpenChange={(open) => (
+        setShowAll(false), setIsOpen(open), onOpenChange?.(open)
       )}
     >
       <DropdownMenuTrigger asChild>
-        <button
-          className="scale-90 place-items-center rounded-full bg-(--menus-color-g) p-2.5 text-(--background-color-g) shadow transition-transform *:size-4.5 hover:scale-100 focus:scale-100 active:scale-90"
-          aria-label="Change theme"
-        >
+        <IconBtn aria-label="Change theme" tabIndex={triggerTabIndex}>
           {!isOpen ? (
             <RiPaletteFill aria-hidden />
           ) : (
             <RiCloseFill aria-hidden />
           )}
-        </button>
+        </IconBtn>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
@@ -113,4 +112,4 @@ const ManualThemeSwitcher = ({
   );
 };
 
-export default ManualThemeSwitcher;
+export default ThemeSwitcher;

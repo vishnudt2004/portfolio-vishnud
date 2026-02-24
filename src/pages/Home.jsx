@@ -2,8 +2,8 @@ import { createElement, Suspense, lazy } from "react";
 
 import { IDS } from "@/config/constants";
 import { filterActiveSections, sectionTitleId } from "@/utils/siteUtils";
-import { SectionRevealMotion } from "@/components/elements/Animations";
-import Divider from "@/components/elements/Divider";
+import { SectionRevealMotion } from "@/components/ui/Animations";
+import Divider from "@/components/ui/Divider";
 import Hero from "@/components/sections/Hero";
 
 const SectionWrapper = ({

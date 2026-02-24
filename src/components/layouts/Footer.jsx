@@ -10,8 +10,8 @@ import {
 import { IDS } from "@/config/constants";
 import { filterActiveSections } from "@/utils/siteUtils";
 import { useNavigateToSection } from "@/hooks/useNavigateToSection";
-import SocialBtn from "@/components/elements/SocialBtn";
-import { LinkedinIcon } from "@/components/elements/CustomIcons";
+import SocialBtn from "@/components/ui/SocialBtn";
+import { LinkedinIcon } from "@/components/ui/CustomIcons";
 
 const FooterSectionHeading = ({ children, icon }) => (
   <h2 className="flex items-center gap-2 text-xl font-medium">
@@ -67,7 +67,7 @@ const FooterLayout = ({ connections, quickLinks, cpyText }) => {
               <li key={id}>
                 <button
                   type="button"
-                  className="leading-4 hover:underline focus:underline"
+                  className="rounded-sm leading-4 hover:underline focus-visible:px-1 focus-visible:underline"
                   onClick={() => navigateToSection(id)}
                 >
                   {label}

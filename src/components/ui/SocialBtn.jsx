@@ -9,12 +9,12 @@ const SocialBtn = ({
     href={link}
     target="_blank"
     rel="noopener noreferrer"
-    className="cursor-effect-subtle group inline-flex flex-col items-center gap-1.5 focus-visible:outline-2"
+    className="cursor-effect-subtle group inline-flex flex-col items-center gap-1.5 rounded"
     {...props}
   >
     <span
       aria-hidden
-      className="inline-flex size-11 items-center justify-center rounded-full border border-(--border-color-g) bg-(--background-color-g) p-2.5 text-(--text-color-g) duration-200 group-hover:border-(--text-color-g) group-focus:border-(--text-color-g)"
+      className="inline-flex size-11 items-center justify-center rounded-full border border-(--border-color-g) bg-(--bg-color-g) p-2.5 text-(--text-color-g) duration-200 group-hover:border-(--text-color-g) group-focus:border-(--text-color-g)"
     >
       {icon}
     </span>

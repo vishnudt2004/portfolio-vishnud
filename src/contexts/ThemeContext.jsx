@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect } from "react";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
-import config from "@/config";
+import { UI } from "@/config";
 
 const ThemeContext = createContext({
   theme: "light",
@@ -12,9 +12,9 @@ function ThemeProvider({ children }) {
   const {
     DEFAULT_THEME: defaultTheme,
     THEME_CLASSNAME_PREFIX: themeClassNamePrefix,
-    INITIAL_THEMES: themes,
+    FEATURED_THEMES: themes,
     THEMES: ALL_THEMES,
-  } = config.UI;
+  } = UI;
   const allThemes = ALL_THEMES.flatMap((group) => group.themes);
 
   const [theme, setTheme] = useLocalStorage("theme", defaultTheme);

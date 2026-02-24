@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { RiHome5Fill } from "@remixicon/react";
 
-import Button from "@/components/elements/Button";
+import Button from "@/components/ui/Button";
 
 const NotFound = () => {
   const id = "notfound-heading";
@@ -9,12 +9,9 @@ const NotFound = () => {
   return (
     <section
       aria-labelledby={id}
-      className="relative flex h-[80vh] flex-col items-center justify-center gap-25"
+      className="relative flex h-[90vh] flex-col items-center justify-center gap-25"
     >
-      <div
-        aria-hidden
-        className="fancy-bg-1 absolute inset-10 -z-1 sm:inset-14 sm:top-20"
-      />
+      <div aria-hidden className="fancy-bg-1 absolute inset-10 -z-1" />
 
       <div className="relative flex flex-col items-center justify-center gap-2">
         <h1 id={id} className="font-medium tracking-wide *:mx-1">

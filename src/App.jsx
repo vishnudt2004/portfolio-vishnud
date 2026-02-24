@@ -3,8 +3,7 @@ import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { twMerge } from "tailwind-merge";
 
 import ThemeProvider from "./contexts/ThemeContext";
-import FullscreenToggle from "./components/elements/FullScreenToggle";
-import AnimatedCursor from "./components/elements/AnimatedCursor";
+import AnimatedCursor from "./components/ui/AnimatedCursor";
 import RestoreScroll from "./components/helpers/RestoreScroll";
 import NavigateHelper from "./components/helpers/NavigateHelper";
 import FocusFixer from "./components/helpers/FocusFixer";
@@ -25,9 +24,6 @@ const ContextProviders = ({ children }) => (
 
 const GlobalUI = () => (
   <>
-    <div className="fixed right-6 bottom-6 z-(--z-fullscreen-btn) sm:right-10 sm:bottom-10">
-      <FullscreenToggle />
-    </div>
     <AnimatedCursor />
     <RestoreScroll />
     <NavigateHelper />

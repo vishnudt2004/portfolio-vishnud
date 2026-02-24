@@ -3,33 +3,38 @@ import * as RadixTooltip from "@radix-ui/react-tooltip";
 import * as RadixPopover from "@radix-ui/react-popover";
 import { twMerge } from "tailwind-merge";
 
-import { useIsMobile } from "@/hooks/useIsMobile";
+import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
 
-const DesktopTooltip = ({ content, children, className, ...props }) => {
-  const [open, setOpen] = useState(false);
+const DesktopTooltip = ({
+  content,
+  tip, // alias
+  children,
+  className,
+  open = true,
+  ...props
+}) => {
+  const isTouch = useIsTouchDevice();
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (isTouch) return children;
+
+  const openTip = () => setIsOpen(true);
+  const closeTip = () => setIsOpen(false);
 
   return (
     <RadixTooltip.Root
-      open={open}
+      open={open && isOpen}
       onOpenChange={(next) => {
         if (next === false) return;
-        setOpen(true);
+        setIsOpen(true);
       }}
     >
       <RadixTooltip.Trigger
         asChild
-        onMouseOver={() => {
-          setOpen(true);
-        }}
-        onMouseOut={() => {
-          setOpen(false);
-        }}
-        onFocus={() => {
-          setOpen(true);
-        }}
-        onBlur={() => {
-          setOpen(false);
-        }}
+        onMouseOver={openTip}
+        onMouseOut={closeTip}
+        onFocus={openTip}
+        onBlur={closeTip}
       >
         {isValidElement(children) ? (
           children
@@ -40,7 +45,7 @@ const DesktopTooltip = ({ content, children, className, ...props }) => {
       <RadixTooltip.Portal>
         <RadixTooltip.Content
           onEscapeKeyDown={(e) => {
-            e.preventDefault(), setOpen(false);
+            e.preventDefault(), setIsOpen(false);
           }}
           side="bottom"
           align="center"
@@ -48,22 +53,28 @@ const DesktopTooltip = ({ content, children, className, ...props }) => {
           avoidCollisions
           collisionPadding={5}
           className={twMerge(
-            "data-[state=instant-open]:animate-fadeIn data-[state=delayed-open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--background-color-g) px-1 py-0.5 text-sm leading-3.5 whitespace-nowrap text-(--text-color-g) transition-opacity duration-200",
+            "data-[state=instant-open]:animate-fadeIn data-[state=delayed-open]:animate-fadeIn data-[state=closed]:animate-fadeOut z-(--z-tooltip) rounded bg-(--bg-color-g) px-1 py-0.5 text-sm leading-3.5 whitespace-nowrap text-(--text-color-g) transition-opacity duration-200",
             className,
           )}
           {...props}
         >
-          {content}
+          {content || tip}
         </RadixTooltip.Content>
       </RadixTooltip.Portal>
     </RadixTooltip.Root>
   );
 };
 
-const MobileTooltip = ({ content, children, className, ...props }) => {
-  const isMobile = useIsMobile();
+const MobileTooltip = ({
+  content,
+  tip, //alias
+  children,
+  className,
+  ...props
+}) => {
+  const isTouch = useIsTouchDevice();
 
-  if (!isMobile) return children;
+  if (!isTouch) return children;
 
   return (
     <RadixPopover.Root>
@@ -82,12 +93,12 @@ const MobileTooltip = ({ content, children, className, ...props }) => {
           avoidCollisions
           collisionPadding={5}
           className={twMerge(
-            "data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut rounded bg-(--background-color-g) px-2 py-0.5 text-sm whitespace-nowrap text-(--text-color-g) outline-0 transition-opacity duration-200",
+            "data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut z-(--z-tooltip) rounded bg-(--bg-color-g) px-2 py-0.5 text-sm whitespace-nowrap text-(--text-color-g) outline-0 transition-opacity duration-200",
             className,
           )}
           {...props}
         >
-          {content}
+          {content || tip}
         </RadixPopover.Content>
       </RadixPopover.Portal>
     </RadixPopover.Root>
@@ -95,10 +106,10 @@ const MobileTooltip = ({ content, children, className, ...props }) => {
 };
 
 const HybridTooltip = (props) => {
-  const isMobile = useIsMobile();
+  const isTouch = useIsTouchDevice();
 
   // Mobile: Popover (tap to open)
-  if (isMobile) return <MobileTooltip {...props} />;
+  if (isTouch) return <MobileTooltip {...props} />;
 
   // Desktop: Tooltip (hover/focus to open)
   return <DesktopTooltip {...props} />;

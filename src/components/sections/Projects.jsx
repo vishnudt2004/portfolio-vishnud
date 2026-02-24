@@ -4,13 +4,13 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 
 import { IDS } from "@/config/constants";
 import { take } from "@/utils/jsUtils";
-import Anchor from "@/components/elements/Anchor";
-import Img from "@/components/elements/Img";
-import LoadMoreGrid from "@/components/elements/LoadMoreGrid";
+import Anchor from "@/components/ui/Anchor";
+import Img from "@/components/ui/Img";
+import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 import {
   SectionBtns,
   SimpleLayout,
-} from "@/components/elements/SectionLayouts";
+} from "@/components/ui/SectionLayouts";
 
 import projectImage_globblog from "@/assets/images/projects-screenshot/globblog_(welcome-page).png";
 import projectImage_portfolio from "@/assets/images/projects-screenshot/portfolio-vishnu-d_(hero-section).png";
@@ -58,7 +58,7 @@ const ProjectCard = ({ title, descr, thumb, techStack, links, id }) => {
   return (
     <div
       style={{ "--accent-color": "var(--color-purple-500)" }}
-      className="fancy-bg-2 group flex min-h-[470px] w-full max-w-lg flex-col overflow-hidden rounded-3xl border border-(--border-color-g)/50 bg-(--background-color-g) transition focus-within:border-(--accent-color) hover:border-(--accent-color)"
+      className="fancy-bg-2 group flex min-h-[470px] w-full max-w-lg flex-col overflow-hidden rounded-3xl border border-(--border-color-g)/50 bg-(--bg-color-g) transition focus-within:border-(--accent-color) hover:border-(--accent-color)"
     >
       <Img
         src={thumb}

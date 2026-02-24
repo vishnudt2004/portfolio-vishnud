@@ -15,7 +15,7 @@ body {
 }
 
 body {
-  background-color: var(--background-color-g);
+  background-color: var(--bg-color-g);
   color: var(--text-color-g);
   font-family: var(--font-family-g);
   cursor: default;
@@ -37,7 +37,7 @@ html::-webkit-scrollbar-thumb {
 
 html::selection {
   background-color: var(--text-color-g);
-  color: var(--background-color-g);
+  color: var(--bg-color-g);
 }
 
 *:not(.focus-reset):focus-visible {

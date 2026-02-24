@@ -9,14 +9,14 @@ import { take } from "@/utils/jsUtils";
 import {
   SectionBtns,
   SimpleLayout,
-} from "@/components/elements/SectionLayouts";
+} from "@/components/ui/SectionLayouts";
 import Card, {
   Br,
   List,
   CardActions,
   CardButton,
-} from "@/components/elements/Card";
-import LoadMoreGrid from "@/components/elements/LoadMoreGrid";
+} from "@/components/ui/Card";
+import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 
 import vercelIcon from "@/assets/images/icons/vercel.svg";
 import hrIcon from "@/assets/images/icons/hackerrank.svg";

@@ -3,18 +3,18 @@ import { twMerge } from "tailwind-merge";
 import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 
 import { IDS } from "@/config/constants";
-import Anchor from "@/components/elements/Anchor";
-import Img from "@/components/elements/Img";
-import Divider from "@/components/elements/Divider";
-import SocialBtn from "@/components/elements/SocialBtn";
-import Tooltip from "@/components/elements/Tooltip";
-import { TwoColumnsLayout } from "@/components/elements/SectionLayouts";
+import Anchor from "@/components/ui/Anchor";
+import Img from "@/components/ui/Img";
+import Divider from "@/components/ui/Divider";
+import SocialBtn from "@/components/ui/SocialBtn";
+import Tooltip from "@/components/ui/Tooltip";
+import { TwoColumnsLayout } from "@/components/ui/SectionLayouts";
 import {
   LinkedinIcon,
   DuotoneComputerIcon,
   DuotoneLightbulbIcon,
   DuotonePluginIcon,
-} from "@/components/elements/CustomIcons";
+} from "@/components/ui/CustomIcons";
 
 import personFallbackImg from "@/assets/images/placeholders/person.webp";
 
@@ -38,7 +38,7 @@ const AboutSection = ({
             src={image}
             alt="Vishnu D"
             fallbackSrc={personFallbackImg}
-            className="cursor-effect-hidden aspect-square size-50 rounded-full object-cover shadow-[0_0_0_5px_color-mix(in_srgb,var(--border-color-g),transparent_70%)] grayscale-50 duration-300 hover:grayscale-0"
+            className="cursor-effect-hidden aspect-square size-50 rounded-full object-cover ring-5 ring-[color-mix(in_srgb,var(--border-color-g),transparent_70%)] grayscale-30 duration-300 hover:ring-(--border-color-g) hover:grayscale-0 hover:saturate-120"
             caption="Vishnu D"
           />
         }

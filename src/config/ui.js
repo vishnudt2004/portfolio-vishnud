@@ -40,8 +40,15 @@ export const UI = {
     },
     {
       category: "Tech & Futuristic",
-      themes: ["dark-matter", "forest-essence", "cyber", "synthwave", "ocean-glow", "aurora"],
+      themes: [
+        "dark-matter",
+        "forest-essence",
+        "cyber",
+        "synthwave",
+        "ocean-glow",
+        "aurora",
+      ],
     },
   ],
-  INITIAL_THEMES: ["light", "dark", "one-dark-pro"],
+  FEATURED_THEMES: ["light", "dark", "one-dark-pro"],
 };

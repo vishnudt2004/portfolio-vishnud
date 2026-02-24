@@ -42,15 +42,15 @@ import {
 } from "@icons-pack/react-simple-icons";
 
 import { IDS } from "@/config/constants";
-import Anchor from "@/components/elements/Anchor";
-import Button from "@/components/elements/Button";
-import { TwoColumnsLayout } from "@/components/elements/SectionLayouts";
-import { Tip } from "@/components/elements/Tooltip";
+import Anchor from "@/components/ui/Anchor";
+import Button from "@/components/ui/Button";
+import { TwoColumnsLayout } from "@/components/ui/SectionLayouts";
+import { Tip } from "@/components/ui/Tooltip";
 import {
   VSCodeIcon,
   MotionIcon,
   NextAuthSmIcon,
-} from "@/components/elements/CustomIcons";
+} from "@/components/ui/CustomIcons";
 
 const TipBtn = ({ tip, ...attr }) => (
   <Tip tip={tip}>
@@ -76,7 +76,7 @@ const SkillEntry = ({ children: name, icon }) => (
     {icon && (
       <span
         aria-hidden
-        className="absolute inset-0 -top-17 m-auto size-0 origin-center overflow-hidden rounded-full border-(--border-color-g) bg-white text-black opacity-100 duration-150 group-hover/item:size-10 group-hover/item:border group-hover/item:p-2 group-hover/item:opacity-100 group-focus-visible/item:size-10 group-focus-visible/item:border group-focus-visible/item:p-2 group-focus-visible/item:opacity-100"
+        className="pointer-events-none absolute inset-0 -top-17 m-auto size-0 origin-center overflow-hidden rounded-full border-(--border-color-g) bg-white text-black opacity-100 duration-150 group-hover/item:size-10 group-hover/item:border group-hover/item:p-2 group-hover/item:opacity-100 group-focus-visible/item:size-10 group-focus-visible/item:border group-focus-visible/item:p-2 group-focus-visible/item:opacity-100"
       >
         {createElement(icon, {
           className: "size-full",
