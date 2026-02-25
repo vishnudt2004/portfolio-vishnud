@@ -100,7 +100,7 @@ const aboutMe = (
 
     <Anchor
       aria-label="Open resume PDF"
-      href="https://vishnudt2004.github.io/vishnud-resume/vishnud-resume.pdf"
+      href="https://vishnudt2004.github.io/vishnud-resume/vishnud-resume-fullstack.pdf"
       className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
     >
       Check out my <Highlighter className="mx-1.5">Resume</Highlighter> here.
