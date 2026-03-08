@@ -1,4 +1,6 @@
-import ActivitiesView from "@/components/sections/Activities";
+import { lazy } from "react";
+
+const ActivitiesView = lazy(() => import("@/components/sections/Activities"));
 
 const Activities = () => <ActivitiesView all />;
 

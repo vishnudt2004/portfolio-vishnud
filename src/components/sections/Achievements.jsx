@@ -6,8 +6,8 @@ import { SectionBtns, SimpleLayout } from "@/components/ui/SectionLayouts";
 import Card, { Br, List, CardActions, CardButton } from "@/components/ui/Card";
 import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 
-import achievement1 from "@/assets/images/achievements-certificate/achievement-1.webp";
-import achievement2 from "@/assets/images/achievements-certificate/achievement-2.webp";
+import achievement1 from "@/assets/images/achievements/achievement-1.webp";
+import achievement2 from "@/assets/images/achievements/achievement-2.webp";
 
 const AchievementItem = ({
   id,

@@ -9,9 +9,9 @@ import Img from "@/components/ui/Img";
 import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 import { SectionBtns, SimpleLayout } from "@/components/ui/SectionLayouts";
 
-import projectImage_globblog from "@/assets/images/projects-screenshot/globblog_(welcome-page).png";
-import projectImage_portfolio from "@/assets/images/projects-screenshot/hero-new-light.png";
-import projectImage_suic from "@/assets/images/projects-screenshot/suic_(home-page).png";
+import projectImage_globblog from "@/assets/images/projects/globblog-hero.png";
+import projectImage_portfolio from "@/assets/images/projects/portfolio-hero.png";
+import projectImage_suic from "@/assets/images/projects/suic-hero.png";
 
 const LinkItem = ({ id, titleId, type, href, index }) => {
   const actionId = id ? `${id}-action-${index}` : undefined;

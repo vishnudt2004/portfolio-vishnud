@@ -21,12 +21,12 @@ import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 import vercelIcon from "@/assets/images/icons/vercel.svg";
 import hrIcon from "@/assets/images/icons/hackerrank.svg";
 import fccIcon from "@/assets/images/icons/fcc.svg";
-import certificate1 from "@/assets/images/certifications-certificates/certificate-1.webp";
-import certificate2 from "@/assets/images/certifications-certificates/certificate-2.webp";
-import certificate3_react from "@/assets/images/certifications-certificates/certificate-3/react_basic-certificate.webp";
-import certificate3_js from "@/assets/images/certifications-certificates/certificate-3/javascript_basic-certificate.webp";
-import certificate3_css from "@/assets/images/certifications-certificates/certificate-3/css-certificate.webp";
-import certificate4 from "@/assets/images/certifications-certificates/certificate-4.webp";
+import certificate1 from "@/assets/images/certifications/certificate-1.webp";
+import certificate2 from "@/assets/images/certifications/certificate-2.webp";
+import certificate3_react from "@/assets/images/certifications/certificate-3/react_basic-certificate.webp";
+import certificate3_js from "@/assets/images/certifications/certificate-3/javascript_basic-certificate.webp";
+import certificate3_css from "@/assets/images/certifications/certificate-3/css-certificate.webp";
+import certificate4 from "@/assets/images/certifications/certificate-4.webp";
 
 const CertificateItem = ({
   id,

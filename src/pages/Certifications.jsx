@@ -1,4 +1,8 @@
-import CertificationsView from "@/components/sections/Certifications";
+import { lazy } from "react";
+
+const CertificationsView = lazy(
+  () => import("@/components/sections/Certifications"),
+);
 
 const Certifications = () => <CertificationsView all />;
 

@@ -1,11 +1,7 @@
 // TODO:
-// 1. Fix page heading hierarchy (h1/h2) across pages.
-//    Sections currently start at h2 because they are reused in Home.
-//    Page-level h1 should be introduced in a future refactor.
-//
-// 2. Resolve Vite dynamic import warning.
-//    Some section components are lazy-loaded in Home but also statically
-//    imported in their dedicated pages, preventing proper code-splitting.
+// Fix page heading hierarchy (h1/h2) across pages.
+// Sections currently start at h2 because they are reused in Home.
+// Page-level h1 should be introduced in a future refactor.
 
 import { Routes, Route, useLocation } from "react-router";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
