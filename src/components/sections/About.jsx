@@ -14,7 +14,7 @@ import {
   DuotoneComputerIcon,
   DuotoneLightbulbIcon,
   DuotonePluginIcon,
-} from "@/components/ui/CustomIcons";
+} from "@/components/ui/Icons";
 
 import personFallbackImg from "@/assets/images/placeholders/person.webp";
 
@@ -38,7 +38,7 @@ const AboutSection = ({
             src={image}
             alt="Vishnu D"
             fallbackSrc={personFallbackImg}
-            className="cursor-effect-hidden aspect-square size-50 rounded-full object-cover ring-5 ring-[color-mix(in_srgb,var(--border-color-g),transparent_70%)] grayscale-30 duration-300 hover:ring-(--border-color-g) hover:grayscale-0 hover:saturate-120"
+            className="cursor-effect-hidden aspect-square size-50 rounded-full object-cover ring-5 ring-(--border-color-g)/30 grayscale-5 duration-300 hover:ring-(--border-color-g) hover:grayscale-0"
             caption="Vishnu D"
           />
         }
@@ -116,14 +116,14 @@ const aboutMe = (
               aria-hidden
               title={null}
               color="default"
-              className="scale-95"
+              className="scale-85"
             />
           ),
         },
         {
           label: "GitHub",
           link: "https://github.com/vishnudt2004",
-          icon: <SiGithub aria-hidden title={null} className="scale-110" />,
+          icon: <SiGithub aria-hidden title={null} className="scale-100" />,
         },
         {
           label: "LinkedIn",

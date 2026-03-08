@@ -17,7 +17,7 @@ import {
 const { FEATURED_THEMES, THEMES } = UI;
 
 const ThemeSwitcher = ({
-  initialThemes = FEATURED_THEMES,
+  featuredThemes = FEATURED_THEMES,
   allThemes = THEMES,
   onThemeChange,
   onOpenChange,
@@ -93,7 +93,7 @@ const ThemeSwitcher = ({
           ))
         ) : (
           <>
-            {initialThemes.map((theme) => (
+            {featuredThemes.map((theme) => (
               <DropdownMenuItem
                 key={theme}
                 active={activeTheme === theme}

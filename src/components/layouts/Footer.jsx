@@ -1,4 +1,3 @@
-import { twMerge } from "tailwind-merge";
 import { RiCompass4Line, RiLinksLine } from "@remixicon/react";
 import {
   SiGithub,
@@ -9,76 +8,38 @@ import {
 
 import { IDS } from "@/config/constants";
 import { filterActiveSections } from "@/utils/siteUtils";
-import { useNavigateToSection } from "@/hooks/useNavigateToSection";
-import SocialBtn from "@/components/ui/SocialBtn";
-import { LinkedinIcon } from "@/components/ui/CustomIcons";
+import { LinkedinIcon } from "@/components/ui/Icons";
 
-const FooterSectionHeading = ({ children, icon }) => (
-  <h2 className="flex items-center gap-2 text-xl font-medium">
-    {children} {icon}
-  </h2>
+const SocialItem = ({ label, link, color, icon }) => (
+  <a
+    href={link}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ "--color": color }}
+    className="cursor-effect-subtle group relative flex rounded-full p-1.5 text-(--text-color-g) transition-colors duration-300 *:size-6 **:first:fill-(--text-color-g) hover:bg-(--text-color-g)/15 focus-visible:bg-(--text-color-g)/15"
+  >
+    {icon}
+    <span className="absolute -bottom-7 left-1/2 inline-flex -translate-x-1/2 items-center justify-center text-[13px] opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+      {label}
+    </span>
+  </a>
 );
 
-const FooterLayout = ({ connections, quickLinks, cpyText }) => {
-  const navigateToSection = useNavigateToSection();
-
+const FooterLayout = ({ connections, cpyText }) => {
   return (
     <footer
       id={IDS.footer}
-      className="fancy-bg-2 relative min-h-[50vh] border-t border-(--border-color-g) p-6 text-(--text-color-g)"
+      className="mx-10 my-2 flex flex-col flex-wrap items-center justify-center gap-10 border-t border-(--border-color-g)/50 py-3 sm:mb-10 sm:flex-row sm:justify-between sm:px-5"
     >
-      <div className="mx-auto mb-[40px] grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
-        {/* Column */}
-        <div className="flex flex-col gap-3 border-(--border-color-g) max-md:border-b md:border-r">
-          <FooterSectionHeading
-            icon={<RiLinksLine aria-hidden className="size-5.5" />}
-          >
-            Connect
-          </FooterSectionHeading>
+      <ul className="flex h-full flex-wrap gap-2">
+        {connections.map(({ label, ...rest }) => (
+          <li key={label}>
+            <SocialItem label={label} {...rest} />
+          </li>
+        ))}
+      </ul>
 
-          <ul className="flex h-full flex-wrap gap-4 p-5">
-            {connections.map(({ label, link, icon }) => (
-              <li key={label}>
-                <SocialBtn
-                  label={label}
-                  link={link}
-                  icon={icon}
-                  labelWidth="8ch"
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Column */}
-        <div>
-          <FooterSectionHeading
-            icon={<RiCompass4Line aria-hidden className="size-5.5" />}
-          >
-            Quick Links
-          </FooterSectionHeading>
-          <ul
-            className={twMerge(
-              "mt-2 w-fit columns-2 space-y-2 pt-4 pl-3",
-              quickLinks.length > 6 && "lg:columns-3",
-            )}
-          >
-            {quickLinks.map(({ id, label }) => (
-              <li key={id}>
-                <button
-                  type="button"
-                  className="rounded-sm leading-4 hover:underline focus-visible:px-1 focus-visible:underline"
-                  onClick={() => navigateToSection(id)}
-                >
-                  {label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <p className="absolute inset-x-0 bottom-0 bg-(--border-color-g)/25 p-2 text-center text-xs text-(--text-color-g)">
+      <p className="text-center text-xs text-(--text-secondary-color-g)">
         {cpyText}
       </p>
     </footer>
@@ -90,50 +51,42 @@ const Footer = () => {
     {
       label: "GitHub",
       link: "https://github.com/vishnudt2004",
-      icon: <SiGithub aria-hidden title={null} className="scale-110" />,
+      icon: <SiGithub aria-hidden title={null} className="scale-90" />,
+      color: "#666", // GitHub Black
     },
     {
       label: "LinkedIn",
       link: "https://www.linkedin.com/in/vishnu-dt",
-      icon: <LinkedinIcon aria-hidden title={null} className="scale-115" />,
+      icon: (
+        <LinkedinIcon
+          style={{
+            "--color-2": "var(--bg-color-g)",
+          }}
+          aria-hidden
+          title={null}
+          className="scale-110"
+        />
+      ),
+      color: "#0A66C2", // LinkedIn Blue
     },
     {
       label: "LeetCode",
       link: "https://leetcode.com/vishnud2004",
-      icon: (
-        <SiLeetcode
-          aria-hidden
-          title={null}
-          color="default"
-          className="scale-100"
-        />
-      ),
+      icon: <SiLeetcode aria-hidden title={null} className="scale-90" />,
+      color: "#FFA116", // LeetCode Orange
     },
     {
-      label: "Hacker Rank",
+      label: "HackerRank",
       link: "https://www.hackerrank.com/profile/vishnu_d_t_2004",
-      icon: (
-        <SiHackerrank
-          aria-hidden
-          title={null}
-          color="default"
-          className="scale-95"
-        />
-      ),
+      icon: <SiHackerrank aria-hidden title={null} className="scale-80" />,
+      color: "#2EC866", // HackerRank Green
     },
     {
       label: "Email",
       link: "mailto:vishnu.d.t.2004@gmail.com",
-      icon: (
-        <SiGmail
-          aria-hidden
-          title={null}
-          color="default"
-          className="scale-95"
-        />
-      ),
+      icon: <SiGmail aria-hidden title={null} className="scale-80" />,
+      color: "#EA4335", // Gmail Red
     },
-    // Phone: "tel:+91936350XXXX",
   ];
 
   const quickLinks = filterActiveSections([
@@ -152,13 +105,7 @@ const Footer = () => {
     <>&copy; {new Date().getFullYear()} Vishnu D. All Rights Reserved.</>
   );
 
-  return (
-    <FooterLayout
-      connections={connections}
-      quickLinks={quickLinks}
-      cpyText={cpyText}
-    />
-  );
+  return <FooterLayout connections={connections} cpyText={cpyText} />;
 };
 
 export default Footer;

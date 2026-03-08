@@ -15,7 +15,7 @@
   }
 
   .anchor {
-    @apply relative inline-flex items-center rounded-sm text-(--anchor-color,var(--anchor-color-g)) before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-(--anchor-decoration-color,var(--anchor-decoration-color-g)) after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-(--anchor-decoration-color_hover,var(--anchor-color-g)) after:duration-150 hover:after:w-full focus:after:w-full focus-visible:px-1;
+    @apply relative inline-flex items-center text-(--anchor-color,var(--anchor-color-g)) before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-(--anchor-decoration-color,var(--anchor-decoration-color-g)) after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-(--anchor-decoration-color_hover,var(--anchor-color-g)) after:duration-150 hover:after:w-full focus:after:w-full focus-visible:px-1;
   }
 
   .btn {
@@ -26,26 +26,6 @@
     @apply bg-transparent text-(--btn-secondary-color,var(--btn-secondary-color-g))/85 ring ring-(--btn-secondary-color,var(--btn-secondary-color-g))/50 transition ring-inset hover:text-(--btn-secondary-color,var(--btn-secondary-color-g)) hover:ring-(--btn-secondary-color,var(--btn-secondary-color-g)) focus:text-(--btn-secondary-color,var(--btn-secondary-color-g)) focus:ring-(--btn-secondary-color,var(--btn-secondary-color-g));
   }
 
-  .zig-zag-line {
-    --a: 90deg; /* control the angle */
-    --s: 10px; /* size of the zig-zag */
-    --b: 2px; /* control the thickness */
-    --color: var(--border-color-g);
-
-    background: var(--color);
-    height: calc(var(--b) + var(--s) / (2 * tan(var(--a) / 2)));
-    width: 100%;
-    --_g: var(--s) repeat-x
-      conic-gradient(
-        from calc(var(--a) / -2) at bottom,
-        #0000,
-        #000 1deg calc(var(--a) - 1deg),
-        #0000 var(--a)
-      );
-    mask:
-      50% calc(-1 * var(--b)) / var(--_g) exclude,
-      50% / var(--_g);
-  }
 }
 
 /* custom tailwind theme-variables */
@@ -85,7 +65,10 @@
 }
 
 @utility fancy-bg-2 {
-  @apply bg-[repeating-linear-gradient(45deg,var(--fancy-bg-2-color)_0,var(--fancy-bg-2-color)_1.5px,transparent_0,transparent_50%)] bg-[length:15px_15px];
+  --color: color-mix(in srgb, var(--fancy-bg-2-color), transparent 0%);
+  --size: 20px;
+  --breadth: 1px;
+  @apply bg-[repeating-linear-gradient(45deg,var(--color)_0,var(--color)_var(--breadth),transparent_0,transparent_50%)] bg-size-[var(--size)_var(--size)];
 }
 
 @utility secondary-scrollbar {

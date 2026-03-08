@@ -1,6 +1,6 @@
 import { useFullscreen } from "@/hooks/useFullScreen";
 import { IconBtn } from "./Button";
-import { FullscreenEnterIcon, FullscreenExitIcon } from "./CustomIcons";
+import { FullscreenEnterIcon, FullscreenExitIcon } from "./Icons";
 
 export default function FullscreenToggle() {
   const { isFullscreen, enter, exit } = useFullscreen({

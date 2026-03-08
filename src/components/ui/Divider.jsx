@@ -1,6 +1,6 @@
 const Divider = ({
   type = "x",
-  width = type === "x" ? "80%" : "1px",
+  width = type === "x" ? "90%" : "1px",
   height = type === "y" ? "80%" : "1px",
   color = "var(--border-color-g)",
   gap = "10px",

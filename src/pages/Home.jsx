@@ -6,12 +6,7 @@ import { SectionRevealMotion } from "@/components/ui/Animations";
 import Divider from "@/components/ui/Divider";
 import Hero from "@/components/sections/Hero";
 
-const SectionWrapper = ({
-  children,
-  sectionId,
-  divide = true,
-  lazy = false,
-}) => {
+const Section = ({ children, sectionId, divide = true, lazy = false }) => {
   return (
     <>
       <SectionRevealMotion isHero={sectionId === IDS.hero}>
@@ -82,14 +77,14 @@ const sections = filterActiveSections([
 
 const Home = () => {
   return sections.map(({ id, component }, index) => (
-    <SectionWrapper
+    <Section
       key={id}
       sectionId={id}
-      divide={index !== sections.length - 1}
+      divide={index > 0 && index !== sections.length - 1} // first & last
       lazy={index > 0}
     >
       {createElement(component)}
-    </SectionWrapper>
+    </Section>
   ));
 };
 

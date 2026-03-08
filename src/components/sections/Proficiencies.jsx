@@ -50,14 +50,14 @@ import {
   VSCodeIcon,
   MotionIcon,
   NextAuthSmIcon,
-} from "@/components/ui/CustomIcons";
+} from "@/components/ui/Icons";
 
 const TipBtn = ({ tip, ...attr }) => (
   <Tip tip={tip}>
     <button
       type="button"
       aria-label="Section information"
-      className="cursor-effect-subtle cursor-help! rounded-full text-sm"
+      className="cursor-help! rounded-full text-sm"
       {...attr}
     >
       <RiInformationFill aria-hidden className="size-5" />

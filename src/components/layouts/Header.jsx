@@ -5,8 +5,8 @@ import { twMerge } from "tailwind-merge";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import {
   RiBriefcaseFill,
+  RiChat3Fill,
   RiCloseFill,
-  RiDiscussFill,
   RiFolderReduceFill,
   RiHome5Fill,
   RiMenu4Fill,
@@ -25,11 +25,22 @@ import { DesktopTooltip } from "@/components/ui/Tooltip";
 const NavMenu = ({ id, onClick, onMenuClick, label, icon: Icon }) => (
   <button
     onClick={() => (onClick ? onClick() : onMenuClick?.(id))}
-    className="focus-reset relative flex items-center gap-1.25 rounded-lg px-2 text-[14px] tracking-wide text-(--menus-color-g) duration-300 hover:bg-(--menus-color-g)/15 focus-visible:bg-(--menus-color-g)/15 focus-visible:outline-0 max-sm:w-fit max-sm:before:-bottom-2"
+    className="focus-reset relative flex items-center gap-1.25 rounded-lg px-2 text-sm tracking-wide text-nowrap text-(--menus-color-g) duration-300 hover:bg-(--menus-color-g)/15 focus-visible:bg-(--menus-color-g)/15 focus-visible:outline-0 max-sm:w-fit"
   >
     {Icon && <Icon aria-hidden className="size-3.25 opacity-80" />}
     {label}
   </button>
+);
+
+const CTABtn = ({ email, label, icon: Icon }) => (
+  <a
+    href={`mailto:${email}`}
+    aria-label="Send me an email"
+    className="focus-reset relative flex items-center gap-1.25 rounded-lg bg-white px-2 text-sm tracking-wide text-nowrap text-(--accent-color-g) duration-300 hover:bg-white/25 focus-visible:bg-white/25 focus-visible:outline-0 max-sm:w-fit"
+  >
+    {Icon && <Icon aria-hidden className="size-3.25 opacity-80" />}
+    {label}
+  </a>
 );
 
 const NavBrand = () => {
@@ -93,11 +104,11 @@ const NavMenuContent = ({
       inert={!isPrimary && !isOpen ? true : undefined}
       aria-hidden={!isPrimary && !isOpen ? true : undefined}
       className={twMerge(
-        "flex list-none justify-center transition-opacity duration-200 ease-in-out",
+        "flex list-none justify-center transition-opacity duration-800 ease-in-out",
         isPrimary
           ? ""
           : isOpen
-            ? "pl-2 opacity-100"
+            ? `opacity-100 ${isHorizontal && "pl-2"}`
             : "pointer-events-none opacity-0",
         isHorizontal ? "flex-row items-center gap-1" : "flex-col gap-2",
       )}
@@ -178,7 +189,7 @@ const DesktopNav = ({ menus, ref }) => {
   const getNavFocusableItems = () =>
     getFocusableItems(
       containerRef.current,
-      'button:not([disabled]):not([aria-hidden="true"])',
+      'button:not([disabled]):not([aria-hidden="true"]), a[href]',
     );
 
   const handleNavKeydown = createKeyMap({
@@ -486,29 +497,31 @@ const Header = () => {
 
   const menus = {
     secondary: [
-      {
-        id: IDS.about,
-        label: "About",
-        icon: RiBriefcaseFill,
-      },
-      {
-        id: IDS.projects,
-        label: "Projects",
-        icon: RiFolderReduceFill,
-      },
-      {
-        id: IDS.footer,
-        label: "Contact",
-        icon: RiDiscussFill,
-      },
-    ].map(({ id, label, icon }) => (
-      <NavMenu
-        id={id}
-        label={label}
-        icon={icon}
-        onMenuClick={handleMenuClick}
-      />
-    )),
+      ...[
+        {
+          id: IDS.about,
+          label: "About",
+          icon: RiBriefcaseFill,
+        },
+        {
+          id: IDS.projects,
+          label: "Projects",
+          icon: RiFolderReduceFill,
+        },
+      ].map(({ id, label, icon }) => (
+        <NavMenu
+          id={id}
+          label={label}
+          icon={icon}
+          onMenuClick={handleMenuClick}
+        />
+      )),
+      <CTABtn
+        email="vishnu.d.t.2004@gmail.com"
+        label="Let’s Talk"
+        icon={RiChat3Fill}
+      />,
+    ],
   };
 
   return (

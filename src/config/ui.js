@@ -3,51 +3,37 @@
 // - Themes must exist in src/styles/themes.css (names without prefix)
 // - THEME_CLASSNAME_PREFIX defines the CSS class pattern (e.g. "theme-light", "theme-aurora")
 
+const DISABLED_THEMES = [
+  { category: "Core", themes: ["pitch-black"] },
+  { category: "Soft Tones", themes: ["minty", "aqua-zen", "sunrise"] },
+  {
+    category: "Warm & Pastel",
+    themes: ["pastel", "crimson-bloom"],
+  },
+  { category: "Developer", themes: ["postman"] },
+  { category: "Neon & Futuristic", themes: ["dark-matter", "forest-essence"] },
+];
+
 export const UI = {
   DEFAULT_THEME: "light",
   THEME_CLASSNAME_PREFIX: "theme",
 
   THEMES: [
     {
-      category: "Base Modes",
-      themes: ["light", "dark", "pitch-black"],
+      category: "Core",
+      themes: ["light", "dark"],
     },
     {
-      category: "Soft & Neutral",
-      themes: [
-        "paper",
-        "sepia",
-        "minty",
-        "lavender",
-        "aqua-zen",
-        "sunrise",
-        "arctic-sky",
-      ],
+      category: "Soft Tones",
+      themes: ["lavender"],
     },
     {
-      category: "Pastel & Romantic",
-      themes: [
-        "pastel",
-        "cotton-candy",
-        "vintage-rose",
-        "red-harmony",
-        "red-rose",
-      ],
+      category: "Developer",
+      themes: ["one-dark-pro", "dracula", "nord"],
     },
     {
-      category: "Dev Favorites",
-      themes: ["one-dark-pro", "dracula", "postman"],
-    },
-    {
-      category: "Tech & Futuristic",
-      themes: [
-        "dark-matter",
-        "forest-essence",
-        "cyber",
-        "synthwave",
-        "ocean-glow",
-        "aurora",
-      ],
+      category: "Neon & Futuristic",
+      themes: ["cyber", "synthwave", "ocean-glow", "aurora"],
     },
   ],
   FEATURED_THEMES: ["light", "dark", "one-dark-pro"],

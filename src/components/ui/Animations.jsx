@@ -1,7 +1,6 @@
-import { AnimatePresence, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "motion/react";
 
 import Motion from "./Motion";
-import { useTheme } from "@/contexts/ThemeContext";
 
 const MotionOnScroll = ({ children, ...rest }) => {
   return (
@@ -18,33 +17,23 @@ const MotionOnScroll = ({ children, ...rest }) => {
 
 // Predefined animations – for component-specific use
 
-const HeroBgOverlayMotion = ({ children, ...motionProps }) => {
-  const { theme } = useTheme();
-  const reduce = useReducedMotion();
-
+const HeroRevealMotion = ({ children, delay = 0, ...motionProps }) => {
   return (
-    <AnimatePresence mode="wait">
-      <Motion
-        key={theme}
-        initial={{ scale: 0.5, opacity: 0 }}
-        animate={{
-          scale: 1,
-          opacity: 0.7,
-          transition: reduce
-            ? { duration: 0 }
-            : {
-                type: "spring",
-                stiffness: 200,
-                damping: 10,
-                mass: 1.2,
-                delay: 0.4,
-              },
-        }}
-        {...motionProps}
-      >
-        {children}
-      </Motion>
-    </AnimatePresence>
+    <Motion
+      initial={{ opacity: 0, y: 12 }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 0.45,
+          ease: [0.16, 1, 0.3, 1],
+          delay,
+        },
+      }}
+      {...motionProps}
+    >
+      {children}
+    </Motion>
   );
 };
 
@@ -101,7 +90,7 @@ const DropdownMotion = ({ children, isOpen, ...motionProps }) => {
 export {
   Motion,
   MotionOnScroll,
-  HeroBgOverlayMotion,
-  DropdownMotion,
+  HeroRevealMotion,
   SectionRevealMotion,
+  DropdownMotion,
 };

@@ -11,26 +11,19 @@ body {
   --cursor-accent: var(--accent-color-g);
 }
 
-.cursor-ring,
 .cursor-dot {
   transition:
     width 0.2s,
     height 0.2s,
     background 0.3s,
     box-shadow 0.2s,
-    opacity 0.2s;
-}
-
-.cursor-ring {
-  transition:
-    width 0.2s,
-    height 0.2s,
+    opacity 0.2s,
     transform 150ms ease;
 
-  &.ring-active {
-    --ring-size: 25px;
-    width: var(--ring-size);
-    height: var(--ring-size);
+  &.dot-active {
+    --dot-size: 10px;
+    width: var(--dot-size);
+    height: var(--dot-size);
   }
 }
 
@@ -40,18 +33,10 @@ body {
       a[href]:not(.cursor-effect-subtle):hover,
       button:not([disabled], .cursor-effect-subtle):hover
     ) {
-    .cursor-ring {
-      border-color: color-mix(in srgb, var(--text-color-g), transparent 50%);
-
-      &:not(.ring-active) {
-        --ring-size: 40px;
-        width: var(--ring-size);
-        height: var(--ring-size);
-      }
-    }
-
     .cursor-dot {
-      background-color: var(--text-color-g);
+      &:not(.dot-active) {
+        background-color: var(--text-color-g);
+      }
     }
   }
 
@@ -60,7 +45,6 @@ body {
   }
 
   &:has(.cursor-effect-hidden:hover) {
-    .cursor-ring,
     .cursor-dot {
       opacity: 0;
       display: none;
@@ -78,10 +62,6 @@ body {
         button:not([disabled], .cursor-effect-subtle):hover
       )
     ) {
-    .cursor-ring {
-      opacity: 0;
-    }
-
     .cursor-dot {
       --dot-size: 12px;
       opacity: 0.3;
@@ -100,7 +80,6 @@ body {
   }
 
   /* Disable cursor motion & effects */
-  .cursor-ring,
   .cursor-dot {
     display: none;
   }

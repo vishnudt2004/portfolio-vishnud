@@ -48,7 +48,6 @@ export function useCursorAccentScope() {
 
 export default function AnimatedCursor({ className }) {
   const dotRef = useRef(null);
-  const ringRef = useRef(null);
   const [hasMoved, setHasMoved] = useState(false);
   const isTouch = useIsTouchDevice();
 
@@ -67,11 +66,11 @@ export default function AnimatedCursor({ className }) {
     };
 
     const down = () => {
-      ringRef.current?.classList.add("ring-active");
+      dotRef.current?.classList.add("dot-active");
     };
 
     const up = () => {
-      ringRef.current?.classList.remove("ring-active");
+      dotRef.current?.classList.remove("dot-active");
     };
 
     const loop = () => {
@@ -80,9 +79,6 @@ export default function AnimatedCursor({ className }) {
 
       if (dotRef.current)
         dotRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-
-      if (ringRef.current)
-        ringRef.current.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
 
       requestAnimationFrame(loop);
     };
@@ -102,28 +98,14 @@ export default function AnimatedCursor({ className }) {
   if (isTouch) return;
 
   return (
-    <>
-      {/* dot */}
-      <div
-        ref={dotRef}
-        aria-hidden="true"
-        className={twMerge(
-          "cursor-dot pointer-events-none fixed top-0 left-0 z-999 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--text-color-g)/25",
-          !hasMoved && "opacity-0",
-          className?.dot,
-        )}
-      />
-
-      {/* ring */}
-      <div
-        ref={ringRef}
-        aria-hidden="true"
-        className={twMerge(
-          "cursor-ring pointer-events-none fixed top-0 left-0 z-998 size-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-(--text-color-g)/25",
-          !hasMoved && "opacity-0",
-          className?.ring,
-        )}
-      />
-    </>
+    <div
+      ref={dotRef}
+      aria-hidden="true"
+      className={twMerge(
+        "cursor-dot pointer-events-none fixed top-0 left-0 z-999 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--text-color-g)/25",
+        !hasMoved && "opacity-0",
+        className?.dot,
+      )}
+    />
   );
 }

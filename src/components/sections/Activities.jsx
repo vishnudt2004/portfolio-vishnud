@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/SectionLayouts";
 import Card, { Br, CardActions } from "@/components/ui/Card";
 import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
-import { LinkedinIcon } from "@/components/ui/CustomIcons";
+import { LinkedinIcon } from "@/components/ui/Icons";
 
 import linkedInIcon from "@/assets/images/icons/linkedin.svg";
 
