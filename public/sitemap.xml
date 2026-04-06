@@ -1,16 +1,29 @@
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<url>
-  <loc>https://portfolio-vishnud.vercel.app/</loc>
-  <lastmod>2025-10-17T08:03:27+00:00</lastmod>
-</url>
+  <url>
+    <loc>https://portfolio-vishnud.vercel.app/</loc>
+    <lastmod>2026-03-11</lastmod>
+  </url>
 
+  <url>
+    <loc>https://portfolio-vishnud.vercel.app/projects</loc>
+    <lastmod>2026-03-11</lastmod>
+  </url>
+
+  <url>
+    <loc>https://portfolio-vishnud.vercel.app/activities</loc>
+    <lastmod>2026-03-11</lastmod>
+  </url>
+
+  <url>
+    <loc>https://portfolio-vishnud.vercel.app/achievements</loc>
+    <lastmod>2026-03-11</lastmod>
+  </url>
+
+  <url>
+    <loc>https://portfolio-vishnud.vercel.app/certifications</loc>
+    <lastmod>2026-03-11</lastmod>
+  </url>
 
 </urlset>

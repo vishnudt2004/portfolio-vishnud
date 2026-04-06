@@ -44,13 +44,9 @@ import {
 import { IDS } from "@/config/constants";
 import Anchor from "@/components/ui/Anchor";
 import Button from "@/components/ui/Button";
-import { TwoColumnsLayout } from "@/components/ui/SectionLayouts";
+import { SectionTitle, TwoColumnsLayout } from "@/components/ui/SectionLayouts";
 import { Tip } from "@/components/ui/Tooltip";
-import {
-  VSCodeIcon,
-  MotionIcon,
-  NextAuthSmIcon,
-} from "@/components/ui/Icons";
+import { VSCodeIcon, MotionIcon, NextAuthSmIcon } from "@/components/ui/Icons";
 
 const TipBtn = ({ tip, ...attr }) => (
   <Tip tip={tip}>
@@ -63,6 +59,13 @@ const TipBtn = ({ tip, ...attr }) => (
       <RiInformationFill aria-hidden className="size-5" />
     </button>
   </Tip>
+);
+
+const SubTitle = ({ children, tip }) => (
+  <h3 className="flex items-center justify-center gap-2 text-center text-xl font-medium">
+    {children}
+    <TipBtn tip={tip} />
+  </h3>
 );
 
 const SkillEntry = ({ children: name, icon }) => (
@@ -100,14 +103,19 @@ const ProficienciesSection = ({
 
   return (
     <TwoColumnsLayout
-      sectionId={IDS.proficiencies}
-      sectionTitle="Proficiencies"
+      sectionTitle={
+        <SectionTitle
+          sectionId={IDS.proficiencies}
+          description="Technologies and tools I use to build and ship applications."
+        >
+          Proficiencies
+        </SectionTitle>
+      }
       left={
         <div className="fancy-bg-1 flex flex-col items-center gap-10 p-4">
-          <h3 className="flex items-center justify-center gap-2 text-center text-xl font-semibold tracking-wider">
+          <SubTitle tip="Skill icons appear on interaction">
             Skill Sets
-            <TipBtn tip="Skill icons appear on interaction" />
-          </h3>
+          </SubTitle>
 
           <ul id="skills-list" className="group/list flex flex-wrap gap-y-2">
             {skills.map(({ group, skills, collapsedSkills }) => (
@@ -161,11 +169,9 @@ const ProficienciesSection = ({
       }
       right={
         <div className="flex flex-col items-center gap-5 p-1">
-          <h3 className="mb-5 flex items-center justify-center gap-2 text-center text-xl font-semibold tracking-wider">
-            Tech Stack
-            <TipBtn tip="Icon names appear on interaction" />
-          </h3>
-          <div className="group flex flex-wrap items-center justify-center gap-2 max-sm:scale-90">
+          <SubTitle tip="Icon names appear on interaction">Tech Stack</SubTitle>
+
+          <div className="group mt-10 flex flex-wrap items-center justify-center gap-2 max-sm:scale-90">
             {techStack.techStackIcons.map(({ name, icon }) => (
               <Tip key={name} tip={name}>
                 <button
@@ -278,34 +284,54 @@ const techStack = {
     { name: "Express", icon: SiExpress },
   ],
   techStackDescription: (
-    <div className="flex flex-col gap-10 p-2 sm:p-4">
+    <div className="flex flex-col gap-4 p-2 sm:p-4">
       <div className="flex flex-col gap-3">
         <p>
-          My main stack revolves around <S>React</S> and <S>Next.js</S> for
-          building modern, performant UIs, supported by <S>Node.js</S> (with{" "}
-          <S>Express</S>) and <S>MongoDB</S> on the backend. I also explore
-          tools and frameworks that improve{" "}
-          <span className="underline underline-offset-2">
-            developer experience
-          </span>
-          , like <S>TypeScript</S>, <S>Prisma</S>, and <S>TailwindCSS</S>.
+          My main stack is <S>React</S> and <S>Next.js</S> on the frontend,
+          paired with <S>Node.js</S>, <S>Express</S>, and <S>MongoDB</S> on the
+          backend — the full <S>MERN stack</S>. I also use <S>TypeScript</S> for
+          type safety, <S>TailwindCSS</S> for styling, and <S>Prisma</S> when
+          working with relational databases.
         </p>
 
         <p>
-          This stack allows me to build end-to-end applications — from UI and
-          state management to APIs, data modeling, and deployment.
+          This stack lets me build complete, end-to-end applications — from UI
+          and state management to REST APIs, data modeling, and deployment — and
+          I explore additional tools as projects demand.
         </p>
       </div>
 
-      <Anchor
-        href="https://nextjs.org/"
-        className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
-      >
-        <span>
-          {/* prevents flex-related text wrapping issue */}
-          Read more about <strong>Next.js</strong> development.
-        </span>
-      </Anchor>
+      <div className="flex flex-wrap gap-3">
+        {[
+          {
+            href: "https://nextjs.org/",
+            label: (
+              <>
+                Learn more about <strong>Next.js</strong>.
+              </>
+            ),
+          },
+          {
+            href: "https://www.geeksforgeeks.org/mern/understand-mern-stack/",
+            label: (
+              <>
+                Learn more about <strong>MERN Stack</strong>.
+              </>
+            ),
+          },
+        ].map((link, i) => (
+          <Anchor
+            key={i}
+            href={link.href}
+            className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
+          >
+            <span>
+              {/* prevents flex-related text wrapping issue */}
+              {link.label}
+            </span>
+          </Anchor>
+        ))}
+      </div>
     </div>
   ),
 };

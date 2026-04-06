@@ -8,22 +8,31 @@ const Button = ({
   fgColor,
   icon,
   className,
-  variant,
+  variant = "solid", // solid, soft, outline
   ...props
 }) => {
-  const isSecondary = variant === "secondary";
+  const isVariant = (v) => variant === v;
 
   const style = {
-    "--btn-color": color,
-    "--btn-fg-color": fgColor,
-    "--btn-secondary-color": color,
+    "--btn-color": color || "var(--text-color-g)",
+    "--btn-fg-color": fgColor || "var(--bg-color-g)",
+    "--btn-secondary-color": color || "var(--text-color-g)",
   };
 
   const Comp = asChild ? Slot.Root : "button";
   return (
     <Comp
       type={Comp === "button" ? "button" : undefined}
-      className={twMerge("btn", isSecondary && "btn-secondary", className)}
+      className={twMerge(
+        "inline-flex items-center justify-center gap-1 rounded-full px-2.5 py-1 text-sm tracking-wide transition-colors duration-300",
+        isVariant("soft") &&
+          "bg-(--btn-secondary-color)/15 text-(--btn-secondary-color) hover:bg-(--btn-secondary-color)/30 focus:bg-(--btn-secondary-color)/30",
+        isVariant("solid") &&
+          "bg-(--btn-color)/90 text-(--btn-fg-color) hover:bg-(--btn-color) focus:bg-(--btn-color)",
+        isVariant("outline") &&
+          "bg-transparent text-(--btn-secondary-color)/85 ring ring-(--btn-secondary-color)/50 ring-inset hover:text-(--btn-secondary-color) hover:ring-(--btn-secondary-color) focus:text-(--btn-secondary-color) focus:ring-(--btn-secondary-color)",
+        className,
+      )}
       style={style}
       {...props}
     >

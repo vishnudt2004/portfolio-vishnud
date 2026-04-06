@@ -1,7 +1,14 @@
 // Module reserved for future use.
 
-import { SimpleLayout } from "@/components/ui/SectionLayouts";
+import { IDS } from "@/config/constants";
+import { SectionTitle, SimpleLayout } from "@/components/ui/SectionLayouts";
 
-const Experience = () => <SimpleLayout sectionTitle="Experience" />;
+const Experience = () => (
+  <SimpleLayout
+    sectionTitle={
+      <SectionTitle sectionId={IDS.experience}>Experience</SectionTitle>
+    }
+  />
+);
 
 export default Experience;

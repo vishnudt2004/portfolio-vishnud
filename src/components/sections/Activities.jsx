@@ -5,6 +5,7 @@ import { take } from "@/utils/jsUtils";
 import Anchor from "@/components/ui/Anchor";
 import {
   SectionBtns,
+  SectionTitle,
   SimpleLayout,
 } from "@/components/ui/SectionLayouts";
 import Card, { Br, CardActions } from "@/components/ui/Card";
@@ -56,7 +57,11 @@ const ActivityItem = ({
 );
 
 const ActivitiesSection = ({ activities, linkedinActivities }) => (
-  <SimpleLayout sectionId={IDS.activities} sectionTitle="Activities">
+  <SimpleLayout
+    sectionTitle={
+      <SectionTitle sectionId={IDS.activities}>Activities</SectionTitle>
+    }
+  >
     <LoadMoreGrid
       gridId="activities-grid"
       items={activities}

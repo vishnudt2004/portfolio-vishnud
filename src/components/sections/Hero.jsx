@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { RiArticleFill } from "@remixicon/react";
+import { RiArticleFill, RiMailFill } from "@remixicon/react";
 import {
   SiExpress,
   SiGit,
@@ -20,21 +20,19 @@ import { HeroRevealMotion } from "@/components/ui/Animations";
 import ThemeVisual from "@/components/ui/ThemeVisual";
 import { DownCircleIcon, HandIcon } from "@/components/ui/Icons";
 
-const ScrollDownBtn = () => {
-  return (
-    <button
-      aria-label="Scroll to About section"
-      className="absolute bottom-10 left-1/2 flex size-8 w-fit -translate-x-1/2 justify-center rounded-full bg-(--bg-color-g) opacity-70 transition hover:translate-y-1 hover:opacity-100 focus-visible:opacity-100"
-      onClick={() => scrollToSection("about")}
-    >
-      <DownCircleIcon
-        aria-hidden
-        style={{ "--color": "var(--text-color-g)" }}
-        className="size-full fill-none"
-      />
-    </button>
-  );
-};
+const ScrollDownBtn = () => (
+  <button
+    aria-label="Scroll to About section"
+    className="absolute bottom-10 left-1/2 flex size-8 w-fit -translate-x-1/2 justify-center rounded-full bg-(--bg-color-g) opacity-70 transition hover:translate-y-1 hover:opacity-100 focus-visible:opacity-100"
+    onClick={() => scrollToSection("about")}
+  >
+    <DownCircleIcon
+      aria-hidden
+      style={{ "--color": "var(--text-color-g)" }}
+      className="size-full fill-none"
+    />
+  </button>
+);
 
 const HeroStatus = ({ status: { color, msg } }) => {
   const colors = {
@@ -67,12 +65,15 @@ const HeroContent = ({
   status,
 }) => (
   <div className="flex w-dvw flex-col justify-center gap-6 max-lg:items-center max-lg:text-center">
-    <h1 id={sectionTitleId(IDS.hero)} className="text-3xl sm:text-4xl">
-      {greeting}{" "}
+    <h1
+      id={sectionTitleId(IDS.hero)}
+      className="flex items-center gap-2 text-3xl sm:text-4xl"
+    >
+      {greeting}
       <span className="whitespace-nowrap text-(--accent-color-g)">{name}</span>.
     </h1>
 
-    <p className="font-medium tracking-wide text-balance">{role}</p>
+    <p className="font-medium tracking-wide">{role}</p>
 
     <p className="text-[15px] max-lg:max-w-150 sm:text-base">{tagline}</p>
 
@@ -89,10 +90,10 @@ const HeroContent = ({
           "aria-label": "Open resume PDF",
         },
         {
-          label: "Say Hello!",
+          label: "Email me",
           color: "var(--accent-color-g)",
           icon: (
-            <HandIcon
+            <RiMailFill
               aria-hidden
               className="order-1 inline size-4 fill-white"
             />
@@ -185,11 +186,20 @@ const HeroLayout = ({ identity }) => {
 const HeroView = () => (
   <HeroLayout
     identity={{
-      greeting: "Hello, I’m",
+      greeting: (
+        <span>
+          Hi{" "}
+          <HandIcon
+            aria-hidden
+            className="inline size-8 translate-x-0.5 -translate-y-1 fill-(--text-color-g)"
+          />
+          , I’m
+        </span>
+      ),
       name: "Vishnu D",
-      role: "Frontend / Full-Stack Developer • React, Next.js & TypeScript",
+      role: "Frontend / Full-Stack Developer • React, Next.js, TypeScript & MERN",
       tagline:
-        "I build clean, maintainable web applications with a strong focus on UI consistency, developer experience, and real-world usability.",
+        "I build clean, maintainable web applications — from UI to API — with a strong focus on consistency, developer experience, and real-world usability.",
       status: { color: "green", msg: "Open to Opportunities" },
       email: "vishnu.d.t.2004@gmail.com",
       resume:

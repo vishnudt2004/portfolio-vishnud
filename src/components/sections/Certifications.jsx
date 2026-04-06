@@ -8,14 +8,10 @@ import { IDS } from "@/config/constants";
 import { take } from "@/utils/jsUtils";
 import {
   SectionBtns,
+  SectionTitle,
   SimpleLayout,
 } from "@/components/ui/SectionLayouts";
-import Card, {
-  Br,
-  List,
-  CardActions,
-  CardButton,
-} from "@/components/ui/Card";
+import Card, { Br, List, CardActions, CardButton } from "@/components/ui/Card";
 import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 
 import vercelIcon from "@/assets/images/icons/vercel.svg";
@@ -72,7 +68,11 @@ const CertificateItem = ({
 );
 
 const CertificationsSection = ({ certificates }) => (
-  <SimpleLayout sectionId={IDS.certifications} sectionTitle="Certifications">
+  <SimpleLayout
+    sectionTitle={
+      <SectionTitle sectionId={IDS.certifications}>Certifications</SectionTitle>
+    }
+  >
     <LoadMoreGrid
       gridId="certifications-grid"
       items={certificates}

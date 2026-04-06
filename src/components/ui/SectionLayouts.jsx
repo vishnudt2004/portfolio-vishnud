@@ -11,6 +11,18 @@ import Button from "./Button";
 
 // Layout naming is based on desktop structure; mobile adapts as needed.
 
+const Line = ({ className }) => (
+  <hr
+    aria-hidden
+    style={{
+      "--w": "95%",
+      "--h": "3px",
+      "--color": "var(--border-color-g)",
+    }}
+    className={"mx-auto h-(--h) w-(--w) border-0 bg-(--color) " + className}
+  />
+);
+
 const SectionTitle = ({
   as: As = "h2", // eslint-disable-line no-unused-vars
   children,
@@ -19,24 +31,32 @@ const SectionTitle = ({
   ...props
 }) => {
   return (
-    <As
-      id={sectionTitleId(sectionId)}
-      className={twMerge("section-title relative self-center", className)}
-      {...props}
+    <div
+      className={twMerge(
+        "relative mb-5 flex w-full items-center justify-center px-2.5",
+        className,
+      )}
     >
-      {children}
-    </As>
+      <As
+        id={sectionTitleId(sectionId)}
+        className="bg-(--bg-color-g) px-10 text-2xl font-semibold tracking-wide transition-colors"
+        // "mb-5 w-full p-5 py-4 text-nowrap text-2xl font-semibold tracking-wide border-y border-y-(--border-color-g) bg-(--text-color-g)/2"
+        {...props}
+      >
+        {children}
+      </As>
+
+      <Line className="absolute inset-y-0 -z-1 my-auto" />
+    </div>
   );
 };
 
 const SimpleLayout = ({
   sectionTitle = "Section Title",
-  sectionId,
   children = (
     <span className="block text-center text-sm opacity-50">Content</span>
   ),
   className,
-  titleProps,
 }) => {
   return (
     <div
@@ -45,11 +65,7 @@ const SimpleLayout = ({
         className,
       )}
     >
-      {sectionTitle && (
-        <SectionTitle sectionId={sectionId} {...titleProps}>
-          {sectionTitle}
-        </SectionTitle>
-      )}
+      {sectionTitle}
       <div className="section-body">{children}</div>
     </div>
   );
@@ -57,18 +73,12 @@ const SimpleLayout = ({
 
 const TwoColumnsLayout = ({
   sectionTitle = "Section Title",
-  sectionId,
   left = <>Column&nbsp;1</>,
   right = <>Column&nbsp;2</>,
-  titleProps,
 }) => {
   return (
     <div className="m-auto flex flex-col items-center justify-center gap-10 px-5 py-10">
-      {sectionTitle && (
-        <SectionTitle sectionId={sectionId} {...titleProps}>
-          {sectionTitle}
-        </SectionTitle>
-      )}
+      {sectionTitle}
 
       <div className="mx-auto flex min-h-[50vh] w-full flex-col gap-4 md:flex-row">
         {[left, right].map((comp, i) => (
@@ -118,12 +128,12 @@ const SectionBtns = ({ primary = { label: "", href: "" }, secondary }) => {
   );
 
   return (
-    <div className="xs:flex-row xs:justify-center mt-6 flex flex-col items-center gap-2 *:min-w-50">
+    <div className="xs:flex-row xs:justify-center mt-6 flex flex-col items-center gap-3 *:min-w-50">
       <Button asChild icon={showPrimaryLink ? icons.primary : icons.home}>
         {showPrimaryLink ? primaryLink : homeLink}
       </Button>
       {showSecondary && (
-        <Button asChild variant="secondary" icon={icons.secondary}>
+        <Button asChild variant="soft" icon={icons.secondary}>
           {secondaryLink}
         </Button>
       )}
@@ -131,4 +141,4 @@ const SectionBtns = ({ primary = { label: "", href: "" }, secondary }) => {
   );
 };
 
-export { SimpleLayout, TwoColumnsLayout, SectionBtns };
+export { SectionTitle, SimpleLayout, TwoColumnsLayout, SectionBtns };

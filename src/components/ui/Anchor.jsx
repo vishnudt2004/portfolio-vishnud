@@ -18,15 +18,15 @@ const AnchorIcon = ({ icon = <RiArrowRightUpLongLine />, className }) => (
 
 const Anchor = ({
   children,
-  color = "var(--anchor-color-g)",
+  color,
   icon = <AnchorIcon />,
   target = "_blank",
+  className,
   ...attr
 }) => {
   const style = {
-    "--anchor-color": color,
-    "--anchor-decoration-color": `color-mix(in srgb, ${color}, transparent 80%)`,
-    "--anchor-decoration-color_hover": color,
+    "--anchor-color": color || "var(--color-blue-500)",
+    "--anchor-decoration-color": `color-mix(in srgb, var(--anchor-color), transparent 80%)`,
   };
 
   return (
@@ -34,7 +34,10 @@ const Anchor = ({
       target={target}
       rel="noopener noreferrer"
       {...attr}
-      className={twMerge("group anchor", attr?.className)}
+      className={twMerge(
+        "group relative inline-flex items-center text-(--anchor-color) before:absolute before:bottom-0 before:left-0 before:h-px before:w-full before:bg-(--anchor-decoration-color) after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-(--anchor-color) after:duration-150 hover:after:w-full focus:after:w-full focus-visible:px-1",
+        className,
+      )}
       style={style}
     >
       {children}

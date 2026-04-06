@@ -3,17 +3,6 @@
 
   --font-family-g: "Poppins", sans-serif;
 
-  --anchor-color-g: var(--color-blue-500);
-  --anchor-decoration-color-g: color-mix(
-    in srgb,
-    var(--anchor-color-g),
-    transparent 80%
-  );
-
-  --btn-color-g: var(--text-color-g);
-  --btn-fg-color-g: var(--bg-color-g);
-  --btn-secondary-color-g: var(--text-color-g);
-
   --scrollbar-track-color-g: var(--bg-color-g);
   --scrollbar-thumb-color-g: var(--text-color-g);
 

@@ -7,7 +7,11 @@ import { take } from "@/utils/jsUtils";
 import Anchor from "@/components/ui/Anchor";
 import Img from "@/components/ui/Img";
 import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
-import { SectionBtns, SimpleLayout } from "@/components/ui/SectionLayouts";
+import {
+  SectionBtns,
+  SectionTitle,
+  SimpleLayout,
+} from "@/components/ui/SectionLayouts";
 
 import projectImage_globblog from "@/assets/images/projects/globblog-hero.png";
 import projectImage_portfolio from "@/assets/images/projects/portfolio-hero.png";
@@ -70,7 +74,7 @@ const ProjectCard = ({ id, title, description, thumb, techStack, links }) => {
         className="aspect-video border border-(--border-color-g)/50 object-cover"
       />
 
-      <div className="flex grow flex-col gap-1 p-2 pt-0">
+      <div className="flex grow flex-col gap-2 p-2 pt-0">
         <h3 id={titleId} className="font-semibold">
           {title}
         </h3>
@@ -78,7 +82,7 @@ const ProjectCard = ({ id, title, description, thumb, techStack, links }) => {
           {description}
         </p>
 
-        <ul className="my-2 flex flex-wrap gap-1.5 text-sm">
+        <ul className="mt-3 mb-2 flex flex-wrap gap-1.5 text-sm">
           <li className="pt-1 leading-2 *:font-medium">
             <strong>Tech stack:</strong>
           </li>
@@ -113,7 +117,11 @@ const ProjectCard = ({ id, title, description, thumb, techStack, links }) => {
 };
 
 const ProjectsSection = ({ projects, githubRepos }) => (
-  <SimpleLayout sectionId={IDS.projects} sectionTitle="Projects">
+  <SimpleLayout
+    sectionTitle={
+      <SectionTitle sectionId={IDS.projects}>Projects</SectionTitle>
+    }
+  >
     <LoadMoreGrid
       gridId="projects-grid"
       items={projects}
@@ -173,7 +181,7 @@ const projects = [
       "React",
       "Tailwind CSS",
       "Framer Motion",
-      "Radix UI Components",
+      "Radix UI Primitives",
     ],
     links: {
       live: "https://portfolio-vishnud.vercel.app/",

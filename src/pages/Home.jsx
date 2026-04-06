@@ -3,10 +3,9 @@ import { createElement, Suspense, lazy } from "react";
 import { IDS } from "@/config/constants";
 import { filterActiveSections, sectionTitleId } from "@/utils/siteUtils";
 import { SectionRevealMotion } from "@/components/ui/Animations";
-import Divider from "@/components/ui/Divider";
 import Hero from "@/components/sections/Hero";
 
-const Section = ({ children, sectionId, divide = true, lazy = false }) => {
+const Section = ({ children, sectionId, lazy = false }) => {
   return (
     <>
       <SectionRevealMotion isHero={sectionId === IDS.hero}>
@@ -29,8 +28,6 @@ const Section = ({ children, sectionId, divide = true, lazy = false }) => {
           )}
         </section>
       </SectionRevealMotion>
-
-      {divide && <Divider />}
     </>
   );
 };
@@ -77,12 +74,7 @@ const sections = filterActiveSections([
 
 const Home = () => {
   return sections.map(({ id, component }, index) => (
-    <Section
-      key={id}
-      sectionId={id}
-      divide={index > 0 && index !== sections.length - 1} // first & last
-      lazy={index > 0}
-    >
+    <Section key={id} sectionId={id} lazy={index > 0}>
       {createElement(component)}
     </Section>
   ));

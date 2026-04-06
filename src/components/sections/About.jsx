@@ -5,10 +5,9 @@ import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 import { IDS } from "@/config/constants";
 import Anchor from "@/components/ui/Anchor";
 import Img from "@/components/ui/Img";
-import Divider from "@/components/ui/Divider";
 import SocialBtn from "@/components/ui/SocialBtn";
 import Tooltip from "@/components/ui/Tooltip";
-import { TwoColumnsLayout } from "@/components/ui/SectionLayouts";
+import { SectionTitle, TwoColumnsLayout } from "@/components/ui/SectionLayouts";
 import {
   LinkedinIcon,
   DuotoneComputerIcon,
@@ -31,8 +30,11 @@ const AboutSection = ({
   return (
     <>
       <TwoColumnsLayout
-        sectionId={IDS.about}
-        sectionTitle={title}
+        sectionTitle={
+          <SectionTitle sectionId={IDS.about} className="text-center">
+            {title}
+          </SectionTitle>
+        }
         left={
           <Img
             src={image}
@@ -45,12 +47,10 @@ const AboutSection = ({
         right={<div className="fancy-bg-1 p-4">{aboutMe}</div>}
       />
 
-      {moreAboutMe.length && <Divider />}
-
       {moreAboutMe.map((section, ind) => (
         <TwoColumnsLayout
           key={`maCol$*-${ind}`}
-          sectionTitle={section.title}
+          sectionTitle={<SectionTitle>{section.title}</SectionTitle>}
           left={<ColContainer>{section.left}</ColContainer>}
           right={<ColContainer>{section.right}</ColContainer>}
         />
@@ -90,9 +90,10 @@ const Underline = ({ children }) => (
 const aboutMe = (
   <ContentBlock>
     <p>
-      I’m Vishnu, a <Highlighter>Full-Stack Developer</Highlighter> focused on
-      building <Underline>clean, modular, and maintainable</Underline> web
-      applications with <Underline>React, Next.js, and TypeScript</Underline>. I
+      I’m Vishnu, a <Highlighter>Frontend</Highlighter> &{" "}
+      <Highlighter>Full-Stack Developer</Highlighter> focused on building{" "}
+      <Underline>clean, modular, and maintainable</Underline> web applications
+      with <Underline>React, Next.js, TypeScript & the MERN Stack</Underline>. I
       care deeply about developer experience — from reusable UI components and
       clear documentation to thoughtful project structure — and I build systems
       that scale without becoming difficult to maintain.
@@ -103,7 +104,9 @@ const aboutMe = (
       href="https://vishnudt2004.github.io/vishnud-resume/vishnud-resume-fullstack.pdf"
       className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
     >
-      Check out my <Highlighter className="mx-1.5">Resume</Highlighter> here.
+      Check out my{" "}
+      <Highlighter className="mx-1.5 bg-(--anchor-color)">Resume</Highlighter>{" "}
+      here.
     </Anchor>
 
     <ul className="flex h-full flex-wrap gap-4 p-3 max-md:self-center">

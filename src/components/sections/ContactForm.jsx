@@ -12,7 +12,7 @@ import {
 
 import { IDS } from "@/config/constants";
 import Button from "@/components/ui/Button";
-import { SimpleLayout } from "@/components/ui/SectionLayouts";
+import { SectionTitle, SimpleLayout } from "@/components/ui/SectionLayouts";
 
 const Input = ({
   as = "input",
@@ -51,7 +51,11 @@ const Input = ({
 
 const ContactForm = () => {
   return (
-    <SimpleLayout sectionId={IDS.contactForm} sectionTitle="Contact Me">
+    <SimpleLayout
+      sectionTitle={
+        <SectionTitle sectionId={IDS.contactForm}>Contact Me</SectionTitle>
+      }
+    >
       <form noValidate={DISABLED}>
         <fieldset
           disabled={DISABLED}

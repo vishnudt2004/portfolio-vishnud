@@ -2,7 +2,11 @@ import { RiFileInfoFill, RiTrophyFill, RiTrophyLine } from "@remixicon/react";
 
 import { IDS } from "@/config/constants";
 import { take } from "@/utils/jsUtils";
-import { SectionBtns, SimpleLayout } from "@/components/ui/SectionLayouts";
+import {
+  SectionBtns,
+  SectionTitle,
+  SimpleLayout,
+} from "@/components/ui/SectionLayouts";
 import Card, { Br, List, CardActions, CardButton } from "@/components/ui/Card";
 import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 
@@ -65,7 +69,11 @@ const AchievementItem = ({
 );
 
 const AchievementsSection = ({ achievements }) => (
-  <SimpleLayout sectionId={IDS.achievements} sectionTitle="Achievements">
+  <SimpleLayout
+    sectionTitle={
+      <SectionTitle sectionId={IDS.achievements}>Achievements</SectionTitle>
+    }
+  >
     <LoadMoreGrid
       gridId="achievements-grid"
       items={achievements}

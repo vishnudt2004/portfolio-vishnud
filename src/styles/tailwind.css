@@ -2,10 +2,6 @@
 
 /* custom tailwind components */
 @layer components {
-  .section-title {
-    @apply mb-4 text-center text-2xl tracking-wider text-(--text-color-g);
-  }
-
   .highlight-primary {
     @apply mx-0.5 inline-block bg-(--highlight-primary-color-g) px-2 text-(--bg-color-g);
   }
@@ -13,19 +9,6 @@
   .highlight-secondary {
     @apply mx-0.5 inline-block bg-(--highlight-secondary-color-g) px-2 text-(--text-color-g);
   }
-
-  .anchor {
-    @apply relative inline-flex items-center text-(--anchor-color,var(--anchor-color-g)) before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full before:bg-(--anchor-decoration-color,var(--anchor-decoration-color-g)) after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-(--anchor-decoration-color_hover,var(--anchor-color-g)) after:duration-150 hover:after:w-full focus:after:w-full focus-visible:px-1;
-  }
-
-  .btn {
-    @apply inline-flex items-center justify-center gap-1 rounded-full bg-(--btn-color,var(--btn-color-g))/90 px-2.5 py-1 text-sm font-medium tracking-wide text-(--btn-fg-color,var(--btn-fg-color-g)) transition-colors hover:bg-(--btn-color,var(--btn-color-g)) focus:bg-(--btn-color,var(--btn-color-g));
-  }
-
-  .btn.btn-secondary {
-    @apply bg-transparent text-(--btn-secondary-color,var(--btn-secondary-color-g))/85 ring ring-(--btn-secondary-color,var(--btn-secondary-color-g))/50 transition ring-inset hover:text-(--btn-secondary-color,var(--btn-secondary-color-g)) hover:ring-(--btn-secondary-color,var(--btn-secondary-color-g)) focus:text-(--btn-secondary-color,var(--btn-secondary-color-g)) focus:ring-(--btn-secondary-color,var(--btn-secondary-color-g));
-  }
-
 }
 
 /* custom tailwind theme-variables */
