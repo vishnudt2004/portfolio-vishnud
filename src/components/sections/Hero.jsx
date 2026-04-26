@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { twMerge } from "tailwind-merge";
 import { RiArticleFill, RiMailFill } from "@remixicon/react";
 import {
@@ -17,8 +18,9 @@ import { scrollToSection } from "@/utils/jsUtils";
 import { sectionTitleId } from "@/utils/siteUtils";
 import Button from "../ui/Button";
 import { HeroRevealMotion } from "@/components/ui/Animations";
-import ThemeVisual from "@/components/ui/ThemeVisual";
 import { DownCircleIcon, HandIcon } from "@/components/ui/Icons";
+
+const ThemeVisual = lazy(() => import("@/components/ui/ThemeVisual"));
 
 const ScrollDownBtn = () => (
   <button
@@ -55,6 +57,48 @@ const HeroStatus = ({ status: { color, msg } }) => {
   ) : null;
 };
 
+const CTAs = ({ resume, email }) => (
+  <div className="mt-5 flex flex-wrap gap-3 *:px-4 *:text-sm *:leading-5 max-lg:justify-center">
+    {[
+      {
+        label: "View Resume",
+        color: undefined,
+        icon: <RiArticleFill aria-hidden className="order-1 size-4" />,
+        cn: "",
+        href: resume,
+        "aria-label": "Open resume PDF",
+      },
+      {
+        label: "Email me",
+        color: "var(--accent-color-g)",
+        icon: (
+          <RiMailFill
+            aria-hidden
+            className="order-1 inline size-4 fill-white"
+          />
+        ),
+        cn: "text-white",
+        href: `mailto:${email}`,
+        "aria-label": "Send me an email",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+    ].map(({ label, color, icon, href, cn, ...rest }) => (
+      <Button
+        key={label.replaceAll(" ", "-")}
+        asChild
+        color={color}
+        icon={icon}
+        className={`gap-3 ${cn}`}
+      >
+        <a href={href} {...rest}>
+          {label}
+        </a>
+      </Button>
+    ))}
+  </div>
+);
+
 const HeroContent = ({
   greeting,
   name,
@@ -67,57 +111,21 @@ const HeroContent = ({
   <div className="flex w-dvw flex-col justify-center gap-6 max-lg:items-center max-lg:text-center">
     <h1
       id={sectionTitleId(IDS.hero)}
-      className="flex items-center gap-2 text-3xl sm:text-4xl"
+      className="text-3xl max-sm:text-nowrap sm:text-4xl"
     >
-      {greeting}
+      {greeting}{" "}
       <span className="whitespace-nowrap text-(--accent-color-g)">{name}</span>.
     </h1>
 
-    <p className="font-medium tracking-wide">{role}</p>
+    <p className="font-medium tracking-wide text-(--text-secondary-color-g) sm:text-lg">
+      {role}
+    </p>
 
     <p className="text-[15px] max-lg:max-w-150 sm:text-base">{tagline}</p>
 
     <HeroStatus status={status} />
 
-    <div className="mt-5 flex flex-wrap gap-3 *:px-4 *:text-sm *:leading-5 max-lg:justify-center">
-      {[
-        {
-          label: "View Resume",
-          color: undefined,
-          icon: <RiArticleFill aria-hidden className="order-1 size-4" />,
-          cn: "",
-          href: resume,
-          "aria-label": "Open resume PDF",
-        },
-        {
-          label: "Email me",
-          color: "var(--accent-color-g)",
-          icon: (
-            <RiMailFill
-              aria-hidden
-              className="order-1 inline size-4 fill-white"
-            />
-          ),
-          cn: "text-white",
-          href: `mailto:${email}`,
-          "aria-label": "Send me an email",
-          target: "_blank",
-          rel: "noopener noreferrer",
-        },
-      ].map(({ label, color, icon, href, cn, ...rest }) => (
-        <Button
-          key={label.replaceAll(" ", "-")}
-          asChild
-          color={color}
-          icon={icon}
-          className={`gap-3 max-sm:w-44 ${cn}`}
-        >
-          <a href={href} {...rest}>
-            {label}
-          </a>
-        </Button>
-      ))}
-    </div>
+    <CTAs resume={resume} email={email} />
   </div>
 );
 
@@ -164,9 +172,10 @@ const HeroVisual = () => (
 
 const HeroLayout = ({ identity }) => {
   return (
-    <div className="mx-auto flex min-h-dvh w-full flex-row px-10">
-      <div className="fancy-bg-1 absolute inset-0 -z-1 [--color:var(--text-color-g)]/25 [--gap:50px]" />
-      <ThemeVisual />
+    <div className="mx-auto flex h-svh w-full flex-row px-10">
+      <Suspense>
+        <ThemeVisual />
+      </Suspense>
 
       <HeroRevealMotion>
         <div className="flex max-w-full justify-center lg:w-1/2">
@@ -188,7 +197,7 @@ const HeroView = () => (
     identity={{
       greeting: (
         <span>
-          Hi{" "}
+          Hello{" "}
           <HandIcon
             aria-hidden
             className="inline size-8 translate-x-0.5 -translate-y-1 fill-(--text-color-g)"
@@ -197,7 +206,10 @@ const HeroView = () => (
         </span>
       ),
       name: "Vishnu D",
-      role: "Frontend / Full-Stack Developer • React, Next.js, TypeScript & MERN",
+      role: [
+        "Frontend / Full-Stack Developer",
+        "•\u00A0React, Next.js, TypeScript & MERN",
+      ].join(" "),
       tagline:
         "I build clean, maintainable web applications — from UI to API — with a strong focus on consistency, developer experience, and real-world usability.",
       status: { color: "green", msg: "Open to Opportunities" },

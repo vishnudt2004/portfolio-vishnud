@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { twMerge } from "tailwind-merge";
 import { RiFileImageFill } from "@remixicon/react";
 
@@ -37,9 +36,10 @@ const Img = ({
 
   return (
     <figure>
-      <LazyLoadImage
+      <img
         src={!error ? src : fallbackSrc}
         alt={!error ? alt : fallbackAlt}
+        loading="lazy"
         {...attr}
         onError={() => setError(true)}
       />

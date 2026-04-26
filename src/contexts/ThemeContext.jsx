@@ -1,5 +1,11 @@
-import { createContext, useContext, useEffect } from "react";
-import { useLocalStorage } from "@uidotdev/usehooks";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
+import { useLocalStorage } from "react-use";
 
 import { UI } from "@/config";
 
@@ -13,48 +19,45 @@ function ThemeProvider({ children }) {
     DEFAULT_THEME: defaultTheme,
     THEME_CLASSNAME_PREFIX: themeClassNamePrefix,
     FEATURED_THEMES: themes,
-    THEMES: ALL_THEMES,
   } = UI;
-  const allThemes = ALL_THEMES.flatMap((group) => group.themes);
 
   const [theme, setTheme] = useLocalStorage("theme", defaultTheme);
 
   useEffect(() => {
-    // Remove all possible theme classes first
-    allThemes.forEach((t) =>
-      document.documentElement.classList.remove(
-        `${themeClassNamePrefix}-${t.replace(" ", "_")}`,
-      ),
+    const root = document.documentElement;
+
+    // Find existing theme class
+    const prevClass = Array.from(root.classList).find((cls) =>
+      cls.startsWith(`${themeClassNamePrefix}-`),
     );
 
-    // Add the selected theme class (except for the default)
-    if (theme !== defaultTheme) {
-      document.documentElement.classList.add(
-        `${themeClassNamePrefix}-${theme.replace(" ", "_")}`,
-      );
+    if (prevClass) {
+      root.classList.remove(prevClass);
     }
-  }, [theme, allThemes, defaultTheme, themeClassNamePrefix]);
 
-  const nextTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
+    // Add new theme
+    root.classList.add(`${themeClassNamePrefix}-${theme.replace(/ /g, "_")}`);
+  }, [theme, themeClassNamePrefix, defaultTheme]);
 
-  const cycleTheme = () =>
-    setTheme((prev) => themes[(themes.indexOf(prev) + 1) % themes.length]);
+  const nextTheme = useMemo(
+    () => themes[(themes.indexOf(theme) + 1) % themes.length],
+    [theme, themes],
+  );
+
+  const cycleTheme = useCallback(
+    () =>
+      setTheme((prev) => themes[(themes.indexOf(prev) + 1) % themes.length]),
+    [themes, setTheme],
+  );
 
   return (
-    <ThemeContext.Provider
-      value={{
-        theme, // Current mode
-        setTheme, // Set mode manually
-        nextTheme, // Next mode
-        cycleTheme, // Cycle through modes
-      }}
-    >
+    <ThemeContext.Provider value={{ theme, setTheme, nextTheme, cycleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
-const useTheme = () => useContext(ThemeContext);
+// eslint-disable-next-line react-refresh/only-export-components
+export const useTheme = () => useContext(ThemeContext);
 
 export default ThemeProvider;
-export { useTheme };

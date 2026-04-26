@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef, useImperativeHandle } from "react";
+import { useState, useRef, useImperativeHandle } from "react";
 import { useLocation } from "react-router";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import { twMerge } from "tailwind-merge";
-import { useMediaQuery } from "@uidotdev/usehooks";
+import { useMedia } from "react-use";
 import {
   RiBriefcaseFill,
   RiChat3Fill,
@@ -20,7 +20,6 @@ import { useNavigateToSection } from "@/hooks/useNavigateToSection";
 import { IconBtn } from "@/components/ui/Button";
 import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
 import FullscreenToggle from "@/components/ui/FullScreenToggle";
-import { DesktopTooltip } from "@/components/ui/Tooltip";
 
 const NavMenu = ({ id, onClick, onMenuClick, label, icon: Icon }) => (
   <button
@@ -36,7 +35,7 @@ const CTABtn = ({ email, label, icon: Icon }) => (
   <a
     href={`mailto:${email}`}
     aria-label="Send me an email"
-    className="focus-reset relative flex items-center gap-1.25 rounded-lg bg-white px-2 text-sm tracking-wide text-nowrap text-(--accent-color-g) duration-300 hover:bg-white/25 focus-visible:bg-white/25 focus-visible:outline-0 max-sm:w-fit"
+    className="focus-reset relative flex items-center gap-1.25 rounded-lg bg-white px-2 text-sm tracking-wide text-nowrap text-(--accent-color-g) duration-300 ring-inset hover:ring-2 focus-visible:ring-2 focus-visible:outline-0 max-sm:w-fit"
   >
     {Icon && <Icon aria-hidden className="size-3.25 opacity-80" />}
     {label}
@@ -82,7 +81,6 @@ const NavBrand = () => {
 
 const NavMenuContent = ({
   id,
-  isVisible,
   isOpen,
   menus,
   variant,
@@ -91,12 +89,6 @@ const NavMenuContent = ({
 }) => {
   const isPrimary = variant === "primary";
   const isHorizontal = layout === "horizontal";
-
-  const [isTooltipAllowed, setIsTooltipAllowed] = useState(true);
-
-  useEffect(() => {
-    setIsTooltipAllowed(isVisible);
-  }, [isVisible]);
 
   return (
     <ul
@@ -119,34 +111,21 @@ const NavMenuContent = ({
 
       {isPrimary && (
         <>
-          <DesktopTooltip
-            tip="Toggle fullscreen"
-            open={isTooltipAllowed}
-            sideOffset={10}
-          >
-            <li>
-              <FullscreenToggle />
-            </li>
-          </DesktopTooltip>
-          <DesktopTooltip
-            tip="Change theme"
-            open={isTooltipAllowed}
-            sideOffset={10}
-          >
-            <li>
-              <ThemeSwitcher
-                containerRef={containerRef}
-                onOpenChange={(isOpen) => {
-                  setIsTooltipAllowed(!isOpen);
-                  onOpenChange?.(isOpen);
-                }}
-                onThemeChange={() => {
-                  setIsTooltipAllowed(false);
-                  onThemeChange?.();
-                }}
-              />
-            </li>
-          </DesktopTooltip>
+          <li title="Toggle Fullscreen">
+            <FullscreenToggle />
+          </li>
+
+          <li title="Change Theme">
+            <ThemeSwitcher
+              containerRef={containerRef}
+              onOpenChange={(isOpen) => {
+                onOpenChange?.(isOpen);
+              }}
+              onThemeChange={() => {
+                onThemeChange?.();
+              }}
+            />
+          </li>
         </>
       )}
     </ul>
@@ -157,9 +136,9 @@ const DesktopNav = ({ menus, ref }) => {
   const POSITION = "top-0 left-0";
 
   const scrollDir = useScrollDirection();
-  const canHover = useMediaQuery("(hover: hover)");
+  const canHover = useMedia("(hover: hover)");
 
-  const [isVisible, setIsVisible] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [isKeyboardInteraction, setIsKeyboardInteraction] = useState(false);
@@ -170,10 +149,7 @@ const DesktopNav = ({ menus, ref }) => {
 
   const trapFocus = isOpen && isKeyboardInteraction;
 
-  useEffect(() => {
-    if (scrollDir === "down") setIsVisible(false);
-    if (scrollDir === "up") setIsVisible(true);
-  }, [scrollDir]);
+  const isVisible = isFocused || scrollDir !== "down";
 
   const closeNav = () => {
     setIsOpen(false);
@@ -192,7 +168,7 @@ const DesktopNav = ({ menus, ref }) => {
       'button:not([disabled]):not([aria-hidden="true"]), a[href]',
     );
 
-  const handleNavKeydown = createKeyMap({
+  const handleNavKeydown = createKeyMap(() => ({
     Escape: () => {
       closeNav();
       buttonRef.current?.focus();
@@ -223,7 +199,7 @@ const DesktopNav = ({ menus, ref }) => {
       moveFocus(items, "last");
       e.preventDefault();
     },
-  });
+  }));
 
   const handleContainerPointerenter = () => setIsOpen(true);
   const handleContainerPointerleave = () => {
@@ -252,19 +228,19 @@ const DesktopNav = ({ menus, ref }) => {
           POSITION,
           isVisible ? "translate-y-0" : "-translate-y-full",
         )}
-        onFocusCapture={() => setIsVisible(true)}
+        onFocusCapture={() => setIsFocused(true)}
+        onBlurCapture={() => setIsFocused(false)}
       >
         <NavBrand />
 
         <nav
           ref={containerRef}
           aria-label="Primary navigation"
-          className="z-(--z-navbar) inline-flex items-center gap-0.5 overflow-hidden rounded-full border border-(--border-color-g)/75 bg-(--bg-color-g) px-2 focus-within:bg-(--text-color-g)/15 focus-within:supports-[background-color:color-mix(in_srgb,red,white)]:bg-[color-mix(in_srgb,var(--text-color-g)_10%,var(--bg-color-g))]"
+          className="z-(--z-navbar) inline-flex items-center gap-0.5 overflow-hidden rounded-full border border-(--border-color-g)/75 bg-(--bg-color-g) px-2 focus-within:bg-[color-mix(in_srgb,var(--text-color-g)_10%,var(--bg-color-g))]"
           onKeyDown={handleNavKeydown}
         >
           <NavMenuContent
             id="primary-nav"
-            isVisible={isVisible}
             isOpen={isOpen}
             layout="horizontal"
             variant="primary"
@@ -352,7 +328,7 @@ const MobileNav = ({ menus, ref }) => {
       'button:not([disabled]):not([aria-hidden="true"])',
     );
 
-  const handleNavKeydown = createKeyMap({
+  const handleNavKeydown = createKeyMap(() => ({
     Escape: () => {
       closeNav();
       buttonRef.current?.focus();
@@ -383,7 +359,7 @@ const MobileNav = ({ menus, ref }) => {
       moveFocus(items, "last");
       e.preventDefault();
     },
-  });
+  }));
 
   const handleToggleClick = () => setIsOpen((p) => !p);
   const handleToggleKeydown = (e) => {
@@ -484,15 +460,13 @@ const MobileNav = ({ menus, ref }) => {
 
 const Header = () => {
   const navigateToSection = useNavigateToSection();
-  const isMobile = useMediaQuery("(max-width: 499px)");
+  const isMobile = useMedia("(max-width: 499px)");
 
   const navRef = useRef(null);
-  const { closeNav } = navRef.current || {};
 
   const handleMenuClick = (id) => {
     navigateToSection(id);
-
-    closeNav?.();
+    navRef.current?.closeNav?.();
   };
 
   const menus = {
@@ -518,7 +492,7 @@ const Header = () => {
       )),
       <CTABtn
         email="vishnu.d.t.2004@gmail.com"
-        label="Let’s Talk"
+        label="Mail me"
         icon={RiChat3Fill}
       />,
     ],

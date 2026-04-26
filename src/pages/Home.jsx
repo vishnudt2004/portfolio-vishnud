@@ -3,32 +3,20 @@ import { createElement, Suspense, lazy } from "react";
 import { IDS } from "@/config/constants";
 import { filterActiveSections, sectionTitleId } from "@/utils/siteUtils";
 import { SectionRevealMotion } from "@/components/ui/Animations";
+import Loader from "@/components/ui/Loader";
 import Hero from "@/components/sections/Hero";
 
 const Section = ({ children, sectionId, lazy = false }) => {
   return (
-    <>
-      <SectionRevealMotion isHero={sectionId === IDS.hero}>
-        <section id={sectionId} aria-labelledby={sectionTitleId(sectionId)}>
-          {lazy ? (
-            <Suspense
-              fallback={
-                <div
-                  className="min-h-dvh"
-                  role="status"
-                  aria-live="polite"
-                  aria-busy="true"
-                />
-              }
-            >
-              {children}
-            </Suspense>
-          ) : (
-            children
-          )}
-        </section>
-      </SectionRevealMotion>
-    </>
+    <SectionRevealMotion isHero={sectionId === IDS.hero}>
+      <section id={sectionId} aria-labelledby={sectionTitleId(sectionId)}>
+        {lazy ? (
+          <Suspense fallback={<Loader />}>{children}</Suspense>
+        ) : (
+          children
+        )}
+      </section>
+    </SectionRevealMotion>
   );
 };
 

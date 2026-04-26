@@ -1,4 +1,5 @@
-const createKeyMap = (map) => (e) => {
+const createKeyMap = (mapFactory) => (e) => {
+  const map = mapFactory();
   const handler = map[e.key];
   if (handler) handler(e);
 };

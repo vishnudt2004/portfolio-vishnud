@@ -3,9 +3,7 @@ import { IconBtn } from "./Button";
 import { FullscreenEnterIcon, FullscreenExitIcon } from "./Icons";
 
 export default function FullscreenToggle() {
-  const { isFullscreen, enter, exit } = useFullscreen({
-    element: typeof document !== "undefined" ? document.documentElement : null,
-  });
+  const { isFullscreen, enter, exit } = useFullscreen();
 
   const toggle = () => {
     if (isFullscreen) {

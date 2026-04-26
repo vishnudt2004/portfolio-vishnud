@@ -1,103 +1,81 @@
 <!doctype html>
-<html lang="en" class="theme-dark">
+<html lang="en">
+  <!-- prettier-ignore -->
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary SEO -->
-    <title>
-      Vishnu D | Frontend & Full-Stack Developer | React, Next.js, TypeScript &
-      MERN
-    </title>
-
-    <meta
-      name="description"
-      content="Frontend & Full-Stack developer specializing in React, Next.js, TypeScript, and the MERN stack. Building modern, performant, and user-focused web applications."
-    />
-
-    <meta
-      name="google-site-verification"
-      content="WrVzdFN-npimegobOFDER5YBo4ipu-5rwoJtZG9lX10"
-    />
+    <title>Vishnu D | Full-Stack Developer | React, Next.js & MERN</title>
+    <meta name="description" content="Frontend & Full-Stack developer specializing in React, Next.js, TypeScript, and the MERN stack. Building modern, performant, and user-focused web applications." />
+    <meta name="author" content="Vishnu D" />
+    
+    <link rel="canonical" href="https://portfolio-vishnud.vercel.app/" />
+    <meta name="google-site-verification" content="WrVzdFN-npimegobOFDER5YBo4ipu-5rwoJtZG9lX10" />
 
     <!-- Open Graph (LinkedIn, Discord, Facebook) -->
     <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="Vishnu D | Frontend & Full-Stack Developer | React, Next.js, TypeScript & MERN"
-    />
-    <meta
-      property="og:description"
-      content="Frontend & Full-Stack developer building modern web applications with React, Next.js, TypeScript, and the MERN stack."
-    />
-    <meta
-      property="og:image"
-      content="https://portfolio-vishnud.vercel.app/images/og-image.png"
-    />
+    <meta property="og:url" content="https://portfolio-vishnud.vercel.app/" />
+    <meta property="og:title" content="Vishnu D | Frontend & Full-Stack Developer | React, Next.js, TypeScript & MERN" />
+    <meta property="og:description" content="Frontend & Full-Stack developer building modern web applications with React, Next.js, TypeScript, and the MERN stack." />
+    <meta property="og:image" content="https://portfolio-vishnud.vercel.app/images/og-image.png" />
+    <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Vishnu D - Full-Stack Developer Portfolio" />
     <meta property="og:site_name" content="Vishnu D Portfolio" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Vishnu D | Frontend & Full-Stack Developer | React, Next.js, TypeScript & MERN"
-    />
-    <meta
-      name="twitter:description"
-      content="Frontend & Full-Stack developer building modern web applications with React, Next.js, TypeScript, and the MERN stack."
-    />
-    <meta
-      name="twitter:image"
-      content="https://portfolio-vishnud.vercel.app/images/og-image.png"
-    />
+    <meta name="twitter:title" content="Vishnu D | Frontend & Full-Stack Developer | React, Next.js, TypeScript & MERN" />
+    <meta name="twitter:description" content="Frontend & Full-Stack developer building modern web applications with React, Next.js, TypeScript, and the MERN stack." />
+    <meta name="twitter:image" content="https://portfolio-vishnud.vercel.app/images/og-image.png" />
+    <meta name="twitter:image:alt" content="Vishnu D - Full-Stack Developer Portfolio" />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
+        "@id": "https://portfolio-vishnud.vercel.app/#person",
         "name": "Vishnu D",
         "url": "https://portfolio-vishnud.vercel.app/",
         "image": "https://portfolio-vishnud.vercel.app/images/vishnud.webp",
         "jobTitle": "Frontend & Full-Stack Developer",
+        "email": "mailto:vishnu.d.t.2004@gmail.com",
         "description": "Frontend & Full-Stack developer specializing in React, Next.js, TypeScript, Node.js, Express, and MongoDB",
         "sameAs": [
           "https://github.com/vishnudt2004",
           "https://www.linkedin.com/in/vishnu-dt"
         ],
         "knowsAbout": [
-          "React",
-          "Next.js",
-          "TypeScript",
-          "Node.js",
-          "Express",
-          "MongoDB",
-          "Frontend Development",
-          "Full-Stack Development"
+          "React", "Next.js", "TypeScript",
+          "Node.js", "Express", "MongoDB",
+          "Frontend Development", "Full-Stack Development"
         ]
       }
     </script>
+
+    <script>
+      (function () {
+        try {
+          const theme = localStorage.getItem("theme");
+          if (theme) {
+            const prefix = "theme"; // match THEME_CLASSNAME_PREFIX
+            document.documentElement.classList.add(
+              `${prefix}-${theme.replace(" ", "_")}`,
+            );
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="preload" href="/fonts/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./src/styles/main.css" />
   </head>
 
   <body>
-    <noscript>
-      <div
-        style="
-          height: calc(100vh - 20px);
-          display: grid;
-          place-items: center;
-          font-size: 18px;
-          font-family: sans-serif;
-          font-weight: bold;
-          letter-spacing: 1px;
-        "
-      >
-        Enable JavaScript to continue.
-      </div>
-    </noscript>
-
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="./src/main.jsx"></script>
   </body>
 </html>

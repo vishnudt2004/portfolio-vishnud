@@ -46,10 +46,9 @@ export function useCursorAccentScope() {
   }, []);
 }
 
-export default function AnimatedCursor({ className }) {
+function AnimatedCursor({ className }) {
   const dotRef = useRef(null);
   const [hasMoved, setHasMoved] = useState(false);
-  const isTouch = useIsTouchDevice();
 
   useCursorAccentScope();
 
@@ -95,8 +94,6 @@ export default function AnimatedCursor({ className }) {
     };
   }, []);
 
-  if (isTouch) return;
-
   return (
     <div
       ref={dotRef}
@@ -108,4 +105,9 @@ export default function AnimatedCursor({ className }) {
       )}
     />
   );
+}
+
+export default function Wrapper() {
+  const isTouch = useIsTouchDevice();
+  return !isTouch ? <AnimatedCursor /> : null;
 }

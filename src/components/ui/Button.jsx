@@ -24,7 +24,7 @@ const Button = ({
     <Comp
       type={Comp === "button" ? "button" : undefined}
       className={twMerge(
-        "inline-flex items-center justify-center gap-1 rounded-full px-2.5 py-1 text-sm tracking-wide transition-colors duration-300",
+        "inline-flex items-center justify-center gap-1 rounded-full px-2.5 py-1.5 text-sm tracking-wide transition-colors duration-300",
         isVariant("soft") &&
           "bg-(--btn-secondary-color)/15 text-(--btn-secondary-color) hover:bg-(--btn-secondary-color)/30 focus:bg-(--btn-secondary-color)/30",
         isVariant("solid") &&

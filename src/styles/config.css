@@ -1,7 +1,9 @@
 :root {
   /* -g = global */
 
-  --font-family-g: "Poppins", sans-serif;
+  --font-family-g:
+    "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 
   --scrollbar-track-color-g: var(--bg-color-g);
   --scrollbar-thumb-color-g: var(--text-color-g);

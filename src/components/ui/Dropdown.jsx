@@ -58,7 +58,7 @@ const DropdownMenuItem = ({ active, ...props }) => (
     className={twMerge(
       "cursor-pointer rounded-[11px] bg-(--bg-color-g) px-4 py-1 text-center text-sm text-(--text-color-g)",
       active
-        ? "my-1 bg-(--accent-color-g)/25"
+        ? "bg-(--accent-color-g)/25 first:mb-1 last:mt-1 [&:not(:first-child):not(:last-child)]:my-1"
         : "focus-reset hover:bg-(--text-color-g)/25 focus-visible:bg-(--text-color-g)/25 focus-visible:outline-0",
     )}
     {...props}

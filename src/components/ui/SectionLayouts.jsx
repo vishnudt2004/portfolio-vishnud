@@ -19,12 +19,12 @@ const Line = ({ className }) => (
       "--h": "3px",
       "--color": "var(--border-color-g)",
     }}
-    className={"mx-auto h-(--h) w-(--w) border-0 bg-(--color) " + className}
+    className={"mx-auto h-(--h) w-(--w) border-0 bg-(--color)/50 " + className}
   />
 );
 
 const SectionTitle = ({
-  as: As = "h2", // eslint-disable-line no-unused-vars
+  as: As = "h2",
   children,
   sectionId,
   className,
@@ -39,7 +39,7 @@ const SectionTitle = ({
     >
       <As
         id={sectionTitleId(sectionId)}
-        className="bg-(--bg-color-g) px-10 text-2xl font-semibold tracking-wide transition-colors"
+        className="bg-(--bg-color-g) px-5 text-2xl font-semibold tracking-wide transition-colors sm:px-10"
         // "mb-5 w-full p-5 py-4 text-nowrap text-2xl font-semibold tracking-wide border-y border-y-(--border-color-g) bg-(--text-color-g)/2"
         {...props}
       >

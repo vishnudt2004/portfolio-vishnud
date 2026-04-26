@@ -131,7 +131,7 @@ const aboutMe = (
         {
           label: "LinkedIn",
           link: "https://www.linkedin.com/in/vishnu-dt",
-          icon: <LinkedinIcon aria-hidden title={null} className="scale-120" />,
+          icon: <LinkedinIcon aria-hidden title={null} className="scale-130" />,
         },
       ].map(({ label, link, icon }) => (
         <li key={label}>

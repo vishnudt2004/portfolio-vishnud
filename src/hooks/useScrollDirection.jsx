@@ -1,27 +1,46 @@
-import { useRef, useState } from "react";
-import { useScroll, useMotionValueEvent } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 export const useScrollDirection = () => {
-  const hasScrolled = useRef(false);
+  const prevY = useRef(0);
+  const rafId = useRef(null);
+  const directionRef = useRef(null);
+  const [direction, setDirection] = useState(null);
 
-  const { scrollY } = useScroll();
-  const [scrollDirection, setScrollDirection] = useState(null);
+  useEffect(() => {
+    prevY.current = window.scrollY;
 
-  useMotionValueEvent(scrollY, "change", (current) => {
-    const prev = scrollY.getPrevious();
-    const diff = current - prev;
+    const update = () => {
+      const currentY = window.scrollY;
+      const diff = currentY - prevY.current;
 
-    if (!hasScrolled.current) {
-      // prevent initial scroll trigger logic
-      hasScrolled.current = true;
-      return;
-    }
+      if (Math.abs(diff) > 5) {
+        const newDirection = diff > 0 ? "down" : "up";
 
-    // Optional: avoid flickering on tiny scrolls
-    if (Math.abs(diff) > 5) {
-      setScrollDirection(diff > 0 ? "down" : "up");
-    }
-  });
+        // prevent unnecessary re-renders
+        if (directionRef.current !== newDirection) {
+          directionRef.current = newDirection;
+          setDirection(newDirection);
+        }
 
-  return scrollDirection;
+        prevY.current = currentY;
+      }
+
+      rafId.current = null;
+    };
+
+    const handleScroll = () => {
+      if (rafId.current === null) {
+        rafId.current = requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
+
+  return direction;
 };

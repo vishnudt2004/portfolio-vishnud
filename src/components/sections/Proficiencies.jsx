@@ -15,7 +15,7 @@ import {
 } from "@remixicon/react";
 import {
   SiHtml5,
-  SiCss3,
+  SiCss,
   SiJavascript,
   SiSass,
   SiTailwindcss,
@@ -182,7 +182,7 @@ const ProficienciesSection = ({
                   {createElement(icon, {
                     "aria-hidden": true,
                     className:
-                      "size-15 rounded-full border-1 border-(--border-color-g)/50 bg-white/15 p-4 ",
+                      "size-15 rounded-full border-1 border-(--border-color-g)/50 bg-white/15 p-4",
                     color: "default",
                     title: null,
                   })}
@@ -207,8 +207,8 @@ const skills = [
   {
     group: "Development",
     skills: [
-      { name: "HTML", icon: SiHtml5 },
-      { name: "CSS", icon: SiCss3 },
+      { name: "HTML5", icon: SiHtml5 },
+      { name: "CSS3", icon: SiCss },
       { name: "JavaScript", icon: SiJavascript },
       { name: "TypeScript", icon: SiTypescript },
       { name: "React.js", icon: SiReact },

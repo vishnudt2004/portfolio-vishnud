@@ -3,12 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 function getFullscreenElement() {
   return (
     document.fullscreenElement ||
-    // @ts-expect-error Safari
+    // Safari
+    // @ts-expect-error
     document.webkitFullscreenElement ||
-    // @ts-expect-error Firefox
-    document.mozFullScreenElement ||
-    // @ts-expect-error IE/Edge legacy
-    document.msFullscreenElement ||
     null
   );
 }
@@ -20,22 +17,16 @@ export function useFullscreen() {
     const el = document.documentElement;
 
     if (el.requestFullscreen) el.requestFullscreen();
-    // @ts-expect-error Safari
+    // Safari
+    // @ts-expect-error
     else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    // @ts-expect-error Firefox
-    else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
-    // @ts-expect-error IE/Edge legacy
-    else if (el.msRequestFullscreen) el.msRequestFullscreen();
   }, []);
 
   const exit = useCallback(() => {
     if (document.exitFullscreen) document.exitFullscreen();
-    // @ts-expect-error Safari
+    // Safari
+    // @ts-expect-error
     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    // @ts-expect-error Firefox
-    else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-    // @ts-expect-error IE/Edge legacy
-    else if (document.msExitFullscreen) document.msExitFullscreen();
   }, []);
 
   const toggle = useCallback(() => {
@@ -44,18 +35,16 @@ export function useFullscreen() {
   }, [enter, exit]);
 
   useEffect(() => {
-    const onChange = () => setIsFullscreen(Boolean(getFullscreenElement()));
+    const onChange = () => {
+      setIsFullscreen(Boolean(getFullscreenElement()));
+    };
 
     document.addEventListener("fullscreenchange", onChange);
     document.addEventListener("webkitfullscreenchange", onChange);
-    document.addEventListener("mozfullscreenchange", onChange);
-    document.addEventListener("MSFullscreenChange", onChange);
 
     return () => {
       document.removeEventListener("fullscreenchange", onChange);
       document.removeEventListener("webkitfullscreenchange", onChange);
-      document.removeEventListener("mozfullscreenchange", onChange);
-      document.removeEventListener("MSFullscreenChange", onChange);
     };
   }, []);
 

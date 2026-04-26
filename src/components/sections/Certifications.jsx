@@ -17,12 +17,15 @@ import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 import vercelIcon from "@/assets/images/icons/vercel.svg";
 import hrIcon from "@/assets/images/icons/hackerrank.svg";
 import fccIcon from "@/assets/images/icons/fcc.svg";
+import slIcon from "@/assets/images/icons/sololearn.svg";
 import certificate1 from "@/assets/images/certifications/certificate-1.webp";
 import certificate2 from "@/assets/images/certifications/certificate-2.webp";
 import certificate3_react from "@/assets/images/certifications/certificate-3/react_basic-certificate.webp";
 import certificate3_js from "@/assets/images/certifications/certificate-3/javascript_basic-certificate.webp";
 import certificate3_css from "@/assets/images/certifications/certificate-3/css-certificate.webp";
 import certificate4 from "@/assets/images/certifications/certificate-4.webp";
+import certificate5 from "@/assets/images/certifications/certificate-5.jpg";
+import certificate6 from "@/assets/images/certifications/certificate-6.jpg";
 
 const CertificateItem = ({
   id,
@@ -219,6 +222,65 @@ const certificates = [
     ],
     logo: hrIcon,
     logoAlt: "HackerRank Logo",
+  },
+  {
+    id: "certificate-5",
+    title: "Web Development Certificate",
+    issuer: "Sololearn",
+    date: "April 2026",
+    description: (
+      <>
+        Completed the <span className="underline">Web Development</span>{" "}
+        certification covering{" "}
+        <span className="underline">
+          HTML, CSS, and JavaScript fundamentals
+        </span>
+        , including semantic structure, forms, media integration, styling with
+        selectors, Flexbox, positioning, and responsive layouts, along with core
+        JavaScript concepts like DOM manipulation, basic methods, and data
+        types. Reinforced through quizzes and iterative projects, demonstrating
+        practical understanding of building structured, styled, and interactive
+        web applications aligned with modern frontend development practices.
+      </>
+    ),
+    credentials: [
+      { label: "View Certificate", href: certificate5 },
+      {
+        label: "Certificate Link",
+        href: "https://www.sololearn.com/certificates/CC-JO3MPWNO",
+      },
+    ],
+    logo: slIcon,
+    logoAlt: "Sololearn Logo",
+  },
+  {
+    id: "certificate-6",
+    title: "JavaScript Intermediate Certificate",
+    issuer: "Sololearn",
+    date: "April 2026",
+    description: (
+      <>
+        Completed the <span className="underline">JavaScript Intermediate</span>{" "}
+        certification, focusing on{" "}
+        <span className="underline">
+          DOM manipulation, event handling, arrays, and timers
+        </span>
+        . Built interactive browser-based features including dynamic element
+        creation and real-time user interactions, validated through structured
+        quizzes and hands-on exercises, demonstrating strong understanding of
+        core JavaScript execution flow and practical application in modern web
+        interfaces.
+      </>
+    ),
+    credentials: [
+      { label: "View Certificate", href: certificate6 },
+      {
+        label: "Certificate Link",
+        href: "https://www.sololearn.com/certificates/CC-LHW5VXMS",
+      },
+    ],
+    logo: slIcon,
+    logoAlt: "Sololearn Logo",
   },
 ];
 

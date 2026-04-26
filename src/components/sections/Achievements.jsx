@@ -11,7 +11,9 @@ import Card, { Br, List, CardActions, CardButton } from "@/components/ui/Card";
 import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
 
 import achievement1 from "@/assets/images/achievements/achievement-1.webp";
-import achievement2 from "@/assets/images/achievements/achievement-2.webp";
+import achievement3 from "@/assets/images/achievements/achievement-3.webp";
+import achievement4 from "@/assets/images/achievements/achievement-4.webp";
+import achievement5 from "@/assets/images/achievements/achievement-5.webp";
 
 const AchievementItem = ({
   id,
@@ -122,7 +124,7 @@ const achievements = [
         <span className="italic">Theme: E-commerce</span>
       </>
     ),
-    credentials: [{ label: "Credential (Coming soon)", href: "#" }],
+    credentials: [{ href: achievement1 }],
   },
 
   {
@@ -167,43 +169,11 @@ const achievements = [
         <span className="italic">Topic: Digital Literacy for All</span>
       </>
     ),
-    credentials: [{ label: "Credential (Coming soon)", href: "#" }],
+    credentials: [{ href: achievement3 }],
   },
 
   {
     id: "achievement-4",
-    title: "Portfolio Redesign & Iterative Improvements",
-    event: "Portfolio Update",
-    date: "Sep 2025 – Jan 2026",
-    description: (
-      <>
-        <List
-          items={[
-            <>
-              <strong>[Sep 2025]</strong> Complete redesign with cleaner UI and
-              improved UX; added smooth transitions, multiple themes, new
-              sections (Certifications, Activities), and a unified showcase
-              layout
-            </>,
-            <>
-              <strong>[Jan 2026]</strong> Major semantic and accessibility
-              (a11y) improvements, UI refinements, and deeper refactors to
-              improve correctness and code quality; released <Hl>v1.6.1</Hl>
-            </>,
-          ]}
-        />
-      </>
-    ),
-    credentials: [
-      {
-        label: "Explore this site",
-        credential: "https://portfolio-vishnud.vercel.app",
-      },
-    ],
-  },
-
-  {
-    id: "achievement-5",
     title: "1st Place – Web Development Contest",
     event: "Mirror 2K24, Intercollegiate Event",
     location: "Erode Arts and Science College, Erode",
@@ -231,11 +201,11 @@ const achievements = [
         <span className="italic">Theme: Green Nature (Organization)</span>
       </>
     ),
-    credentials: [{ href: achievement1 }],
+    credentials: [{ href: achievement4 }],
   },
 
   {
-    id: "achievement-6",
+    id: "achievement-5",
     title: "1st Place – Logo Design Competition",
     event: "CS Department Function",
     location: "Govt. Arts & Science College – Komarapalayam",
@@ -247,7 +217,7 @@ const achievements = [
         a commemorative <Hl>book</Hl> as the prize.
       </>
     ),
-    credentials: [{ href: achievement2 }],
+    credentials: [{ href: achievement5 }],
   },
 ];
 

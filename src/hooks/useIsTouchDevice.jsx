@@ -1,4 +1,4 @@
-import { useMediaQuery } from "@uidotdev/usehooks";
+import { useMedia } from "react-use";
 
 export const useIsTouchDevice = () =>
-  useMediaQuery("(hover: none) and (pointer: coarse)");
+  useMedia("(hover: none) and (pointer: coarse)");
