@@ -88,7 +88,6 @@ const DropdownMotion = ({ children, isOpen, ...motionProps }) => {
 };
 
 export {
-  Motion,
   MotionOnScroll,
   HeroRevealMotion,
   SectionRevealMotion,

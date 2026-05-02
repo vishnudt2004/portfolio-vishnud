@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 import Img from "./Img";
 import Button from "./Button";
+import Heading from "./Heading";
 
 const getTitleId = (id) => (id ? `${id}-title` : undefined); // sync
 
@@ -56,9 +57,9 @@ const Card = ({
           })
         )}
         <div>
-          <h3 id={titleId} className="text-lg font-semibold">
+          <Heading id={titleId} className="text-lg font-semibold">
             {title}
-          </h3>
+          </Heading>
 
           <p className="text-sm font-semibold text-(--text-secondary-color-g)">
             <span className="mr-2">{subtitle}</span>

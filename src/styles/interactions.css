@@ -14,7 +14,7 @@ body {
     transform 150ms ease;
 
   &.dot-active {
-    --dot-size: 10px;
+    --dot-size: 13px;
     width: var(--dot-size);
     height: var(--dot-size);
   }
@@ -68,7 +68,6 @@ body {
 /* Contain blur rendering to this element's layer only */
 .theme-visual {
   contain: layout style;
-  will-change: filter, opacity;
 }
 
 @keyframes fillText {

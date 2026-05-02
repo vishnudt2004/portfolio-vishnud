@@ -1,8 +1,3 @@
-// TODO:
-// Fix page heading hierarchy (h1/h2) across pages.
-// Sections currently start at h2 because they are reused in Home.
-// Page-level h1 should be introduced in a future refactor.
-
 import { lazy, Suspense } from "react";
 import { Routes, Route, useLocation, BrowserRouter } from "react-router";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
@@ -10,12 +5,11 @@ import { twJoin } from "tailwind-merge";
 
 import ThemeProvider from "./contexts/ThemeContext";
 import Header from "./components/layouts/Header";
-import Home from "./pages/Home";
+import Home from "./pages/home";
 import AnimatedCursor from "./components/ui/AnimatedCursor";
 import Loader from "./components/ui/Loader";
 import RestoreScroll from "./components/helpers/RestoreScroll";
 import NavigateHelper from "./components/helpers/NavigateHelper";
-import FocusFixer from "./components/helpers/FocusFixer";
 import Footer from "./components/layouts/Footer";
 
 const Achievements = lazy(() => import("./pages/Achievements"));
@@ -29,7 +23,6 @@ const GlobalUI = () => (
     <AnimatedCursor />
     <RestoreScroll />
     <NavigateHelper />
-    <FocusFixer />
   </>
 );
 

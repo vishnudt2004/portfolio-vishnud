@@ -1,96 +1,84 @@
-import { useEffect, useRef, useState } from "react";
-import { twMerge } from "tailwind-merge";
-
 import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
+import { useEffect, useRef } from "react";
 
-const CURSOR_ACCENT_VAR = "--cursor-accent";
-const CURSOR_ACCENT_SCOPE_VAR = "--cursor-accent-scoped";
+const LERP = 12;
+const IDLE_THRESHOLD_SQ = 0.01;
 
-const DEFAULT_CURSOR_ACCENT = "var(--accent-color-g)";
-
-function resolveCursorAccent(target) {
-  if (!target) return null;
-
-  const el = target.closest("[style], [data-cursor-accent]");
-  if (!el) return null;
-
-  return (
-    el.dataset.cursorAccent ||
-    getComputedStyle(el).getPropertyValue(CURSOR_ACCENT_SCOPE_VAR)?.trim()
-  );
-}
-
-export function useCursorAccentScope() {
-  useEffect(() => {
-    const handleMouseOver = (e) => {
-      const accent = resolveCursorAccent(e.target);
-      if (!accent) return;
-
-      document.body.style.setProperty(CURSOR_ACCENT_VAR, accent);
-    };
-
-    const handleMouseOut = (e) => {
-      const relatedAccent = resolveCursorAccent(e.relatedTarget);
-      if (relatedAccent) return;
-
-      document.body.style.setProperty(CURSOR_ACCENT_VAR, DEFAULT_CURSOR_ACCENT);
-    };
-
-    document.addEventListener("mouseover", handleMouseOver);
-    document.addEventListener("mouseout", handleMouseOut);
-
-    return () => {
-      document.removeEventListener("mouseover", handleMouseOver);
-      document.removeEventListener("mouseout", handleMouseOut);
-    };
-  }, []);
-}
-
-function AnimatedCursor({ className }) {
+function AnimatedCursor() {
   const dotRef = useRef(null);
-  const [hasMoved, setHasMoved] = useState(false);
-
-  useCursorAccentScope();
+  const state = useRef(null);
 
   useEffect(() => {
-    let x = window.innerWidth / 2;
-    let y = window.innerHeight / 2;
-    let rx = x;
-    let ry = y;
+    const el = dotRef.current;
+    if (!el) return;
 
-    const move = (e) => {
-      x = e.clientX;
-      y = e.clientY;
-      setHasMoved(true);
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+
+    const s = {
+      target: { x: cx, y: cy },
+      current: { x: cx, y: cy },
+      rafId: null,
+      lastTime: null,
+      hasMoved: false,
+      isRunning: false,
+    };
+    state.current = s;
+
+    const loop = (timestamp) => {
+      const dt = Math.min((timestamp - (s.lastTime ?? timestamp)) / 1000, 0.05);
+      s.lastTime = timestamp;
+
+      const alpha = 1 - Math.exp(-LERP * dt);
+      s.current.x += (s.target.x - s.current.x) * alpha;
+      s.current.y += (s.target.y - s.current.y) * alpha;
+
+      el.style.transform = `translate3d(${s.current.x}px,${s.current.y}px,0)`;
+
+      const dx = s.target.x - s.current.x;
+      const dy = s.target.y - s.current.y;
+      if (dx * dx + dy * dy < IDLE_THRESHOLD_SQ) {
+        s.isRunning = false;
+        s.rafId = null;
+        return;
+      }
+
+      s.rafId = requestAnimationFrame(loop);
     };
 
-    const down = () => {
-      dotRef.current?.classList.add("dot-active");
+    const startLoop = () => {
+      if (s.isRunning) return;
+      s.isRunning = true;
+      s.lastTime = null;
+      s.rafId = requestAnimationFrame(loop);
     };
 
-    const up = () => {
-      dotRef.current?.classList.remove("dot-active");
+    const onMove = (e) => {
+      s.target.x = e.clientX;
+      s.target.y = e.clientY;
+
+      if (!s.hasMoved) {
+        s.hasMoved = true;
+        s.current.x = e.clientX;
+        s.current.y = e.clientY;
+        el.style.removeProperty("opacity");
+      }
+
+      startLoop();
     };
 
-    const loop = () => {
-      rx += (x - rx) * 0.12;
-      ry += (y - ry) * 0.12;
+    const onDown = () => el.classList.add("dot-active");
+    const onUp = () => el.classList.remove("dot-active");
 
-      if (dotRef.current)
-        dotRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-
-      requestAnimationFrame(loop);
-    };
-
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mousedown", down);
-    window.addEventListener("mouseup", up);
-    requestAnimationFrame(loop);
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("mouseup", onUp);
 
     return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mousedown", down);
-      window.removeEventListener("mouseup", up);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("mousedown", onDown);
+      window.removeEventListener("mouseup", onUp);
+      if (s.rafId) cancelAnimationFrame(s.rafId);
     };
   }, []);
 
@@ -98,11 +86,8 @@ function AnimatedCursor({ className }) {
     <div
       ref={dotRef}
       aria-hidden="true"
-      className={twMerge(
-        "cursor-dot pointer-events-none fixed top-0 left-0 z-999 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--text-color-g)/25",
-        !hasMoved && "opacity-0",
-        className?.dot,
-      )}
+      style={{ opacity: 0 }}
+      className="cursor-dot pointer-events-none fixed top-0 left-0 z-999 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--text-color-g)/25"
     />
   );
 }

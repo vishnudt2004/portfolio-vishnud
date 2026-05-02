@@ -16,8 +16,9 @@ import {
 import { IDS } from "@/config/constants";
 import { scrollToSection } from "@/utils/jsUtils";
 import { sectionTitleId } from "@/utils/siteUtils";
-import Button from "../ui/Button";
+import Button from "@/components/ui/Button";
 import { HeroRevealMotion } from "@/components/ui/Animations";
+import Heading from "@/components/ui/Heading";
 import { DownCircleIcon, HandIcon } from "@/components/ui/Icons";
 
 const ThemeVisual = lazy(() => import("@/components/ui/ThemeVisual"));
@@ -58,7 +59,7 @@ const HeroStatus = ({ status: { color, msg } }) => {
 };
 
 const CTAs = ({ resume, email }) => (
-  <div className="mt-5 flex flex-wrap gap-3 *:px-4 *:text-sm *:leading-5 max-lg:justify-center">
+  <div className="mt-5 flex flex-wrap gap-3 *:px-4 *:text-sm *:leading-5 max-[900px]:justify-center">
     {[
       {
         label: "View Resume",
@@ -89,7 +90,7 @@ const CTAs = ({ resume, email }) => (
         asChild
         color={color}
         icon={icon}
-        className={`gap-3 ${cn}`}
+        className={`gap-3 max-sm:w-44 ${cn}`}
       >
         <a href={href} {...rest}>
           {label}
@@ -99,29 +100,31 @@ const CTAs = ({ resume, email }) => (
   </div>
 );
 
-const HeroContent = ({
-  greeting,
-  name,
-  role,
-  email,
-  tagline,
-  resume,
-  status,
-}) => (
-  <div className="flex w-dvw flex-col justify-center gap-6 max-lg:items-center max-lg:text-center">
-    <h1
-      id={sectionTitleId(IDS.hero)}
-      className="text-3xl max-sm:text-nowrap sm:text-4xl"
-    >
-      {greeting}{" "}
-      <span className="whitespace-nowrap text-(--accent-color-g)">{name}</span>.
-    </h1>
+const HeroContent = ({ name, role, email, tagline, resume, status }) => (
+  <div className="flex w-dvw flex-col justify-center gap-6 max-[900px]:items-center max-[900px]:text-center">
+    <div className="flex items-center gap-2 text-3xl sm:text-4xl">
+      <span>
+        Hi{" "}
+        <HandIcon
+          aria-hidden
+          className="inline size-8 translate-x-0.5 -translate-y-1 fill-(--text-color-g)"
+        />
+        , I’m
+      </span>
+
+      <Heading
+        id={sectionTitleId(IDS.hero)}
+        className="whitespace-nowrap text-(--accent-color-g)"
+      >
+        {name}
+      </Heading>
+    </div>
 
     <p className="font-medium tracking-wide text-(--text-secondary-color-g) sm:text-lg">
       {role}
     </p>
 
-    <p className="text-[15px] max-lg:max-w-150 sm:text-base">{tagline}</p>
+    <p className="text-[15px] max-[900px]:max-w-150 sm:text-base">{tagline}</p>
 
     <HeroStatus status={status} />
 
@@ -172,18 +175,16 @@ const HeroVisual = () => (
 
 const HeroLayout = ({ identity }) => {
   return (
-    <div className="mx-auto flex h-svh w-full flex-row px-10">
+    <div className="mx-auto flex min-h-dvh w-full flex-row px-10">
       <Suspense>
         <ThemeVisual />
       </Suspense>
 
-      <HeroRevealMotion>
-        <div className="flex max-w-full justify-center lg:w-1/2">
-          <HeroContent {...identity} />
-        </div>
-      </HeroRevealMotion>
+      <div className="flex max-w-full justify-center min-[900px]:w-1/2">
+        <HeroContent {...identity} />
+      </div>
 
-      <div className="hidden w-1/2 place-items-center p-7 lg:grid">
+      <div className="hidden w-1/2 place-items-center p-7 min-[900px]:grid">
         <HeroVisual />
       </div>
 
@@ -195,20 +196,10 @@ const HeroLayout = ({ identity }) => {
 const HeroView = () => (
   <HeroLayout
     identity={{
-      greeting: (
-        <span>
-          Hello{" "}
-          <HandIcon
-            aria-hidden
-            className="inline size-8 translate-x-0.5 -translate-y-1 fill-(--text-color-g)"
-          />
-          , I’m
-        </span>
-      ),
       name: "Vishnu D",
       role: [
-        "Frontend / Full-Stack Developer",
-        "•\u00A0React, Next.js, TypeScript & MERN",
+        "Frontend / Full-Stack Developer •",
+        "React, Next.js, TypeScript & MERN",
       ].join(" "),
       tagline:
         "I build clean, maintainable web applications — from UI to API — with a strong focus on consistency, developer experience, and real-world usability.",

@@ -8,6 +8,7 @@ import {
 
 import { sectionTitleId } from "@/utils/siteUtils";
 import Button from "./Button";
+import Heading from "./Heading";
 
 // Layout naming is based on desktop structure; mobile adapts as needed.
 
@@ -23,13 +24,7 @@ const Line = ({ className }) => (
   />
 );
 
-const SectionTitle = ({
-  as: As = "h2",
-  children,
-  sectionId,
-  className,
-  ...props
-}) => {
+const SectionTitle = ({ children, sectionId, className, ...props }) => {
   return (
     <div
       className={twMerge(
@@ -37,14 +32,14 @@ const SectionTitle = ({
         className,
       )}
     >
-      <As
+      <Heading
         id={sectionTitleId(sectionId)}
         className="bg-(--bg-color-g) px-5 text-2xl font-semibold tracking-wide transition-colors sm:px-10"
         // "mb-5 w-full p-5 py-4 text-nowrap text-2xl font-semibold tracking-wide border-y border-y-(--border-color-g) bg-(--text-color-g)/2"
         {...props}
       >
         {children}
-      </As>
+      </Heading>
 
       <Line className="absolute inset-y-0 -z-1 my-auto" />
     </div>

@@ -3,10 +3,12 @@ import { twMerge } from "tailwind-merge";
 import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 
 import { IDS } from "@/config/constants";
+import HeadingScope from "@/components/helpers/HeadingScope";
 import Anchor from "@/components/ui/Anchor";
 import Img from "@/components/ui/Img";
 import SocialBtn from "@/components/ui/SocialBtn";
-import Tooltip from "@/components/ui/Tooltip";
+import { Tip } from "@/components/ui/Tooltip";
+import Heading from "@/components/ui/Heading";
 import { SectionTitle, TwoColumnsLayout } from "@/components/ui/SectionLayouts";
 import {
   LinkedinIcon,
@@ -28,17 +30,15 @@ const AboutSection = ({
   moreAboutMe = [],
 }) => {
   return (
-    <>
+    <HeadingScope>
       <TwoColumnsLayout
         sectionTitle={
-          <SectionTitle sectionId={IDS.about} className="text-center">
-            {title}
-          </SectionTitle>
+          <SectionTitle sectionId={IDS.about}>{title}</SectionTitle>
         }
         left={
           <Img
             src={image}
-            alt="Vishnu D"
+            alt="Vishnu D profile image"
             fallbackSrc={personFallbackImg}
             className="cursor-effect-hidden aspect-square size-50 rounded-full object-cover ring-5 ring-(--border-color-g)/30 grayscale-5 duration-300 hover:ring-(--border-color-g) hover:grayscale-0"
             caption="Vishnu D"
@@ -55,14 +55,16 @@ const AboutSection = ({
           right={<ColContainer>{section.right}</ColContainer>}
         />
       ))}
-    </>
+    </HeadingScope>
   );
 };
 
 const ContentBlock = ({ children }) => (
-  <div className="flex flex-col gap-10 text-(--text-secondary-color-g)">
-    {children}
-  </div>
+  <HeadingScope>
+    <div className="flex flex-col gap-10 text-(--text-secondary-color-g)">
+      {children}
+    </div>
+  </HeadingScope>
 );
 
 const ContentSubBlock = ({ children }) => (
@@ -70,9 +72,9 @@ const ContentSubBlock = ({ children }) => (
 );
 
 const MoreAboutSubTitle = ({ children }) => (
-  <h3 className="font-semibold tracking-wider text-(--text-color-g)">
+  <Heading className="font-semibold tracking-wider text-(--text-color-g)">
     {children}
-  </h3>
+  </Heading>
 );
 
 const Highlighter = ({ variant = "primary", children, ...attr }) => (
@@ -258,14 +260,14 @@ const moreAboutMe = [
               icon: DuotonePluginIcon,
             },
           ].map(({ tip, icon }, i) => (
-            <Tooltip key={i} content={tip}>
+            <Tip key={i} tip={tip}>
               <span aria-hidden>
                 {createElement(icon, {
                   className:
                     "size-22 p-6 [--color-1:var(--text-color-g)]! [--color-2:var(--accent-color-g)]! max-sm:size-20 hover:animate-fadeIn transition hover:-translate-y-1",
                 })}
               </span>
-            </Tooltip>
+            </Tip>
           ))}
         </div>
       </ContentBlock>

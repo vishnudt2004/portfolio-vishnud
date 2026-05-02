@@ -13,17 +13,4 @@ const IDS = {
   contactForm: "contact-form",
 };
 
-const ACTIVE_SECTIONS = [
-  "hero",
-  "about",
-  "proficiencies",
-  // "experience",
-  "projects",
-  "achievements",
-  "certifications",
-  "activities",
-  // "testimonials",
-  // "contact-form",
-];
-
-export { IDS, ACTIVE_SECTIONS };
+export { IDS };

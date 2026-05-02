@@ -15,31 +15,33 @@ import { resolve } from "path";
 
 function barrelTreeshakePlugin(config = {}) {
   const VIRTUAL_PREFIX = "\0barrel-treeshake:";
+  const packages = new Set(Object.keys(config));
+  const cache = new Map();
 
   return {
     name: "vite-plugin-barrel-treeshake",
     enforce: "pre",
 
     resolveId(id) {
-      if (config[id]) {
-        return VIRTUAL_PREFIX + id;
-      }
+      if (packages.has(id)) return VIRTUAL_PREFIX + id;
     },
 
     load(id) {
       if (!id.startsWith(VIRTUAL_PREFIX)) return;
 
       const pkg = id.replace(VIRTUAL_PREFIX, "");
+      if (cache.has(pkg)) return cache.get(pkg);
+
       const options = config[pkg];
-
       const source = readFileSync(resolve(options.entry), "utf8");
-
       const result = options.transform(source);
+
       if (typeof result !== "string")
         throw new Error(
           `[barrel-treeshake] transform for "${pkg}" must return a string`,
         );
 
+      cache.set(pkg, result);
       return result;
     },
   };
@@ -59,10 +61,10 @@ function remixiconTransformer(src) {
     .join("|");
 
   const bigConst = src.match(/const [A-Za-z0-9$_]+=[\s\S]+?(?=export\{)/)?.[0];
-
+  const regex = new RegExp(`(?=,(?:${shortNames})=)`);
   const blocks = {};
 
-  for (const part of bigConst.split(new RegExp(`(?=,(?:${shortNames})=)`))) {
+  for (const part of bigConst.split(regex)) {
     const m = part.match(/,?([A-Za-z0-9$_]+)=([\s\S]+)/);
     if (m) blocks[m[1]] = m[2].trimEnd();
   }

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { RiCloseFill, RiPaletteFill } from "@remixicon/react";
 
 import { UI } from "@/config";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from "@/hooks/useTheme";
 import { IconBtn } from "./Button";
 import {
   DropdownMenu,

@@ -5,7 +5,6 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import visualizer from "rollup-plugin-visualizer";
 import remixiconTreeshake from "./vite-remixicon-treeshake-plugin";
 
-// https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   return {
     plugins: [
@@ -15,8 +14,8 @@ export default defineConfig(({ mode }) => {
         png: { quality: 80 },
         jpeg: { quality: 80 },
         jpg: { quality: 80 },
-        webp: { lossless: true },
-        avif: { lossless: true },
+        webp: { quality: 80 },
+        avif: { quality: 80 },
         svg: { multipass: true },
       }),
       mode === "analyze" &&
@@ -32,21 +31,29 @@ export default defineConfig(({ mode }) => {
     resolve: { alias: { "@": "/src" } },
     optimizeDeps: { exclude: ["@remixicon/react"] }, // delegated to plugin
 
-    // rolldownOptions: {
-    //   output: {
-    //     codeSplitting: {
-    //       groups: [
-    //         {
-    //           test: /node_modules\/(react|react-dom|scheduler)/,
-    //           name: "react",
-    //         },
-    //       ],
-    //     },
-    //   },
-    // },
+    build: {
+      rolldownOptions: {
+        // prettier-ignore
+        output: {
+          chunkFileNames(chunkInfo) {
+            const featureMatch = [...chunkInfo.moduleIds]
+              .map((id) => id.replace(/\\/g, "/"))
+              .map((id) => id.match(/features\/([^/]+)\//)?.[1])
+              .find(Boolean);
+            if (featureMatch) return `assets/${featureMatch}-[hash].js`;
+            return "assets/[name]-[hash].js";
+          },
 
-    // devtools: {
-    //   enabled: true,
-    // },
+          codeSplitting: {
+            groups: [
+              { name: "vendor-react", test: /node_modules[\\/](react|react-dom|react-router)/ },
+              { name: "vendor-motion", test: /node_modules[\\/](framer-motion|motion)/ },
+              { name: "vendor-radix", test: /node_modules[\\/](@radix-ui|@floating-ui)/ },
+              { name: "vendor", test: /node_modules/ }
+            ],
+          },
+        },
+      },
+    },
   };
 });

@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-} from "react";
+import { createContext, useCallback, useEffect, useMemo } from "react";
 import { useLocalStorage } from "react-use";
 
 import { UI } from "@/config";
@@ -57,7 +51,5 @@ function ThemeProvider({ children }) {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const useTheme = () => useContext(ThemeContext);
-
 export default ThemeProvider;
+export { ThemeContext };

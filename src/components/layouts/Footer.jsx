@@ -6,7 +6,6 @@ import {
 } from "@icons-pack/react-simple-icons";
 
 import { IDS } from "@/config/constants";
-// import { filterActiveSections } from "@/utils/siteUtils";
 import { LinkedinIcon } from "@/components/ui/Icons";
 
 const SocialItem = ({ label, link, color, icon }) => (
@@ -88,7 +87,7 @@ const Footer = () => {
     },
   ];
 
-  // const quickLinks = filterActiveSections([
+  // const quickLinks = [
   //   { id: "about", label: "About" },
   //   { id: "proficiencies", label: "Proficiencies" },
   //   { id: "projects", label: "Projects" },
@@ -98,7 +97,7 @@ const Footer = () => {
   //   { id: "activities", label: "Activities" },
   //   { id: "testimonials", label: "Testimonials" },
   //   { id: "contact-form", label: "Contact Form" },
-  // ]);
+  // ];
 
   const cpyText = (
     <>&copy; {new Date().getFullYear()} Vishnu D. All Rights Reserved.</>

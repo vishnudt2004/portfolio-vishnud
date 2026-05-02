@@ -1,7 +1,7 @@
 import { RiArticleFill, RiArticleLine } from "@remixicon/react";
 
 import { IDS } from "@/config/constants";
-import HeadingLevelProvider from "@/contexts/HeadingLevelContext";
+import { take } from "@/utils/jsUtils";
 import HeadingScope from "@/components/helpers/HeadingScope";
 import Anchor from "@/components/ui/Anchor";
 import {
@@ -57,38 +57,42 @@ const ActivityItem = ({
 );
 
 const ActivitiesSection = ({ activities, linkedinActivities }) => (
-  <SimpleLayout
-    sectionTitle={
-      <SectionTitle sectionId={IDS.activities}>All Activities</SectionTitle>
-    }
-  >
-    <HeadingScope>
-      <LoadMoreGrid gridId="activities-grid" items={activities}>
-        {(visibleItems) =>
-          visibleItems.map((activity) => (
-            <ActivityItem key={activity.id} {...activity} />
-          ))
-        }
-      </LoadMoreGrid>
-    </HeadingScope>
-
-    <SectionBtns
-      secondary={{
-        label: "See more on LinkedIn",
-        href: linkedinActivities,
-        icon: <LinkedinIcon aria-hidden className="order-1 size-4.5" />,
-      }}
-    />
-  </SimpleLayout>
+  <HeadingScope>
+    <SimpleLayout
+      sectionTitle={
+        <SectionTitle sectionId={IDS.activities}>Activities</SectionTitle>
+      }
+    >
+      <HeadingScope>
+        <LoadMoreGrid gridId="activities-grid" items={activities}>
+          {(visibleItems) =>
+            visibleItems.map((activity) => (
+              <ActivityItem key={activity.id} {...activity} />
+            ))
+          }
+        </LoadMoreGrid>
+      </HeadingScope>
+      <SectionBtns
+        primary={{ label: "View all activities", href: "/activities" }}
+        secondary={{
+          label: "See more on LinkedIn",
+          href: linkedinActivities,
+          icon: <LinkedinIcon aria-hidden className="order-1 size-4.5" />,
+        }}
+      />
+    </SimpleLayout>
+  </HeadingScope>
 );
 
-const ActivitiesView = () => (
-  <HeadingLevelProvider>
+const ActivitiesView = () => {
+  const FEATURED_COUNT = 3;
+
+  return (
     <ActivitiesSection
-      activities={activities}
+      activities={take(activities, FEATURED_COUNT)}
       linkedinActivities="https://www.linkedin.com/in/vishnu-dt/recent-activity/all/"
     />
-  </HeadingLevelProvider>
-);
+  );
+};
 
 export default ActivitiesView;

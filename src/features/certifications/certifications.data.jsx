@@ -1,18 +1,4 @@
-import {
-  RiCertificateLine,
-  RiCertificateFill,
-  RiFileCheckFill,
-} from "@remixicon/react";
-
-import { IDS } from "@/config/constants";
-import { take } from "@/utils/jsUtils";
-import {
-  SectionBtns,
-  SectionTitle,
-  SimpleLayout,
-} from "@/components/ui/SectionLayouts";
-import Card, { Br, List, CardActions, CardButton } from "@/components/ui/Card";
-import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
+import { Br, List } from "@/components/ui/Card";
 
 import vercelIcon from "@/assets/images/icons/vercel.svg";
 import hrIcon from "@/assets/images/icons/hackerrank.svg";
@@ -27,74 +13,7 @@ import certificate4 from "@/assets/images/certifications/certificate-4.webp";
 import certificate5 from "@/assets/images/certifications/certificate-5.jpg";
 import certificate6 from "@/assets/images/certifications/certificate-6.jpg";
 
-const CertificateItem = ({
-  id,
-  title,
-  issuer,
-  date,
-  description,
-  credentials,
-  logo,
-  logoAlt,
-}) => (
-  <Card
-    id={id}
-    title={title}
-    subtitle={issuer}
-    date={date}
-    description={description}
-    actions={
-      <CardActions
-        actions={credentials}
-        fallbackLabel="View Credential"
-        itemId={id}
-      >
-        {({ key, id, label, ariaLabelledby, href }) => (
-          <CardButton
-            key={key}
-            id={id}
-            href={href}
-            icon={<RiFileCheckFill aria-hidden className="size-4" />}
-            aria-labelledby={ariaLabelledby}
-          >
-            {label}
-          </CardButton>
-        )}
-      </CardActions>
-    }
-    logo={logo}
-    logoAlt={logoAlt}
-    leadingIcon={RiCertificateLine}
-    bgOverlay={<RiCertificateFill className="size-[120px] opacity-5" />}
-    style={{ "--accent-color": "var(--color-green-500)" }}
-  />
-);
-
-const CertificationsSection = ({ certificates }) => (
-  <SimpleLayout
-    sectionTitle={
-      <SectionTitle sectionId={IDS.certifications}>Certifications</SectionTitle>
-    }
-  >
-    <LoadMoreGrid
-      gridId="certifications-grid"
-      items={certificates}
-      style={{ "--cursor-accent-scoped": "var(--color-green-500)" }}
-    >
-      {(visibleItems) =>
-        visibleItems.map((certificate) => (
-          <CertificateItem key={certificate.id} {...certificate} />
-        ))
-      }
-    </LoadMoreGrid>
-
-    <SectionBtns
-      primary={{ label: "View all certifications", href: "/certifications" }}
-    />
-  </SimpleLayout>
-);
-
-const certificates = [
+export const certificates = [
   {
     id: "certificate-1",
     title: "Next.js App Router Fundamentals",
@@ -283,15 +202,3 @@ const certificates = [
     logoAlt: "Sololearn Logo",
   },
 ];
-
-const CertificationsView = ({ all }) => {
-  const FEATURED_COUNT = 3;
-
-  return (
-    <CertificationsSection
-      certificates={all ? certificates : take(certificates, FEATURED_COUNT)}
-    />
-  );
-};
-
-export default CertificationsView;

@@ -17,14 +17,14 @@
  * Example:
  *   finalSize = 500px, finalBlur = 100px, scale = 5
  *   baseSize  = 500 / 5 = 100px
- *   baseBlur  = 100 / 5 = 20px
+ *   baseBlur  = 100 / 5 = 20px → 15px
  *
  *   originalTop   = 80px  → newTop   = 80  + 200 = 280px  → top-[280px]
  *   originalLeft  = 40px  → newLeft  = 40  + 200 = 240px  → left-[240px]
  *   originalRight = 40px  → newRight = 40  + 200 = 240px → right-[240px]
  *
  *   Before: size-[500px] blur-[100px] top-20
- *   After:  size-[100px] blur-[20px] scale-[5] top-[280px]
+ *   After:  size-[100px] blur-[15px] scale-[5] top-[280px]
  *
  * Note:
  *   - Only applies to featureless rounded glow divs (no content, no edges)
@@ -34,52 +34,51 @@
  *   - Trade-off: higher scale = better performance, lower scale = better quality
  */
 
-import { lazy, useState } from "react";
-import { useMount } from "react-use";
+import { lazy } from "react";
 
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from "@/hooks/useTheme";
 
 const Light = () => (
-  <div className="absolute top-[280px] left-1/2 size-[100px] -translate-x-1/2 scale-[5] rounded-full bg-sky-200/60 blur-[20px]" />
+  <div className="absolute top-[280px] left-1/2 size-[100px] -translate-x-1/2 scale-[5] transform-gpu rounded-full bg-sky-200/60 blur-[15px]" />
 );
 
 const Dark = () => (
-  <div className="absolute top-[320px] left-1/2 size-[120px] -translate-x-1/2 scale-[5] rounded-full bg-indigo-500/20 blur-[20px]" />
+  <div className="absolute top-[320px] left-1/2 size-[120px] -translate-x-1/2 scale-[5] transform-gpu rounded-full bg-indigo-500/20 blur-[15px]" />
 );
 
 const Lavender = () => (
   <>
-    <div className="absolute top-[250px] left-1/3 size-[100px] scale-[5] rounded-full bg-purple-300/70 blur-[20px]" />
-    <div className="absolute top-[360px] right-1/3 size-[80px] scale-[5] rounded-full bg-pink-300/50 blur-[20px]" />
+    <div className="absolute top-[250px] left-1/3 size-[100px] scale-[5] transform-gpu rounded-full bg-purple-300/70 blur-[15px]" />
+    <div className="absolute top-[360px] right-1/3 size-[80px] scale-[5] transform-gpu rounded-full bg-pink-300/50 blur-[15px]" />
   </>
 );
 
 const OneDarkPro = () => (
   <>
-    <div className="absolute top-[280px] left-[280px] size-[100px] scale-[5] rounded-full bg-blue-500/20 blur-[20px]" />
-    <div className="absolute right-[240px] bottom-[280px] size-[80px] scale-[5] rounded-full bg-purple-500/20 blur-[20px]" />
+    <div className="absolute top-[280px] left-[280px] size-[100px] scale-[5] transform-gpu rounded-full bg-blue-500/20 blur-[15px]" />
+    <div className="absolute right-[240px] bottom-[280px] size-[80px] scale-[5] transform-gpu rounded-full bg-purple-500/20 blur-[15px]" />
   </>
 );
 
 const Dracula = () => (
   <>
-    <div className="absolute top-[250px] left-1/4 size-[100px] scale-[5] rounded-full bg-fuchsia-500/30 blur-[20px]" />
-    <div className="absolute right-10 bottom-[280px] size-[80px] scale-[5] rounded-full bg-purple-500/30 blur-[20px]" />
+    <div className="absolute top-[250px] left-1/4 size-[100px] scale-[5] transform-gpu rounded-full bg-fuchsia-500/30 blur-[15px]" />
+    <div className="absolute right-10 bottom-[280px] size-[80px] scale-[5] transform-gpu rounded-full bg-purple-500/30 blur-[15px]" />
   </>
 );
 
 const Nord = () => (
   <>
-    <div className="absolute top-[250px] left-1/2 size-[110px] -translate-x-1/2 scale-[5] rounded-full bg-cyan-300/30 blur-[20px]" />
-    <div className="absolute right-20 bottom-[280px] size-[80px] scale-[5] rounded-full bg-blue-300/30 blur-[20px]" />
+    <div className="absolute top-[250px] left-1/2 size-[110px] -translate-x-1/2 scale-[5] transform-gpu rounded-full bg-cyan-300/30 blur-[15px]" />
+    <div className="absolute right-20 bottom-[280px] size-[80px] scale-[5] transform-gpu rounded-full bg-blue-300/30 blur-[15px]" />
   </>
 );
 
 const Cyber = () => (
   <>
     {/* Atmosphere Glow */}
-    <div className="absolute top-[280px] left-[200px] size-[100px] scale-[5] rounded-full bg-pink-500/20 blur-[20px]" />
-    <div className="absolute right-[210px] bottom-[300px] size-[90px] scale-[5] rounded-full bg-cyan-400/20 blur-[20px]" />
+    <div className="absolute top-[280px] left-[200px] size-[100px] scale-[5] transform-gpu rounded-full bg-pink-500/20 blur-[15px]" />
+    <div className="absolute right-[210px] bottom-[300px] size-[90px] scale-[5] transform-gpu rounded-full bg-cyan-400/20 blur-[15px]" />
 
     {/* Skyline*/}
     <div className="absolute bottom-10 left-0 h-64 w-full min-w-[1000px] bg-[#020202]/20 [clip-path:polygon(0%_100%,0%_80%,6%_80%,6%_35%,14%_35%,14%_70%,22%_70%,22%_30%,32%_30%,32%_75%,44%_75%,44%_45%,56%_45%,56%_70%,68%_70%,68%_35%,80%_35%,80%_60%,92%_60%,92%_40%,100%_40%,100%_100%)]" />
@@ -94,8 +93,8 @@ const Cyber = () => (
 const Synthwave = () => (
   <>
     {/* Atmosphere Glow */}
-    <div className="absolute top-[280px] left-1/2 size-[104px] -translate-x-1/2 scale-[5] rounded-full bg-fuchsia-500/10 blur-[20px]" />
-    <div className="absolute top-[290px] right-10 size-[84px] scale-[5] rounded-full bg-purple-500/20 blur-[20px]" />
+    <div className="absolute top-[280px] left-1/2 size-[104px] -translate-x-1/2 scale-[5] transform-gpu rounded-full bg-fuchsia-500/10 blur-[15px]" />
+    <div className="absolute top-[290px] right-10 size-[84px] scale-[5] transform-gpu rounded-full bg-purple-500/20 blur-[15px]" />
 
     <div className="blur-x100px absolute bottom-28 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-gradient-to-b from-yellow-300 via-orange-400 to-pink-500 opacity-70 blur-sm" />
     <div className="absolute bottom-0 h-52 w-full bg-gradient-to-t from-purple-900/20 via-purple-700/10 to-transparent" />
@@ -107,11 +106,11 @@ const Synthwave = () => (
 const OceanGlow = () => (
   <>
     {/* Water Glow */}
-    <div className="absolute top-[280px] left-1/2 size-[104px] -translate-x-1/2 scale-[5] rounded-full bg-cyan-400/25 blur-[20px]" />
-    <div className="absolute top-[290px] right-10 size-[84px] scale-[5] rounded-full bg-teal-400/15 blur-[20px]" />
+    <div className="absolute top-[280px] left-1/2 size-[104px] -translate-x-1/2 scale-[5] transform-gpu rounded-full bg-cyan-400/25 blur-[15px]" />
+    <div className="absolute top-[290px] right-10 size-[84px] scale-[5] transform-gpu rounded-full bg-teal-400/15 blur-[15px]" />
 
     {/* Horizon Glow */}
-    <div className="absolute bottom-28 left-1/2 h-[28px] w-[84px] -translate-x-1/2 scale-[5] rounded-full bg-cyan-300/40 blur-[20px]" />
+    <div className="absolute bottom-28 left-1/2 h-[28px] w-[84px] -translate-x-1/2 scale-[5] transform-gpu rounded-full bg-cyan-300/40 blur-[15px]" />
 
     {/* Ocean Surface */}
     <div className="absolute bottom-0 h-52 w-full bg-linear-to-t from-slate-900 via-cyan-900/40 to-transparent" />
@@ -124,8 +123,8 @@ const OceanGlow = () => (
 
 const Aurora = () => (
   <>
-    <div className="absolute top-[20px] left-1/2 size-[90px] -translate-x-1/2 scale-[5] rounded-full bg-green-400/40 blur-[20px] lg:size-[120px]" />
-    <div className="absolute top-[280px] right-[280px] size-[90px] scale-[5] rounded-full bg-cyan-400/30 blur-[20px] lg:size-[120px]" />
+    <div className="absolute top-[20px] left-1/2 size-[90px] -translate-x-1/2 scale-[5] transform-gpu rounded-full bg-green-400/40 blur-[15px] lg:size-[120px]" />
+    <div className="absolute top-[280px] right-[280px] size-[90px] scale-[5] transform-gpu rounded-full bg-cyan-400/30 blur-[15px] lg:size-[120px]" />
   </>
 );
 
@@ -163,12 +162,7 @@ const visualsMap = {
 };
 
 const ThemeVisual = () => {
-  const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
-
-  useMount(() => setMounted(true));
-
-  if (!mounted) return null;
 
   const Visual = visualsMap[theme];
 

@@ -1,107 +1,19 @@
-import { RiFileInfoFill, RiTrophyFill, RiTrophyLine } from "@remixicon/react";
-
-import { IDS } from "@/config/constants";
-import { take } from "@/utils/jsUtils";
-import {
-  SectionBtns,
-  SectionTitle,
-  SimpleLayout,
-} from "@/components/ui/SectionLayouts";
-import Card, { Br, List, CardActions, CardButton } from "@/components/ui/Card";
-import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
+import { Br, List } from "@/components/ui/Card";
 
 import achievement1 from "@/assets/images/achievements/achievement-1.webp";
 import achievement3 from "@/assets/images/achievements/achievement-3.webp";
 import achievement4 from "@/assets/images/achievements/achievement-4.webp";
 import achievement5 from "@/assets/images/achievements/achievement-5.webp";
 
-const AchievementItem = ({
-  id,
-  title,
-  event,
-  location,
-  date,
-  description,
-  credentials,
-  logo,
-  logoAlt,
-  className,
-}) => (
-  <Card
-    id={id}
-    title={title}
-    subtitle={
-      (event || location) && (
-        <span className="mb-2 inline text-sm font-semibold text-(--text-secondary-color-g)">
-          {event} {location && "@"}{" "}
-          {location && <span className="italic">{location}</span>}
-        </span>
-      )
-    }
-    date={date}
-    description={description}
-    actions={
-      <CardActions
-        actions={credentials}
-        fallbackLabel="View Details"
-        itemId={id}
-      >
-        {({ key, id, label, ariaLabelledby, href }) => (
-          <CardButton
-            key={key}
-            id={id}
-            href={href}
-            icon={<RiFileInfoFill aria-hidden className="size-4" />}
-            aria-labelledby={ariaLabelledby}
-          >
-            {label}
-          </CardButton>
-        )}
-      </CardActions>
-    }
-    logo={logo}
-    logoAlt={logoAlt}
-    leadingIcon={RiTrophyLine}
-    bgOverlay={<RiTrophyFill className="size-[120px] opacity-5" />}
-    style={{
-      "--accent-color": "var(--color-yellow-500)",
-    }}
-    className={className}
-  />
-);
-
-const AchievementsSection = ({ achievements }) => (
-  <SimpleLayout
-    sectionTitle={
-      <SectionTitle sectionId={IDS.achievements}>Achievements</SectionTitle>
-    }
-  >
-    <LoadMoreGrid
-      gridId="achievements-grid"
-      items={achievements}
-      style={{ "--cursor-accent-scoped": "var(--color-yellow-500)" }}
-    >
-      {(visibleItems) =>
-        visibleItems.map((achievement) => (
-          <AchievementItem key={achievement.id} {...achievement} />
-        ))
-      }
-    </LoadMoreGrid>
-
-    <SectionBtns
-      primary={{ label: "View all achievements", href: "/achievements" }}
-    />
-  </SimpleLayout>
-);
-
+// eslint-disable-next-line react-refresh/only-export-components
 const Hl = (props) => (
   <span className="highlight-primary rounded-md px-1.25 leading-4" {...props} />
 ); // Highlight
 
-const achievements = [
+export const achievements = [
   {
     id: "achievement-1",
-    title: "1st Place – Web Development Contest",
+    title: "1st Place – Web Development Contest #1",
     event: "CS Department Function",
     location: "Govt. Arts & Science College – Komarapalayam",
     date: "Jan 2026",
@@ -145,7 +57,7 @@ const achievements = [
 
   {
     id: "achievement-3",
-    title: "1st Place – Web Development Contest",
+    title: "1st Place – Web Development Contest #2",
     event: "Mirror 2K25, Intercollegiate Event",
     location: "Erode Arts and Science College, Erode",
     date: "Oct 2025",
@@ -174,7 +86,7 @@ const achievements = [
 
   {
     id: "achievement-4",
-    title: "1st Place – Web Development Contest",
+    title: "1st Place – Web Development Contest #3",
     event: "Mirror 2K24, Intercollegiate Event",
     location: "Erode Arts and Science College, Erode",
     date: "Oct 2024",
@@ -220,15 +132,3 @@ const achievements = [
     credentials: [{ href: achievement5 }],
   },
 ];
-
-const AchievementsView = ({ all }) => {
-  const FEATURED_COUNT = 3;
-
-  return (
-    <AchievementsSection
-      achievements={all ? achievements : take(achievements, FEATURED_COUNT)}
-    />
-  );
-};
-
-export default AchievementsView;
