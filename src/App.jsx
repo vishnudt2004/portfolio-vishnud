@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route, useLocation, BrowserRouter } from "react-router";
-import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { twJoin } from "tailwind-merge";
 
 import ThemeProvider from "./contexts/ThemeContext";
@@ -27,9 +26,7 @@ const GlobalUI = () => (
 );
 
 const ContextProviders = ({ children }) => (
-  <TooltipProvider delayDuration={0} disableHoverableContent>
-    <ThemeProvider>{children}</ThemeProvider>
-  </TooltipProvider>
+  <ThemeProvider>{children}</ThemeProvider>
 );
 
 const Layout = ({ children }) => {

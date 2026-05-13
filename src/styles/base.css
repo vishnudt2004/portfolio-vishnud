@@ -1,0 +1,259 @@
+html {
+  scroll-behavior: smooth;
+
+  &,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+body {
+  background-color: var(--bg-color-g);
+  color: var(--text-color-g);
+  font-family: var(--font-family-g);
+  cursor: default;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+html::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color-g);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color-g);
+  border: 3px solid var(--scrollbar-track-color-g);
+  border-radius: 10px;
+}
+
+html::selection {
+  background-color: var(--text-color-g);
+  color: var(--bg-color-g);
+}
+
+*:not(.focus-reset):focus-visible {
+  outline: 2px solid var(--text-color-g);
+  outline-offset: 4px;
+  transition: none;
+}
+
+.focus-reset:focus-visible {
+  transition: none;
+}
+
+button:not(:disabled) {
+  user-select: none;
+  cursor: pointer;
+}
+
+button:disabled,
+a:not([href]),
+a[href="#"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+
+  &:active {
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  .highlight-primary {
+    @apply mx-0.5 inline-block bg-(--highlight-primary-color-g) px-2 text-(--bg-color-g);
+  }
+
+  .highlight-secondary {
+    @apply mx-0.5 inline-block bg-(--highlight-secondary-color-g) px-2 text-(--text-color-g);
+  }
+}
+
+@theme {
+  --breakpoint-xs: 30rem;
+}
+
+@utility fancy-bg-1 {
+  --gap: 25px;
+  --color: var(--fancy-bg-1-color);
+  --size: 0.08em; /* 1.3px */
+  @apply bg-[radial-gradient(var(--color)_var(--size),transparent_var(--size))] bg-size-[var(--gap)_var(--gap)];
+}
+
+@utility fancy-bg-2 {
+  --color: color-mix(in srgb, var(--fancy-bg-2-color), transparent 0%);
+  --size: 20px;
+  --breadth: 1px;
+  @apply bg-[repeating-linear-gradient(45deg,var(--color)_0,var(--color)_var(--breadth),transparent_0,transparent_50%)] bg-size-[var(--size)_var(--size)];
+}
+
+@utility secondary-scrollbar {
+  &::-webkit-scrollbar {
+    @apply size-[7px];
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply rounded-lg border-1 border-(--bg-color-g) bg-[color-mix(in_srgb,_var(--text-color-g)_30%,_transparent)];
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-[color-mix(in_srgb,_var(--text-color-g)_55%,_transparent)];
+  }
+}
+
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: heroReveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.section-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out;
+  will-change: opacity, transform;
+}
+
+.section-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-motion[data-state="open"] {
+  animation: dropdownOpen 0.3s ease-in-out forwards;
+}
+
+.dropdown-motion[data-state="closed"] {
+  animation: dropdownClose 0.3s ease-in-out forwards;
+}
+
+@keyframes heroReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    clip-path: inset(0% 0% 100% 0%);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0% 0% 0% 0%);
+  }
+}
+
+@keyframes dropdownClose {
+  from {
+    opacity: 1;
+    clip-path: inset(0% 0% 0% 0%);
+  }
+  to {
+    opacity: 0;
+    clip-path: inset(0% 0% 100% 0%);
+  }
+}
+
+.loader-animation {
+  animation: fillText 12s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fillText {
+  from {
+    clip-path: inset(0 80% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.cursor-dot {
+  transition:
+    width 0.2s,
+    height 0.2s,
+    background 0.3s,
+    box-shadow 0.2s,
+    opacity 0.2s,
+    transform 150ms ease;
+
+  &.dot-active {
+    --dot-size: 13px;
+    width: var(--dot-size);
+    height: var(--dot-size);
+  }
+}
+
+body {
+  &:has(
+    .cursor-effect-active:hover,
+    a[href]:not(.cursor-effect-subtle):hover,
+    button:not([disabled], .cursor-effect-subtle):hover
+  ) {
+    .cursor-dot {
+      &:not(.dot-active) {
+        background-color: var(--text-color-g);
+      }
+    }
+  }
+
+  .cursor-effect-hidden {
+    cursor: none;
+  }
+
+  &:has(.cursor-effect-hidden:hover) {
+    .cursor-dot {
+      opacity: 0;
+      display: none;
+      transition:
+        opacity 0.3s,
+        display 0.3s allow-discrete;
+    }
+  }
+
+  &:has(.cursor-effect-subtle:hover)
+    *:not(
+      :has(
+        .cursor-effect-active:hover,
+        a[href]:not(.cursor-effect-subtle):hover,
+        button:not([disabled], .cursor-effect-subtle):hover
+      )
+    ) {
+    .cursor-dot {
+      --dot-size: 12px;
+      --cursor-accent: var(--accent-color-g);
+      opacity: 0.3;
+      width: var(--dot-size);
+      height: var(--dot-size);
+      background: var(--cursor-accent);
+    }
+  }
+}
+
+.theme-visual {
+  contain: layout style;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none;
+  }
+
+  /* Disable cursor motion & effects */
+  .cursor-dot {
+    display: none;
+  }
+}

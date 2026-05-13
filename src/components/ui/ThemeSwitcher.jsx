@@ -21,7 +21,7 @@ const ThemeSwitcher = ({
   allThemes = THEMES,
   onThemeChange,
   onOpenChange,
-  containerRef,
+  containerRef, // use useState hook, not useRef
   triggerTabIndex = 0,
 }) => {
   const { theme: activeTheme, setTheme: setTheme } = useTheme();
@@ -53,7 +53,9 @@ const ThemeSwitcher = ({
     <DropdownMenu
       open={isOpen}
       onOpenChange={(open) => (
-        setShowAll(false), setIsOpen(open), onOpenChange?.(open)
+        setShowAll(false),
+        setIsOpen(open),
+        onOpenChange?.(open)
       )}
     >
       <DropdownMenuTrigger asChild>
@@ -68,7 +70,6 @@ const ThemeSwitcher = ({
 
       <DropdownMenuContent
         sideOffset={5}
-        isOpen={isOpen}
         containerRef={containerRef}
         onEscapeKeyDown={(e) => e.stopPropagation()}
       >

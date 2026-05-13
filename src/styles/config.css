@@ -20,21 +20,7 @@
   );
 
   /* Z-index map */
-  --z-tooltip: 4;
   --z-navbar: 3;
   --z-dropdown: 3;
   --z-overlay: 2;
-
-  /* Theme-dependent variables (themes.css) */
-  /* --bg-color-g: ;
-  --text-color-g: ;
-  --text-secondary-color-g: ;
-  --border-color-g: ;
-  --menus-color-g: ;
-  --highlight-primary-color-g: ;
-  --highlight-secondary-color-g: ;
-  --input-color: ; */
-  /* --accent-color-g:;
-  --gradient-1: ;
-  --gradient-2: ; */
 }

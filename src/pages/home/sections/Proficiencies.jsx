@@ -6,7 +6,6 @@ import {
   RiCss3Fill,
   RiFileCodeFill,
   RiGlobalFill,
-  RiInformationFill,
   RiPagesFill,
   RiShieldKeyholeFill,
   RiSubtractLine,
@@ -46,27 +45,13 @@ import HeadingScope from "@/components/helpers/HeadingScope";
 import Anchor from "@/components/ui/Anchor";
 import Button from "@/components/ui/Button";
 import { SectionTitle, TwoColumnsLayout } from "@/components/ui/SectionLayouts";
-import { Tip } from "@/components/ui/Tooltip";
 import { VSCodeIcon, MotionIcon, NextAuthSmIcon } from "@/components/ui/Icons";
 import Heading from "@/components/ui/Heading";
 
-const TipBtn = ({ tip, ...attr }) => (
-  <Tip tip={tip}>
-    <button
-      type="button"
-      aria-label="Section information"
-      className="cursor-help! rounded-full text-sm"
-      {...attr}
-    >
-      <RiInformationFill aria-hidden className="size-5" />
-    </button>
-  </Tip>
-);
-
 const SubTitle = ({ children, tip }) => (
-  <Heading className="flex items-center justify-center gap-2 text-center text-xl font-medium">
+  <Heading className="flex flex-col items-center justify-center text-center text-xl font-medium">
     {children}
-    <TipBtn tip={tip} />
+    {tip && <p className="text-sm text-(--text-color-g)/80">{tip}</p>}
   </Heading>
 );
 
@@ -164,7 +149,7 @@ const ProficienciesSection = ({
               <Button
                 aria-expanded={isSkillsExpanded}
                 aria-controls="skills-list"
-                className="p-1.5 py-0.5"
+                className="p-2 py-1"
                 onClick={() => setIsSkillsExpanded((p) => !p)}
                 icon={
                   <span aria-hidden className="inline-flex *:size-3.75">
@@ -180,28 +165,24 @@ const ProficienciesSection = ({
         right={
           <HeadingScope>
             <div className="flex flex-col items-center gap-5 p-1">
-              <SubTitle tip="Icon names appear on interaction">
-                Tech Stack
-              </SubTitle>
-              <div className="group mt-10 flex flex-wrap items-center justify-center gap-2 max-sm:scale-90">
+              <SubTitle>Tech Stack</SubTitle>
+              <ul className="group mt-10 flex flex-wrap items-center justify-center gap-2.5 max-sm:scale-90">
                 {techStack.techStackIcons.map(({ name, icon }) => (
-                  <Tip key={name} tip={name}>
-                    <button
-                      type="button"
-                      aria-label={name}
-                      className="focus-reset cursor-effect-subtle inline-flex cursor-default! rounded-full transition-opacity group-hover:not-hover:not-focus:opacity-60 hover:bg-white/25 focus:bg-white/25 focus-visible:outline-none"
-                    >
-                      {createElement(icon, {
-                        "aria-hidden": true,
-                        className:
-                          "size-15 rounded-full border-1 border-(--border-color-g)/50 bg-white/15 p-4",
-                        color: "default",
-                        title: null,
-                      })}
-                    </button>
-                  </Tip>
+                  <li
+                    key={`$i*-${name}`}
+                    className="inline-flex flex-col items-center gap-1 rounded-full"
+                  >
+                    {createElement(icon, {
+                      "aria-hidden": true,
+                      className:
+                        "size-15 rounded-full border-1 border-(--border-color-g)/50 bg-white/25 p-4",
+                      color: "default",
+                      title: null,
+                    })}
+                    <span className="text-sm">{name}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
               <div className="text-(--text-secondary-color-g)">
                 {techStack.techStackDescription}
               </div>
@@ -219,7 +200,7 @@ const S = (props) => (
 
 const skills = [
   {
-    group: "Development",
+    group: "Frontend",
     skills: [
       { name: "HTML5", icon: SiHtml5 },
       { name: "CSS3", icon: SiCss },
@@ -227,72 +208,73 @@ const skills = [
       { name: "TypeScript", icon: SiTypescript },
       { name: "React.js", icon: SiReact },
       { name: "Next.js", icon: SiNextdotjs },
-      { name: "Node.js", icon: SiNodedotjs },
-      { name: "Express", icon: SiExpress },
-      { name: "MongoDB", icon: SiMongodb },
-      { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "Prisma", icon: SiPrisma },
       { name: "Tailwind CSS", icon: SiTailwindcss },
-      { name: "NextAuth.js", icon: NextAuthSmIcon },
-      { name: "Zod", icon: SiZod },
-    ],
-    collapsedSkills: [
       { name: "Redux", icon: SiRedux },
       { name: "Framer Motion", icon: MotionIcon },
+      { name: "SASS", icon: SiSass },
+    ],
+    collapsedSkills: [
+      { name: "MDX", icon: SiMdx },
       { name: "Bootstrap", icon: SiBootstrap },
-      { name: "jQuery", icon: SiJquery },
+      { name: "JQuery", icon: SiJquery },
+      { name: "Styled Components", icon: SiStyledcomponents },
+      { name: "Styled JSX", icon: RiCss3Fill },
       {
         name: "EJS",
         icon: () => (
           <span className="font-semibold text-yellow-500">&lt;%</span>
         ),
       },
-      { name: "SASS", icon: SiSass },
-      { name: "MDX", icon: SiMdx },
-      { name: "Styled Components", icon: SiStyledcomponents },
-      { name: "Styled JSX", icon: RiCss3Fill },
     ],
   },
+
   {
-    group: "Tools & Technologies",
+    group: "Backend & Database",
+    skills: [
+      { name: "Node.js", icon: SiNodedotjs },
+      { name: "Express", icon: SiExpress },
+      { name: "NextAuth.js", icon: NextAuthSmIcon },
+      { name: "Zod", icon: SiZod },
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "Prisma", icon: SiPrisma },
+    ],
+    collapsedSkills: [],
+  },
+
+  {
+    group: "Tools & Deployment",
     skills: [
       { name: "Git", icon: SiGit },
       { name: "GitHub", icon: SiGithub },
       { name: "VS Code", icon: VSCodeIcon },
       { name: "NPM/PNPM", icon: SiPnpm },
-      { name: "CLI Usage", icon: RiTerminalBoxFill },
       { name: "Vercel", icon: SiVercel },
-    ],
-    collapsedSkills: [
       { name: "Postman", icon: SiPostman },
-      { name: "Render", icon: SiRender },
     ],
+    collapsedSkills: [{ name: "Render", icon: SiRender }],
   },
+
   {
-    group: "Concepts & Methodologies",
+    group: "Core Concepts",
     skills: [
       { name: "Responsive Design", icon: RiTabletFill },
       { name: "REST API Design & Integration", icon: RiGlobalFill },
       { name: "Authentication & Authorization", icon: RiShieldKeyholeFill },
       { name: "Deployment", icon: RiPagesFill },
       { name: "Debugging", icon: RiBugFill },
+      { name: "Command Line Tools", icon: RiTerminalBoxFill },
     ],
     collapsedSkills: [
       { name: "CSS-in-JS", icon: RiCss3Fill },
       { name: "OOP Principles", icon: RiFileCodeFill },
     ],
-    // {name: "SDLC", icon: ArrowPathRoundedSquareIcon,}
-    // {name: "DSA", icon: CubeIcon,}
   },
-  // {
-  //   group: "Programming Languages",
-  //   skills: ["Python (Intermediate)"],
-  // },
 ];
 
 const techStack = {
   techStackIcons: [
-    { name: "React.js", icon: SiReact },
+    { name: "React", icon: SiReact },
     { name: "Next.js", icon: SiNextdotjs },
     { name: "Node.js", icon: SiNodedotjs },
     { name: "Express", icon: SiExpress },
@@ -339,10 +321,7 @@ const techStack = {
             href={link.href}
             className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
           >
-            <span>
-              {/* prevents flex-related text wrapping issue */}
-              {link.label}
-            </span>
+            {link.label}
           </Anchor>
         ))}
       </div>

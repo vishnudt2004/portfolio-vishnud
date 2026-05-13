@@ -18,7 +18,7 @@ A clean, responsive, and modern portfolio built to showcase who I am as a self-t
 
 ### Tech Stack
 
-- **Frontend:** HTML, CSS, JavaScript, React.js, Tailwind CSS, Motion (framer-motion)
+- **Frontend:** HTML, CSS, JavaScript, React.js, Tailwind CSS, Radix UI Primitives
 - **Deployment:** GitHub + Vercel
 
 ### Configuration Files

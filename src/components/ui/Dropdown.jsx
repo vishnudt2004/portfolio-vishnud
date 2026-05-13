@@ -1,5 +1,4 @@
 import * as RadixDropdownMenu from "@radix-ui/react-dropdown-menu";
-import { AnimatePresence } from "motion/react";
 import { twMerge } from "tailwind-merge";
 
 import { DropdownMotion } from "./Animations";
@@ -19,31 +18,30 @@ const DropdownMenuTrigger = (props) => (
 const DropdownMenuArrow = RadixDropdownMenu.Arrow;
 
 const DropdownMenuContent = ({
-  isOpen,
   children,
   ref: forwardedRef,
   containerRef,
   ...props
 }) => {
   return (
-    <AnimatePresence mode="wait">
-      {isOpen && (
-        <RadixDropdownMenu.Portal
-          container={containerRef ? containerRef?.current : document.body}
-          forceMount
-        >
-          <RadixDropdownMenu.Content {...props} ref={forwardedRef} loop asChild>
-            <DropdownMotion isOpen={isOpen}>
-              <div className="z-(--z-dropdown) w-40 overflow-hidden rounded-2xl border border-(--border-color-g) bg-(--bg-color-g)">
-                <div className="secondary-scrollbar max-h-50 overflow-y-auto p-1">
-                  {children}
-                </div>
-              </div>
-            </DropdownMotion>
-          </RadixDropdownMenu.Content>
-        </RadixDropdownMenu.Portal>
-      )}
-    </AnimatePresence>
+    <RadixDropdownMenu.Portal container={containerRef ?? document.body}>
+      <RadixDropdownMenu.Content
+        avoidCollisions // repositions if it would overflow viewport
+        collisionPadding={8} // 8px breathing room from viewport edges
+        {...props}
+        ref={forwardedRef}
+        loop
+        asChild
+      >
+        <DropdownMotion>
+          <div className="z-(--z-dropdown) w-40 overflow-hidden rounded-2xl border border-(--border-color-g) bg-(--bg-color-g)">
+            <div className="secondary-scrollbar max-h-50 scroll-py-1 overflow-y-auto p-1">
+              {children}
+            </div>
+          </div>
+        </DropdownMotion>
+      </RadixDropdownMenu.Content>
+    </RadixDropdownMenu.Portal>
   );
 };
 
@@ -53,6 +51,7 @@ const DropdownMenuLabel = (props) => (
     {...props}
   />
 );
+
 const DropdownMenuItem = ({ active, ...props }) => (
   <RadixDropdownMenu.Item
     className={twMerge(
@@ -67,6 +66,7 @@ const DropdownMenuItem = ({ active, ...props }) => (
     onPointerLeave={(event) => event.preventDefault()}
   />
 );
+
 const DropdownMenuGroup = RadixDropdownMenu.Group;
 
 const DropdownMenuCheckboxItem = ({

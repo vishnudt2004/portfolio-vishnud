@@ -6,12 +6,12 @@ import fccIcon from "@/assets/images/icons/fcc.svg";
 import slIcon from "@/assets/images/icons/sololearn.svg";
 import certificate1 from "@/assets/images/certifications/certificate-1.webp";
 import certificate2 from "@/assets/images/certifications/certificate-2.webp";
-import certificate3_react from "@/assets/images/certifications/certificate-3/react_basic-certificate.webp";
-import certificate3_js from "@/assets/images/certifications/certificate-3/javascript_basic-certificate.webp";
-import certificate3_css from "@/assets/images/certifications/certificate-3/css-certificate.webp";
+import certificate3_react from "@/assets/images/certifications/certificate-3-react-basic.webp";
+import certificate3_js from "@/assets/images/certifications/certificate-3-js-basic.webp";
+import certificate3_css from "@/assets/images/certifications/certificate-3-css.webp";
 import certificate4 from "@/assets/images/certifications/certificate-4.webp";
-import certificate5 from "@/assets/images/certifications/certificate-5.jpg";
-import certificate6 from "@/assets/images/certifications/certificate-6.jpg";
+import certificate5 from "@/assets/images/certifications/certificate-5.webp";
+import certificate6 from "@/assets/images/certifications/certificate-6.webp";
 
 export const certificates = [
   {

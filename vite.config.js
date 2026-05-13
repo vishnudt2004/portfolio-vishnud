@@ -45,11 +45,11 @@ export default defineConfig(({ mode }) => {
           },
 
           codeSplitting: {
+            // minSize: 15000,
             groups: [
               { name: "vendor-react", test: /node_modules[\\/](react|react-dom|react-router)/ },
-              { name: "vendor-motion", test: /node_modules[\\/](framer-motion|motion)/ },
-              { name: "vendor-radix", test: /node_modules[\\/](@radix-ui|@floating-ui)/ },
-              { name: "vendor", test: /node_modules/ }
+              // { name: "vendor-radix", test: /node_modules[\\/](@radix-ui|@floating-ui)/ },
+              { name: "vendor", test: /node_modules/ },
             ],
           },
         },

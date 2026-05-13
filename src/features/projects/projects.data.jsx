@@ -1,5 +1,5 @@
 import projectImage_globblog from "@/assets/images/projects/globblog-hero.png";
-import projectImage_portfolio from "@/assets/images/projects/portfolio-hero.png";
+import projectImage_portfolio from "@/assets/images/projects/portfolio-hero.webp";
 import projectImage_suic from "@/assets/images/projects/suic-hero.png";
 
 export const projects = [
@@ -30,12 +30,7 @@ export const projects = [
     description:
       "A modern developer portfolio showcasing projects, UI experiments, and reusable components with performance-focused design and smooth UI animations.",
     thumb: projectImage_portfolio,
-    techStack: [
-      "React",
-      "Tailwind CSS",
-      "Framer Motion",
-      "Radix UI Primitives",
-    ],
+    techStack: ["React", "Tailwind CSS", "Radix UI Primitives"],
     links: {
       live: "https://portfolio-vishnud.vercel.app/",
       repo: "https://github.com/vishnudt2004/portfolio-vishnud",

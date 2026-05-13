@@ -36,10 +36,10 @@ const LinkItem = ({ id, titleId, type, href, index }) => {
       href={href}
       aria-labelledby={titleId && `${actionId} ${titleId}`}
     >
-      <span className="inline-flex! items-center justify-center gap-1.5">
+      <span className="inline-flex gap-1.5">
         {createElement(linkProps.icon[type], {
           "aria-hidden": true,
-          className: "inline-block size-4",
+          className: "inline-block translate-y-0.75 size-3.5",
         })}
         {linkProps.label[type] ||
           type.charAt(0).toUpperCase() + type.substring(1)}

@@ -1,46 +1,33 @@
-import { useState, useRef, useImperativeHandle } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { useLocation } from "react-router";
-import { FocusScope } from "@radix-ui/react-focus-scope";
 import { twMerge } from "tailwind-merge";
-import { useMedia } from "react-use";
 import {
   RiBriefcaseFill,
+  RiCalendarEventFill,
   RiChat3Fill,
   RiCloseFill,
+  RiCodeSSlashFill,
   RiFolderReduceFill,
   RiHome5Fill,
   RiMenu4Fill,
   RiSparkling2Fill,
+  RiTrophyFill,
+  RiVerifiedBadgeFill,
 } from "@remixicon/react";
 
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/Dropdown";
 import { IDS } from "@/config/constants";
-import { createKeyMap, getFocusableItems, moveFocus } from "@/utils/keyboard";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { useNavigateToSection } from "@/hooks/useNavigateToSection";
 import { IconBtn } from "@/components/ui/Button";
 import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
 import FullscreenToggle from "@/components/ui/FullScreenToggle";
-
-const NavMenu = ({ id, onClick, onMenuClick, label, icon: Icon }) => (
-  <button
-    onClick={() => (onClick ? onClick() : onMenuClick?.(id))}
-    className="focus-reset relative flex items-center gap-1.25 rounded-lg px-2 text-sm tracking-wide text-nowrap text-(--menus-color-g) duration-300 hover:bg-(--menus-color-g)/15 focus-visible:bg-(--menus-color-g)/15 focus-visible:outline-0 max-sm:w-fit"
-  >
-    {Icon && <Icon aria-hidden className="size-3.25 opacity-80" />}
-    {label}
-  </button>
-);
-
-const CTABtn = ({ email, label, icon: Icon }) => (
-  <a
-    href={`mailto:${email}`}
-    aria-label="Send me an email"
-    className="focus-reset relative flex items-center gap-1.25 rounded-lg bg-white px-2 text-sm tracking-wide text-nowrap text-(--accent-color-g) duration-300 ring-inset hover:ring-2 focus-visible:ring-2 focus-visible:outline-0 max-sm:w-fit"
-  >
-    {Icon && <Icon aria-hidden className="size-3.25 opacity-80" />}
-    {label}
-  </a>
-);
 
 const NavBrand = () => {
   const navigateToSection = useNavigateToSection();
@@ -53,7 +40,7 @@ const NavBrand = () => {
   return (
     <button
       type="button"
-      aria-label="Go to portfolio section"
+      aria-label="Go to Home section"
       onClick={handleClick}
       className={twMerge(
         "focus-reset group relative z-0 flex size-12 items-center overflow-hidden rounded-full border border-(--border-color-g)/75 bg-(--bg-color-g) transition-all duration-300 ease-in-out focus-visible:outline-0 focus-visible:supports-[background-color:color-mix(in_srgb,red,white)]:bg-[color-mix(in_srgb,var(--text-color-g)_10%,var(--bg-color-g))]",
@@ -79,432 +66,154 @@ const NavBrand = () => {
   );
 };
 
-const NavMenuContent = ({
-  id,
-  isOpen,
-  menus,
-  variant,
-  layout,
-  themeBtn: { containerRef, onThemeChange, onOpenChange } = {},
-}) => {
-  const isPrimary = variant === "primary";
-  const isHorizontal = layout === "horizontal";
+const PrimaryMenus = () => (
+  <div className="flex items-center gap-0.5">
+    <FullscreenToggle />
+    <ThemeSwitcher />
+  </div>
+);
 
+const SecondaryMenus = ({ isOpen, items, onOpenChange }) => {
   return (
-    <ul
-      id={id}
-      inert={!isPrimary && !isOpen ? true : undefined}
-      aria-hidden={!isPrimary && !isOpen ? true : undefined}
-      className={twMerge(
-        "flex list-none justify-center transition-opacity duration-800 ease-in-out",
-        isPrimary
-          ? ""
-          : isOpen
-            ? `opacity-100 ${isHorizontal && "pl-2"}`
-            : "pointer-events-none opacity-0",
-        isHorizontal ? "flex-row items-center gap-1" : "flex-col gap-2",
-      )}
-    >
-      {menus?.map((menu, i) => (
-        <li key={`menu$*-${i}`}>{menu}</li>
-      ))}
+    <DropdownMenu onOpenChange={onOpenChange}>
+      <DropdownMenuTrigger asChild>
+        <IconBtn aria-label="Open navigation menu">
+          {isOpen ? <RiCloseFill aria-hidden /> : <RiMenu4Fill aria-hidden />}
+        </IconBtn>
+      </DropdownMenuTrigger>
 
-      {isPrimary && (
-        <>
-          <li title="Toggle Fullscreen">
-            <FullscreenToggle />
-          </li>
+      <DropdownMenuContent sideOffset={8}>
+        {items.map(({ label, icon: Icon, id, href, onClick }, i) => {
+          const isLink = Boolean(href);
+          const isSeparatorBefore = i > 0 && isLink && !items[i - 1].href;
 
-          <li title="Change Theme">
-            <ThemeSwitcher
-              containerRef={containerRef}
-              onOpenChange={(isOpen) => {
-                onOpenChange?.(isOpen);
-              }}
-              onThemeChange={() => {
-                onThemeChange?.();
-              }}
-            />
-          </li>
-        </>
-      )}
-    </ul>
+          return (
+            <Fragment key={`menu-item-${id}`}>
+              {isSeparatorBefore && <DropdownMenuSeparator />}
+
+              <DropdownMenuItem
+                asChild={isLink}
+                onClick={!isLink ? () => onClick?.(id) : undefined}
+                // active={}
+              >
+                {isLink ? (
+                  <a href={href} className="flex items-center gap-2">
+                    {Icon && (
+                      <Icon
+                        aria-hidden
+                        className="size-3.25 shrink-0 opacity-80"
+                      />
+                    )}
+                    {label}
+                  </a>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    {Icon && (
+                      <Icon
+                        aria-hidden
+                        className="size-3.25 shrink-0 opacity-80"
+                      />
+                    )}
+                    {label}
+                  </div>
+                )}
+              </DropdownMenuItem>
+            </Fragment>
+          );
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
-const DesktopNav = ({ menus, ref }) => {
-  const POSITION = "top-0 left-0";
-
+const Nav = ({ items }) => {
   const scrollDir = useScrollDirection();
-  const canHover = useMedia("(hover: hover)");
 
   const [isFocused, setIsFocused] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isThemeOpen, setIsThemeOpen] = useState(false);
-  const [isKeyboardInteraction, setIsKeyboardInteraction] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const containerRef = useRef(null);
-  const buttonRef = useRef(null);
-  const secondaryId = "secondary-nav";
-
-  const trapFocus = isOpen && isKeyboardInteraction;
-
-  const isVisible = isFocused || scrollDir !== "down";
-
-  const closeNav = () => {
-    setIsOpen(false);
-    setIsKeyboardInteraction(false);
-    setIsThemeOpen(false);
-    buttonRef.current?.focus();
-  };
-
-  useImperativeHandle(ref, () => ({
-    closeNav,
-  }));
-
-  const getNavFocusableItems = () =>
-    getFocusableItems(
-      containerRef.current,
-      'button:not([disabled]):not([aria-hidden="true"]), a[href]',
-    );
-
-  const handleNavKeydown = createKeyMap(() => ({
-    Escape: () => {
-      closeNav();
-      buttonRef.current?.focus();
-    },
-
-    ArrowRight: (e) => {
-      const items = getNavFocusableItems();
-      if (!items.length) return;
-      moveFocus(items, "next");
-      e.preventDefault();
-    },
-
-    ArrowLeft: (e) => {
-      const items = getNavFocusableItems();
-      if (!items.length) return;
-      moveFocus(items, "prev");
-      e.preventDefault();
-    },
-
-    Home: (e) => {
-      const items = getNavFocusableItems();
-      moveFocus(items, "first");
-      e.preventDefault();
-    },
-
-    End: (e) => {
-      const items = getNavFocusableItems();
-      moveFocus(items, "last");
-      e.preventDefault();
-    },
-  }));
-
-  const handleContainerPointerenter = () => setIsOpen(true);
-  const handleContainerPointerleave = () => {
-    if (isKeyboardInteraction || isThemeOpen) return;
-
-    setIsOpen(false);
-  };
-
-  const handleToggleClick = () => setIsOpen((p) => !p);
-  const handleToggleKeydown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      setIsOpen((p) => !p);
-      setIsKeyboardInteraction((p) => !p);
-    }
-  };
+  const isVisible = isFocused || isDropdownOpen || scrollDir !== "down";
 
   return (
-    <>
-      <FocusScope
-        loop={trapFocus}
-        trapped={trapFocus}
-        onMountAutoFocus={(e) => e.preventDefault()}
-        className={twMerge(
-          "fixed z-(--z-navbar) mx-auto flex justify-center gap-2 p-3 transition-transform duration-300 *:first:shrink-0",
-          POSITION,
-          isVisible ? "translate-y-0" : "-translate-y-full",
-        )}
-        onFocusCapture={() => setIsFocused(true)}
-        onBlurCapture={() => setIsFocused(false)}
-      >
-        <NavBrand />
-
-        <nav
-          ref={containerRef}
-          aria-label="Primary navigation"
-          className="z-(--z-navbar) inline-flex items-center gap-0.5 overflow-hidden rounded-full border border-(--border-color-g)/75 bg-(--bg-color-g) px-2 focus-within:bg-[color-mix(in_srgb,var(--text-color-g)_10%,var(--bg-color-g))]"
-          onKeyDown={handleNavKeydown}
-        >
-          <NavMenuContent
-            id="primary-nav"
-            isOpen={isOpen}
-            layout="horizontal"
-            variant="primary"
-            menus={menus?.primary}
-            themeBtn={{
-              containerRef,
-              onOpenChange: (isOpen) => {
-                setIsThemeOpen(isOpen);
-                closeNav();
-              },
-              onThemeChange: closeNav,
-            }}
-          />
-
-          <div
-            className={twMerge(
-              "inline-flex h-12 items-center transition-all duration-500",
-              isOpen ? "sm:max-w-[500px]" : "max-w-8",
-            )}
-            onPointerEnter={canHover ? handleContainerPointerenter : undefined}
-            onPointerLeave={canHover ? handleContainerPointerleave : undefined}
-          >
-            <IconBtn
-              ref={buttonRef}
-              aria-label="Toggle navigation"
-              aria-expanded={isOpen}
-              aria-controls={secondaryId}
-              onClick={handleToggleClick}
-              onKeyDown={handleToggleKeydown}
-            >
-              {isOpen ? (
-                <RiCloseFill aria-hidden />
-              ) : (
-                <RiMenu4Fill aria-hidden />
-              )}
-            </IconBtn>
-
-            <NavMenuContent
-              id={secondaryId}
-              isOpen={isOpen}
-              menus={menus.secondary}
-              layout="horizontal"
-            />
-          </div>
-        </nav>
-      </FocusScope>
-
-      {isOpen && (
-        <div
-          aria-hidden
-          role="presentation"
-          className="fixed inset-0 z-(--z-overlay)"
-          onClick={closeNav}
-        />
+    <div
+      className={twMerge(
+        "fixed top-0 left-0 z-(--z-navbar) flex gap-2 p-3 transition-transform duration-300",
+        isVisible ? "translate-y-0" : "-translate-y-full",
       )}
-    </>
-  );
-};
+      onFocusCapture={() => setIsFocused(true)}
+      onBlurCapture={() => setIsFocused(false)}
+    >
+      <NavBrand />
 
-const MobileNav = ({ menus, ref }) => {
-  const POSITION = "top-0 left-0";
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [isKeyboardInteraction, setIsKeyboardInteraction] = useState(false);
-
-  const containerRef = useRef(null);
-  const buttonRef = useRef(null);
-  const secondaryId = "secondary-nav";
-
-  const trapFocus = isOpen && isKeyboardInteraction;
-
-  const closeNav = () => {
-    setIsOpen(false);
-    setIsKeyboardInteraction(false);
-    buttonRef.current?.focus();
-  };
-
-  useImperativeHandle(ref, () => ({
-    closeNav,
-  }));
-
-  const getNavFocusableItems = () =>
-    getFocusableItems(
-      containerRef.current,
-      'button:not([disabled]):not([aria-hidden="true"])',
-    );
-
-  const handleNavKeydown = createKeyMap(() => ({
-    Escape: () => {
-      closeNav();
-      buttonRef.current?.focus();
-    },
-
-    ArrowDown: (e) => {
-      const items = getNavFocusableItems();
-      if (!items.length) return;
-      moveFocus(items, "next");
-      e.preventDefault();
-    },
-
-    ArrowUp: (e) => {
-      const items = getNavFocusableItems();
-      if (!items.length) return;
-      moveFocus(items, "prev");
-      e.preventDefault();
-    },
-
-    Home: (e) => {
-      const items = getNavFocusableItems();
-      moveFocus(items, "first");
-      e.preventDefault();
-    },
-
-    End: (e) => {
-      const items = getNavFocusableItems();
-      moveFocus(items, "last");
-      e.preventDefault();
-    },
-  }));
-
-  const handleToggleClick = () => setIsOpen((p) => !p);
-  const handleToggleKeydown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      setIsOpen((p) => !p);
-      setIsKeyboardInteraction((p) => !p);
-    }
-  };
-
-  return (
-    <>
-      <FocusScope
-        loop={trapFocus}
-        trapped={trapFocus}
-        onMountAutoFocus={(e) => e.preventDefault()}
-        className={twMerge(
-          "fixed z-(--z-navbar) mx-auto flex justify-center gap-2 p-3 transition-transform duration-300 *:first:shrink-0",
-          POSITION,
-        )}
+      <nav
+        aria-label="Primary navigation"
+        className="inline-flex items-center gap-1 overflow-hidden rounded-full border border-(--border-color-g)/75 bg-(--bg-color-g) px-1 focus-within:bg-[color-mix(in_srgb,var(--text-color-g)_10%,var(--bg-color-g))]"
       >
-        <NavBrand />
+        <PrimaryMenus />
 
-        <nav
-          ref={containerRef}
-          aria-label="Primary navigation"
-          className={twMerge(
-            "z-(--z-navbar) inline-flex flex-col gap-3 overflow-hidden rounded-3xl border border-(--border-color-g)/75 bg-(--bg-color-g) p-1.5 transition-all duration-500 focus-within:bg-(--text-color-g)/15 focus-within:supports-[background-color:color-mix(in_srgb,red,white)]:bg-[color-mix(in_srgb,var(--text-color-g)_10%,var(--bg-color-g))]",
-            isOpen
-              ? "max-h-[250px] max-w-[200px] items-center"
-              : "max-h-12 max-w-12",
-          )}
-          onKeyDown={handleNavKeydown}
-        >
-          <div className="flex gap-2">
-            <IconBtn
-              ref={buttonRef}
-              aria-label="Toggle navigation"
-              aria-expanded={isOpen}
-              aria-controls={secondaryId}
-              onClick={handleToggleClick}
-              onKeyDown={handleToggleKeydown}
-              className={isOpen && "border border-(--border-color-g)"} // twMerge()
-            >
-              {isOpen ? (
-                <RiCloseFill aria-hidden />
-              ) : (
-                <RiMenu4Fill aria-hidden />
-              )}
-            </IconBtn>
-            {isOpen && (
-              <NavMenuContent
-                id="primary-nav"
-                isOpen={isOpen}
-                layout="horizontal"
-                variant="primary"
-                menus={menus?.primary}
-                themeBtn={{
-                  containerRef,
-                  onThemeOpenChange: closeNav,
-                  onThemeChange: closeNav,
-                }}
-              />
-            )}
-          </div>
-
-          <hr
-            aria-hidden
-            role="presentation"
-            className={twMerge(
-              "border-px w-[90%]",
-              isOpen
-                ? "border-(--text-color-g)/25"
-                : "border-(--border-color-g)",
-            )}
-          />
-
-          <NavMenuContent
-            id={secondaryId}
-            isOpen={isOpen}
-            menus={menus.secondary}
-            layout="vertical"
-          />
-        </nav>
-      </FocusScope>
-
-      {isOpen && (
-        <div
-          aria-hidden
-          role="presentation"
-          className="fixed inset-0 z-(--z-overlay)"
-          onClick={closeNav}
+        <SecondaryMenus
+          items={items}
+          isOpen={isDropdownOpen}
+          onOpenChange={setIsDropdownOpen}
         />
-      )}
-    </>
+      </nav>
+    </div>
   );
 };
 
 const Header = () => {
   const navigateToSection = useNavigateToSection();
-  const isMobile = useMedia("(max-width: 499px)");
 
-  const navRef = useRef(null);
-
-  const handleMenuClick = (id) => {
-    navigateToSection(id);
-    navRef.current?.closeNav?.();
-  };
-
-  const menus = {
-    secondary: [
-      ...[
-        {
-          id: IDS.about,
-          label: "About",
-          icon: RiBriefcaseFill,
-        },
-        {
-          id: IDS.projects,
-          label: "Projects",
-          icon: RiFolderReduceFill,
-        },
-      ].map(({ id, label, icon }) => (
-        <NavMenu
-          id={id}
-          label={label}
-          icon={icon}
-          onMenuClick={handleMenuClick}
-        />
-      )),
-      <CTABtn
-        email="vishnu.d.t.2004@gmail.com"
-        label="Mail me"
-        icon={RiChat3Fill}
-      />,
+  const items = useMemo(
+    () => [
+      {
+        id: IDS.about,
+        label: "About Me",
+        icon: RiBriefcaseFill,
+        onClick: (id) => navigateToSection(id),
+      },
+      {
+        id: IDS.proficiencies,
+        label: "Proficiencies",
+        icon: RiCodeSSlashFill,
+        onClick: (id) => navigateToSection(id),
+      },
+      {
+        id: IDS.projects,
+        label: "Projects",
+        icon: RiFolderReduceFill,
+        onClick: (id) => navigateToSection(id),
+      },
+      {
+        id: IDS.achievements,
+        label: "Achievements",
+        icon: RiTrophyFill,
+        onClick: (id) => navigateToSection(id),
+      },
+      {
+        id: IDS.certifications,
+        label: "Certifications",
+        icon: RiVerifiedBadgeFill,
+        onClick: (id) => navigateToSection(id),
+      },
+      {
+        id: IDS.activities,
+        label: "Activities",
+        icon: RiCalendarEventFill,
+        onClick: (id) => navigateToSection(id),
+      },
+      {
+        label: "Mail me",
+        icon: RiChat3Fill,
+        href: "mailto:vishnu.d.t.2004@gmail.com",
+      },
     ],
-  };
+    [navigateToSection],
+  );
 
   return (
     <header id={IDS.header}>
-      {isMobile ? (
-        <MobileNav menus={menus} ref={navRef} />
-      ) : (
-        <DesktopNav menus={menus} ref={navRef} />
-      )}
+      <Nav items={items} />
     </header>
   );
 };

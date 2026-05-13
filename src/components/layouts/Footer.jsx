@@ -1,3 +1,4 @@
+import { RiLinkedinFill } from "@remixicon/react";
 import {
   SiGithub,
   SiLeetcode,
@@ -6,14 +7,12 @@ import {
 } from "@icons-pack/react-simple-icons";
 
 import { IDS } from "@/config/constants";
-import { LinkedinIcon } from "@/components/ui/Icons";
 
-const SocialItem = ({ label, link, color, icon }) => (
+const SocialItem = ({ label, link, icon }) => (
   <a
     href={link}
     target="_blank"
     rel="noopener noreferrer"
-    style={{ "--color": color }}
     className="cursor-effect-subtle group relative flex rounded-full p-1.5 text-(--text-color-g) transition-colors duration-300 *:size-6 **:first:fill-(--text-color-g) hover:bg-(--text-color-g)/15 focus-visible:bg-(--text-color-g)/15"
   >
     {icon}
@@ -50,54 +49,28 @@ const Footer = () => {
       label: "GitHub",
       link: "https://github.com/vishnudt2004",
       icon: <SiGithub aria-hidden title={null} className="scale-90" />,
-      color: "#666", // GitHub Black
     },
     {
       label: "LinkedIn",
       link: "https://www.linkedin.com/in/vishnu-dt",
-      icon: (
-        <LinkedinIcon
-          style={{
-            "--color-2": "var(--bg-color-g)",
-          }}
-          aria-hidden
-          title={null}
-          className="scale-110"
-        />
-      ),
-      color: "#0A66C2", // LinkedIn Blue
+      icon: <RiLinkedinFill aria-hidden title={null} />,
     },
     {
       label: "LeetCode",
       link: "https://leetcode.com/vishnud2004",
       icon: <SiLeetcode aria-hidden title={null} className="scale-90" />,
-      color: "#FFA116", // LeetCode Orange
     },
     {
       label: "HackerRank",
       link: "https://www.hackerrank.com/profile/vishnu_d_t_2004",
       icon: <SiHackerrank aria-hidden title={null} className="scale-80" />,
-      color: "#2EC866", // HackerRank Green
     },
     {
       label: "Email",
       link: "mailto:vishnu.d.t.2004@gmail.com",
       icon: <SiGmail aria-hidden title={null} className="scale-80" />,
-      color: "#EA4335", // Gmail Red
     },
   ];
-
-  // const quickLinks = [
-  //   { id: "about", label: "About" },
-  //   { id: "proficiencies", label: "Proficiencies" },
-  //   { id: "projects", label: "Projects" },
-  //   { id: "experience", label: "Experience" },
-  //   { id: "achievements", label: "Achievements" },
-  //   { id: "certifications", label: "Certifications" },
-  //   { id: "activities", label: "Activities" },
-  //   { id: "testimonials", label: "Testimonials" },
-  //   { id: "contact-form", label: "Contact Form" },
-  // ];
 
   const cpyText = (
     <>&copy; {new Date().getFullYear()} Vishnu D. All Rights Reserved.</>

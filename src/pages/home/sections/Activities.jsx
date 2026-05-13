@@ -1,4 +1,4 @@
-import { RiArticleFill, RiArticleLine } from "@remixicon/react";
+import { RiArticleFill, RiArticleLine, RiLinkedinFill } from "@remixicon/react";
 
 import { IDS } from "@/config/constants";
 import { take } from "@/utils/jsUtils";
@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/SectionLayouts";
 import Card, { CardActions } from "@/components/ui/Card";
 import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
-import { LinkedinIcon } from "@/components/ui/Icons";
 import { activities } from "@/features/activities/activities.data";
 
 const ActivityItem = ({
@@ -77,7 +76,7 @@ const ActivitiesSection = ({ activities, linkedinActivities }) => (
         secondary={{
           label: "See more on LinkedIn",
           href: linkedinActivities,
-          icon: <LinkedinIcon aria-hidden className="order-1 size-4.5" />,
+          icon: <RiLinkedinFill aria-hidden className="order-1 size-4.5" />,
         }}
       />
     </SimpleLayout>

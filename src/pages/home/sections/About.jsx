@@ -1,5 +1,5 @@
-import { createElement } from "react";
 import { twMerge } from "tailwind-merge";
+import { RiLinkedinFill } from "@remixicon/react";
 import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 
 import { IDS } from "@/config/constants";
@@ -7,15 +7,8 @@ import HeadingScope from "@/components/helpers/HeadingScope";
 import Anchor from "@/components/ui/Anchor";
 import Img from "@/components/ui/Img";
 import SocialBtn from "@/components/ui/SocialBtn";
-import { Tip } from "@/components/ui/Tooltip";
 import Heading from "@/components/ui/Heading";
 import { SectionTitle, TwoColumnsLayout } from "@/components/ui/SectionLayouts";
-import {
-  LinkedinIcon,
-  DuotoneComputerIcon,
-  DuotoneLightbulbIcon,
-  DuotonePluginIcon,
-} from "@/components/ui/Icons";
 
 import personFallbackImg from "@/assets/images/placeholders/person.webp";
 
@@ -133,7 +126,13 @@ const aboutMe = (
         {
           label: "LinkedIn",
           link: "https://www.linkedin.com/in/vishnu-dt",
-          icon: <LinkedinIcon aria-hidden title={null} className="scale-130" />,
+          icon: (
+            <RiLinkedinFill
+              aria-hidden
+              title={null}
+              className="scale-120 text-[#0A66C2]"
+            />
+          ),
         },
       ].map(({ label, link, icon }) => (
         <li key={label}>
@@ -244,32 +243,6 @@ const moreAboutMe = [
             <Underline>educational writing</Underline>.
           </p>
         </ContentSubBlock>
-
-        <div className="flex justify-center gap-3 *:rounded-full *:bg-(--border-color-g)/50">
-          {[
-            {
-              tip: "Clarity • Quality • Usability",
-              icon: DuotoneComputerIcon,
-            },
-            {
-              tip: "Problem Solving • Intent • Craft",
-              icon: DuotoneLightbulbIcon,
-            },
-            {
-              tip: "Collaboration • Integration • Growth",
-              icon: DuotonePluginIcon,
-            },
-          ].map(({ tip, icon }, i) => (
-            <Tip key={i} tip={tip}>
-              <span aria-hidden>
-                {createElement(icon, {
-                  className:
-                    "size-22 p-6 [--color-1:var(--text-color-g)]! [--color-2:var(--accent-color-g)]! max-sm:size-20 hover:animate-fadeIn transition hover:-translate-y-1",
-                })}
-              </span>
-            </Tip>
-          ))}
-        </div>
       </ContentBlock>
     ),
   },

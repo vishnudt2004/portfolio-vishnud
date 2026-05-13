@@ -175,7 +175,7 @@ const HeroVisual = () => (
 
 const HeroLayout = ({ identity }) => {
   return (
-    <div className="mx-auto flex min-h-dvh w-full flex-row px-10">
+    <div className="mx-auto flex min-h-svh w-full flex-row px-10">
       <Suspense>
         <ThemeVisual />
       </Suspense>
