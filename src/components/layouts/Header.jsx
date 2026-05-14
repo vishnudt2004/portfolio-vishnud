@@ -21,7 +21,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@/components/ui/Dropdown";
+} from "@/components/ui/DropdownMenu";
 import { IDS } from "@/config/constants";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { useNavigateToSection } from "@/hooks/useNavigateToSection";
@@ -82,7 +82,7 @@ const SecondaryMenus = ({ isOpen, items, onOpenChange }) => {
         </IconBtn>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent sideOffset={8}>
+      <DropdownMenuContent>
         {items.map(({ label, icon: Icon, id, href, onClick }, i) => {
           const isLink = Boolean(href);
           const isSeparatorBefore = i > 0 && isLink && !items[i - 1].href;

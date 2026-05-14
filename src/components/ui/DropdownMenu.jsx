@@ -29,12 +29,13 @@ const DropdownMenuContent = ({
         avoidCollisions // repositions if it would overflow viewport
         collisionPadding={8} // 8px breathing room from viewport edges
         {...props}
+        sideOffset={10}
         ref={forwardedRef}
         loop
         asChild
       >
-        <DropdownMotion>
-          <div className="z-(--z-dropdown) w-40 overflow-hidden rounded-2xl border border-(--border-color-g) bg-(--bg-color-g)">
+        <DropdownMotion className="z-(--z-dropdown)">
+          <div className="w-40 overflow-hidden rounded-2xl border border-(--border-color-g) bg-(--bg-color-g)">
             <div className="secondary-scrollbar max-h-50 scroll-py-1 overflow-y-auto p-1">
               {children}
             </div>

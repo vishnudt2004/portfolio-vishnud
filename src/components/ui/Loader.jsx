@@ -6,7 +6,7 @@ const Loader = ({ text = "LOADING" }) => (
     aria-busy="true"
   >
     <span>{text}</span>
-    <span className="loader-animation absolute top-1/2 left-1/2 -translate-1/2 overflow-hidden text-(--text-color-g)">
+    <span className="animate-wipeX absolute top-1/2 left-1/2 -translate-1/2 overflow-hidden text-(--text-color-g)">
       {text}
     </span>
   </div>

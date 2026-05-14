@@ -70,7 +70,7 @@ const MoreAboutSubTitle = ({ children }) => (
   </Heading>
 );
 
-const Highlighter = ({ variant = "primary", children, ...attr }) => (
+const Highlight = ({ variant = "primary", children, ...attr }) => (
   <span
     className={`highlight-${variant} rounded-full text-sm leading-4.25 text-nowrap ${attr?.className ? attr.className : ""}`}
   >
@@ -85,8 +85,8 @@ const Underline = ({ children }) => (
 const aboutMe = (
   <ContentBlock>
     <p>
-      I’m Vishnu, a <Highlighter>Frontend</Highlighter> &{" "}
-      <Highlighter>Full-Stack Developer</Highlighter> focused on building{" "}
+      I’m Vishnu, a <Highlight>Frontend</Highlight> &{" "}
+      <Highlight>Full-Stack Developer</Highlight> focused on building{" "}
       <Underline>clean, modular, and maintainable</Underline> web applications
       with <Underline>React, Next.js, TypeScript & the MERN Stack</Underline>. I
       care deeply about developer experience — from reusable UI components and
@@ -99,8 +99,7 @@ const aboutMe = (
       href="https://vishnudt2004.github.io/vishnud-resume/vishnud-resume-fullstack.pdf"
       className="self-start text-sm before:-bottom-0.5! after:-bottom-0.5! max-md:self-center"
     >
-      Check out my{" "}
-      <Highlighter className="mx-1.5 bg-(--anchor-color)">Resume</Highlighter>{" "}
+      Check out my <Highlight className="bg-(--anchor-color)">Resume</Highlight>{" "}
       here.
     </Anchor>
 

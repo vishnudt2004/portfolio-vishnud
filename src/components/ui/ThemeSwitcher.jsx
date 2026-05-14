@@ -12,7 +12,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./Dropdown";
+} from "./DropdownMenu";
 
 const { FEATURED_THEMES, THEMES } = UI;
 
@@ -69,7 +69,6 @@ const ThemeSwitcher = ({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        sideOffset={5}
         containerRef={containerRef}
         onEscapeKeyDown={(e) => e.stopPropagation()}
       >

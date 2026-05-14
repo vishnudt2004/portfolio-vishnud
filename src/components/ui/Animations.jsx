@@ -6,7 +6,7 @@ const HeroRevealMotion = ({ children, delay = 0, className = "" }) => {
   return (
     <div
       style={{ animationDelay: `${delay}s` }}
-      className={twMerge("hero-reveal", className)}
+      className={twMerge("fadeUp-initial animate-fadeUp", className)}
     >
       {children}
     </div>
@@ -29,8 +29,8 @@ const SectionRevealMotion = ({ children, className = "", ...rest }) => {
     <div
       ref={ref}
       className={twMerge(
-        "section-reveal",
-        wasVisible && "section-reveal-visible",
+        "fadeUp-initial",
+        wasVisible && "animate-fadeUp",
         className,
       )}
       {...rest}
@@ -40,8 +40,14 @@ const SectionRevealMotion = ({ children, className = "", ...rest }) => {
   );
 };
 
-const DropdownMotion = ({ children, ...props }) => (
-  <div className="dropdown-motion" {...props}>
+const DropdownMotion = ({ children, className, ...props }) => (
+  <div
+    className={twMerge(
+      "data-[state=open]:animate-fadeUp data-[state=closed]:animate-fadeOut",
+      className,
+    )}
+    {...props}
+  >
     {children}
   </div>
 );

@@ -1,26 +1,12 @@
 :root {
   /* -g = global */
 
-  --font-family-g:
-    "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --font-family-g: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --scrollbar-track-color-g: var(--bg-color-g);
   --scrollbar-thumb-color-g: var(--text-color-g);
 
-  --fancy-bg-1-color: color-mix(
-    in srgb,
-    var(--border-color-g),
-    transparent 20%
-  );
-  --fancy-bg-2-color: color-mix(
-    in srgb,
-    var(--border-color-g),
-    transparent 70%
-  );
-
   /* Z-index map */
-  --z-navbar: 3;
-  --z-dropdown: 3;
-  --z-overlay: 2;
+  --z-navbar: 1;
+  --z-dropdown: 2;
 }

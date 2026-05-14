@@ -75,20 +75,50 @@ a[href="#"] {
 
 @theme {
   --breakpoint-xs: 30rem;
+
+  --animate-fadeUp: fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fadeOut: fadeOut 0.3s ease forwards;
+  --animate-wipeX: wipeX 8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes wipeX {
+    from {
+      clip-path: inset(0 80% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}
+
+.fadeUp-initial {
+  @apply translate-y-3 opacity-0 will-change-transform;
 }
 
 @utility fancy-bg-1 {
   --gap: 25px;
-  --color: var(--fancy-bg-1-color);
+  --color: color-mix(in srgb, var(--border-color-g), transparent 20%);
   --size: 0.08em; /* 1.3px */
   @apply bg-[radial-gradient(var(--color)_var(--size),transparent_var(--size))] bg-size-[var(--gap)_var(--gap)];
-}
-
-@utility fancy-bg-2 {
-  --color: color-mix(in srgb, var(--fancy-bg-2-color), transparent 0%);
-  --size: 20px;
-  --breadth: 1px;
-  @apply bg-[repeating-linear-gradient(45deg,var(--color)_0,var(--color)_var(--breadth),transparent_0,transparent_50%)] bg-size-[var(--size)_var(--size)];
 }
 
 @utility secondary-scrollbar {
@@ -106,76 +136,6 @@ a[href="#"] {
 
   &::-webkit-scrollbar-thumb:hover {
     @apply bg-[color-mix(in_srgb,_var(--text-color-g)_55%,_transparent)];
-  }
-}
-
-.hero-reveal {
-  opacity: 0;
-  transform: translateY(12px);
-  animation: heroReveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.section-reveal {
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.3s ease-out,
-    transform 0.3s ease-out;
-  will-change: opacity, transform;
-}
-
-.section-reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.dropdown-motion[data-state="open"] {
-  animation: dropdownOpen 0.3s ease-in-out forwards;
-}
-
-.dropdown-motion[data-state="closed"] {
-  animation: dropdownClose 0.3s ease-in-out forwards;
-}
-
-@keyframes heroReveal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes dropdownOpen {
-  from {
-    opacity: 0;
-    clip-path: inset(0% 0% 100% 0%);
-  }
-  to {
-    opacity: 1;
-    clip-path: inset(0% 0% 0% 0%);
-  }
-}
-
-@keyframes dropdownClose {
-  from {
-    opacity: 1;
-    clip-path: inset(0% 0% 0% 0%);
-  }
-  to {
-    opacity: 0;
-    clip-path: inset(0% 0% 100% 0%);
-  }
-}
-
-.loader-animation {
-  animation: fillText 12s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes fillText {
-  from {
-    clip-path: inset(0 80% 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
   }
 }
 
