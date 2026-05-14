@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { twMerge } from "tailwind-merge";
 import { RiArticleFill, RiMailFill } from "@remixicon/react";
 import {
@@ -16,12 +15,12 @@ import {
 import { IDS } from "@/config/constants";
 import { scrollToSection } from "@/utils/jsUtils";
 import { sectionTitleId } from "@/utils/siteUtils";
+import { useDeferredRender } from "@/hooks/useDeferredRender";
 import Button from "@/components/ui/Button";
 import { HeroRevealMotion } from "@/components/ui/Animations";
 import Heading from "@/components/ui/Heading";
+import ThemeVisual from "@/components/ui/ThemeVisual";
 import { DownCircleIcon, HandIcon } from "@/components/ui/Icons";
-
-const ThemeVisual = lazy(() => import("@/components/ui/ThemeVisual"));
 
 const ScrollDownBtn = () => (
   <button
@@ -102,33 +101,47 @@ const CTAs = ({ resume, email }) => (
 
 const HeroContent = ({ name, role, email, tagline, resume, status }) => (
   <div className="flex w-dvw flex-col justify-center gap-6 max-[900px]:items-center max-[900px]:text-center">
-    <div className="flex items-center gap-2 text-3xl sm:text-4xl">
-      <span>
-        Hi{" "}
-        <HandIcon
-          aria-hidden
-          className="inline size-8 translate-x-0.5 -translate-y-1 fill-(--text-color-g)"
-        />
-        , I’m
-      </span>
+    <HeroRevealMotion
+    // delay={ 1 * 0.15}
+    >
+      <div className="flex items-center gap-2 text-3xl sm:text-4xl">
+        <span>
+          Hi{" "}
+          <HandIcon
+            aria-hidden
+            className="inline size-8 translate-x-0.5 -translate-y-1 fill-(--text-color-g)"
+          />
+          , I’m
+        </span>
 
-      <Heading
-        id={sectionTitleId(IDS.hero)}
-        className="whitespace-nowrap text-(--accent-color-g)"
-      >
-        {name}
-      </Heading>
-    </div>
+        <Heading
+          id={sectionTitleId(IDS.hero)}
+          className="whitespace-nowrap text-(--accent-color-g)"
+        >
+          {name}
+        </Heading>
+      </div>
+    </HeroRevealMotion>
 
-    <p className="font-medium tracking-wide text-(--text-secondary-color-g) sm:text-lg">
-      {role}
-    </p>
+    <HeroRevealMotion delay={1 * 0.15}>
+      <p className="font-medium tracking-wide text-(--text-secondary-color-g) sm:text-lg">
+        {role}
+      </p>
+    </HeroRevealMotion>
 
-    <p className="text-[15px] max-[900px]:max-w-150 sm:text-base">{tagline}</p>
+    <HeroRevealMotion delay={1 * 0.25}>
+      <p className="text-[15px] max-[900px]:max-w-150 sm:text-base">
+        {tagline}
+      </p>
+    </HeroRevealMotion>
 
-    <HeroStatus status={status} />
+    <HeroRevealMotion delay={1 * 0.35}>
+      <HeroStatus status={status} />
+    </HeroRevealMotion>
 
-    <CTAs resume={resume} email={email} />
+    <HeroRevealMotion delay={1 * 0.45}>
+      <CTAs resume={resume} email={email} />
+    </HeroRevealMotion>
   </div>
 );
 
@@ -174,11 +187,11 @@ const HeroVisual = () => (
 );
 
 const HeroLayout = ({ identity }) => {
+  const deferredVisuals = useDeferredRender();
+
   return (
     <div className="mx-auto flex min-h-svh w-full flex-row px-10">
-      <Suspense>
-        <ThemeVisual />
-      </Suspense>
+      {deferredVisuals && <ThemeVisual />}
 
       <div className="flex max-w-full justify-center min-[900px]:w-1/2">
         <HeroContent {...identity} />

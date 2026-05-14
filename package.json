@@ -1,7 +1,7 @@
 {
   "name": "portfolio-vishnud",
   "private": true,
-  "version": "1.11.0",
+  "version": "1.11.1",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "build:analyze": "vite build --mode analyze",
-    "build:preview": "npm run build:analyze && npm run preview -- --host",
+    "preview:analyze": "npm run build:analyze && npm run preview -- --host",
     "clean": "rd /s /q node_modules dist && del package-lock.json"
   },
   "dependencies": {

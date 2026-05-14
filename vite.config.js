@@ -48,7 +48,7 @@ export default defineConfig(({ mode }) => {
             // minSize: 15000,
             groups: [
               { name: "vendor-react", test: /node_modules[\\/](react|react-dom|react-router)/ },
-              // { name: "vendor-radix", test: /node_modules[\\/](@radix-ui|@floating-ui)/ },
+              { name: "vendor-radix", test: /node_modules[\\/](@radix-ui|@floating-ui)/ },
               { name: "vendor", test: /node_modules/ },
             ],
           },

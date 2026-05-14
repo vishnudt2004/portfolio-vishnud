@@ -82,7 +82,7 @@ a[href="#"] {
 
   @keyframes fadeUp {
     from {
-      opacity: 0;
+      opacity: 0.01;
       transform: translateY(12px);
     }
     to {
@@ -111,7 +111,7 @@ a[href="#"] {
 }
 
 .fadeUp-initial {
-  @apply translate-y-3 opacity-0 will-change-transform;
+  @apply translate-y-3 opacity-1 will-change-transform; /* Keep opacity-1 visible for LCP */
 }
 
 @utility fancy-bg-1 {
@@ -202,7 +202,7 @@ body {
 }
 
 .theme-visual {
-  contain: layout style;
+  contain: layout style paint;
 }
 
 @media (prefers-reduced-motion: reduce) {
