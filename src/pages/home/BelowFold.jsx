@@ -1,5 +1,6 @@
 import { IDS } from "@/config/constants";
 import { sectionTitleId } from "@/utils/siteUtils";
+import HeadingScope from "@/components/helpers/HeadingScope";
 import { SectionRevealMotion } from "@/components/ui/Animations";
 import About from "./sections/About";
 import Proficiencies from "./sections/Proficiencies";
@@ -21,7 +22,9 @@ const BelowFold = () =>
   belowFoldSections.map(({ id, component: C }) => (
     <SectionRevealMotion key={id}>
       <section id={id} aria-labelledby={sectionTitleId(id)}>
-        <C />
+        <HeadingScope>
+          <C />
+        </HeadingScope>
       </section>
     </SectionRevealMotion>
   ));

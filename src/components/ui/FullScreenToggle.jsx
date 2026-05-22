@@ -3,15 +3,12 @@ import { RiFullscreenExitFill, RiFullscreenFill } from "@remixicon/react";
 import { useFullscreen } from "@/hooks/useFullScreen";
 import { IconBtn } from "./Button";
 
-export default function FullscreenToggle() {
+const FullscreenToggle = () => {
   const { isFullscreen, enter, exit } = useFullscreen();
 
   const toggle = () => {
-    if (isFullscreen) {
-      exit();
-    } else {
-      enter();
-    }
+    if (isFullscreen) exit();
+    else enter();
   };
 
   return (
@@ -19,9 +16,11 @@ export default function FullscreenToggle() {
       aria-label="Toggle fullscreen mode"
       aria-pressed={isFullscreen}
       onClick={toggle}
-      className="*:scale-x-90 *:text-(--menus-color-g)"
+      className="focus-reset *:scale-x-90 *:text-(--menus-color-g) focus-visible:outline-none"
     >
       {isFullscreen ? <RiFullscreenExitFill /> : <RiFullscreenFill />}
     </IconBtn>
   );
-}
+};
+
+export default FullscreenToggle;

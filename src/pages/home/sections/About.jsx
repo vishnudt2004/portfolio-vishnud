@@ -5,12 +5,10 @@ import { SiGithub, SiGmail } from "@icons-pack/react-simple-icons";
 import { IDS } from "@/config/constants";
 import HeadingScope from "@/components/helpers/HeadingScope";
 import Anchor from "@/components/ui/Anchor";
-import Img from "@/components/ui/Img";
+import Img, { ImgFallback } from "@/components/ui/Img";
 import SocialBtn from "@/components/ui/SocialBtn";
 import Heading from "@/components/ui/Heading";
 import { SectionTitle, TwoColumnsLayout } from "@/components/ui/SectionLayouts";
-
-import personFallbackImg from "@/assets/images/placeholders/person.webp";
 
 const ColContainer = ({ children, className }) => (
   <div className={twMerge("p-4 max-sm:p-2", className)}>{children}</div>
@@ -23,7 +21,7 @@ const AboutSection = ({
   moreAboutMe = [],
 }) => {
   return (
-    <HeadingScope>
+    <>
       <TwoColumnsLayout
         sectionTitle={
           <SectionTitle sectionId={IDS.about}>{title}</SectionTitle>
@@ -32,9 +30,11 @@ const AboutSection = ({
           <Img
             src={image}
             alt="Vishnu D profile image"
-            fallbackSrc={personFallbackImg}
             className="cursor-effect-hidden aspect-square size-50 rounded-full object-cover ring-5 ring-(--border-color-g)/30 grayscale-5 duration-300 hover:ring-(--border-color-g) hover:grayscale-0"
             caption="Vishnu D"
+            fallback={
+              <ImgFallback className="rounded-full ring-5 ring-(--border-color-g)/30" />
+            }
           />
         }
         right={<div className="fancy-bg-1 p-4">{aboutMe}</div>}
@@ -48,7 +48,7 @@ const AboutSection = ({
           right={<ColContainer>{section.right}</ColContainer>}
         />
       ))}
-    </HeadingScope>
+    </>
   );
 };
 

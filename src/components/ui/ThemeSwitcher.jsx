@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { RiCloseFill, RiPaletteFill } from "@remixicon/react";
 
 import { UI } from "@/config";
 import { useTheme } from "@/hooks/useTheme";
-import { IconBtn } from "./Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem,
+  DropdownMenuItem as DMI,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -16,13 +14,27 @@ import {
 
 const { FEATURED_THEMES, THEMES } = UI;
 
+const DropdownMenuItem = ({ children, active, ...props }) => (
+  <DMI
+    className={
+      active &&
+      "bg-(--accent-color-g)/25 first:mb-1 last:mt-1 [&:not(:first-child):not(:last-child)]:my-1 " +
+        "hover:bg-(--accent-color-g)/25 focus-visible:bg-(--accent-color-g)/25" // overrides
+    }
+    disabled={active}
+    {...props}
+  >
+    {children}
+  </DMI>
+);
+
 const ThemeSwitcher = ({
   featuredThemes = FEATURED_THEMES,
   allThemes = THEMES,
   onThemeChange,
   onOpenChange,
   containerRef, // use useState hook, not useRef
-  triggerTabIndex = 0,
+  trigger,
 }) => {
   const { theme: activeTheme, setTheme: setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
@@ -58,15 +70,7 @@ const ThemeSwitcher = ({
         onOpenChange?.(open)
       )}
     >
-      <DropdownMenuTrigger asChild>
-        <IconBtn aria-label="Change theme" tabIndex={triggerTabIndex}>
-          {!isOpen ? (
-            <RiPaletteFill aria-hidden />
-          ) : (
-            <RiCloseFill aria-hidden />
-          )}
-        </IconBtn>
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>{trigger({ isOpen })}</DropdownMenuTrigger>
 
       <DropdownMenuContent
         containerRef={containerRef}

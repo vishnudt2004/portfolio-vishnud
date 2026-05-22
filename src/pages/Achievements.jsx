@@ -1,41 +1,14 @@
-import { IDS } from "@/config/constants";
-
-import {
-  SectionBtns,
-  SectionTitle,
-  SimpleLayout,
-} from "@/components/ui/SectionLayouts";
-
+import { SectionActions } from "@/components/ui/FeatureLayout";
 import HeadingLevelProvider from "@/contexts/HeadingLevelContext";
-import HeadingScope from "@/components/helpers/HeadingScope";
-import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
-import AchievementItem from "@/features/achievements/AchievementItem";
-import { achievements } from "@/features/achievements/achievements.data";
+import AchievementsSection from "@/features/achievements/AchievementsSection";
 
-const AchievementsSection = ({ achievements }) => (
-  <SimpleLayout
-    sectionTitle={
-      <SectionTitle sectionId={IDS.achievements}>All Achievements</SectionTitle>
-    }
-  >
-    <HeadingScope>
-      <LoadMoreGrid gridId="achievements-grid" items={achievements}>
-        {(visibleItems) =>
-          visibleItems.map((achievement) => (
-            <AchievementItem key={achievement.id} {...achievement} />
-          ))
-        }
-      </LoadMoreGrid>
-    </HeadingScope>
-
-    <SectionBtns />
-  </SimpleLayout>
-);
-
-const AchievementsView = () => (
+const Achievements = () => (
   <HeadingLevelProvider>
-    <AchievementsSection achievements={achievements} />
+    <AchievementsSection
+      title="All Achievements"
+      actions={<SectionActions goBack />}
+    />
   </HeadingLevelProvider>
 );
 
-export default AchievementsView;
+export default Achievements;

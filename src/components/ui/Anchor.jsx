@@ -32,7 +32,7 @@ const Anchor = ({
   return (
     <a
       target={target}
-      rel="noopener noreferrer"
+      rel={target === "_blank" ? "noopener noreferrer" : undefined}
       {...attr}
       className={twMerge(
         "group relative inline-flex items-end text-(--anchor-color) before:absolute before:bottom-0 before:left-0 before:h-px before:w-full before:bg-(--anchor-decoration-color) after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-(--anchor-color) after:duration-150 hover:after:w-full focus:after:w-full focus-visible:px-1",
@@ -42,11 +42,10 @@ const Anchor = ({
     >
       <span>{children}</span>
       {target === "_blank" && (
-        <span className="sr-only">(opens in new tab)</span>
+        <span className="sr-only whitespace-pre"> (opens in new tab)</span>
       )}
-      &nbsp;
       {icon && (
-        <span aria-hidden className="-ml-px inline-flex">
+        <span aria-hidden className="ml-[2px] inline-flex">
           {icon}
         </span>
       )}

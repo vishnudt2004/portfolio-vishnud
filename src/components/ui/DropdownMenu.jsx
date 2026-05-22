@@ -21,22 +21,29 @@ const DropdownMenuContent = ({
   children,
   ref: forwardedRef,
   containerRef,
+  className,
   ...props
 }) => {
   return (
     <RadixDropdownMenu.Portal container={containerRef ?? document.body}>
       <RadixDropdownMenu.Content
+        ref={forwardedRef}
         avoidCollisions // repositions if it would overflow viewport
         collisionPadding={8} // 8px breathing room from viewport edges
-        {...props}
         sideOffset={10}
-        ref={forwardedRef}
         loop
         asChild
+        className="z-(--z-dropdown)"
+        {...props}
       >
-        <DropdownMotion className="z-(--z-dropdown)">
-          <div className="w-40 overflow-hidden rounded-2xl border border-(--border-color-g) bg-(--bg-color-g)">
-            <div className="secondary-scrollbar max-h-50 scroll-py-1 overflow-y-auto p-1">
+        <DropdownMotion>
+          <div className="overflow-hidden rounded-2xl border border-(--border-color-g) bg-(--bg-color-g)">
+            <div
+              className={twMerge(
+                "secondary-scrollbar max-h-50 w-40 scroll-py-1 overflow-y-auto p-1 [&::-webkit-scrollbar-track]:my-2.5",
+                className,
+              )}
+            >
               {children}
             </div>
           </div>
@@ -53,22 +60,27 @@ const DropdownMenuLabel = (props) => (
   />
 );
 
-const DropdownMenuItem = ({ active, ...props }) => (
+const DropdownMenuItem = ({ className, ...props }) => (
   <RadixDropdownMenu.Item
     className={twMerge(
       "cursor-pointer rounded-[11px] bg-(--bg-color-g) px-4 py-1 text-center text-sm text-(--text-color-g)",
-      active
-        ? "bg-(--accent-color-g)/25 first:mb-1 last:mt-1 [&:not(:first-child):not(:last-child)]:my-1"
-        : "focus-reset hover:bg-(--text-color-g)/25 focus-visible:bg-(--text-color-g)/25 focus-visible:outline-0",
+      "focus-reset hover:bg-(--text-color-g)/25 focus-visible:bg-(--text-color-g)/25 focus-visible:outline-0",
+      className,
     )}
     {...props}
-    disabled={active}
     onPointerMove={(event) => event.preventDefault()}
     onPointerLeave={(event) => event.preventDefault()}
   />
 );
 
 const DropdownMenuGroup = RadixDropdownMenu.Group;
+
+const DropdownMenuSeparator = () => (
+  <RadixDropdownMenu.Separator className="m-1 h-px bg-(--border-color-g)/25" />
+);
+
+/*
+// Commented out as unused. Kept to prevent potential tree-shaking issues caused by chunking logic.
 
 const DropdownMenuCheckboxItem = ({
   children,
@@ -141,10 +153,7 @@ const DropdownMenuRadioItem = ({ children, ref: forwardedRef, ...props }) => {
     </RadixDropdownMenu.RadioItem>
   );
 };
-
-const DropdownMenuSeparator = () => (
-  <RadixDropdownMenu.Separator className="m-1 h-px bg-(--border-color-g)/25" />
-);
+*/
 
 export {
   DropdownMenu,
@@ -154,8 +163,5 @@ export {
   DropdownMenuLabel,
   DropdownMenuItem,
   DropdownMenuGroup,
-  DropdownMenuCheckboxItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
 };

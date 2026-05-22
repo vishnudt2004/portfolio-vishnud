@@ -11,7 +11,6 @@ import {
 } from "@remixicon/react";
 
 import { IDS } from "@/config/constants";
-import HeadingScope from "@/components/helpers/HeadingScope";
 import { SectionTitle, SimpleLayout } from "@/components/ui/SectionLayouts";
 import Button from "@/components/ui/Button";
 
@@ -52,65 +51,63 @@ const Input = ({
 
 const ContactForm = () => {
   return (
-    <HeadingScope>
-      <SimpleLayout
-        sectionTitle={
-          <SectionTitle sectionId={IDS.contactForm}>Contact Me</SectionTitle>
-        }
-      >
-        <form noValidate={DISABLED}>
-          <fieldset
+    <SimpleLayout
+      sectionTitle={
+        <SectionTitle sectionId={IDS.contactForm}>Contact Form</SectionTitle>
+      }
+    >
+      <form noValidate={DISABLED}>
+        <fieldset
+          disabled={DISABLED}
+          className="m-auto mt-10 flex max-w-lg flex-col items-center gap-5 text-sm"
+        >
+          <legend className="sr-only">Contact form</legend>
+          <Input
+            type="text"
+            id="name"
+            name="name"
+            label="Your Name"
+            placeholder="Your Name"
+            icon={RiUser3Fill}
+            autoComplete="name"
+          />
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            label="Your Email"
+            placeholder="Your Email"
+            icon={RiMailFill}
+            autoComplete="email"
+          />
+          <Input
+            type="text"
+            id="subject"
+            name="subject"
+            label="Subject"
+            placeholder="Subject"
+            icon={RiPriceTag3Fill}
+            autoComplete="off"
+          />
+          <Input
+            as="textarea"
+            id="message"
+            name="message"
+            label="Your Message"
+            placeholder="Your Message"
+            icon={RiEditBoxFill}
+            className="max-h-40 min-h-20"
+          />
+          <Button
+            type="submit"
             disabled={DISABLED}
-            className="m-auto mt-10 flex max-w-lg flex-col items-center gap-5 text-sm"
+            className="mt-4 px-4 py-1.5"
           >
-            <legend className="sr-only">Contact form</legend>
-            <Input
-              type="text"
-              id="name"
-              name="name"
-              label="Your Name"
-              placeholder="Your Name"
-              icon={RiUser3Fill}
-              autoComplete="name"
-            />
-            <Input
-              type="email"
-              id="email"
-              name="email"
-              label="Your Email"
-              placeholder="Your Email"
-              icon={RiMailFill}
-              autoComplete="email"
-            />
-            <Input
-              type="text"
-              id="subject"
-              name="subject"
-              label="Subject"
-              placeholder="Subject"
-              icon={RiPriceTag3Fill}
-              autoComplete="off"
-            />
-            <Input
-              as="textarea"
-              id="message"
-              name="message"
-              label="Your Message"
-              placeholder="Your Message"
-              icon={RiEditBoxFill}
-              className="max-h-40 min-h-20"
-            />
-            <Button
-              type="submit"
-              disabled={DISABLED}
-              className="mt-4 px-4 py-1.5"
-            >
-              Send <RiSendPlaneFill aria-hidden className="size-4" />
-            </Button>
-          </fieldset>
-        </form>
-      </SimpleLayout>
-    </HeadingScope>
+            Send <RiSendPlaneFill aria-hidden className="size-4" />
+          </Button>
+        </fieldset>
+      </form>
+    </SimpleLayout>
   );
 };
 

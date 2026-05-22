@@ -5,13 +5,11 @@ import HeadingScope from "@/components/helpers/HeadingScope";
 import { SectionTitle, SimpleLayout } from "@/components/ui/SectionLayouts";
 
 const Experience = () => (
-  <HeadingScope>
-    <SimpleLayout
-      sectionTitle={
-        <SectionTitle sectionId={IDS.experience}>Experience</SectionTitle>
-      }
-    />
-  </HeadingScope>
+  <SimpleLayout
+    sectionTitle={
+      <SectionTitle sectionId={IDS.experience}>Experience</SectionTitle>
+    }
+  />
 );
 
 export default Experience;

@@ -6,21 +6,21 @@ import {
 
 import Card, { CardActions, CardButton } from "@/components/ui/Card";
 
-const CertificateItem = ({
+const CertificateCard = ({
   id,
-  title,
-  issuer,
-  date,
-  description,
+  content: { title, description },
+  meta: { issuer, date, logo },
   credentials,
-  logo,
-  logoAlt,
 }) => (
   <Card
     id={id}
-    title={title}
-    subtitle={issuer}
-    date={date}
+    header={{
+      title,
+      subtitle: issuer,
+      date,
+      logo,
+      leadingIcon: RiCertificateLine,
+    }}
     description={description}
     actions={
       <CardActions
@@ -41,12 +41,11 @@ const CertificateItem = ({
         )}
       </CardActions>
     }
-    logo={logo}
-    logoAlt={logoAlt}
-    leadingIcon={RiCertificateLine}
-    bgOverlay={<RiCertificateFill className="size-[120px] opacity-5" />}
-    style={{ "--accent-color": "var(--color-green-500)" }}
+    visual={{
+      overlay: <RiCertificateFill className="size-[120px] opacity-5" />,
+      accentColor: "var(--color-green-500)",
+    }}
   />
 );
 
-export default CertificateItem;
+export default CertificateCard;

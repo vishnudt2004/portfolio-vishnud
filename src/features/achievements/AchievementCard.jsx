@@ -2,30 +2,26 @@ import { RiFileInfoFill, RiTrophyFill, RiTrophyLine } from "@remixicon/react";
 
 import Card, { CardActions, CardButton } from "@/components/ui/Card";
 
-const AchievementItem = ({
+const AchievementCard = ({
   id,
-  title,
-  event,
-  location,
-  date,
-  description,
+  content: { title, description },
+  meta: { event, location, date, logo },
   credentials,
-  logo,
-  logoAlt,
-  className,
 }) => (
   <Card
     id={id}
-    title={title}
-    subtitle={
-      (event || location) && (
+    header={{
+      title,
+      subtitle: (event || location) && (
         <span className="mb-2 inline text-sm font-semibold text-(--text-secondary-color-g)">
           {event} {location && "@"}{" "}
           {location && <span className="italic">{location}</span>}
         </span>
-      )
-    }
-    date={date}
+      ),
+      date,
+      logo,
+      leadingIcon: RiTrophyLine,
+    }}
     description={description}
     actions={
       <CardActions
@@ -46,15 +42,11 @@ const AchievementItem = ({
         )}
       </CardActions>
     }
-    logo={logo}
-    logoAlt={logoAlt}
-    leadingIcon={RiTrophyLine}
-    bgOverlay={<RiTrophyFill className="size-[120px] opacity-5" />}
-    style={{
-      "--accent-color": "var(--color-yellow-500)",
+    visual={{
+      overlay: <RiTrophyFill className="size-[120px] opacity-5" />,
+      accentColor: "var(--color-yellow-500)",
     }}
-    className={className}
   />
 );
 
-export default AchievementItem;
+export default AchievementCard;

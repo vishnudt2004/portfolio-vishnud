@@ -1,54 +1,37 @@
-import { SiGithub } from "@icons-pack/react-simple-icons";
-
-import { IDS } from "@/config/constants";
-import { take } from "@/utils/jsUtils";
-import HeadingScope from "@/components/helpers/HeadingScope";
-import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
+import { Link } from "react-router";
 import {
-  SectionBtns,
-  SectionTitle,
-  SimpleLayout,
-} from "@/components/ui/SectionLayouts";
-import { projects } from "@/features/projects/projects.data";
-import ProjectItem from "@/features/projects/ProjectItem";
+  RiArrowRightLine,
+  RiArrowRightUpLine,
+  RiLinkedinFill,
+} from "@remixicon/react";
 
-const ProjectsSection = ({ projects, githubRepos }) => (
-  <HeadingScope>
-    <SimpleLayout
-      sectionTitle={
-        <SectionTitle sectionId={IDS.projects}>Projects</SectionTitle>
-      }
-    >
-      <HeadingScope>
-        <LoadMoreGrid gridId="projects-grid" items={projects}>
-          {(visibleItems) =>
-            visibleItems.map((project) => (
-              <ProjectItem key={project.id} {...project} />
-            ))
-          }
-        </LoadMoreGrid>
-      </HeadingScope>
-      <SectionBtns
-        primary={{ label: "View all projects", href: "/projects" }}
-        secondary={{
-          label: "See more on GitHub",
-          href: githubRepos,
-          icon: <SiGithub aria-hidden className="order-1 size-4" />,
-        }}
+import { SectionActions } from "@/components/ui/FeatureLayout";
+import ProjectsSection from "@/features/projects/ProjectsSection";
+
+const Projects = () => (
+  <ProjectsSection
+    featuredCount={3}
+    actions={
+      <SectionActions
+        primary={
+          <Link to="/projects">
+            View all projects
+            <RiArrowRightLine aria-hidden />
+          </Link>
+        }
+        secondary={
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/vishnudt2004?tab=repositories"
+          >
+            <RiLinkedinFill aria-hidden /> See more on GitHub
+            <RiArrowRightUpLine aria-hidden />
+          </a>
+        }
       />
-    </SimpleLayout>
-  </HeadingScope>
+    }
+  />
 );
 
-const ProjectsView = () => {
-  const FEATURED_COUNT = 4;
-
-  return (
-    <ProjectsSection
-      projects={take(projects, FEATURED_COUNT)}
-      githubRepos="https://github.com/vishnudt2004?tab=repositories"
-    />
-  );
-};
-
-export default ProjectsView;
+export default Projects;

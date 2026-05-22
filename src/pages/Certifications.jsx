@@ -1,41 +1,14 @@
-import { IDS } from "@/config/constants";
+import { SectionActions } from "@/components/ui/FeatureLayout";
 import HeadingLevelProvider from "@/contexts/HeadingLevelContext";
-import HeadingScope from "@/components/helpers/HeadingScope";
-import {
-  SectionBtns,
-  SectionTitle,
-  SimpleLayout,
-} from "@/components/ui/SectionLayouts";
-import LoadMoreGrid from "@/components/ui/LoadMoreGrid";
-import { certificates } from "@/features/certifications/certifications.data";
-import CertificateItem from "@/features/certifications/CertificateItem";
+import CertificationsSection from "@/features/certifications/CertificationsSection";
 
-const CertificationsSection = ({ certificates }) => (
-  <SimpleLayout
-    sectionTitle={
-      <SectionTitle sectionId={IDS.certifications}>
-        All Certifications
-      </SectionTitle>
-    }
-  >
-    <HeadingScope>
-      <LoadMoreGrid gridId="certifications-grid" items={certificates}>
-        {(visibleItems) =>
-          visibleItems.map((certificate) => (
-            <CertificateItem key={certificate.id} {...certificate} />
-          ))
-        }
-      </LoadMoreGrid>
-    </HeadingScope>
-
-    <SectionBtns />
-  </SimpleLayout>
-);
-
-const CertificationsView = () => (
+const Certifications = () => (
   <HeadingLevelProvider>
-    <CertificationsSection certificates={certificates} />
+    <CertificationsSection
+      title="All Certifications"
+      actions={<SectionActions goBack />}
+    />
   </HeadingLevelProvider>
 );
 
-export default CertificationsView;
+export default Certifications;

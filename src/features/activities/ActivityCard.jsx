@@ -3,21 +3,21 @@ import { RiArticleFill, RiArticleLine } from "@remixicon/react";
 import Anchor from "@/components/ui/Anchor";
 import Card, { CardActions } from "@/components/ui/Card";
 
-const ActivityItem = ({
+const ActivityCard = ({
   id,
-  title,
-  platform,
-  date,
-  description,
+  content: { title, description },
+  meta: { platform, date, logo },
   links,
-  logo,
-  logoAlt,
 }) => (
   <Card
     id={id}
-    title={title}
-    subtitle={platform}
-    date={date}
+    header={{
+      title,
+      subtitle: platform,
+      date,
+      logo,
+      leadingIcon: RiArticleLine,
+    }}
     description={description}
     actions={
       <CardActions actions={links} fallbackLabel="View Details" itemId={id}>
@@ -35,14 +35,11 @@ const ActivityItem = ({
         )}
       </CardActions>
     }
-    logo={logo}
-    logoAlt={logoAlt}
-    leadingIcon={RiArticleLine}
-    bgOverlay={<RiArticleFill className="size-[120px] opacity-5" />}
-    style={{
-      "--accent-color": "var(--color-blue-500)",
+    visual={{
+      overlay: <RiArticleFill className="size-[120px] opacity-5" />,
+      accentColor: "var(--color-blue-500)",
     }}
   />
 );
 
-export default ActivityItem;
+export default ActivityCard;

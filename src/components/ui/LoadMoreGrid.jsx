@@ -1,5 +1,4 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { twMerge } from "tailwind-merge";
 import { RiArrowDownLine } from "@remixicon/react";
 
 import Button from "./Button";
@@ -8,7 +7,7 @@ const LoadMoreGrid = ({
   gridId,
   children,
   items = [],
-  initialCount = 3,
+  initialCount = 6,
   noResultElement,
   endMessageElement = <EndMessage>All caught up!</EndMessage>,
   loadCount = 3,
@@ -54,10 +53,7 @@ const LoadMoreGrid = ({
           ref={containerRef}
           id={gridId ?? undGridId}
           aria-live="polite"
-          className={twMerge(
-            "cursor-effect-subtle group/smd grid grid-cols-1 justify-items-center gap-5 *:group-hover/smd:not-hover:not-focus-within:opacity-75 md:grid-cols-2 lg:grid-cols-3",
-            props?.className ?? "",
-          )}
+          className="cursor-effect-subtle group/smd grid grid-cols-1 justify-items-center gap-5 *:group-hover/smd:not-hover:not-focus-within:opacity-75 md:grid-cols-2 lg:grid-cols-3"
           {...props}
         >
           {children(visibleItems)}
@@ -66,14 +62,15 @@ const LoadMoreGrid = ({
         noResultElement
       )}
 
-      <div className="mt-5 flex justify-center">
+      <div className="mt-10 flex justify-center">
         {hasMore ? (
           <Button
             icon={<RiArrowDownLine aria-hidden className="w-3.75" />}
             aria-controls={gridId ?? undGridId}
             onClick={handleShowMore}
+            className="px-4 py-1"
           >
-            More...
+            Load More
           </Button>
         ) : (
           !loadAll &&

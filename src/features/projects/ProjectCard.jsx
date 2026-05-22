@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { RiFileCodeFill, RiGlobalFill } from "@remixicon/react";
 
 import Anchor from "@/components/ui/Anchor";
-import Img from "@/components/ui/Img";
+import Img, { ImgFallback } from "@/components/ui/Img";
 import Heading from "@/components/ui/Heading";
 
 const LinkItem = ({ id, titleId, type, href, index }) => {
@@ -48,7 +48,14 @@ const LinkItem = ({ id, titleId, type, href, index }) => {
   );
 };
 
-const ProjectItem = ({ id, title, description, thumb, techStack, links }) => {
+const ProjectCard = ({
+  id,
+  title, // str
+  description,
+  thumb,
+  techStack,
+  links,
+}) => {
   const titleId = `${id}-title`;
 
   return (
@@ -60,6 +67,9 @@ const ProjectItem = ({ id, title, description, thumb, techStack, links }) => {
         src={thumb}
         alt={`${title} Screenshot`}
         className="aspect-video border border-(--border-color-g)/50 object-cover"
+        fallback={
+          <ImgFallback className="aspect-video w-[unset] bg-(--border-color-g)/50" />
+        }
       />
 
       <div className="flex grow flex-col gap-2 p-2 pt-0">
@@ -104,4 +114,4 @@ const ProjectItem = ({ id, title, description, thumb, techStack, links }) => {
   );
 };
 
-export default ProjectItem;
+export default ProjectCard;

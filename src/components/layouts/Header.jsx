@@ -10,6 +10,7 @@ import {
   RiFolderReduceFill,
   RiHome5Fill,
   RiMenu4Fill,
+  RiPaletteFill,
   RiSparkling2Fill,
   RiTrophyFill,
   RiVerifiedBadgeFill,
@@ -27,7 +28,7 @@ import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { useNavigateToSection } from "@/hooks/useNavigateToSection";
 import { IconBtn } from "@/components/ui/Button";
 import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
-import FullscreenToggle from "@/components/ui/FullScreenToggle";
+import FullscreenToggle from "@/components/ui/FullscreenToggle";
 
 const NavBrand = () => {
   const navigateToSection = useNavigateToSection();
@@ -69,7 +70,20 @@ const NavBrand = () => {
 const PrimaryMenus = () => (
   <div className="flex items-center gap-0.5">
     <FullscreenToggle />
-    <ThemeSwitcher />
+    <ThemeSwitcher
+      trigger={({ isOpen }) => (
+        <IconBtn
+          aria-label="Change theme"
+          className="focus-reset focus-visible:outline-none"
+        >
+          {!isOpen ? (
+            <RiPaletteFill aria-hidden />
+          ) : (
+            <RiCloseFill aria-hidden />
+          )}
+        </IconBtn>
+      )}
+    />
   </div>
 );
 
@@ -77,7 +91,10 @@ const SecondaryMenus = ({ isOpen, items, onOpenChange }) => {
   return (
     <DropdownMenu onOpenChange={onOpenChange}>
       <DropdownMenuTrigger asChild>
-        <IconBtn aria-label="Open navigation menu">
+        <IconBtn
+          aria-label="Open navigation menu"
+          className="focus-reset focus-visible:outline-none"
+        >
           {isOpen ? <RiCloseFill aria-hidden /> : <RiMenu4Fill aria-hidden />}
         </IconBtn>
       </DropdownMenuTrigger>
@@ -94,7 +111,6 @@ const SecondaryMenus = ({ isOpen, items, onOpenChange }) => {
               <DropdownMenuItem
                 asChild={isLink}
                 onClick={!isLink ? () => onClick?.(id) : undefined}
-                // active={}
               >
                 {isLink ? (
                   <a href={href} className="flex items-center gap-2">

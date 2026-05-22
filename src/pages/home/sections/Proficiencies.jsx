@@ -49,10 +49,10 @@ import { VSCodeIcon, MotionIcon, NextAuthSmIcon } from "@/components/ui/Icons";
 import Heading from "@/components/ui/Heading";
 
 const SubTitle = ({ children, tip }) => (
-  <Heading className="flex flex-col items-center justify-center text-center text-xl font-medium">
-    {children}
+  <div className="flex flex-col items-center justify-center text-center text-xl font-medium">
+    <Heading>{children}</Heading>
     {tip && <p className="text-sm text-(--text-color-g)/80">{tip}</p>}
-  </Heading>
+  </div>
 );
 
 const SkillEntry = ({ children: name, icon }) => (
@@ -89,108 +89,104 @@ const ProficienciesSection = ({
   const normGrpId = (str) => str.toLowerCase().replaceAll(" ", "-");
 
   return (
-    <HeadingScope>
-      <TwoColumnsLayout
-        sectionTitle={
-          <SectionTitle sectionId={IDS.proficiencies}>
-            Proficiencies
-          </SectionTitle>
-        }
-        left={
-          <HeadingScope>
-            <div className="fancy-bg-1 flex flex-col items-center gap-10 p-4">
-              <SubTitle tip="Skill icons appear on interaction">
-                Skill Sets
-              </SubTitle>
-              <HeadingScope>
-                <ul
-                  id="skills-list"
-                  className="group/list flex flex-wrap gap-y-2"
-                >
-                  {skills.map(({ group, skills, collapsedSkills }) => (
-                    <li
-                      key={group}
-                      className="flex flex-col gap-y-1 group-focus-within/list:not-focus-within:[&>h4]:opacity-50 group-hover/list:not-hover:not-focus-within:[&>h4]:opacity-50"
+    <TwoColumnsLayout
+      sectionTitle={
+        <SectionTitle sectionId={IDS.proficiencies}>Proficiencies</SectionTitle>
+      }
+      left={
+        <HeadingScope>
+          <div className="fancy-bg-1 flex flex-col items-center gap-10 p-4">
+            <SubTitle tip="Skill icons appear on interaction">
+              Skill Sets
+            </SubTitle>
+            <HeadingScope>
+              <ul
+                id="skills-list"
+                className="group/list flex flex-wrap gap-y-2"
+              >
+                {skills.map(({ group, skills, collapsedSkills }) => (
+                  <li
+                    key={group}
+                    className="flex flex-col gap-y-1 group-focus-within/list:not-focus-within:[&>h4]:opacity-50 group-hover/list:not-hover:not-focus-within:[&>h4]:opacity-50"
+                  >
+                    <Heading
+                      id={normGrpId(group)}
+                      className="my-3 font-semibold"
                     >
-                      <Heading
-                        id={normGrpId(group)}
-                        className="my-3 font-semibold"
-                      >
-                        {group}
-                      </Heading>
-                      <ul
-                        aria-labelledby={normGrpId(group)}
-                        className="flex flex-wrap gap-x-1 gap-y-2"
-                      >
-                        {skills.map(({ name, icon = undefined }) => (
+                      {group}
+                    </Heading>
+                    <ul
+                      aria-labelledby={normGrpId(group)}
+                      className="flex flex-wrap gap-x-1 gap-y-2"
+                    >
+                      {skills.map(({ name, icon = undefined }) => (
+                        <SkillEntry key={name} icon={icon}>
+                          {name}
+                        </SkillEntry>
+                      ))}
+                      {isSkillsExpanded ? (
+                        collapsedSkills.map(({ name, icon = undefined }) => (
                           <SkillEntry key={name} icon={icon}>
                             {name}
                           </SkillEntry>
-                        ))}
-                        {isSkillsExpanded ? (
-                          collapsedSkills.map(({ name, icon = undefined }) => (
-                            <SkillEntry key={name} icon={icon}>
-                              {name}
-                            </SkillEntry>
-                          ))
-                        ) : (
-                          <li
-                            aria-hidden
-                            className="h-5 text-(--text-color-g)/50"
-                          >
-                            ...
-                          </li>
-                        )}
-                      </ul>
-                    </li>
-                  ))}
-                </ul>
-              </HeadingScope>
-              <Button
-                aria-expanded={isSkillsExpanded}
-                aria-controls="skills-list"
-                className="p-2 py-1"
-                onClick={() => setIsSkillsExpanded((p) => !p)}
-                icon={
-                  <span aria-hidden className="inline-flex *:size-3.75">
-                    {isSkillsExpanded ? <RiSubtractLine /> : <RiAddLine />}
-                  </span>
-                }
-              >
-                <span>View {isSkillsExpanded ? "fewer" : "all"} skills</span>
-              </Button>
-            </div>
-          </HeadingScope>
-        }
-        right={
-          <HeadingScope>
-            <div className="flex flex-col items-center gap-5 p-1">
-              <SubTitle>Tech Stack</SubTitle>
-              <ul className="group mt-10 flex flex-wrap items-center justify-center gap-2.5 max-sm:scale-90">
-                {techStack.techStackIcons.map(({ name, icon }) => (
-                  <li
-                    key={`$i*-${name}`}
-                    className="inline-flex flex-col items-center gap-1 rounded-full"
-                  >
-                    {createElement(icon, {
-                      "aria-hidden": true,
-                      className:
-                        "size-15 rounded-full border-1 border-(--border-color-g)/50 bg-white/25 p-4",
-                      color: "default",
-                      title: null,
-                    })}
-                    <span className="text-sm">{name}</span>
+                        ))
+                      ) : (
+                        <li
+                          aria-hidden
+                          className="h-5 text-(--text-color-g)/50"
+                        >
+                          ...
+                        </li>
+                      )}
+                    </ul>
                   </li>
                 ))}
               </ul>
-              <div className="text-(--text-secondary-color-g)">
-                {techStack.techStackDescription}
-              </div>
+            </HeadingScope>
+            <Button
+              aria-expanded={isSkillsExpanded}
+              aria-controls="skills-list"
+              className="p-2 py-1"
+              onClick={() => setIsSkillsExpanded((p) => !p)}
+              icon={
+                <span aria-hidden className="inline-flex *:size-3.75">
+                  {isSkillsExpanded ? <RiSubtractLine /> : <RiAddLine />}
+                </span>
+              }
+            >
+              <span>View {isSkillsExpanded ? "fewer" : "all"} skills</span>
+            </Button>
+          </div>
+        </HeadingScope>
+      }
+      right={
+        <HeadingScope>
+          <div className="flex flex-col items-center gap-5 p-1">
+            <SubTitle>Tech Stack</SubTitle>
+            <ul className="group mt-10 flex flex-wrap items-center justify-center gap-2.5 max-sm:scale-90">
+              {techStack.techStackIcons.map(({ name, icon }) => (
+                <li
+                  key={`$i*-${name}`}
+                  className="inline-flex flex-col items-center gap-1 rounded-full"
+                >
+                  {createElement(icon, {
+                    "aria-hidden": true,
+                    className:
+                      "size-15 rounded-full border-1 border-(--border-color-g)/50 bg-white/25 p-4",
+                    color: "default",
+                    title: null,
+                  })}
+                  <span className="text-sm">{name}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="text-(--text-secondary-color-g)">
+              {techStack.techStackDescription}
             </div>
-          </HeadingScope>
-        }
-      />
-    </HeadingScope>
+          </div>
+        </HeadingScope>
+      }
+    />
   );
 };
 
