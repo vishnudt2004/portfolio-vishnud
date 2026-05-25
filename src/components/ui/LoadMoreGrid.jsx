@@ -10,13 +10,13 @@ const LoadMoreGrid = ({
   initialCount = 6,
   noResultElement,
   endMessageElement = <EndMessage>All caught up!</EndMessage>,
-  loadCount = 3,
-  loadAll = false,
+  loadCount = 3, // number | "all"
   ...props
 }) => {
   const [visibleCount, setVisibleCount] = useState(initialCount);
   const undGridId = useId();
 
+  const isLoadAll = loadCount === "all";
   const hasMore = visibleCount < items.length;
   const visibleItems = items.slice(0, visibleCount);
 
@@ -42,7 +42,7 @@ const LoadMoreGrid = ({
 
   const handleShowMore = () => {
     setVisibleCount((prev) =>
-      loadAll ? items.length : Math.min(prev + loadCount, items.length),
+      isLoadAll ? items.length : Math.min(prev + loadCount, items.length),
     );
   };
 
@@ -73,7 +73,7 @@ const LoadMoreGrid = ({
             Load More
           </Button>
         ) : (
-          !loadAll &&
+          !isLoadAll &&
           items.length > 0 &&
           !(items.length <= initialCount) && <span>{endMessageElement}</span>
         )}

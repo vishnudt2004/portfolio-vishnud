@@ -3,13 +3,14 @@ import { Routes, Route, useLocation, BrowserRouter } from "react-router";
 import { twJoin } from "tailwind-merge";
 
 import ThemeProvider from "./contexts/ThemeContext";
-import Header from "./components/layouts/Header";
-import Home from "./pages/home";
-import AnimatedCursor from "./components/ui/AnimatedCursor";
-import Loader from "./components/ui/Loader";
 import RestoreScroll from "./components/helpers/RestoreScroll";
 import NavigateHelper from "./components/helpers/NavigateHelper";
+import ErrorBoundary from "./components/helpers/ErrorBoundary";
+import AnimatedCursor from "./components/ui/AnimatedCursor";
+import Loader from "./components/ui/Loader";
+import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
+import Home from "./pages/home";
 
 const Achievements = lazy(() => import("./pages/Achievements"));
 const Projects = lazy(() => import("./pages/Projects"));
@@ -29,7 +30,7 @@ const ContextProviders = ({ children }) => (
   <ThemeProvider>{children}</ThemeProvider>
 );
 
-const Layout = ({ children }) => {
+const AppLayout = ({ children }) => {
   const topOffset = useLocation().pathname !== "/";
 
   return (
@@ -60,11 +61,16 @@ const AppRoutes = () => {
         <Route
           key={`route$*-${i}`}
           element={
-            lazy ? (
-              <Suspense fallback={<Loader />}>{element}</Suspense>
-            ) : (
-              element
-            )
+            <ErrorBoundary
+              message="Something went wrong on this page."
+              height="80svh"
+            >
+              {lazy ? (
+                <Suspense fallback={<Loader />}>{element}</Suspense>
+              ) : (
+                element
+              )}
+            </ErrorBoundary>
           }
           {...props}
         />
@@ -74,13 +80,15 @@ const AppRoutes = () => {
 };
 
 const App = () => (
-  <BrowserRouter>
-    <ContextProviders>
-      <Layout>
-        <AppRoutes />
-      </Layout>
-    </ContextProviders>
-  </BrowserRouter>
+  <ErrorBoundary message="Something went wrong." height="100svh">
+    <BrowserRouter>
+      <ContextProviders>
+        <AppLayout>
+          <AppRoutes />
+        </AppLayout>
+      </ContextProviders>
+    </BrowserRouter>
+  </ErrorBoundary>
 );
 
 export default App;

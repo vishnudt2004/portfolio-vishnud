@@ -56,17 +56,15 @@
     </script>
 
     <script>
-      (function () {
-        try {
-          const theme = localStorage.getItem("theme");
-          if (theme) {
-            const prefix = "theme"; // match THEME_CLASSNAME_PREFIX
-            document.documentElement.classList.add(
-              `${prefix}-${theme.replace(" ", "_")}`,
-            );
-          }
-        } catch (e) {}
-      })();
+      try {
+        const theme = JSON.parse(localStorage.getItem("theme"));
+        if (theme) {
+          const prefix = "theme"; // match UI.THEME_CLASSNAME_PREFIX
+          document.documentElement.classList.add(
+            `${prefix}-${theme.replace(/ /g, "_")}`,
+          );
+        }
+      } catch (e) {}
     </script>
 
     <link rel="preload" href="/fonts/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
