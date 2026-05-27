@@ -101,9 +101,7 @@ const CTAs = ({ resume, email }) => (
 
 const HeroContent = ({ name, role, email, tagline, resume, status }) => (
   <div className="flex w-dvw flex-col justify-center gap-6 max-[900px]:items-center max-[900px]:text-center">
-    <HeroRevealMotion
-    // delay={ 1 * 0.15}
-    >
+    <HeroRevealMotion>
       <div className="flex items-center gap-2 text-3xl sm:text-4xl">
         <span>
           Hi{" "}
@@ -123,23 +121,23 @@ const HeroContent = ({ name, role, email, tagline, resume, status }) => (
       </div>
     </HeroRevealMotion>
 
-    <HeroRevealMotion delay={1 * 0.15}>
+    <HeroRevealMotion delay={0.15}>
       <p className="font-medium tracking-wide text-(--text-secondary-color-g) sm:text-lg">
         {role}
       </p>
     </HeroRevealMotion>
 
-    <HeroRevealMotion delay={1 * 0.25}>
+    <HeroRevealMotion delay={0.25}>
       <p className="text-[15px] max-[900px]:max-w-150 sm:text-base">
         {tagline}
       </p>
     </HeroRevealMotion>
 
-    <HeroRevealMotion delay={1 * 0.35}>
+    <HeroRevealMotion delay={0.35}>
       <HeroStatus status={status} />
     </HeroRevealMotion>
 
-    <HeroRevealMotion delay={1 * 0.45}>
+    <HeroRevealMotion delay={0.45}>
       <CTAs resume={resume} email={email} />
     </HeroRevealMotion>
   </div>
