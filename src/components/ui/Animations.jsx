@@ -6,7 +6,10 @@ const HeroRevealMotion = ({ children, delay = 0, className = "" }) => {
   return (
     <div
       style={{ animationDelay: `${delay}s` }}
-      className={twMerge("fadeUp-initial animate-fadeUp", className)}
+      className={twMerge(
+        "animate-fadeUp opacity-1 will-change-transform", // To overcome NO_LCP issue
+        className,
+      )}
     >
       {children}
     </div>
