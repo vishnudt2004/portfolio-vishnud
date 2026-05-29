@@ -1,7 +1,7 @@
 {
   "name": "portfolio-vishnud",
   "private": true,
-  "version": "1.12.1",
+  "version": "1.12.2",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -36,10 +36,10 @@
     "globals": "^17.5.0",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.7.3",
-    "rollup-plugin-visualizer": "^7.0.1",
     "sharp": "^0.34.5",
+    "sonda": "^0.11.1",
     "svgo": "^4.0.1",
-    "vite": "^8.0.10",
+    "vite": "^8.0.14",
     "vite-plugin-image-optimizer": "^2.0.3"
   }
 }

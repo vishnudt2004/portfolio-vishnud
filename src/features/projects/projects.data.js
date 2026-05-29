@@ -30,7 +30,7 @@ export const projects = [
     description:
       "A modern developer portfolio showcasing projects, UI experiments, and reusable components with performance-focused design and smooth UI animations.",
     thumb: projectImage_portfolio,
-    techStack: ["React", "Tailwind CSS", "Radix UI Primitives"],
+    techStack: ["React", "Tailwind CSS", "Radix UI Primitives", "Vite"],
     links: {
       live: "https://portfolio-vishnud.vercel.app/",
       repo: "https://github.com/vishnudt2004/portfolio-vishnud",

@@ -38,6 +38,7 @@ import {
   SiPnpm,
   SiZod,
   SiStyledcomponents,
+  SiVite,
 } from "@icons-pack/react-simple-icons";
 
 import { IDS } from "@/config/constants";
@@ -208,6 +209,7 @@ const skills = [
       { name: "Redux", icon: SiRedux },
       { name: "Framer Motion", icon: MotionIcon },
       { name: "SASS", icon: SiSass },
+      { name: "Vite", icon: SiVite },
     ],
     collapsedSkills: [
       { name: "MDX", icon: SiMdx },

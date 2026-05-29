@@ -2,10 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
-import visualizer from "rollup-plugin-visualizer";
-import remixiconTreeshake from "./vite-remixicon-treeshake-plugin";
+import { SondaVitePlugin } from "sonda";
 
 export default defineConfig(({ mode }) => {
+  const isAnalyzeMode = mode === "analyze";
   return {
     plugins: [
       react(),
@@ -18,20 +18,19 @@ export default defineConfig(({ mode }) => {
         avif: { quality: 80 },
         svg: { multipass: true },
       }),
-      mode === "analyze" &&
-        visualizer({
-          filename: "dist/stats.html",
-          template: "treemap",
-          gzipSize: true,
-          brotliSize: true,
+      isAnalyzeMode &&
+        SondaVitePlugin({
+          outputDir: "dist",
+          filename: "stats",
           open: true,
+          gzip: true,
+          brotli: true,
         }),
-      remixiconTreeshake(),
     ].filter(Boolean),
     resolve: { alias: { "@": "/src" } },
-    optimizeDeps: { exclude: ["@remixicon/react"] }, // delegated to plugin
 
     build: {
+      sourcemap: isAnalyzeMode,
       rolldownOptions: {
         // prettier-ignore
         output: {
@@ -45,11 +44,11 @@ export default defineConfig(({ mode }) => {
           },
 
           codeSplitting: {
-            // minSize: 15000,
             groups: [
               { name: "vendor-react", test: /node_modules[\\/](react|react-dom|react-router)/ },
               { name: "vendor-radix", test: /node_modules[\\/](@radix-ui|@floating-ui)/ },
-              { name: "vendor", test: /node_modules/ },
+              // { name: "icons", test: /node_modules[\\/](@remixicon|@icons-pack)/ }, // enable if vendor chunk grows
+              { name: "vendor", test: /node_modules/ }, // remixicon, simple-icons, tailwind-merge
             ],
           },
         },
